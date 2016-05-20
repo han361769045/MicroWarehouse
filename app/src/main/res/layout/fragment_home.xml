@@ -1,6 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical"
+    tools:context=".fragments.HomeFragment">
 
+    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main_tab_color"
+        android:minHeight="50dp"
+        app:mLeftText="全国"
+        app:mLeftTextColor="@color/main_font_color"
+        app:mLeftTextMarginLeft="10dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/home_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    app:pager_animation="Accordion" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@drawable/pao_tui"
+                        android:gravity="center_horizontal|bottom"
+                        android:text="86跑腿" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@drawable/tool_rent"
+                        android:gravity="center_horizontal|bottom"
+                        android:text="86跑腿" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@drawable/village"
+                        android:gravity="center_horizontal|bottom"
+                        android:text="86跑腿" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@drawable/express"
+                        android:gravity="center_horizontal|bottom"
+                        android:text="86跑腿" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:shrinkColumns="0,1,2"
+                android:stretchColumns="0,1,2">
+
+                <TableRow>
+
+                    <ImageView
+                        android:id="@+id/ad_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+
+                    <ImageView
+                        android:id="@+id/ad_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+
+                    <ImageView
+                        android:id="@+id/ad_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="1dp">
+
+                    <ImageView
+                        android:id="@+id/ad_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+
+                    <ImageView
+                        android:id="@+id/ad_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+
+                    <ImageView
+                        android:id="@+id/ad_six"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="1dp">
+
+                    <ImageView
+                        android:id="@+id/ad_seven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+
+                    <ImageView
+                        android:id="@+id/ad_eight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+
+                    <ImageView
+                        android:id="@+id/ad_nine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="95dp"
+                        android:background="@color/white"
+                        android:src="@drawable/pao_tui" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

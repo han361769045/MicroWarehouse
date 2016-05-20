@@ -27,4 +27,10 @@
     </style>
 
 
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/shopcart_selector</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">32dp</item>
+    </style>
+
 </resources>

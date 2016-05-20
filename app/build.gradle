@@ -89,6 +89,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.18'
+    compile 'me.himanshusoni.quantityview:quantity-view:1.1.1'
 
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"

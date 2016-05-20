@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@color/main_tab_color"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/cb_select"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_cart_goods_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/goods_default" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_cart_goods_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="30"
+            android:lineSpacingExtra="5dp"
+            android:lines="2"
+            android:maxLines="2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_cart_goods_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="sdfas" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <me.himanshusoni.quantityview.QuantityView
+                    android:id="@+id/quantityView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:qv_addButtonBackground="@drawable/car_plus"
+                    app:qv_addButtonText=""
+                    app:qv_addButtonTextColor="@color/buy_button"
+                    app:qv_maxQuantity="100"
+                    app:qv_minQuantity="1"
+                    app:qv_quantity="1"
+                    app:qv_quantityBackground="@drawable/quantity_bg"
+                    app:qv_quantityPadding="10dp"
+                    app:qv_removeButtonBackground="@drawable/car_minus"
+                    app:qv_removeButtonText=""
+                    app:qv_removeButtonTextColor="@color/buy_button" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

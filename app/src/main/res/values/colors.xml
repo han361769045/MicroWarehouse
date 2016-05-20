@@ -6,11 +6,9 @@
     <color name="black">#333333</color>
 
 
-
     <color name="gray">#aaaaaa</color>
     <color name="red">#FF0000</color>
     <color name="blue">#3366CC</color>
-
 
 
     <color name="main_tab_color">#fafafa</color>
@@ -18,7 +16,10 @@
     <color name="main_font_color">#fa7a04</color>
     <color name="second_font_color">#737373</color>
     <color name="white">#ffffff</color>
+    <color name="cart_buy">#eb6706</color>
 
 
+    <color name="buy_button">#ff9900</color>
 
+    <color name="line_color">#e1e1e1</color>
 </resources>

@@ -8,5 +8,7 @@
     <string name="cart">购物车</string>
     <string name="mine">我的</string>
 
-
+    <string name="text_all_select">全选</string>
+    <string name="text_buy">结算</string>
+    <string name="text_delete">结算</string>
 </resources>
