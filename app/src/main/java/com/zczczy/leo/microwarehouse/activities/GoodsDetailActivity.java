@@ -14,10 +14,10 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_goods_detail)
 public class GoodsDetailActivity extends  BaseActivity {
 
-    @ViewById
-    WebView wev_view;
-    @AfterViews
-    void afterView(){
-        wev_view.loadUrl("");
-    }
+//    @ViewById
+//    WebView web_view;
+//    @AfterViews
+//    void afterView(){
+//        web_view.loadUrl("");
+//    }
 }

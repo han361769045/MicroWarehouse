@@ -23,7 +23,7 @@
                 android:layout_width="70dp"
                 android:layout_height="80dp"
                 android:layout_gravity="left"
-                android:src="@drawable/header_new"
+                android:src="@drawable/headernew"
                 app:border_color="@color/white"
                 app:border_width="1dp" />
         </LinearLayout>
@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/newset"
+            android:drawableLeft="@drawable/myorder"
             android:text="我的订单"
             android:textSize="18dp" />
 
@@ -174,8 +174,8 @@
             android:layout_weight="1"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/tobepaid"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/tobepay"
             android:gravity="center_horizontal"
             android:text="待付款" />
 
@@ -187,8 +187,8 @@
             android:layout_weight="1"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/paid"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/tobeget"
             android:gravity="center_horizontal"
             android:text="待收货" />
 
@@ -200,8 +200,8 @@
             android:layout_weight="1"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/yifahuo"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/daipingjia"
             android:gravity="center_horizontal"
             android:text="待评价" />
 
@@ -212,8 +212,8 @@
             android:layout_weight="1"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/tobeevaluate"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/fanxiu"
             android:gravity="center_horizontal"
             android:text="返修/退换" />
 
@@ -236,7 +236,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:drawableLeft="@drawable/myaddress"
-            android:drawablePadding="10dp"
+            android:drawablePadding="5dp"
             android:text="我的地址" />
 
         <ImageView
