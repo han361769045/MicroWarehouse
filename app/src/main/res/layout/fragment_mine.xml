@@ -7,17 +7,28 @@
     android:background="@color/home_background"
     android:orientation="vertical"
     tools:context=".fragments.MineFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:background="@color/major_color"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:padding="20dp">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
             <com.zczczy.leo.microwarehouse.viewgroup.CircleImageView
                 android:id="@+id/img_avatar"
                 android:layout_width="70dp"
@@ -248,6 +259,7 @@
 
     </RelativeLayout>
     <include layout="@layout/horizontal_line" />
+
     <RelativeLayout
         android:id="@+id/rl_vip"
         android:layout_width="match_parent"
@@ -328,5 +340,6 @@
             android:src="@drawable/next_icon" />
 
     </RelativeLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
