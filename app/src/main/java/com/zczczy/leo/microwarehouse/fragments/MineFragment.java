@@ -7,6 +7,6 @@ import org.androidannotations.annotations.EFragment;
 /**
  * Created by Leo on 2016/5/20.
  */
-@EFragment(R.layout.fragment_home)
+@EFragment(R.layout.fragment_mine)
 public class MineFragment extends BaseFragment {
 }
