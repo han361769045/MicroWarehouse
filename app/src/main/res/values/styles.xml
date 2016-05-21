@@ -10,6 +10,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
 
@@ -29,6 +30,12 @@
 
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/shopcart_selector</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">32dp</item>
+    </style>
+
+    <style name="AddressDefaultCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/address_default</item>
         <item name="android:minHeight">16dp</item>
         <item name="android:maxHeight">32dp</item>
     </style>

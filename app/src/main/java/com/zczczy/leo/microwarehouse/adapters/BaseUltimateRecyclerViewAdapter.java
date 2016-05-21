@@ -15,11 +15,23 @@ import com.marshalchen.ultimaterecyclerview.animators.internal.ViewHelper;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerImpl;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerInterface;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeLayout;
+import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
 import com.zczczy.leo.microwarehouse.items.ItemView;
+import com.zczczy.leo.microwarehouse.listener.OttoBus;
+import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
+import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
+import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +62,36 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     private BindHeaderViewHolder bindHeaderViewHolder;
 
+    public VerticalAndHorizontal verticalAndHorizontal;
+
+    @RestService
+    MyRestClient myRestClient;
+
+    @App
+    MyApplication app;
+
+    @Pref
+    MyPrefs_ pre;
+
+    @Bean
+    OttoBus bus;
+
+    @StringRes
+    String no_net;
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+    boolean isRefresh;
+
     @RootContext
     Context context;
+
+    @AfterInject
+    void afterBaseInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+    }
+
 
     public int getAdapterItemCount() {
 
@@ -65,7 +105,9 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
      * @param pageSize
      * @param objects
      */
+    @Background
     public abstract void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects);
+
 
     /**
      * @param viewHolder
@@ -425,4 +467,10 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         public static final int FOOTER = 2;
         public static final int CHANGED_FOOTER = 3;
     }
+
+    public enum VerticalAndHorizontal {
+        Vertical,
+        Horizontal
+    }
+
 }

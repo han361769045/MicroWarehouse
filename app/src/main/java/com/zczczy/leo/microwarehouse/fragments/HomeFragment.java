@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.SearchResultActivity_;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -35,7 +36,6 @@ public class HomeFragment extends BaseFragment {
     List<ImageView> imageViewList;
 
 
-
     @AfterViews
     void afterView() {
 
@@ -45,6 +45,11 @@ public class HomeFragment extends BaseFragment {
     @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine})
     void imageViewList(ImageView imageView) {
 
+    }
+
+    @Click
+    void txt_one() {
+        SearchResultActivity_.intent(this).start();
     }
 
 }

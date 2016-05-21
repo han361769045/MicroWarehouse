@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.marshalchen.ultimaterecyclerview.itemTouchHelper.ItemTouchHelperViewHolder;
+import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 
 /**
@@ -18,12 +19,16 @@ public abstract class ItemView<T> extends LinearLayout implements ItemTouchHelpe
 
     protected RecyclerView.ViewHolder viewHolder;
 
+    protected BaseRecyclerViewAdapter baseRecyclerViewAdapter;
+
     public ItemView(Context context) {
         super(context);
     }
 
-    public void init(T t, Object... objects) {
+    public void init(T t, BaseRecyclerViewAdapter baseRecyclerViewAdapter, RecyclerView.ViewHolder viewHolder, Object... objects) {
         this._data = t;
+        this.baseRecyclerViewAdapter = baseRecyclerViewAdapter;
+        this.viewHolder = viewHolder;
         init(objects);
     }
 

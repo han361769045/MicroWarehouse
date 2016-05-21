@@ -11,4 +11,28 @@
     <string name="text_all_select">全选</string>
     <string name="text_buy">结算</string>
     <string name="text_delete">结算</string>
+
+    <!--收货地址-->
+    <string name="text_shipping_address">收货地址</string>
+    <string name="text_add_shipping_address">+ 收货地址</string>
+    <string name="text_default_shipping_address">默认地址</string>
+    <string name="text_edit_shipping_address">编辑</string>
+    <string name="text_delete_shipping_address">删除</string>
+
+
+    <!--搜索-->
+    <string name="search">搜索</string>
+    <string name="search_summary">综合</string>
+    <string name="search_sell_count">销量</string>
+    <string name="search_price">价格</string>
+
+
+
+
+    <string name="text_goods_sell_count">月销量%1$s件</string>
+    <string name="text_goods_price">￥%1$s</string>
+
+
+
+
 </resources>

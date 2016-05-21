@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.prefs;
 
+import org.androidannotations.annotations.sharedpreferences.DefaultString;
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
 /**
@@ -9,5 +10,7 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 @SharedPref(value = SharedPref.Scope.UNIQUE)
 public interface MyPrefs {
 
+    @DefaultString("")
+    String token();
 
 }
