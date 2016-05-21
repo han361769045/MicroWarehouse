@@ -11,7 +11,7 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/5/21.
  */
 @EActivity
-public abstract class RecyclerViewActivity extends BaseActivity {
+public abstract class BaseRecyclerViewActivity extends BaseActivity {
 
     @ViewById
     RecyclerView recyclerView;

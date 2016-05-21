@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.UltimateRecyclerViewActivity">
+    tools:context=".activities.BaseUltimateRecyclerViewActivity">
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"

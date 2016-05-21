@@ -8,5 +8,5 @@ import org.androidannotations.annotations.EActivity;
  * Created by Leo on 2016/5/21.
  */
 @EActivity(R.layout.activity_category)
-public class CategoryActivity extends RecyclerViewActivity {
+public class CategoryActivity extends BaseRecyclerViewActivity {
 }

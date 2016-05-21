@@ -1,14 +1,26 @@
 package com.zczczy.leo.microwarehouse.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.ItemView;
+import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
+import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
+import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +31,37 @@ import java.util.List;
 @EBean
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
-
     private List<T> items = new ArrayList<>();
 
     private OnItemClickListener onItemClickListener;
 
     private OnItemLongClickListener onItemLongClickListener;
 
+    @Background
     public abstract void getMoreData(Object... objects);
+
+    @RestService
+    MyRestClient myRestClient;
+
+    @App
+    MyApplication app;
+
+    @Pref
+    MyPrefs_ pre;
+
+    @StringRes
+    String no_net;
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+    @AfterInject
+    void afterBaseInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+    }
+
+    @RootContext
+    Context context;
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

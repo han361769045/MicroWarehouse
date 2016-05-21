@@ -6,14 +6,13 @@ import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.CheckedChange;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
 /**
  * Created by Leo on 2016/5/21.
  */
 @EActivity(R.layout.activity_search_result)
-public class SearchResultActivity extends UltimateRecyclerViewActivity {
+public class SearchResultActivity extends BaseUltimateRecyclerViewActivity {
 
 
     @Bean

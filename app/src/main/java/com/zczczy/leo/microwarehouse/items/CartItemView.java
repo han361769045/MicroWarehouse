@@ -2,18 +2,19 @@ package com.zczczy.leo.microwarehouse.items;
 
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.model.CartModel;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 
 import me.himanshusoni.quantityview.QuantityView;
 
@@ -31,6 +32,9 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
 
     @ViewById
     TextView txt_goods_name, txt_goods_price;
+
+    @StringRes
+    String text_goods_price;
 
     @ViewById
     QuantityView quantityView;
@@ -53,7 +57,17 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
 
     @Override
     protected void init(Object... objects) {
+        quantityView.setQuantity(_data.goodsNum);
+        txt_goods_name.setText(_data.goodsName);
+        txt_goods_price.setText(String.format(text_goods_price, _data.goodsPrice));
+        cb_select.setChecked(_data.isChecked);
 
+    }
+
+    @CheckedChange
+    void cb_select(boolean isChecked) {
+        AndroidTool.showToast(context, isChecked + "");
+        _data.isChecked = isChecked;
     }
 
     @Override

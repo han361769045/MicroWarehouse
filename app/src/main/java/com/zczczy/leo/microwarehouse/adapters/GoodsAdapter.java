@@ -42,7 +42,7 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
         afterGetMoreData(result);
     }
 
-    @UiThread()
+    @UiThread
     void afterGetMoreData(BaseModelJson<PagerResult<GoodsModel>> result) {
         if (result == null) {
             result = new BaseModelJson<>();

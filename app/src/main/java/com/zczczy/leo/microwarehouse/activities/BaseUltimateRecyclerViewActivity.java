@@ -31,7 +31,7 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  * Created by Leo on 2016/5/21.
  */
 @EActivity(R.layout.activity_ultimate_recycler_view)
-public abstract class UltimateRecyclerViewActivity extends BaseActivity {
+public abstract class BaseUltimateRecyclerViewActivity extends BaseActivity {
 
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
@@ -73,7 +73,7 @@ public abstract class UltimateRecyclerViewActivity extends BaseActivity {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(UltimateRecyclerViewActivity.this, "没有更多的数据了！~");
+                    AndroidTool.showToast(BaseUltimateRecyclerViewActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
                     myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {

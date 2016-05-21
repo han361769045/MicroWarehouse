@@ -3,21 +3,53 @@ package com.zczczy.leo.microwarehouse.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.microwarehouse.items.CartItemView_;
+import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.UiThread;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Leo on 2016/5/21.
  */
+@EBean
 public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
 
 
     @Override
     public void getMoreData(Object... objects) {
+        BaseModelJson<List<CartModel>> result = new BaseModelJson<>();
+        result.Data = new ArrayList<>();
+        result.Successful = true;
+        for (int i = 0; i < 10; i++) {
+            CartModel cartModel = new CartModel();
+            cartModel.goodsName = "巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉" + i;
+            cartModel.goodsNum = i + 1;
+            cartModel.goodsPrice = "12.00";
+            result.Data.add(cartModel);
+        }
+        afterGetMoreData(result);
+    }
 
+    @UiThread
+    void afterGetMoreData(BaseModelJson<List<CartModel>> result) {
+        if (result == null) {
+            AndroidTool.showToast(context, no_net);
+        } else if (!result.Successful) {
+            AndroidTool.showToast(context, result.Error);
+        } else {
+            clear();
+            insertAll(result.Data, getItemCount());
+        }
     }
 
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
-        return null;
+        return CartItemView_.build(parent.getContext());
     }
 }

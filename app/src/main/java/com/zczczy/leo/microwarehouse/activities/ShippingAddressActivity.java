@@ -18,7 +18,7 @@ import org.androidannotations.annotations.Extra;
  * Created by Leo on 2016/5/4.
  */
 @EActivity(R.layout.activity_shipping_address)
-public class ShippingAddressActivity extends RecyclerViewActivity {
+public class ShippingAddressActivity extends BaseRecyclerViewActivity {
 
 
     @Bean(ShippingAddressAdapter.class)

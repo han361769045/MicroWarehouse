@@ -31,10 +31,10 @@
         layout="@layout/horizontal_line"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:layout_above="@+id/ll_cart_jiesuan" />
+        android:layout_above="@+id/ll_cart_total" />
 
     <LinearLayout
-        android:id="@+id/ll_cart_jiesuan"
+        android:id="@+id/ll_cart_total"
         android:layout_width="match_parent"
         android:layout_height="49.5dp"
         android:layout_alignParentBottom="true"
@@ -73,7 +73,6 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="合计：9.9"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -120,7 +119,5 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
-
-
     </LinearLayout>
 </RelativeLayout>
