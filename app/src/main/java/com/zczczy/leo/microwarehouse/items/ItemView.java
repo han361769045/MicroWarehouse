@@ -21,8 +21,11 @@ public abstract class ItemView<T> extends LinearLayout implements ItemTouchHelpe
 
     protected BaseRecyclerViewAdapter baseRecyclerViewAdapter;
 
+    protected Context context;
+
     public ItemView(Context context) {
         super(context);
+        this.context = context;
     }
 
     public void init(T t, BaseRecyclerViewAdapter baseRecyclerViewAdapter, RecyclerView.ViewHolder viewHolder, Object... objects) {
