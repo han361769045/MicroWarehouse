@@ -16,4 +16,6 @@ public class IndexActivity extends BaseActivity {
     void afterView() {
         MainActivity_.intent(this).start();
     }
+
+
 }
