@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:background="@drawable/title_cart_scrolled"
+        android:background="@drawable/redcart"
         android:gravity="center_vertical"
         android:textColor="@color/white" />
 </RelativeLayout>
