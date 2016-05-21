@@ -12,5 +12,5 @@ import org.androidannotations.annotations.EFragment;
  */
 @EFragment(R.layout.fragment_mine)
 public class MineFragment extends BaseFragment {
-
+//123
 }
