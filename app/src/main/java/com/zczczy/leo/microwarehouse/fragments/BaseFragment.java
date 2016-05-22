@@ -31,8 +31,8 @@ public abstract class BaseFragment extends Fragment {
     @App
     MyApplication app;
 
-//    @StringRes
-//    String no_net, empty_search, empty_order, empty_review, empty_logistics;
+    @StringRes
+    String no_net;
 
     @Pref
     MyPrefs_ pre;
@@ -45,9 +45,9 @@ public abstract class BaseFragment extends Fragment {
      *
      * @return
      */
-//    protected boolean checkUserIsLogin() {
-//        return !StringUtils.isEmpty(pre.shopToken().get());
-//    }
+    protected boolean checkUserIsLogin() {
+        return !StringUtils.isEmpty(pre.token().get());
+    }
 
     @Override
     public void onPause() {

@@ -22,9 +22,9 @@ public class ShippingAddressAdapter extends BaseRecyclerViewAdapter<ShippingAddr
 
     @Override
     public void getMoreData(Object... objects) {
-//        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-//        afterGetData(myRestClient.getMReceiptAddressListByUserInfoId());
+        afterGetData(myRestClient.getMReceiptAddressListByUserInfoId());
     }
 
     @UiThread
@@ -43,5 +43,10 @@ public class ShippingAddressAdapter extends BaseRecyclerViewAdapter<ShippingAddr
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
         return ShippingAddressItemView_.build(parent.getContext());
+    }
+
+    @Override
+    public void itemNotify(Object... objects) {
+
     }
 }

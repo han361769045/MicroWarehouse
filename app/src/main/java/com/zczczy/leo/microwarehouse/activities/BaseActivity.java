@@ -15,6 +15,7 @@ import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.res.ColorRes;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.springframework.util.StringUtils;
 
@@ -42,8 +43,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @ColorRes
     int line_color;
 
-//    @StringRes
-//    String no_net, empty_search, empty_order, empty_review, empty_logistics,empty_no_review;
+    @StringRes
+    String no_net;
 
 
 
@@ -76,9 +77,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @return
      */
-//    protected boolean checkUserIsLogin() {
-//        return !StringUtils.isEmpty(pre.shopToken().get());
-//    }
+    protected boolean checkUserIsLogin() {
+        return !StringUtils.isEmpty(pre.token().get());
+    }
 
     public void finish() {
         closeInputMethod(this);

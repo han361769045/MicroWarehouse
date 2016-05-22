@@ -4,21 +4,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.CartItemView_;
+import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Leo on 2016/5/21.
  */
 @EBean
 public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
+
+    @Bean
+    OttoBus bus;
 
 
     @Override
@@ -30,7 +36,7 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
             CartModel cartModel = new CartModel();
             cartModel.goodsName = "巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉" + i;
             cartModel.goodsNum = i + 1;
-            cartModel.goodsPrice = "12.00";
+            cartModel.goodsPrice = 12.00;
             result.Data.add(cartModel);
         }
         afterGetMoreData(result);
@@ -51,5 +57,15 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
         return CartItemView_.build(parent.getContext());
+    }
+
+    /**
+     * 通知 fragment
+     *
+     * @param objects 可变参数
+     */
+    @Override
+    public void itemNotify(Object... objects) {
+        bus.post(objects[0]);
     }
 }

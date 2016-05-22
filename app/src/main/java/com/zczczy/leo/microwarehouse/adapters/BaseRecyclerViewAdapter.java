@@ -24,6 +24,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Leo on 2016/5/3.
@@ -114,6 +115,10 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     }
 
 
+    public void itemNotify(Object... objects) {
+
+    }
+
     /**
      * Clear the list of the adapter
      */
@@ -132,6 +137,13 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         items.remove(position);
         notifyItemRemoved(position);
     }
+
+    public void deleteItemRange(List<T> t) {
+        items.removeAll(t);
+//        notifyItemRangeRemoved();
+        notifyDataSetChanged();
+    }
+
 
     public T getItemData(int position) {
         return items.size() < position + 1 ? null : items.get(position);

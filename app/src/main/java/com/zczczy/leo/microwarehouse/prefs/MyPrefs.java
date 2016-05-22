@@ -9,8 +9,15 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
 @SharedPref(value = SharedPref.Scope.UNIQUE)
 public interface MyPrefs {
-
+    /**
+     * @return
+     */
     @DefaultString("")
     String token();
 
+    @DefaultString("")
+    String avatar();
+
+    @DefaultString("")
+    String nickName();
 }

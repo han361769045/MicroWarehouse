@@ -7,13 +7,15 @@ import java.io.Serializable;
  */
 public class CartModel implements Serializable {
 
+    public String cartId;
+
     public boolean isChecked;
 
     public String goodsName;
 
     public String goodsImage;
 
-    public String goodsPrice;
+    public double goodsPrice;
 
     public int goodsNum;
 

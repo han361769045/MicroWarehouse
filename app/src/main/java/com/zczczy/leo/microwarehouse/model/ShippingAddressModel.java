@@ -20,16 +20,19 @@ public class ShippingAddressModel {
      * AreaName : sample string 12
      */
 
-    public int MReceiptAddressId;
-    public int AreaId;
-    public String UserInfoId;
-    public String ReceiptName;
-    public String DetailAddress;
-    public String IsPrimary;
-    public String Mobile;
-    public int CityId;
-    public int ProvinceId;
-    public String ProvinceName;
-    public String CityName;
-    public String AreaName;
+    public int MReceiptAddressId; //收货地址主键ID
+    public int AreaId; //区ID
+    public String UserInfoId; //用户主键ID
+    public String ReceiptName; //收货人
+    public String DetailAddress;//   详细地址
+
+    public String IsPrimary; //是否是主收货地址（0：否，1：是）
+    public String Mobile; //手机号
+    public String Coordinates; //位置坐标
+
+    public int CityId; //城市ID
+    public int ProvinceId; //省ID
+    public String ProvinceName; //省名称
+    public String CityName; //城市名称
+    public String AreaName; //区域名称
 }

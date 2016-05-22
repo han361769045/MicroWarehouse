@@ -8,18 +8,55 @@
     <string name="cart">购物车</string>
     <string name="mine">我的</string>
 
+    <!--common-->
+    <string name="text_tip">提示</string>
+    <string name="text_tip_confirm">确定要删除吗?</string>
+
+    <!--login-->
+    <string name="text_username">用户名</string>
+    <string name="text_password">密码</string>
+    <string name="text_login">登录</string>
+    <string name="text_register">登录</string>
+    <string name="text_forget_password">忘记密码？</string>
+
+
+    <!--login-->
+    <string name="text_manager">账户管理</string>
+    <string name="text_coupon">优惠券</string>
+    <string name="text_my_review">评论</string>
+    <string name="text_bookmark">收藏</string>
+    <string name="text_my_order">我的订单</string>
+
+
+    <string name="text_all_order">查看全部订单</string>
+    <string name="text_no_pay_order">待付款</string>
+    <string name="text_take_goods_order">待收货</string>
+    <string name="text_review">待评价</string>
+    <string name="text_my_address">我的地址</string>
+    <string name="text_about_us">关于86微仓</string>
+    <string name="text_share">我要分享</string>
+    <string name="text_scan">扫一扫</string>
+
     <!--购物车-->
+    <string name="text_cart">我的购物车</string>
     <string name="text_all_select">全选</string>
-    <string name="text_buy">结算</string>
-    <string name="text_delete">结算</string>
+    <string name="text_buy">结算(%1$s)</string>
+    <string name="text_delete">删除</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_edit">编辑</string>
     <string name="cart_total">合计:%1$s</string>
 
     <!--收货地址-->
     <string name="text_shipping_address">收货地址</string>
-    <string name="text_add_shipping_address">+ 收货地址</string>
+    <string name="text_add_shipping_address">添加地址</string>
     <string name="text_default_shipping_address">默认地址</string>
     <string name="text_edit_shipping_address">编辑</string>
     <string name="text_delete_shipping_address">删除</string>
+    <string name="text_p_c_a">省、市、区</string>
+    <string name="text_mobile">手机号码</string>
+    <string name="text_shipping_name">收 货 人</string>
+    <string name="text_detail_address">详细地址</string>
+    <string name="text_save">保存</string>
 
 
     <!--搜索-->
