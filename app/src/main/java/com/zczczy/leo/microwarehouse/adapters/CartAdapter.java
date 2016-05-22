@@ -15,7 +15,6 @@ import org.androidannotations.annotations.UiThread;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Leo on 2016/5/21.
@@ -34,9 +33,9 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
         result.Successful = true;
         for (int i = 0; i < 10; i++) {
             CartModel cartModel = new CartModel();
-            cartModel.goodsName = "巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉" + i;
-            cartModel.goodsNum = i + 1;
-            cartModel.goodsPrice = 12.00;
+            cartModel.GodosName = "巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉" + i;
+            cartModel.ProductCount = i + 1;
+            cartModel.GoodsPrice = 12.00;
             result.Data.add(cartModel);
         }
         afterGetMoreData(result);

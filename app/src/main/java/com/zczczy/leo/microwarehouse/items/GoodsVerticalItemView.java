@@ -33,9 +33,9 @@ public class GoodsVerticalItemView extends ItemView<GoodsModel> {
 
     @Override
     protected void init(Object... objects) {
-        goods_name.setText(_data.goodsName);
+        goods_name.setText(_data.GodosName);
         goods_sell_count.setText(String.format(text_goods_sell_count, 100));
-        goods_price.setText(String.format(text_goods_price, _data.goodsPrice));
+        goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
     }
 
 

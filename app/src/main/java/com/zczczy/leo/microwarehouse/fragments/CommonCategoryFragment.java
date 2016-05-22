@@ -9,4 +9,5 @@ import org.androidannotations.annotations.EFragment;
  */
 @EFragment(R.layout.fragment_common_category)
 public class CommonCategoryFragment extends BaseRecyclerViewFragment {
+
 }

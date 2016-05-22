@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.prefs;
 
+import org.androidannotations.annotations.sharedpreferences.DefaultLong;
 import org.androidannotations.annotations.sharedpreferences.DefaultString;
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
@@ -20,4 +21,10 @@ public interface MyPrefs {
 
     @DefaultString("")
     String nickName();
+
+    @DefaultLong(0L)
+    long loginTimerCode();
+
+    @DefaultLong(0L)
+    long registerTimerCode();
 }

@@ -91,6 +91,7 @@ dependencies {
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.18'
     compile 'me.himanshusoni.quantityview:quantity-view:1.1.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'me.iwf.photopicker:PhotoPicker:0.8.1@aar'
 
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"

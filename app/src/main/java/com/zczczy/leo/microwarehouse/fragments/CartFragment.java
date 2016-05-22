@@ -27,9 +27,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Leo on 2016/5/20.
@@ -98,6 +96,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
             adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton(text_delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    AndroidTool.showLoadDialog(CartFragment.this);
                     deleteShopping();
                 }
             }).setNegativeButton(text_cancel, null).setIcon(R.mipmap.ic_launcher).create().show();
@@ -110,24 +109,12 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     void deleteShopping() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        Map<String, String> map = new HashMap<>(1);
-        String temp = "";
-//        for (int i = 0; i < list.size(); i++) {
-//            if (i == list.size() - 1) {
-//                temp += list.get(i).BuyCartInfoIds;
-//            } else {
-//                temp += list.get(i).BuyCartInfoIds + ",";
-//            }
-//        }
-        map.put("BuyCartInfoIds", temp);
-//        afterDeleteShopping(myRestClient.deleteShoppingCartById(map));
-        BaseModel baseModel = new BaseModel();
-        baseModel.Successful = true;
-        afterDeleteShopping(baseModel);
+        afterDeleteShopping(myRestClient.deleteShoppingCartById(ids));
     }
 
     @UiThread
     void afterDeleteShopping(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
         if (bm == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bm.Successful) {
@@ -195,9 +182,9 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         list.clear();
         for (CartModel cartModel : myAdapter.getItems()) {
             if (cartModel.isChecked) {
-                totalMoney += cartModel.goodsNum * cartModel.goodsPrice;
-                count += cartModel.goodsNum;
-                ids += cartModel.cartId + ",";
+                totalMoney += cartModel.ProductCount * cartModel.GoodsPrice;
+                count += cartModel.ProductCount;
+                ids += cartModel.BuyCartInfoId + ",";
                 list.add(cartModel);
             }
         }

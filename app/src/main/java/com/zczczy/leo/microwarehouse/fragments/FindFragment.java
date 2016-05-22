@@ -7,6 +7,9 @@ import org.androidannotations.annotations.EFragment;
 /**
  * Created by Leo on 2016/5/20.
  */
-@EFragment(R.layout.fragment_home)
-public class FindFragment extends BaseFragment {
+@EFragment(R.layout.fragment_find)
+public class FindFragment extends BaseRecyclerViewFragment {
+
+
+
 }

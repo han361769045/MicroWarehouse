@@ -1,10 +1,13 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.net.Uri;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
@@ -12,6 +15,7 @@ import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -36,9 +40,17 @@ public class LoginActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    ReadSmsContent readSmsContent;
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+    }
+
+    @AfterViews
+    void afterView() {
+        readSmsContent = new ReadSmsContent(new Handler(), this, editUsername);
+        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
     }
 
     @Click
@@ -81,6 +93,13 @@ public class LoginActivity extends BaseActivity {
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }
+    }
+
+    @Override
+    public void finish() {
+        //注销内容监听者
+        this.getContentResolver().unregisterContentObserver(readSmsContent);
+        super.finish();
     }
 
     @Click

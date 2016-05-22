@@ -83,7 +83,7 @@
                     app:qv_addButtonBackground="@drawable/car_plus"
                     app:qv_addButtonText=""
                     app:qv_addButtonTextColor="@color/buy_button"
-                    app:qv_maxQuantity="100"
+                    app:qv_maxQuantity="99"
                     app:qv_minQuantity="1"
                     app:qv_quantity="1"
                     app:qv_quantityBackground="@drawable/quantity_bg"

@@ -83,9 +83,10 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
 
     @Override
     protected void init(Object... objects) {
-        quantityView.setQuantity(_data.goodsNum);
-        txt_goods_name.setText(_data.goodsName);
-        txt_goods_price.setText(String.format(text_goods_price, _data.goodsPrice));
+        quantityView.setQuantity(_data.ProductCount);
+        quantityView.setMaxQuantity(_data.GoodsStock > 99 ? 99 : _data.GoodsStock);
+        txt_goods_name.setText(_data.GodosName);
+        txt_goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
         cb_select.setChecked(_data.isChecked);
     }
 
@@ -99,14 +100,67 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
 
     @Override
     public void onQuantityChanged(int newQuantity, boolean programmatically) {
+        //点击+，-
         if (!programmatically) {
-//            AndroidTool.showLoadDialog(context);
-            if (newQuantity > _data.goodsNum) {
-                addShoppingCart();
+            AndroidTool.showLoadDialog(context);
+            if (newQuantity > _data.ProductCount) {
+                addShoppingCart(newQuantity);
             } else {
-                subShoppingCart();
+                subShoppingCart(newQuantity);
             }
+        } else {
+            //达到最大数或者最小数，或者增加删除失败 调用
+            changeItem(newQuantity);
         }
+    }
+
+    @Background(serial = "subShopping")
+    void subShoppingCart(int newQuantity) {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("GoodsInfoId", _data.GoodsInfoId);
+        afterAubShoppingCart(myRestClient.subShoppingCart(map), newQuantity);
+    }
+
+    @UiThread
+    void afterAubShoppingCart(BaseModel bm, int newQuantity) {
+        AndroidTool.dismissLoadDialog();
+        if (bm == null) {
+            AndroidTool.showToast(context, "修改失败");
+        } else if (!bm.Successful) {
+            AndroidTool.showToast(context, bm.Error);
+        } else {
+            _data.ProductCount--;
+            changeItem(newQuantity);
+        }
+    }
+
+    @Background(serial = "addShopping")
+    void addShoppingCart(int newQuantity) {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("GoodsInfoId", _data.GoodsInfoId);
+        afterAddShoppingCart(myRestClient.addShoppingCart(map), newQuantity);
+    }
+
+    @UiThread
+    void afterAddShoppingCart(BaseModel bm, int newQuantity) {
+        AndroidTool.dismissLoadDialog();
+        if (bm == null) {
+            AndroidTool.showToast(context, "商品添加失败");
+            quantityView.setQuantity(_data.ProductCount);
+        } else if (!bm.Successful) {
+            AndroidTool.showToast(context, bm.Error);
+            quantityView.setQuantity(_data.ProductCount);
+        } else {
+            _data.ProductCount++;
+            changeItem(newQuantity);
+        }
+    }
+
+    void changeItem(int newQuantity) {
         if (newQuantity == quantityView.getMinQuantity()) {
             quantityView.getChildAt(0).setEnabled(false);
             quantityView.getChildAt(2).setEnabled(true);
@@ -127,56 +181,6 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     public void onLimitReached() {
 
     }
-
-    @Background(serial = "subShopping")
-    void subShoppingCart() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
-        HashMap<String, String> map = new HashMap<>();
-//        map.put("GoodsInfoId", _data.GoodsInfoId);
-//        afterAubShoppingCart(myRestClient.subShoppingCart(map));
-    }
-
-    @UiThread
-    void afterAubShoppingCart(BaseModel bm) {
-        AndroidTool.dismissLoadDialog();
-        if (bm == null) {
-            AndroidTool.showToast(context, "修改失败");
-        } else if (!bm.Successful) {
-            AndroidTool.showToast(context, bm.Error);
-        } else {
-            _data.goodsNum--;
-//            cartActivity.setTotalMoney();
-//            cartAdapter.notifyItemChanged(baseViewHolder.getAdapterPosition());
-        }
-    }
-
-    @Background(serial = "addShopping")
-    void addShoppingCart() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
-        HashMap<String, String> map = new HashMap<>();
-//        map.put("GoodsInfoId", _data.GoodsInfoId);
-//        afterAddShoppingCart(myRestClient.addShoppingCart(map));
-        afterAddShoppingCart(null);
-    }
-
-    @UiThread
-    void afterAddShoppingCart(BaseModel bm) {
-        AndroidTool.dismissLoadDialog();
-        if (bm == null) {
-            AndroidTool.showToast(context, "商品添加失败");
-            quantityView.setQuantity(_data.goodsNum);
-        } else if (!bm.Successful) {
-            AndroidTool.showToast(context, bm.Error);
-            quantityView.setQuantity(_data.goodsNum);
-        } else {
-            _data.goodsNum++;
-//            cartActivity.setTotalMoney();
-//            cartAdapter.notifyItemChanged(baseViewHolder.getAdapterPosition());
-        }
-    }
-
 
     @Override
     public void onItemSelected() {
