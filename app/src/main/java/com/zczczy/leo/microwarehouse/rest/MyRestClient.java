@@ -9,6 +9,7 @@ import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.model.CityModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.model.ProvinceModel;
 import com.zczczy.leo.microwarehouse.model.ShippingAddressModel;
@@ -113,6 +114,15 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoLikeWord(@Path int PageIndex, @Path int PageSize, @Path String SearchWord, @Path String OB);
 
     /**
+     * 查询商品明细
+     *
+     * @param GoodsInfoId 查询商品明细Id
+     * @return
+     */
+    @Get("api/Content/GetGoodsInfoDetailById?GoodsInfoId={GoodsInfoId}")
+    BaseModelJson<GoodsModel> getGoodsInfoDetailById(@Path String GoodsInfoId);
+
+    /**
      * 查询推荐商品
      *
      * @param PageIndex 当前页面
@@ -140,7 +150,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @return
      */
     @Post("api/Content/SendMsg")
-    BaseModel SendMsg(@Body Map map);
+    BaseModel sendMsg(@Body Map map);
 
 
     //==============================================================================================
@@ -251,22 +261,22 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * 商品加入购物车
      * 购物车加1
      *
-     * @param map GoodsInfoId
+     * @param id GoodsInfoId 商品ID
      * @return
      */
-    @Post("api/Shop/AddShoppingCart")
+    @Post("api/Member/AddShoppingCart/{id}")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModel addShoppingCart(@Body Map map);
+    BaseModel addShoppingCart(@Path String id);
 
     /**
      * 购物车减1
      *
-     * @param map GoodsInfoId
+     * @param id GoodsInfoId 商品ID
      * @return
      */
-    @Post("api/Shop/SubShoppingCart")
+    @Post("api/Member/SubShoppingCart/{id}")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModel subShoppingCart(@Body Map map);
+    BaseModel subShoppingCart(@Path String id);
 
     /**
      * 删除购物车商品
@@ -274,7 +284,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @param ids 以逗号隔开
      * @return
      */
-    @Post("api/Shop/{ids}")
+    @Post("api/Member/DelShoppingCartCountByIds/{ids}")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModel deleteShoppingCartById(@Path String ids);
 
@@ -283,8 +293,21 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      *
      * @return
      */
-    @Get("api/Shop/GetBuyCartInfo")
+    @Get("api/Member/GetBuyCartInfo")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<List<CartModel>> getBuyCartInfo();
+
+
+    /**
+     * 生成临时订单信息
+     *
+     * @param map BuyCardIds 购物车结算时选择的多个购物车ID,用逗号分隔的形式
+     * @return
+     */
+    @Post("api/Member/CreateTempOrder")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<OrderModel> CreateTempOrder(@Body Map map);
+
+
 
 }

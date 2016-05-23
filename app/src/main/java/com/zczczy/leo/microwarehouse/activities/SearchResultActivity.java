@@ -31,7 +31,7 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity {
     String searchContent;
 
     @ViewById
-    EditText text_search;
+    TextView text_search;
 
     @ViewById
     RadioButton rb_price;
@@ -48,12 +48,10 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity {
     @AfterViews
     void afterView() {
         text_search.setText(searchContent);
-        text_search.setEnabled(false);
-        text_search.setFocusable(false);
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
-                GoodsDetailActivity_.intent(SearchResultActivity.this).start();
+                GoodsDetailActivity_.intent(SearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
 
             }
 
@@ -68,16 +66,26 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity {
                 finish();
             }
         });
+
+        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (myTitleBar.getmRightButtonView().isSelected()) {
+                    myTitleBar.getmRightButtonView().setSelected(false);
+                    verticalItem();
+                } else {
+                    myTitleBar.getmRightButtonView().setSelected(true);
+                    horizontalItem();
+                }
+            }
+        });
         isSelected = true;
-//        verticalItem();
-//        horizontalItem();
     }
 
     @CheckedChange
     void rb_others(boolean isChecked) {
         if (isChecked) {
             orderBy = Constants.ZONG_HE;
-
             isRefresh = true;
             afterLoadMore();
         }

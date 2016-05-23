@@ -93,6 +93,13 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
             tabHost.addTab(tabSpec, classTab[i], bundle);
         }
         tabHost.setCurrentTab(0);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+
+            }
+        });
+
     }
 
     protected View buildIndicator(int position) {

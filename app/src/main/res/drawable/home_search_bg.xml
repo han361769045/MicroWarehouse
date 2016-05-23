@@ -6,7 +6,7 @@
     <corners android:radius="30dp" />
 
     <!-- 填充 -->
-    <solid android:color="#e9e9e9" /><!-- 填充的颜色 -->
+    <solid android:color="#ffffff" /><!-- 填充的颜色 -->
     <padding
         android:bottom="5dp"
         android:left="5dp"

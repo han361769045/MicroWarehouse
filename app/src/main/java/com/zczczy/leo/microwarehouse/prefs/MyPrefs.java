@@ -13,7 +13,7 @@ public interface MyPrefs {
     /**
      * @return
      */
-    @DefaultString("")
+    @DefaultString("D463CF459CE7AF242A727787E2DCDC8EC555869244E957647E08EDB14C9597C28CE9FA19437D1EA2")
     String token();
 
     @DefaultString("")

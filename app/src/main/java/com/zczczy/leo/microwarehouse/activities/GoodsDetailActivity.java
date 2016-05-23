@@ -1,7 +1,9 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -9,11 +11,16 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.GoodsImgModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.viewgroup.MyScrollView;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
@@ -21,10 +28,12 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
@@ -49,7 +58,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     View mBuyLayout;
 
     @ViewById
-    TextView txt_address;
+    TextView goods_name, goods_by, goods_sell_count, txt_rmb, txt_home_lb, goods_count;
 
     @ViewById
     LinearLayout parent, ll_review, ll_sell_count, ll_goods_by;
@@ -65,6 +74,13 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
 
     @Extra
     String goodsId;
+
+    @StringRes
+    String text_goods_price;
+
+    WebSettings settings;
+
+    boolean isCanBy;
 
     @AfterInject
     void afterInject() {
@@ -84,19 +100,76 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
                         onScroll(myScrollView.getScrollY());
                     }
                 });
-        getGoodsDetailById(goodsId);
-//        getGoodsComments(goodsId);
 
+        settings = web_view.getSettings();
+        settings.setJavaScriptEnabled(true);
+        web_view.getSettings().setAllowFileAccess(true);
+        web_view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
+        getGoodsDetailById(goodsId);
+    }
+
+    @Click
+    void card_buy() {
+        if (checkUserIsLogin()) {
+            if (!isCanBy) {
+                addShoppingCart();
+            } else {
+                AndroidTool.showToast(this, "该商品已下架");
+            }
+
+        } else {
+            AndroidTool.showToast(this, "请登录");
+        }
     }
 
     @Background
     void getGoodsDetailById(String goodsInfoId) {
-//        afterGetGoodsDetailById(myRestClient.getGoodsDetailById(goodsInfoId));
+        afterGetGoodsDetailById(myRestClient.getGoodsInfoDetailById(goodsInfoId));
     }
 
     @UiThread
     void afterGetGoodsDetailById(BaseModelJson<GoodsModel> bmj) {
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bmj.Successful) {
+            AndroidTool.showToast(this, bmj.Error);
+        } else {
+            goods_name.setText(bmj.Data.GodosName);
+            goods_by.setText(bmj.Data.GoodsIsBy == 0 ? bmj.Data.Postage : "包邮");
+            goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
+            web_view.loadUrl(bmj.Data.StaticHtmlUrl);
+            txt_rmb.setText(String.format(text_goods_price, bmj.Data.GoodsPrice));
+            txt_home_lb.setText(String.format(text_goods_price, bmj.Data.GoodsBatPrice));
+            goods_count.setText(String.valueOf(bmj.Data.GoodsStock));
+            isCanBy = (Constants.Goods_UP == bmj.Data.GoodsStatus && bmj.Data.GoodsStock > 0);
+            if(bmj.Data.GoodsImgList!=null){
+                for (GoodsImgModel goodsImgModel : bmj.Data.GoodsImgList) {
+                    TextSliderView textSliderView = new TextSliderView(this);
+                    textSliderView.image(goodsImgModel.GoodsImgUrl);
+                    textSliderView.setOnSliderClickListener(this);
+                    sliderLayout.addSlider(textSliderView);
+                }
+            }
+        }
+    }
 
+
+    @Background
+    void addShoppingCart() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterAddShoppingCart(myRestClient.addShoppingCart(goodsId));
+    }
+
+    @UiThread
+    void afterAddShoppingCart(BaseModel result) {
+        if (result == null) {
+
+        } else if (!result.Successful) {
+            AndroidTool.showToast(this, result.Error);
+        } else {
+            AndroidTool.showToast(this, "添加成功");
+        }
     }
 
     /**

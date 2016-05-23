@@ -63,6 +63,8 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     @AfterViews
     void afterView() {
+        txt_total_lb.setText(String.format(cart_total, 0.0));
+        txt_checkout.setText(String.format(text_buy, count));
         list = new ArrayList<>();
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,12 +154,13 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
         if (hidden) {
             bus.unregister(this);
         } else {
+            myAdapter.getMoreData();
             bus.register(this);
         }
+        super.onHiddenChanged(hidden);
     }
 
     @Subscribe

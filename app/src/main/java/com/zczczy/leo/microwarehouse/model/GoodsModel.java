@@ -1,5 +1,7 @@
 package com.zczczy.leo.microwarehouse.model;
 
+import java.util.List;
+
 /**
  * Created by Leo on 2016/5/21.
  */
@@ -33,5 +35,8 @@ public class GoodsModel {
     public String PjNum; //评价数量
     public String PJBfb; //评价百分比
 
+    public GoodsCommentsModel GoodsComments;  //商品评价
+
+    public List<GoodsImgModel> GoodsImgList;  //商品图片集合
 
 }

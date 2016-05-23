@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- 相当于padding -->
+            <item>
+                <shape>
+                    <solid android:color="@color/cart_buy" />
+                    <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="0dp" android:topLeftRadius="5dp" android:topRightRadius="0dp" />
+                    <stroke android:width="2dp" android:color="@color/cart_buy" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_checked="false">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/white" />
+                    <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="0dp" android:topLeftRadius="5dp" android:topRightRadius="0dp" />
+                    <stroke android:width="2dp" android:color="@color/cart_buy" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

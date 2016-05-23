@@ -13,9 +13,9 @@
         android:layout_height="50dp"
         android:background="@color/main_tab_color"
         android:minHeight="50dp"
-        app:mCustomView="@layout/search"
+        app:mCustomView="@layout/search_result"
         app:mNavButtonIcon="@drawable/title_back"
-        app:mRightTextMarginRight="15dp" />
+        app:mRightButtonIcon="@drawable/linear_grid" />
 
     <RadioGroup
         android:layout_width="match_parent"

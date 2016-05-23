@@ -25,7 +25,6 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_search)
 public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
 
-
     @Bean
     SearchHistoryDao searchHistoryDao;
 
@@ -48,6 +47,7 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
                 SearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
             }
         });
+        myAdapter.getMoreData(0, 0);
     }
 
     @EditorAction

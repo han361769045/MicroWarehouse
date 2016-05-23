@@ -101,8 +101,8 @@
                             android:text="月销量:" />
 
                         <TextView
-                            android:id="@+id/goods_kucun"
-                            android:layout_width="match_parent"
+                            android:id="@+id/goods_sell_count"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="120" />
@@ -115,12 +115,16 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/txt_address"
-                            android:layout_width="match_parent"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:gravity="right"
-                            android:text="辽宁大连" />
+                            android:text="库存:" />
+
+                        <TextView
+                            android:id="@+id/goods_count"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="120" />
                     </LinearLayout>
 
                 </LinearLayout>

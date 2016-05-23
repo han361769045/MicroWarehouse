@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -53,7 +54,6 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAdapter);
-        myAdapter.getMoreData();
     }
 
 

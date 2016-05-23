@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
+import org.androidannotations.annotations.res.ColorRes;
+import org.androidannotations.annotations.res.DrawableRes;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,7 +51,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     MyBackgroundTask myBackgroundTask;
 
     @ViewById
-    TextView txt_one, txt_two, txt_three, txt_four;
+    TextView txt_one, txt_two, txt_three, txt_four, text_search;
 
     @ViewsById(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine})
     List<ImageView> imageViewList;
@@ -56,11 +59,17 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     @Bean
     OttoBus bus;
 
+    @DrawableRes
+    Drawable home_search_bg;
+
     int i = 0;
 
     @AfterViews
     void afterView() {
         bus.register(this);
+
+        text_search.setBackground(home_search_bg);
+
         if (app.getNewBannerList().size() >= 0) {
             setBanner();
         } else {
@@ -68,6 +77,11 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             myBackgroundTask.getHomeBanner();
             myBackgroundTask.getAdvertByKbn();
         }
+    }
+
+    @Click
+    void text_search() {
+        SearchActivity_.intent(this).start();
     }
 
     void setBanner() {
@@ -78,7 +92,6 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             homeSlider.addSlider(textSliderView);
         }
         int i = 0;
-
         for (AdvertModel advertModel : app.getAdvertModelList()) {
             RequestCreator rc = Picasso.with(getActivity()).load(advertModel.AdvertImg);
             rc.into(imageViewList.get(i));
@@ -133,7 +146,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         super.onHiddenChanged(hidden);
         if (hidden) {
             bus.unregister(this);
+            homeSlider.stopAutoCycle();
         } else {
+            homeSlider.startAutoCycle();
             bus.register(this);
         }
     }

@@ -6,6 +6,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.CartModel;
@@ -26,6 +27,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 
@@ -83,6 +85,9 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
 
     @Override
     protected void init(Object... objects) {
+        if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
+            Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
+        }
         quantityView.setQuantity(_data.ProductCount);
         quantityView.setMaxQuantity(_data.GoodsStock > 99 ? 99 : _data.GoodsStock);
         txt_goods_name.setText(_data.GodosName);
@@ -118,9 +123,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     void subShoppingCart(int newQuantity) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        HashMap<String, String> map = new HashMap<>();
-        map.put("GoodsInfoId", _data.GoodsInfoId);
-        afterAubShoppingCart(myRestClient.subShoppingCart(map), newQuantity);
+        afterAubShoppingCart(myRestClient.subShoppingCart(_data.GoodsInfoId), newQuantity);
     }
 
     @UiThread
@@ -140,9 +143,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     void addShoppingCart(int newQuantity) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        HashMap<String, String> map = new HashMap<>();
-        map.put("GoodsInfoId", _data.GoodsInfoId);
-        afterAddShoppingCart(myRestClient.addShoppingCart(map), newQuantity);
+        afterAddShoppingCart(myRestClient.addShoppingCart(_data.GoodsInfoId), newQuantity);
     }
 
     @UiThread

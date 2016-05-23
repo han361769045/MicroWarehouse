@@ -37,6 +37,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
                     app:pager_animation="Accordion" />
+
+                <include
+                    layout="@layout/search_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp" />
             </FrameLayout>
 
             <LinearLayout
