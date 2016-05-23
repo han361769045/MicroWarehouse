@@ -20,6 +20,11 @@
     <string name="text_forget_password">忘记密码？</string>
 
 
+    <!--goods detail-->
+    <string name="text_goods_detail">商品详情</string>
+    <string name="text_add_cart">加入购物车</string>
+    <string name="text_goods_review">商品评价</string>
+
     <!--login-->
     <string name="text_manager">账户管理</string>
     <string name="text_coupon">优惠券</string>
@@ -64,6 +69,11 @@
     <string name="search_summary">综合</string>
     <string name="search_sell_count">销量</string>
     <string name="search_price">价格</string>
+    <string name="search_hint">输入商品名称查找</string>
+    <string name="search_clear">清空历史搜索</string>
+    <string name="search_history">搜索记录</string>
+    <string name="text_bat_price">批发价</string>
+    <string name="text_price">零售价</string>
 
 
     <string name="text_goods_sell_count">月销量%1$s件</string>

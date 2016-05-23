@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:background="@color/main_tab_color"
         android:minHeight="50dp"
+        app:mCustomView="@layout/search"
         app:mNavButtonIcon="@drawable/title_back"
         app:mRightTextMarginRight="15dp" />
 
@@ -33,7 +34,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/search_summary"
-            android:textColor="@color/bottom_selector" />
+            android:textColor="@color/common_order_text" />
 
         <RadioButton
             android:id="@+id/rb_sell_count"
@@ -44,7 +45,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/search_sell_count"
-            android:textColor="@color/bottom_selector" />
+            android:textColor="@color/common_order_text" />
 
         <RadioButton
             android:id="@+id/rb_price"
@@ -56,7 +57,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/search_price"
-            android:textColor="@color/bottom_selector" />
+            android:textColor="@color/common_order_text" />
     </RadioGroup>
 
     <include layout="@layout/horizontal_line" />

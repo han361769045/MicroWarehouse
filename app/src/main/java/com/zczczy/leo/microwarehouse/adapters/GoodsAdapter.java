@@ -29,6 +29,12 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
         BaseModelJson<PagerResult<GoodsModel>> result = new BaseModelJson<>();
+
+//        switch (Integer.valueOf(objects[0].toString())) {
+//            case 0:
+//                result = myRestClient.getGoodsInfoLikeWord(pageIndex, pageSize, objects[1].toString(), objects[2].toString());
+//                break;
+//        }
         result.Successful = true;
         result.Data = new PagerResult<>();
         result.Data.ListData = new ArrayList<>();
@@ -40,6 +46,7 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
             result.Data.ListData.add(goodsModel);
         }
         afterGetMoreData(result);
+
     }
 
     @UiThread

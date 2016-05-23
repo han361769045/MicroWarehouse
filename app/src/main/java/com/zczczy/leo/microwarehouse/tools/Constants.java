@@ -16,4 +16,15 @@ public class Constants {
     public static final int REGISTER_CODE = 1; //1：用户注册，2：用户登录
 
     public static final String HOME_AD = "1";
+
+    public static final String GOODS_TYPE = "1";  //跳转标识(1:商品类别页，2：商品明细)
+    public static final String GOODS_DETAIL = "2"; //跳转标识(1:商品类别页，2：商品明细)
+
+
+    public static final String ZONG_HE = "1"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
+    public static final String SELL_COUNT = "2"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_DESC = "3"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_ASC = "4"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
+
+
 }

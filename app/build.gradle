@@ -35,13 +35,19 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+//        jackOptions {
+//            enabled true
+//        }
     }
+
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+
             minifyEnabled false
             // 显示Log
             buildConfigField "boolean", "LEO_DEBUG", "true"
@@ -70,6 +76,10 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+//    compileOptions {
+//        targetCompatibility 1.8
+//        sourceCompatibility 1.8
+//    }
 }
 
 dependencies {
@@ -92,6 +102,8 @@ dependencies {
     compile 'me.himanshusoni.quantityview:quantity-view:1.1.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'me.iwf.photopicker:PhotoPicker:0.8.1@aar'
+
+
 
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"

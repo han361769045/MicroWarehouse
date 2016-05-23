@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical"
+    tools:context=".activities.SearchActivity">
+
+    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/main_tab_color"
+        android:minHeight="50dp"
+        app:mCustomView="@layout/search"
+        app:mNavButtonIcon="@drawable/title_back"
+        app:mRightText="@string/search"
+        app:mRightTextColor="@color/main_font_color"
+        app:mRightTextMarginRight="15dp" />
+
+    <TextView
+        android:id="@+id/txt_ti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_title_bar"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/search_history" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_clear"
+        android:layout_below="@+id/txt_ti"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/ll_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:background="@drawable/order_gray"
+            android:text="@string/search_clear" />
+    </LinearLayout>
+</RelativeLayout>

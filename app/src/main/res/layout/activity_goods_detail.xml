@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical"
+    tools:context=".activities.GoodsDetailActivity">
+
+    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main_tab_color"
+        android:minHeight="50dp"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="商品详情" />
+
+    <com.zczczy.leo.microwarehouse.viewgroup.MyScrollView
+        android:id="@+id/myScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/goods_default"
+                    app:pager_animation="Accordion" />
+
+                <TextView
+                    android:id="@+id/goods_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:text="三只松鼠。/。。。。。。。"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <View
+                    android:id="@+id/mBuyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@color/white" />
+
+                <include layout="@layout/horizontal_line" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_goods_by"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:text="快递：" />
+
+                        <TextView
+                            android:id="@+id/goods_by"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="8元" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_sell_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:text="月销量:" />
+
+                        <TextView
+                            android:id="@+id/goods_kucun"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="120" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:gravity="right"
+                            android:text="辽宁大连" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <include layout="@layout/horizontal_line" />
+
+                <include
+                    layout="@layout/horizontal_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_marginTop="10dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:padding="10dp"
+                        android:text="@string/text_goods_review"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
+
+                    <include layout="@layout/horizontal_line" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/horizontal_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:padding="10dp"
+                        android:text="@string/text_goods_detail"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
+
+                    <include layout="@layout/horizontal_line" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <WebView
+                        android:id="@+id/web_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <include layout="@layout/horizontal_line" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/the_view_stay"
+                layout="@layout/buy_view" />
+        </FrameLayout>
+    </com.zczczy.leo.microwarehouse.viewgroup.MyScrollView>
+</LinearLayout>

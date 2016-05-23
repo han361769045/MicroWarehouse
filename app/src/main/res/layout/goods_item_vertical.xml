@@ -43,7 +43,6 @@
                 android:gravity="center_vertical"
                 android:lines="2"
                 android:maxLines="2"
-                android:text="美客多 开口栗子100g 唐山栗子零食甜糯米甘栗仁巴拉巴拉"
                 android:textSize="16sp" />
 
             <TextView
@@ -64,15 +63,58 @@
                 android:maxLines="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/goods_price"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_goods_price"
-                    android:textColor="@color/main_font_color"
-                    android:textSize="16sp" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_price"
+                            android:textColor="@color/second_font_color" />
+
+                        <TextView
+                            android:id="@+id/goods_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/text_goods_price"
+                            android:textColor="@color/main_font_color"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_bat_price"
+                            android:textColor="@color/second_font_color" />
+
+                        <TextView
+                            android:id="@+id/goods_bat_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/text_goods_price"
+                            android:textColor="@color/main_font_color"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/img_add_cart"

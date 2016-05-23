@@ -22,7 +22,7 @@ public class GoodsVerticalItemView extends ItemView<GoodsModel> {
     ImageView pic, img_add_cart;
 
     @ViewById
-    TextView goods_name, goods_sell_count, goods_price;
+    TextView goods_name, goods_sell_count, goods_price, goods_bat_price;
 
     @StringRes
     String text_goods_sell_count, text_goods_price;
@@ -36,6 +36,7 @@ public class GoodsVerticalItemView extends ItemView<GoodsModel> {
         goods_name.setText(_data.GodosName);
         goods_sell_count.setText(String.format(text_goods_sell_count, 100));
         goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
+        goods_bat_price.setText(String.format(text_goods_price, _data.GoodsBatPrice));
     }
 
 

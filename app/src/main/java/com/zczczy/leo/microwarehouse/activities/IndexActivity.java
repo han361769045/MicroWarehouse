@@ -9,6 +9,7 @@ import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -27,6 +28,8 @@ public class IndexActivity extends BaseActivity {
 
     @Bean
     OttoBus bus;
+
+    final int SDK_PERMISSION_REQUEST = 127;
 
     int i = 0;
 
@@ -47,11 +50,11 @@ public class IndexActivity extends BaseActivity {
     public void notifyUI(BaseModel bm) {
         i++;
         if (i == 2) {
-            getPersimmions();
+            getPermissions();
         }
     }
 
-    private void getPersimmions() {
+    private void getPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ArrayList<String> permissions = new ArrayList<>();
             /***
@@ -76,7 +79,7 @@ public class IndexActivity extends BaseActivity {
             }
 
             if (permissions.size() > 0) {
-                requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
+                requestPermissions(permissions.toArray(new String[permissions.size()]), SDK_PERMISSION_REQUEST);
             } else {
                 MainActivity_.intent(this).start();
                 finish();
