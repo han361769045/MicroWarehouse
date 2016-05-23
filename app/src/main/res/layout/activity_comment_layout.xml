@@ -106,7 +106,7 @@
             android:clickable="true"
             android:drawablePadding="5dp"
             android:textSize="18dp"
-            android:drawableLeft="@drawable/youhuiquan"
+            android:drawableLeft="@drawable/goodcomment"
             android:gravity="center_vertical"
             android:text="好评" />
 
@@ -120,7 +120,7 @@
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
             android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/pinglun"
+            android:drawableLeft="@drawable/midcommenr"
             android:textSize="18dp"
             android:gravity="center_vertical"
             android:text="中评" />
@@ -137,7 +137,7 @@
             android:textSize="18dp"
             android:drawablePadding="5dp"
             android:layout_marginLeft="27dp"
-            android:drawableLeft="@drawable/shoucang"
+            android:drawableLeft="@drawable/lowcomment"
             android:gravity="center_vertical"
             android:text="差评" />
 
