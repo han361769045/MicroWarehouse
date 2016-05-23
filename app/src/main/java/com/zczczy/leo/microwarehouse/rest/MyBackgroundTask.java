@@ -5,17 +5,23 @@ import android.net.ConnectivityManager;
 
 import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
+import com.zczczy.leo.microwarehouse.model.Banner;
+import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.SystemService;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.util.List;
 
 /**
  * Created by Leo on 2016/4/29.
@@ -50,5 +56,21 @@ public class MyBackgroundTask {
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+    }
+
+
+    @Background
+    public void getHomeBanner() {
+        afterGetHomeBanner(myRestClient.getHomeBanner());
+    }
+
+    @UiThread
+    void afterGetHomeBanner(BaseModelJson<List<Banner>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            app.setBannerList(bmj.Data);
+        } else {
+            bmj = new BaseModelJson<>();
+        }
+        bus.post(bmj);
     }
 }
