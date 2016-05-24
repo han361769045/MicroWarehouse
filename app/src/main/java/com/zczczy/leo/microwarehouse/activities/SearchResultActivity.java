@@ -24,7 +24,7 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/5/21.
  */
 @EActivity(R.layout.activity_search_result)
-public class SearchResultActivity extends BaseUltimateRecyclerViewActivity {
+public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<GoodsModel> {
 
 
     @Extra

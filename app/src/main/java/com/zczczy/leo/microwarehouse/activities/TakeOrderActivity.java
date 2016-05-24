@@ -113,11 +113,10 @@ public class TakeOrderActivity extends BaseActivity {
             setShipping(model);
             txt_sub_express_charges.setText(String.format(text_goods_price, result.Data.Postage));
             txt_total.setText(String.format(text_goods_price, result.Data.MOrderMoney));
-            int i = 0;
             for (OrderDetailModel orderDetailModel : result.Data.MOrderDetailList) {
                 TakeOrderItemView preOrderItemView = TakeOrderItemView_.build(this);
                 preOrderItemView.init(orderDetailModel);
-                ll_pre_order_item.addView(preOrderItemView, i);
+                ll_pre_order_item.addView(preOrderItemView);
             }
 
         }
@@ -151,17 +150,6 @@ public class TakeOrderActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder adb = new AlertDialog.Builder(this);
-        adb.setTitle("提示").setMessage("确定要放弃该订单吗？").setPositiveButton("放弃", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher).create().show();
-    }
-
     @Click
     void txt_take() {
         if (AndroidTool.checkTextViewIsNull(tv_shipping, txt_phone, tv_shipping_address)) {
@@ -189,7 +177,7 @@ public class TakeOrderActivity extends BaseActivity {
         } else if (!result.Successful) {
             AndroidTool.showToast(this, result.Error);
         } else {
-            if (Constants.CASH == result.Data.PsType) {
+            if (Constants.CASH == result.Data.MPaymentType) {
                 OrderDetailActivity_.intent(this).orderId(result.Data.MOrderId).start();
             } else {
                 UmspayActivity_.intent(this).order(result.Data).start();

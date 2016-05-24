@@ -68,7 +68,6 @@
         android:layout_height="match_parent"
         android:background="@color/main_bg_color"
         app:recyclerviewEmptyView="@layout/empty_view"
-        app:recyclerviewScrollbars="vertical"
-        app:theme="@style/AlertDialog.AppCompat.Light" />
+        app:recyclerviewScrollbars="vertical" />
 
 </LinearLayout>

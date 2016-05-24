@@ -8,7 +8,9 @@ import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.model.CityModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
+import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.model.ProvinceModel;
@@ -319,10 +321,77 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     BaseModelJson<OrderModel> createOrder(@Body OrderModel model);
 
 
-
-    @Get("api/Member/GetOrderDetailById/{orderId}")
+    @Get("api/Member/GetOrderInfoById?MorderId={MorderId}")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModelJson<OrderModel> getOrderDetailById(@Path String orderId);
+    BaseModelJson<OrderModel> getOrderInfoById(@Path String MorderId);
+
+    /**
+     * 根据订单状态查询订单信息
+     *
+     * @param PageIndex 当前页码
+     * @param PageSize  每页显示记录数
+     * @param Status    订单状态（0：待支付，1：待收货，2：全部订单）
+     * @return
+     */
+    @Get("api/Member/GetOrderInfoListByStatus?PageIndex={PageIndex}&PageSize={PageSize}&Status={Status}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<PagerResult<OrderModel>> getOrderInfoListByStatus(@Path int PageIndex, @Path int PageSize, @Path int Status);
+
+    /**
+     * 根据订单ID取消订单
+     *
+     * @param id 订单ID
+     * @return
+     */
+    @Post("api/Member/CancelOrderByOrderId/{id}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel cancelOrderByOrderId(@Path String id);
+
+    /**
+     * 确认收货处理
+     *
+     * @param id 订单ID
+     * @return
+     */
+    @Post("api/Member/ConfirmSh/{id}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel confirmSh(@Path String id);
+
+    /**
+     * 查询待评价订单
+     *
+     * @return
+     * @see OrderDetailModel
+     */
+    @Get("api/Member/GetBeevaluatedOrder")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<List<OrderDetailModel>> getBeevaluatedOrder();
+
+    /**
+     * 添加商品评论
+     *
+     * @param map GoodsInfoId 商品主键ID
+     *            MOrderDetailId 子订单ID
+     *            GoodsCommentsDj 评论等级(1:好评，2：中评，3：差评)
+     *            GoodsCommentsNr 评论内容
+     *            XNum 星的数量
+     * @return
+     */
+    @Post("api/Member/InsertGoodsComments")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel insertGoodsComments(@Body Map map);
+
+
+    /**
+     * 查询物流信息
+     *
+     * @param MOrderId 订单id
+     * @return
+     */
+    @Get("api/Member/GetLogistics?MOrderId={MOrderId}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<List<LogisticsInfoModel>> getLogistics(@Path String MOrderId);
+
 
 }
 

@@ -72,6 +72,7 @@ public class OrderModel implements Serializable {
     public String FhTime;
     public String ShTime;
     public String MarkInfo;
+    public String MerchantId;
 
     public List<OrderDetailModel> MOrderDetailList;
 }

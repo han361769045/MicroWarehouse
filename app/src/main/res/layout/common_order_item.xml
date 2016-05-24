@@ -18,9 +18,7 @@
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/cart_store_icon"
             android:drawablePadding="5dp"
-            android:drawableRight="@drawable/next"
             android:ellipsize="end"
-            android:ems="30"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:text="86微仓" />

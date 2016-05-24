@@ -6,6 +6,7 @@ package com.zczczy.leo.microwarehouse.tools;
 public class Constants {
 
 
+    public static final String ROOT_URL = "http://218.61.203.50:8018/";
     public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
     //正式环境
 //    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
@@ -40,13 +41,13 @@ public class Constants {
     public static final int Goods_DOWN = 0; //1：上架，0：下架
 
 
-
     public static final int DUEPAYMENT = 0; //0:待支付
     public static final int PAID = 1;   //1：已支付
-    public static final int CANCEL = 2; //2:已取消,
-    public static final int SEND = 3; //3：已发货
-    public static final int CONFIRM = 4; //4:确认收货
-    public static final int FINISH = 5; //5:交易完成
-    public static final int ALL_ORDER = 9; //5:交易完成
+    public static final int SELECT_ = 2; //2：仓库选择
+    public static final int RECEIVER = 3; //3：仓库接单
+    public static final int SHIPPING = 4; //4:已发货
+    public static final int CONFIRM = 5; //5:确认收货
+    public static final int FINISH = 6; //5:交易完成
+    public static final int ALL_ORDER = 9; //9.取消订单
 
 }

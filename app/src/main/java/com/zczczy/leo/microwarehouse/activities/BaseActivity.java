@@ -46,6 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @StringRes
     String no_net;
 
+    @StringRes
+    String empty_search, empty_order, empty_review, empty_no_review, empty_logistics;
 
 
     /**
