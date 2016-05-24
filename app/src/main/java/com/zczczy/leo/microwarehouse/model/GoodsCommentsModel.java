@@ -27,6 +27,7 @@ public class GoodsCommentsModel implements Serializable {
     public String UserLogin;
     public String HeadImg;
     public String MOrderId;
+    public String MOrderDetailId;
     public int GoodsCommentsDj;
     public String GoodsCommentsNr;
     public int XNum;

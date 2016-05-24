@@ -34,6 +34,9 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
             case 0:
                 result = myRestClient.getGoodsInfoLikeWord(pageIndex, pageSize, objects[1].toString(), objects[2].toString());
                 break;
+            case 1:
+                result = myRestClient.getRecommendedGoods(pageIndex, pageSize);
+                break;
         }
 //        result.Successful = true;
 //        result.Data = new PagerResult<>();

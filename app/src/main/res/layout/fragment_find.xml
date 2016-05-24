@@ -13,11 +13,16 @@
         android:layout_height="50dp"
         android:background="@color/main_tab_color"
         android:minHeight="50dp"
-        app:mLeftText="全国"
-        app:mLeftTextColor="@color/main_font_color"
-        app:mLeftTextMarginLeft="10dp" />
+        app:mCustomView="@layout/search_result"
+        app:mRightButtonIcon="@drawable/linear_grid" />
 
-
+    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
+        android:id="@+id/ultimate_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg_color"
+        app:recyclerviewEmptyView="@layout/empty_view"
+        app:recyclerviewScrollbars="vertical" />
 
 
 </LinearLayout>

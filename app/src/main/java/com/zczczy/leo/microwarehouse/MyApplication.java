@@ -7,6 +7,7 @@ import android.os.Vibrator;
 import com.baidu.mapapi.SDKInitializer;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
+import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 
 import org.androidannotations.annotations.AfterInject;
@@ -28,6 +29,9 @@ public class MyApplication extends Application {
     //首页广告
     private List<AdvertModel> advertModelList;
 
+    private List<GoodsTypeModel> goodsTypeModelList;
+
+
     //百度地图
     @Bean
     public LocationService locationService;
@@ -39,6 +43,7 @@ public class MyApplication extends Application {
     void afterInject() {
         advertModelList = new ArrayList<>(9);
         newBannerList = new ArrayList<>();
+        goodsTypeModelList = new ArrayList<>();
         //百度地图
 //        locationService = new LocationService(this);
 //        mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
@@ -60,5 +65,13 @@ public class MyApplication extends Application {
 
     public void setNewBannerList(List<BannerModel> newBannerList) {
         this.newBannerList = newBannerList;
+    }
+
+    public List<GoodsTypeModel> getGoodsTypeModelList() {
+        return goodsTypeModelList;
+    }
+
+    public void setGoodsTypeModelList(List<GoodsTypeModel> goodsTypeModelList) {
+        this.goodsTypeModelList = goodsTypeModelList;
     }
 }

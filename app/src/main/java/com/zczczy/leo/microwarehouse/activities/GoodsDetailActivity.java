@@ -1,6 +1,5 @@
 package com.zczczy.leo.microwarehouse.activities;
 
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.webkit.WebSettings;
@@ -13,8 +12,11 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView;
+import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsImgModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
@@ -76,7 +78,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     String goodsId;
 
     @StringRes
-    String text_goods_price;
+    String text_goods_price, text_bat_price, text_price;
 
     WebSettings settings;
 
@@ -111,7 +113,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     @Click
     void card_buy() {
         if (checkUserIsLogin()) {
-            if (!isCanBy) {
+            if (isCanBy) {
                 addShoppingCart();
             } else {
                 AndroidTool.showToast(this, "该商品已下架");
@@ -138,17 +140,23 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
             goods_by.setText(bmj.Data.GoodsIsBy == 0 ? bmj.Data.Postage : "包邮");
             goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
             web_view.loadUrl(bmj.Data.StaticHtmlUrl);
-            txt_rmb.setText(String.format(text_goods_price, bmj.Data.GoodsPrice));
-            txt_home_lb.setText(String.format(text_goods_price, bmj.Data.GoodsBatPrice));
+            txt_rmb.setText(String.format(text_price + text_goods_price, bmj.Data.GoodsPrice));
+            txt_home_lb.setText(String.format(text_bat_price + text_goods_price, bmj.Data.GoodsBatPrice));
             goods_count.setText(String.valueOf(bmj.Data.GoodsStock));
             isCanBy = (Constants.Goods_UP == bmj.Data.GoodsStatus && bmj.Data.GoodsStock > 0);
-            if(bmj.Data.GoodsImgList!=null){
+            if (bmj.Data.GoodsImgList != null) {
                 for (GoodsImgModel goodsImgModel : bmj.Data.GoodsImgList) {
                     TextSliderView textSliderView = new TextSliderView(this);
                     textSliderView.image(goodsImgModel.GoodsImgUrl);
                     textSliderView.setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
                 }
+            }
+            if (bmj.Data.GoodsComments != null) {
+                GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
+                goodsCommentsItemView.init(bmj.Data.GoodsComments);
+                ll_review.addView(goodsCommentsItemView);
+                ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
             }
         }
     }
@@ -164,12 +172,17 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     @UiThread
     void afterAddShoppingCart(BaseModel result) {
         if (result == null) {
-
+            AndroidTool.showToast(this, no_net);
         } else if (!result.Successful) {
             AndroidTool.showToast(this, result.Error);
         } else {
             AndroidTool.showToast(this, "添加成功");
         }
+    }
+
+    @Click
+    void ll_review() {
+        GoodsCommentsActivity_.intent(this).goodsId(goodsId).start();
     }
 
     /**
@@ -186,5 +199,17 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     @Override
     public void onSliderClick(BaseSliderView slider) {
 
+    }
+
+
+    public void onPause() {
+        super.onPause();
+        sliderLayout.stopAutoCycle();
+    }
+
+
+    public void onResume() {
+        super.onResume();
+        sliderLayout.startAutoCycle();
     }
 }

@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
     android:orientation="vertical"
-    tools:context=".activities.BaseUltimateRecyclerViewActivity">
+    tools:context=".activities.GoodsCommentsActivity">
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -13,16 +15,13 @@
         android:layout_height="50dp"
         android:background="@color/main_tab_color"
         android:minHeight="50dp"
-        app:mNavButtonIcon="@drawable/title_back"
-        app:mRightTextMarginRight="15dp" />
-
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="@string/text_goods_reviews" />
 
     <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
         android:id="@+id/ultimate_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_bg_color"
-        app:recyclerviewEmptyView="@layout/empty_view"
-        app:recyclerviewScrollbars="vertical" />
-
+        android:background="@color/white"
+        app:recyclerviewEmptyView="@layout/empty_view" />
 </LinearLayout>

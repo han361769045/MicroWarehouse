@@ -37,8 +37,8 @@ public abstract class BaseFragment extends Fragment {
     @Pref
     MyPrefs_ pre;
 
-//    @ColorRes
-//    int line_color;
+    @ColorRes
+    int line_color;
 
     /**
      * 判断用户是否登录

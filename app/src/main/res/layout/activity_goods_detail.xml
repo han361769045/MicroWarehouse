@@ -16,8 +16,8 @@
         android:background="@color/main_tab_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitleTextColor="@color/black"
-        app:mTitle="商品详情" />
+        app:mTitle="商品详情"
+        app:mTitleTextColor="@color/black" />
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyScrollView
         android:id="@+id/myScrollView"
@@ -146,14 +146,32 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:padding="10dp"
-                        android:text="@string/text_goods_review"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp" />
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+
+                            android:padding="10dp"
+                            android:text="@string/text_goods_review"
+                            android:textColor="@color/gray"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@drawable/next"
+                            android:padding="10dp"
+                            android:text="@string/text_all_review"
+                            android:textColor="@color/main_font_color" />
+                    </RelativeLayout>
+
 
                     <include layout="@layout/horizontal_line" />
 

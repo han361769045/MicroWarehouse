@@ -50,6 +50,8 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    boolean isCanBy;
+
     public GoodsHorizontalItemView(Context context) {
         super(context);
     }
@@ -69,6 +71,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
         goods_sell_count.setText(String.format(text_goods_sell_count, _data.GoodsXl));
         goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
         goods_bat_price.setText(String.format(text_goods_price, _data.GoodsBatPrice));
+        isCanBy = (Constants.Goods_UP == _data.GoodsStatus && _data.GoodsStock > 0);
     }
 
 
@@ -77,7 +80,11 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
         if (StringUtils.isEmpty(pre.token().get())) {
             AndroidTool.showToast(context, "请登录");
         } else {
-            addShoppingCart();
+            if (isCanBy) {
+                addShoppingCart();
+            } else {
+                AndroidTool.showToast(context, "该商品已下架");
+            }
         }
     }
 

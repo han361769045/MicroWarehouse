@@ -7,7 +7,9 @@ import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.model.CityModel;
+import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
+import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
@@ -153,6 +155,37 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Post("api/Content/SendMsg")
     BaseModel sendMsg(@Body Map map);
+
+    /**
+     * 根据商品ID查询评论信息
+     *
+     * @param PageIndex   当前页面
+     * @param PageSize    页面大小
+     * @param GoodsInfoId 商品Id
+     * @return
+     */
+    @Get("api/Content/GetGoodsCommentsByGoodsInfoId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsInfoId={GoodsInfoId}")
+    BaseModelJson<PagerResult<GoodsCommentsModel>> getGoodsCommentsByGoodsInfoId(@Path int PageIndex, @Path int PageSize, @Path String GoodsInfoId);
+
+    /**
+     * 根据父ID查询二级分类
+     *
+     * @param GoodsTypePid 分类id
+     * @return
+     */
+    @Get("api/Content/GetGoodsTypeListByPid?GoodsTypePid={GoodsTypePid}")
+    BaseModelJson<List<GoodsTypeModel>> getGoodsTypeListByPid(@Path String GoodsTypePid);
+
+
+    /**
+     * 根据商品类别ID查询商品信息
+     *
+     * @param GoodsTypeId 分类id
+     * @param Top         数量
+     * @return
+     */
+    @Get("api/Content/GetGoodsInfoByTypeId?GoodsTypeId={GoodsTypeId}&Top={Top}")
+    BaseModelJson<List<GoodsModel>> getGoodsInfoByTypeId(@Path String GoodsTypeId, @Path String Top);
 
 
     //==============================================================================================
