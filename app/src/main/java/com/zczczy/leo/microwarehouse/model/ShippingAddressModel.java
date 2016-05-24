@@ -1,9 +1,11 @@
 package com.zczczy.leo.microwarehouse.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Leo on 2016/5/21.
  */
-public class ShippingAddressModel {
+public class ShippingAddressModel implements Serializable {
 
     /**
      * MReceiptAddressId : 1

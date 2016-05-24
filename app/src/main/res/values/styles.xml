@@ -34,11 +34,19 @@
         <item name="android:maxHeight">32dp</item>
     </style>
 
+    <style name="PayCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/pay_checkbox</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:maxHeight">64dp</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
     <style name="AddressDefaultCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/address_default</item>
         <item name="android:minHeight">16dp</item>
         <item name="android:maxHeight">32dp</item>
     </style>
+
 
     <style name="myTheme.actionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColorPrimary">@color/white</item>

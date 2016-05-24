@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_tab_color"
+    tools:context=".activities.OrderDetailActivity">
+
+    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/main_tab_color"
+        android:minHeight="50dp"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="@string/text_order_detail"
+        app:mTitleTextColor="@color/black" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_take"
+        android:layout_below="@+id/my_title_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/address_line" />
+
+            <include layout="@layout/order_shipping_address" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/address_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/txt_order_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:ems="20"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <include layout="@layout/horizontal_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_logistics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/car"
+                    android:drawablePadding="20dp"
+                    android:drawableRight="@drawable/next"
+                    android:ellipsize="end"
+                    android:ems="21"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/text_order_logistics"
+                    android:textColor="@color/main_font_color" />
+
+            </LinearLayout>
+
+
+            <include layout="@layout/horizontal_line" />
+
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="15dp" />
+
+            <include layout="@layout/common_order_item" />
+
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="-5dp" />
+
+            <include layout="@layout/horizontal_line" />
+
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_express_charges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="15dp"
+                        android:text="@string/text_postal" />
+
+                    <TextView
+                        android:id="@+id/txt_sub_express_charges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="15dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="15dp"
+                        android:text="@string/text_total" />
+
+                    <TextView
+                        android:id="@+id/txt_pay_total_rmb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="15dp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <include layout="@layout/horizontal_line" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_take"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <include layout="@layout/horizontal_line" />
+        <include layout="@layout/order_status" />
+    </LinearLayout>
+</RelativeLayout>

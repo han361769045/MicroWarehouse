@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 
 import com.zczczy.leo.microwarehouse.R;
@@ -36,9 +37,9 @@ public class ShippingAddressActivity extends BaseRecyclerViewActivity<ShippingAd
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, ShippingAddressModel obj, int position) {
                 if (isFinish) {
-//                    Intent intent = new Intent();
-//                    intent.putExtra("model", obj);
-//                    setResult(1001, intent);
+                    Intent intent = new Intent();
+                    intent.putExtra("model", obj);
+                    setResult(1001, intent);
                     finish();
                 }
             }

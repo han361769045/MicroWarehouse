@@ -1,6 +1,7 @@
 package com.zczczy.leo.microwarehouse.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Leo on 2016/5/23.
@@ -50,6 +51,9 @@ public class OrderModel implements Serializable {
     public int MPaymentType;
     public int PsType;
     public int AreaId;
+    public String ProvinceName;
+    public String CityName;
+    public String AreaName;
     public String ShrName;
     public String Lxdh;
     public String DetailAddress;
@@ -58,6 +62,7 @@ public class OrderModel implements Serializable {
     public String transId;
     public String merSign;
     public int MorderStatus;
+    public String MorderStatusDisp;
     public int GoodsAllCount;
     public String TrackingNo;
     public double Postage;
@@ -67,4 +72,6 @@ public class OrderModel implements Serializable {
     public String FhTime;
     public String ShTime;
     public String MarkInfo;
+
+    public List<OrderDetailModel> MOrderDetailList;
 }

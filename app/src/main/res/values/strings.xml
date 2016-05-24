@@ -83,4 +83,30 @@
     <string name="text_goods_price">￥%1$s</string>
 
 
+    <!--take order-->
+    <string name="text_take_order">确认订单</string>
+    <string name="text_take">提交订单</string>
+    <string name="text_postal">运费</string>
+    <string name="text_bao_pay">支付宝</string>
+    <string name="text_wechat_pay">微信</string>
+    <string name="text_umpay">银联</string>
+    <string name="text_cash">货到付款</string>
+    <string name="text_total">合计:</string>
+    <string name="text_shipping">收货人:%1$s</string>
+    <string name="text_take_shipping_address">收货地址:%1$s</string>
+
+
+    <!--order detail-->
+    <string name="text_order_detail">订单详情</string>
+    <string name="text_order_logistics">感谢您的购买，点击查看物流信息！</string>
+
+
+    <!--订单列表-->
+    <string name="text_canceled">已取消</string>
+    <string name="text_cancel_order">取消订单</string>
+    <string name="text_logistics">物流信息</string>
+    <string name="text_finished">已完成</string>
+    <string name="text_pay">付款</string>
+    <string name="text_finish">确认收货</string>
+
 </resources>

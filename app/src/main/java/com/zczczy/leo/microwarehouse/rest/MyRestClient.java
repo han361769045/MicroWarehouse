@@ -297,7 +297,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<List<CartModel>> getBuyCartInfo();
 
-
     /**
      * 生成临时订单信息
      *
@@ -306,8 +305,24 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Post("api/Member/CreateTempOrder")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModelJson<OrderModel> CreateTempOrder(@Body Map map);
+    BaseModelJson<OrderModel> createTempOrder(@Body Map map);
+
+    /**
+     * 生成订单信息
+     *
+     * @param model d订单对象
+     * @return
+     * @see OrderModel
+     */
+    @Post("api/Member/CreateOrder")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<OrderModel> createOrder(@Body OrderModel model);
 
 
+
+    @Get("api/Member/GetOrderDetailById/{orderId}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<OrderModel> getOrderDetailById(@Path String orderId);
 
 }
+

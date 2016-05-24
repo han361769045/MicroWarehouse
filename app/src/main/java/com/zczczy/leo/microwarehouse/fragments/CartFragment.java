@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity_;
 import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
@@ -134,7 +135,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     void ll_checkout() {
         calcMoney();
         if (ids.length() > 0) {
-
+            TakeOrderActivity_.intent(this).ids(ids).start();
         } else {
             AndroidTool.showToast(this, "您还没有选中任何商品哟~");
         }
@@ -154,13 +155,16 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
         if (hidden) {
             bus.unregister(this);
         } else {
+            txt_total_lb.setText(String.format(cart_total, 0.0));
+            txt_checkout.setText(String.format(text_buy, count = 0));
+            cb_all.setChecked(false);
             myAdapter.getMoreData();
             bus.register(this);
         }
-        super.onHiddenChanged(hidden);
     }
 
     @Subscribe

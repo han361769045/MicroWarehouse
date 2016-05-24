@@ -16,6 +16,7 @@
         android:background="@color/main_tab_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitleTextColor="@color/black"
         app:mTitle="商品详情" />
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyScrollView
