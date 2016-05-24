@@ -133,7 +133,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Click
     void txt_two() {
-        SearchActivity_.intent(this).start();
+//        SearchActivity_.intent(this).start();
     }
 
     @Override
