@@ -1,8 +1,9 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -12,11 +13,9 @@ import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.activities.CategoryActivity;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchActivity_;
-import com.zczczy.leo.microwarehouse.activities.SearchResultActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
@@ -24,19 +23,20 @@ import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
+import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
-import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.DrawableRes;
+import org.androidannotations.api.UiThreadExecutor;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -55,9 +55,15 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     MyBackgroundTask myBackgroundTask;
 
     @ViewById
-    TextView txt_one, txt_two, txt_three, txt_four, text_search;
+    TextView txt_one, txt_two, txt_three, txt_four, txt_horn;
 
-    @ViewsById(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine})
+    @ViewById
+    LinearLayout ll_born;
+
+    @ViewsById(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four,
+            R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine,
+            R.id.ad_ten, R.id.ad_eleven
+    })
     List<ImageView> imageViewList;
 
     @Bean
@@ -66,26 +72,28 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     @DrawableRes
     Drawable home_search_bg;
 
-    int i = 0;
+    int i;
+
+    int noticeIndex;
 
     @AfterViews
     void afterView() {
         bus.register(this);
-
-        text_search.setBackground(home_search_bg);
-
         if (app.getNewBannerList().size() >= 0) {
             setBanner();
         } else {
             AndroidTool.showLoadDialog(this);
             myBackgroundTask.getHomeBanner();
             myBackgroundTask.getAdvertByKbn();
+            myBackgroundTask.getNoticeInfoList();
         }
-    }
 
-    @Click
-    void text_search() {
-        SearchActivity_.intent(this).start();
+        myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchActivity_.intent(HomeFragment.this).start();
+            }
+        });
     }
 
     void setBanner() {
@@ -105,18 +113,35 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
                 break;
             }
         }
+
+        if (app.getNoticeInfoModelList().size() > 0) {
+            setNotice();
+        } else {
+            ll_born.setVisibility(View.GONE);
+        }
     }
+
+    @UiThread(delay = 3000, id = "notice")
+    void setNotice() {
+        if (noticeIndex >= app.getNoticeInfoModelList().size()) {
+            noticeIndex = noticeIndex % app.getNoticeInfoModelList().size();
+        }
+        txt_horn.setText(app.getNoticeInfoModelList().get(noticeIndex).NoticeInfoTitle);
+        noticeIndex++;
+        setNotice();
+    }
+
 
     @Subscribe
     public void notifyUI(BaseModel bm) {
         AndroidTool.dismissLoadDialog();
         i++;
-        if (i == 2) {
+        if (i == 3) {
             setBanner();
         }
     }
 
-    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine})
+    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine, R.id.ad_ten, R.id.ad_eleven})
     void imageViewList(ImageView imageView) {
         if (imageView.getContentDescription() != null) {
             String[] temp = imageView.getContentDescription().toString().split(",");
@@ -152,9 +177,11 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         if (hidden) {
             bus.unregister(this);
             homeSlider.stopAutoCycle();
+            UiThreadExecutor.cancelAll("notice");
         } else {
             homeSlider.startAutoCycle();
             bus.register(this);
+            setNotice();
         }
     }
 

@@ -8,6 +8,7 @@ import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
@@ -95,4 +96,23 @@ public class MyBackgroundTask {
         }
         bus.post(bmj);
     }
+
+    /**
+     * 获取首页banner
+     */
+    @Background
+    public void getNoticeInfoList() {
+        afterGetNoticeInfoList(myRestClient.getNoticeInfoList());
+    }
+
+    @UiThread
+    void afterGetNoticeInfoList(BaseModelJson<List<NoticeInfoModel>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            app.setNoticeInfoModelList(bmj.Data);
+        } else {
+            bmj = new BaseModelJson<>();
+        }
+        bus.post(bmj);
+    }
+
 }

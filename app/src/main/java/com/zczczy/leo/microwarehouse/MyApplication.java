@@ -8,6 +8,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
+import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 
 import org.androidannotations.annotations.AfterInject;
@@ -31,6 +32,8 @@ public class MyApplication extends Application {
 
     private List<GoodsTypeModel> goodsTypeModelList;
 
+    private List<NoticeInfoModel> noticeInfoModelList;
+
 
     //百度地图
     @Bean
@@ -44,6 +47,7 @@ public class MyApplication extends Application {
         advertModelList = new ArrayList<>(9);
         newBannerList = new ArrayList<>();
         goodsTypeModelList = new ArrayList<>();
+        noticeInfoModelList = new ArrayList<>();
         //百度地图
 //        locationService = new LocationService(this);
 //        mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
@@ -73,5 +77,13 @@ public class MyApplication extends Application {
 
     public void setGoodsTypeModelList(List<GoodsTypeModel> goodsTypeModelList) {
         this.goodsTypeModelList = goodsTypeModelList;
+    }
+
+    public List<NoticeInfoModel> getNoticeInfoModelList() {
+        return noticeInfoModelList;
+    }
+
+    public void setNoticeInfoModelList(List<NoticeInfoModel> noticeInfoModelList) {
+        this.noticeInfoModelList = noticeInfoModelList;
     }
 }

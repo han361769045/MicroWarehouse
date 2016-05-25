@@ -3,6 +3,8 @@ package com.zczczy.leo.microwarehouse.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.microwarehouse.items.CommonCategoryHorizontalItemView_;
+import com.zczczy.leo.microwarehouse.items.CommonCategoryVerticalItemView_;
 import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.items.GoodsVerticalItemView_;
 import com.zczczy.leo.microwarehouse.items.ItemView;
@@ -46,10 +48,10 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsModel> {
         ItemView<GoodsModel> itemView = null;
         switch (verticalAndHorizontal) {
             case Horizontal:
-                itemView = GoodsHorizontalItemView_.build(parent.getContext());
+                itemView = CommonCategoryHorizontalItemView_.build(parent.getContext());
                 break;
             case Vertical:
-                itemView = GoodsVerticalItemView_.build(parent.getContext());
+                itemView = CommonCategoryVerticalItemView_.build(parent.getContext());
                 break;
         }
         return itemView;

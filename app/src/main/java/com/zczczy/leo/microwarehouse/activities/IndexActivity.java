@@ -38,6 +38,7 @@ public class IndexActivity extends BaseActivity {
         bus.register(this);
         myBackgroundTask.getAdvertByKbn();
         myBackgroundTask.getHomeBanner();
+        myBackgroundTask.getNoticeInfoList();
     }
 
     @Override
@@ -49,7 +50,7 @@ public class IndexActivity extends BaseActivity {
     @Subscribe
     public void notifyUI(BaseModel bm) {
         i++;
-        if (i == 2) {
+        if (i == 3) {
             getPermissions();
         }
     }

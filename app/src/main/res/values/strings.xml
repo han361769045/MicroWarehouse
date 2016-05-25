@@ -18,7 +18,6 @@
     <string name="empty_logistics">暂时还没有物流信息</string>
 
 
-
     <!--login-->
     <string name="text_username">手机号</string>
     <string name="text_password">密码</string>
@@ -42,7 +41,7 @@
     <string name="text_bookmark">收藏</string>
     <string name="text_my_order">我的订单</string>
 
-
+    <!--mine-->
     <string name="text_all_order">查看全部订单</string>
     <string name="text_order">全部订单</string>
     <string name="text_no_pay_order">待付款</string>
@@ -52,6 +51,22 @@
     <string name="text_about_us">关于86微仓</string>
     <string name="text_share">我要分享</string>
     <string name="text_scan">扫一扫</string>
+    <string name="text_change_password">修改密码</string>
+    <string name="text_old_pass">旧密码：</string>
+    <string name="text_new_password">新密码：</string>
+    <string name="text_confirm_password">确认密码:</string>
+    <string name="text_update">修改</string>
+    <string name="text_account_manager">账户管理</string>
+    <string name="text_real_name">真实姓名</string>
+    <string name="text_qq">QQ</string>
+    <string name="text_blog">微博</string>
+    <string name="text_email">邮箱</string>
+    <string name="text_safe">账户安全</string>
+    <string name="text_change_pass">可修改密码</string>
+    <string name="text_zhu_ce">用户注册协议</string>
+    <string name="text_mian_ze">APP免责声明</string>
+    <string name="text_logout">退出当前账户</string>
+
 
     <!--购物车-->
     <string name="text_cart">我的购物车</string>
@@ -132,7 +147,6 @@
     <string name="text_add_comment">添加评论</string>
     <string name="text_goods_reviews">商品评论</string>
     <string name="text_all_review">查看全部评论</string>
-
 
 
     <string name="progress_de">%1$s\%</string>

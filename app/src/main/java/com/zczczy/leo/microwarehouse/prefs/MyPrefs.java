@@ -12,6 +12,7 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 public interface MyPrefs {
     /**
      * D463CF459CE7AF242A727787E2DCDC8EC555869244E957647E08EDB14C9597C28CE9FA19437D1EA2
+     *
      * @return
      */
     @DefaultString("")
@@ -28,4 +29,8 @@ public interface MyPrefs {
 
     @DefaultLong(0L)
     long registerTimerCode();
+
+    @DefaultString("")
+    String userTypeStr();
+
 }

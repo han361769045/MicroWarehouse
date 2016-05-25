@@ -58,7 +58,7 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
 
     MaterialHeader materialHeader;
 
-    Paint paint = new Paint();
+        Paint paint = new Paint();
 
     boolean isRefresh;
 

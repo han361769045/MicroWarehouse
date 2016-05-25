@@ -12,6 +12,7 @@ import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
@@ -79,6 +80,15 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Get("api/Content/GetHomeBanner")
     BaseModelJson<List<BannerModel>> getHomeBanner();
+
+    /**
+     * 查询公告信息表
+     *
+     * @return
+     * @see NoticeInfoModel
+     */
+    @Get("api/Content/GetNoticeInfoList")
+    BaseModelJson<List<NoticeInfoModel>> getNoticeInfoList();
 
     /**
      * 根据广告区分查询广告信息（1：首页广告，2：其他页面广告） 广告区分（1：首页广告，2：其他页面广告）
@@ -197,7 +207,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Content/GetGoodsInfoByTypeId?GoodsTypeId={GoodsTypeId}&Top={Top}")
     BaseModelJson<List<GoodsModel>> getGoodsInfoByTypeId(@Path String GoodsTypeId, @Path String Top);
 
-
     //==============================================================================================
     // 需要传入token
 
@@ -209,6 +218,47 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Member/GetMemberInfo")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<MemberInfoModel> getMemberInfo();
+
+    /**
+     * @param model MemberInfoModel
+     * @return
+     * @see MemberInfoModel
+     */
+    @Post("api/Member/PerfectMemberInfo")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel perfectMemberInfo(@Body MemberInfoModel model);
+
+    /**
+     * 修改会员密码
+     *
+     * @param map OldPw 原始密码
+     *            NewPw 新密码
+     *            ConfirmPw 确认密码
+     * @return
+     */
+    @Post("api/Member/UpdPassWord")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel updPassWord(@Body Map map);
+
+    /**
+     * 修改会员头像
+     *
+     * @param model 头像地址
+     * @return
+     */
+    @Post("api/Member/UpdateMemberInfoImg")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<String> updateMemberInfoImg(@Body Map model);
+
+    /**
+     * 更新头像
+     * HttpHeaders.CONTENT_TYPE
+     *
+     * @param image
+     * @return
+     */
+    @Post("http://updimage.86fuwuwang.com/FileHandler.ashx?type=&folder=Shop")
+    String uploadAvatar(@Part FileSystemResource image);
 
     /**
      * 查询收货地址
@@ -260,26 +310,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Post("api/Member/DelReceiptAddress/{MReceiptAddressId}")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModel delReceiptAddress(@Path int MReceiptAddressId);
-
-    /**
-     * 修改会员头像
-     *
-     * @param model 头像地址
-     * @return
-     */
-    @Post("api/Member/UpdateMemberInfoImg")
-    @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModelJson<String> updateMemberInfoImg(@Body String model);
-
-    /**
-     * 更新头像
-     * HttpHeaders.CONTENT_TYPE
-     *
-     * @param image
-     * @return
-     */
-    @Post("http://updimage.86fuwuwang.com/FileHandler.ashx?type=&folder=Shop")
-    String uploadAvatar(@Part FileSystemResource image);
 
     /**
      * 根据收货地址ID查询单个收货地址信息
@@ -424,7 +454,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModel insertGoodsComments(@Body Map map);
 
-
     /**
      * 查询物流信息
      *
@@ -434,7 +463,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Member/GetLogistics?MOrderId={MOrderId}")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<List<LogisticsInfoModel>> getLogistics(@Path String MOrderId);
-
 
 }
 

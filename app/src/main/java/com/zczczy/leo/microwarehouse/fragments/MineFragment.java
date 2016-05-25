@@ -5,19 +5,30 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
+import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
+import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
 /**
@@ -30,14 +41,29 @@ public class MineFragment extends BaseFragment {
     ImageView avatar;
 
     @ViewById
-    TextView txt_username;
+    TextView txt_username, txt_user_type;
 
     @StringRes
     String text_username, text_no_pay_order, text_take_goods_order, text_order;
 
+    @RestService
+    MyRestClient myRestClient;
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+    @AfterInject
+    void afterInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+    }
+
     @AfterViews
     void afterView() {
-
+        if (checkUserIsLogin()) {
+            getMemberInfo();
+        }
     }
 
     void setData() {
@@ -46,8 +72,10 @@ public class MineFragment extends BaseFragment {
                 Picasso.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
             }
             txt_username.setText(pre.nickName().get());
+            txt_user_type.setText(pre.userTypeStr().get());
         } else {
             txt_username.setText(text_username);
+            txt_user_type.setText(pre.userTypeStr().get());
             avatar.setImageResource(R.drawable.default_avatar);
         }
 
@@ -61,12 +89,30 @@ public class MineFragment extends BaseFragment {
         }
     }
 
+    //获取会员信息
+    @Background
+    void getMemberInfo() {
+        afterGetMemberInfo(myRestClient.getMemberInfo());
+    }
+
+    @UiThread
+    void afterGetMemberInfo(BaseModelJson<MemberInfoModel> bmj) {
+        AndroidTool.dismissLoadDialog();
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bmj.Successful) {
+            AndroidTool.showToast(this, bmj.Error);
+        } else {
+            pre.userTypeStr().put(bmj.Data.UserTypeStr);
+            txt_user_type.setText(pre.userTypeStr().get());
+        }
+    }
+
 
     @Click
     void txt_manager() {
         if (checkUserIsLogin()) {
-            AndroidTool.showToast(this, "开发中");
-
+            AccountManagementActivity_.intent(this).start();
         } else {
             LoginActivity_.intent(this).start();
         }
@@ -147,7 +193,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_about_us() {
-        CommonWebViewActivity_.intent(this).title("关于86微仓").methodName("ContentView").start();
+        CommonWebViewActivity_.intent(this).title("关于86微仓").methodName("Index").start();
     }
 
     @Click

@@ -35,9 +35,13 @@
 
 
         <attr name="mCustomView" format="reference" />
-
-        <!--<attr name="border_width" format="dimension|reference" />-->
-        <!--<attr name="border_color" format="reference|color" />-->
+        <attr name="mCustomViewGravity" format="enum">
+            <enum name="mLeft" value="0" />
+            <enum name="mCenter" value="1" />
+            <enum name="mRight" value="2" />
+        </attr>
+        <attr name="mCustomViewMarginRight" format="dimension|reference" />
+        <attr name="mCustomViewMarginLeft" format="dimension|reference" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">

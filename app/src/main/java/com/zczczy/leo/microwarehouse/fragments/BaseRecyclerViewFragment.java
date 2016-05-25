@@ -1,9 +1,11 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.graphics.Paint;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
@@ -41,6 +43,8 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
 
     LinearLayoutManager linearLayoutManager;
 
+    Paint paint = new Paint();
+
     @AfterInject
     void afterRecyclerInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -52,6 +56,9 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
+        paint.setStrokeWidth(1);
+        paint.setColor(line_color);
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).paint(paint).build());
         verticalItem();
     }
 

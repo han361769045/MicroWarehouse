@@ -58,11 +58,13 @@ public class MyTitleBar extends RelativeLayout {
 
     private Drawable searchDrawable;
 
-    private int mRightTextMarginRight, mleftTextMarginLeft;
+    private int mRightTextMarginRight, mLeftTextMarginLeft, mCustomViewMarginRight, mCustomViewMarginLeft;
 
     private int mLeftTextDrawablePadding, mRightTextDrawablePadding;
 
     private boolean mLogoShape;
+
+    private int mCustomViewGravity;
 
     public MyTitleBar(Context context) {
         this(context, null);
@@ -77,7 +79,10 @@ public class MyTitleBar extends RelativeLayout {
         final TintTypedArray a = TintTypedArray.obtainStyledAttributes(getContext(), attrs, R.styleable.MyTitleBar, defStyleAttr, 0);
 
         mRightTextMarginRight = a.getDimensionPixelSize(R.styleable.MyTitleBar_mRightTextMarginRight, pxFromDp(0));
-        mleftTextMarginLeft = a.getDimensionPixelSize(R.styleable.MyTitleBar_mLeftTextMarginLeft, pxFromDp(0));
+        mLeftTextMarginLeft = a.getDimensionPixelSize(R.styleable.MyTitleBar_mLeftTextMarginLeft, pxFromDp(0));
+
+        mCustomViewMarginRight = a.getDimensionPixelSize(R.styleable.MyTitleBar_mCustomViewMarginRight, pxFromDp(0));
+        mCustomViewMarginLeft = a.getDimensionPixelSize(R.styleable.MyTitleBar_mCustomViewMarginLeft, pxFromDp(0));
 
 
         final Drawable rightButtonView = a.getDrawable(R.styleable.MyTitleBar_mRightButtonIcon);
@@ -185,6 +190,8 @@ public class MyTitleBar extends RelativeLayout {
             mCustomViewId = a.getResourceId(R.styleable.MyTitleBar_mCustomView, 0);
         }
 
+        mCustomViewGravity = a.getInt(R.styleable.MyTitleBar_mCustomViewGravity, 1);
+
         if (mCustomViewId != 0) {
             setCustomView(mCustomViewId);
         }
@@ -223,7 +230,16 @@ public class MyTitleBar extends RelativeLayout {
                 mTitleTextView.setVisibility(GONE);
             }
             LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+            if (mCustomViewGravity == 0) {
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            } else if (mCustomViewGravity == 2) {
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            } else {
+                layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+            }
+            layoutParams.setMargins(mCustomViewMarginLeft, 0, mCustomViewMarginRight, 0);
             mCustomView.setLayoutParams(layoutParams);
             addView(customView, layoutParams);
         }
@@ -471,7 +487,7 @@ public class MyTitleBar extends RelativeLayout {
                 layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
                 layoutParams.alignWithParent = true;
                 if (mNavButtonView == null) {
-                    layoutParams.setMargins(mleftTextMarginLeft, 0, 5, 0);
+                    layoutParams.setMargins(mLeftTextMarginLeft, 0, 5, 0);
                     layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 } else {
                     layoutParams.addRule(RelativeLayout.RIGHT_OF, R.id.m_nav_button);

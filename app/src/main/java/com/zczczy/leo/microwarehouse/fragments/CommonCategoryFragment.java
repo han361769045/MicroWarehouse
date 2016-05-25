@@ -39,7 +39,7 @@ public class CommonCategoryFragment extends BaseRecyclerViewFragment<GoodsModel>
                 GoodsDetailActivity_.intent(CommonCategoryFragment.this).goodsId(obj.GoodsInfoId).start();
             }
         });
-        horizontalItem();
+//        horizontalItem();
     }
 
 }

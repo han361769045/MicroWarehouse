@@ -162,6 +162,21 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".activities.AccountManagementActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".activities.ChangePwdActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".activities.ChangeInfoActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
 
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
