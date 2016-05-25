@@ -5,6 +5,7 @@ package com.zczczy.leo.microwarehouse.fragments;
 import android.widget.TextView;
 
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 
 import org.androidannotations.annotations.Click;
@@ -24,7 +25,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_login(){
 
-        LoginActivity_.intent(this).start();
+        AccountManagementActivity_.intent(this).start();
     }
 
 

@@ -14,203 +14,295 @@
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
         app:mTitle="账户管理" />
-
-    <LinearLayout
-
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/common_shadow_selector"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:text="头像" />
-
-        <TextView
-            android:textSize="16dp"
+        android:scrollbars="none">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:drawableRight="@drawable/next_icon"
-            android:gravity="top|right"
-            android:drawablePadding="5dp"
-            android:singleLine="true" />
-    </LinearLayout>
-    <include layout="@layout/horizontal_line" />
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/common_shadow_selector"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:text="用户名" />
-
-        <TextView
-            android:id="@+id/edt_name"
-            android:textSize="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:drawableRight="@drawable/next_icon"
-            android:gravity="center_vertical|right"
-            android:text="陆景强"
-            android:textColor="@color/gray"
-            android:drawablePadding="5dp"
-             />
-    </LinearLayout>
-    <include layout="@layout/horizontal_line" />
-    <LinearLayout
-        android:id="@+id/ll_companyarea"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/common_shadow_selector"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:text="昵称" />
-
-        <TextView
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:drawableRight="@drawable/next_icon"
-            android:gravity="center_vertical|right"
-            android:textSize="15dp"
-            android:text="你好"
-            android:textColor="@color/gray"
-            android:drawablePadding="5dp"
-             />
-    </LinearLayout>
-    <include layout="@layout/horizontal_line" />
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/common_shadow_selector"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:text="账户安全" />
-
-        <TextView
-            android:id="@+id/edt_qq"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:drawableRight="@drawable/next_icon"
-            android:gravity="right|center_vertical"
-            android:textSize="13dp"
-            android:text="可修改密码"
-            android:textColor="@color/gray"
-            android:drawablePadding="5dp"
-            android:singleLine="true" />
-    </LinearLayout>
-    <include layout="@layout/horizontal_line" />
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/common_shadow_selector"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:text="用户注册协议" />
-
-        <TextView
-            android:id="@+id/edt_blog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:drawableRight="@drawable/next_icon"
-            android:gravity="top|right"
-            android:textSize="16dp"
-            android:drawablePadding="5dp"
-            android:singleLine="true" />
-    </LinearLayout>
-    <include layout="@layout/horizontal_line" />
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/common_shadow_selector"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-            android:id="@+id/txt_province"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:text="APP免责声明" />
-
-        <TextView
-            android:id="@+id/txt_change"
-            android:drawablePadding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:drawableRight="@drawable/next_icon"
-            android:gravity="top|right"
-            android:singleLine="true" />
-    </LinearLayout>
-    <include layout="@layout/horizontal_line" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    <Button
-        android:textSize="17dp"
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/button_selector"
-        android:padding="15dp"
-        android:text="退出当前账户"
-        android:textColor="#ffffff" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_shadow_selector"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:drawablePadding="10dp"
+                    android:text="头像"
+                    android:textSize="18sp" />
+
+                <com.zczczy.leo.microwarehouse.viewgroup.CircleImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/default_header" />
+
+                <ImageView
+                    android:id="@+id/img_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/next_icon" />
+
+            </RelativeLayout>
+            <include layout="@layout/horizontal_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_companyarea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="姓名" />
+
+                <EditText
+                    android:id="@+id/edt_realname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="5dp"
+                    />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <LinearLayout
+                android:id="@+id/ll_qq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="QQ" />
+
+                <EditText
+                    android:id="@+id/edt_qq"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:singleLine="true"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textColor="@color/gray"
+                    android:drawablePadding="5dp"
+                    />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="微博" />
+
+                <EditText
+                    android:id="@+id/edt_blog"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:singleLine="true"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textColor="@color/gray"
+                    android:drawablePadding="5dp"
+                    />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="邮箱" />
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:singleLine="true"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textColor="@color/gray"
+                    android:drawablePadding="5dp"
+                    />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:text="账户安全" />
+
+                <TextView
+                    android:id="@+id/txt_changepsd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:drawableRight="@drawable/next_icon"
+                    android:gravity="right|center_vertical"
+                    android:textSize="13dp"
+                    android:text="可修改密码"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="5dp"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="用户注册协议" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:drawableRight="@drawable/next_icon"
+                    android:gravity="top|right"
+                    android:textSize="16dp"
+                    android:drawablePadding="5dp"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/txt_province"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="APP免责声明" />
+
+                <TextView
+                    android:id="@+id/txt_change"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:drawableRight="@drawable/next_icon"
+                    android:gravity="top|right"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+            <Button
+                android:textSize="17dp"
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/button_selector"
+                android:padding="15dp"
+                android:text="保存账户信息"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:textSize="17dp"
+                android:id="@+id/btn_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/button_selector"
+                android:padding="15dp"
+                android:text="退出当前账户"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
