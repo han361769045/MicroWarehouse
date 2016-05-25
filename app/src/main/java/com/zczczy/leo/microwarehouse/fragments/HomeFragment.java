@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +12,9 @@ import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.CategoryActivity;
+import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
+import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchResultActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
@@ -119,8 +123,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             if (temp.length == 2) {
                 //跳转标识(1:商品类别页，2：商品明细)
                 if (Constants.GOODS_TYPE.equals(temp[0])) {
+                    CategoryActivity_.intent(getActivity()).id(temp[1]).start();
                 } else {
-//                    GoodsDetailInfoActivity_.intent(context).goodsId(temp[1]).start();
+                    GoodsDetailActivity_.intent(getActivity()).goodsId(temp[1]).start();
                 }
             }
         }

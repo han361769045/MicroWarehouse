@@ -11,9 +11,10 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 @SharedPref(value = SharedPref.Scope.UNIQUE)
 public interface MyPrefs {
     /**
+     * D463CF459CE7AF242A727787E2DCDC8EC555869244E957647E08EDB14C9597C28CE9FA19437D1EA2
      * @return
      */
-    @DefaultString("D463CF459CE7AF242A727787E2DCDC8EC555869244E957647E08EDB14C9597C28CE9FA19437D1EA2")
+    @DefaultString("")
     String token();
 
     @DefaultString("")

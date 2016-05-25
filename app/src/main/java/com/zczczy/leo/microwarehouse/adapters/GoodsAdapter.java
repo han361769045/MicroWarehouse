@@ -38,18 +38,7 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
                 result = myRestClient.getRecommendedGoods(pageIndex, pageSize);
                 break;
         }
-//        result.Successful = true;
-//        result.Data = new PagerResult<>();
-//        result.Data.ListData = new ArrayList<>();
-//        result.Data.RowCount = 91;
-//        for (int i = pageSize * (pageIndex - 1); i < pageSize * pageIndex; i++) {
-//            GoodsModel goodsModel = new GoodsModel();
-//            goodsModel.GodosName = "巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉" + i;
-//            goodsModel.GoodsPrice = (i + 1);
-//            result.Data.ListData.add(goodsModel);
-//        }
         afterGetMoreData(result);
-
     }
 
     @UiThread

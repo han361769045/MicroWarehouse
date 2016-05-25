@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity_;
 import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
@@ -53,6 +54,11 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     @Bean
     OttoBus bus;
+
+    AlertDialog.Builder adb;
+
+    AlertDialog alertDialog;
+
     //总钱数
     int count = 0;
 
@@ -153,6 +159,27 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         calcMoney();
     }
 
+    void check() {
+        if (checkUserIsLogin()) {
+            myAdapter.getMoreData();
+        } else {
+            if (adb == null) {
+                adb = new AlertDialog.Builder(getActivity());
+                adb.setTitle("提示").setMessage("请先登录？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoginActivity_.intent(CartFragment.this).start();
+                    }
+                }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher);
+                alertDialog = adb.create();
+            }
+            if (!alertDialog.isShowing()) {
+                alertDialog.show();
+            }
+        }
+
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -162,8 +189,9 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
             txt_total_lb.setText(String.format(cart_total, 0.0));
             txt_checkout.setText(String.format(text_buy, count = 0));
             cb_all.setChecked(false);
-            myAdapter.getMoreData();
             bus.register(this);
+            check();
+
         }
     }
 

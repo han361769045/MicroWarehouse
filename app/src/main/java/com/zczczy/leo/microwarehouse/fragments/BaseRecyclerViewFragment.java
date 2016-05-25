@@ -52,9 +52,23 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
+        verticalItem();
+    }
+
+    //线性布局
+    void verticalItem() {
+        recyclerView.setAdapter(null);
+        myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Vertical;
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAdapter);
     }
 
+    //网格布局
+    void horizontalItem() {
+        recyclerView.setAdapter(null);
+        myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Horizontal;
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(myAdapter);
+    }
 
 }

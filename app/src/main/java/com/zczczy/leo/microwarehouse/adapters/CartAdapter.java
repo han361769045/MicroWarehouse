@@ -30,15 +30,6 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
     @Override
     public void getMoreData(Object... objects) {
         BaseModelJson<List<CartModel>> result;
-//        result.Data = new ArrayList<>();
-//        result.Successful = true;
-//        for (int i = 0; i < 10; i++) {
-//            CartModel cartModel = new CartModel();
-//            cartModel.GodosName = "巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉" + i;
-//            cartModel.ProductCount = i + 1;
-//            cartModel.GoodsPrice = 12.00;
-//            result.Data.add(cartModel);
-//        }
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
         result = myRestClient.getBuyCartInfo();

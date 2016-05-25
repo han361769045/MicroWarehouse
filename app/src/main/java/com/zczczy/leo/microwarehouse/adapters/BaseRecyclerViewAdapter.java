@@ -38,6 +38,8 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     private OnItemLongClickListener onItemLongClickListener;
 
+    public VerticalAndHorizontal verticalAndHorizontal;
+
     @Background
     public abstract void getMoreData(Object... objects);
 
@@ -188,5 +190,10 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     public void setItems(List<T> items) {
         this.items = items;
+    }
+
+    public enum VerticalAndHorizontal {
+        Vertical,
+        Horizontal
     }
 }
