@@ -10,6 +10,7 @@ import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
+import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -28,6 +29,8 @@ import org.androidannotations.rest.spring.annotations.RestService;
 @EActivity(R.layout.activity_change_info)
 public class ChangeInfoActivity extends BaseActivity {
 
+    @ViewById
+    MyTitleBar myTitleBar;
 
     @ViewById
     EditText edt_content;
@@ -57,6 +60,15 @@ public class ChangeInfoActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         edt_content.setHint(content);
+        if ("1".equals(flagT)) {
+            myTitleBar.setTitle("修改姓名");
+        } else if ("2".equals(flagT)) {
+            myTitleBar.setTitle("修改QQ");
+        } else if ("3".equals(flagT)) {
+            myTitleBar.setTitle("修改博客");
+        } else if ("4".equals(flagT)) {
+            myTitleBar.setTitle("修改邮箱");
+        }
     }
 
 
