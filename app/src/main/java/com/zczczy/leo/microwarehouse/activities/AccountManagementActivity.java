@@ -22,6 +22,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
@@ -44,7 +45,7 @@ public class AccountManagementActivity extends  BaseActivity {
     @ViewById
     ImageView img_avatar;
     @ViewById
-    LinearLayout ll_psd;
+    LinearLayout ll_psd,ll_changepsd;
 
 
 
@@ -59,6 +60,12 @@ public class AccountManagementActivity extends  BaseActivity {
     @AfterViews
     void afterView(){
         getMemberInfo();
+    }
+
+    @Click
+    void ll_changepsd(){
+        ChangePwdActivity_.intent(this).start();
+        finish();
     }
 
     //获取会员信息
@@ -81,9 +88,9 @@ public class AccountManagementActivity extends  BaseActivity {
             edt_email.setText(bmj.Data.MemberEmail);
             edt_qq.setText(bmj.Data.MemberQQ);
             edt_blog.setText(bmj.Data.MemberBlog);
-            if (edt_psd==null){
-                ll_psd.setVisibility(View.VISIBLE);
-            }
+            edt_psd.setText(bmj.Data.UserPw);
+            ll_psd.setVisibility(StringUtils.isEmpty(bmj.Data.UserPw)?View.VISIBLE:View. GONE);
+
 
             if (!StringUtils.isEmpty(bmj.Data.HeadImg)) {
                 Picasso.with(this).load(bmj.Data.HeadImg).placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
@@ -95,8 +102,10 @@ public class AccountManagementActivity extends  BaseActivity {
 
     @Click
     void btn_save(){
-
-        changeInfo(edt_realname.getText().toString().trim(),edt_psd.getText().toString().trim(),edt_qq.getText().toString().trim(),edt_blog.getText().toString().trim(),
+        changeInfo(edt_realname.getText().toString().trim(),
+                edt_psd.getText().toString().trim(),
+                edt_qq.getText().toString().trim(),
+                edt_blog.getText().toString().trim(),
                 edt_email.getText().toString().trim());
     }
 
@@ -108,11 +117,7 @@ public class AccountManagementActivity extends  BaseActivity {
         myRestClient.setHeader("Kbn","1");
         HashMap map =new HashMap();
         map.put("MemberRealName",MemberRealName);
-        if (edt_psd==null){
-        map.put("UserPw",UserPw);}
-        else {
-            map.put("UserPw","");
-        }
+        map.put("UserPw",ll_psd.isShown()?UserPw:null);
         map.put("MemberQQ",MemberQQ);
         map.put("MemberBlog",MemberBlog);
         map.put("MemberEmail",MemberEmail);

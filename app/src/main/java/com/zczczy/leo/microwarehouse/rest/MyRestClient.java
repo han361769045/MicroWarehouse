@@ -1,10 +1,12 @@
 package com.zczczy.leo.microwarehouse.rest;
 
 import com.zczczy.leo.microwarehouse.model.Banner;
+import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.LoginInfo;
 import com.zczczy.leo.microwarehouse.model.MemberInfo;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Path;
@@ -62,5 +64,13 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Member/GetMemberInfo")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<MemberInfo>GetMemberInfo();
+
+    /**
+     * 修改密码
+     */
+    @Post("api/Member/UpdPassWord")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel UpdPassWord(@Body Map map);
+
 
 }
