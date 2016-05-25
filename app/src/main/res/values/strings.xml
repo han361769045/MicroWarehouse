@@ -133,4 +133,8 @@
     <string name="text_goods_reviews">商品评论</string>
     <string name="text_all_review">查看全部评论</string>
 
+
+
+    <string name="progress_de">%1$s\%</string>
+
 </resources>

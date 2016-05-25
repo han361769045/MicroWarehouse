@@ -17,6 +17,7 @@ import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.model.ProvinceModel;
 import com.zczczy.leo.microwarehouse.model.ShippingAddressModel;
+import com.zczczy.leo.microwarehouse.model.UpdateAppModel;
 
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
@@ -61,6 +62,15 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Get("api/Content/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
     BaseModelJson<String> login(@Path String UserName, @Path String UserPw, @Path int LoginType, @Path String Kbn);
+
+    /**
+     * 验证app是否需要更新
+     *
+     * @param kbn 类型
+     * @return
+     */
+    @Get("api/Content/AppUpdCheck?kbn={kbn}")
+    BaseModelJson<UpdateAppModel> appUpdCheck(@Path String kbn);
 
     /**
      * 查询App首页Banner

@@ -12,10 +12,10 @@
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/main_tab_color"
+        android:background="@color/title_bar_bg"
         android:minHeight="50dp"
         app:mLeftText="全国"
-        app:mLeftTextColor="@color/main_font_color"
+        app:mLeftTextColor="@color/white"
         app:mLeftTextMarginLeft="10dp" />
 
     <ScrollView
@@ -67,7 +67,7 @@
                         android:drawablePadding="5dp"
                         android:drawableTop="@drawable/pao_tui"
                         android:gravity="center_horizontal|bottom"
-                        android:text="86跑腿" />
+                        android:text="微仓跑腿" />
                 </LinearLayout>
 
                 <LinearLayout

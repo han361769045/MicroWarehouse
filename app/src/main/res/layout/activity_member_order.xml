@@ -13,10 +13,10 @@
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/main_tab_color"
+        android:background="@color/title_bar_bg"
         android:minHeight="50dp"
-        app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitleTextColor="@color/black" />
+        app:mNavButtonIcon="@drawable/title_back"
+        app:mTitleTextColor="@color/white" />
 
     <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
         android:id="@+id/ultimate_recycler_view"

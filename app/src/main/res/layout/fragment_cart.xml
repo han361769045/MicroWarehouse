@@ -12,13 +12,13 @@
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/main_tab_color"
+        android:background="@color/title_bar_bg"
         android:minHeight="50dp"
         app:mRightText="@string/text_edit"
-        app:mRightTextColor="@color/black"
+        app:mRightTextColor="@color/white"
         app:mRightTextMarginRight="10dp"
         app:mTitle="@string/text_cart"
-        app:mTitleTextColor="@color/black" />
+        app:mTitleTextColor="@color/white" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
