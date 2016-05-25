@@ -75,7 +75,7 @@
                     android:gravity="center"
                     android:textSize="18dp"
                     android:textColor="@color/black"
-                    android:text="姓名" />
+                    android:text="真实姓名" />
 
                 <EditText
                     android:id="@+id/edt_realname"
@@ -90,6 +90,39 @@
                     />
             </LinearLayout>
             <include layout="@layout/horizontal_line" />
+            <LinearLayout
+                android:id="@+id/ll_psd"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/common_shadow_selector"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:text="设置密码" />
+
+                <EditText
+                    android:id="@+id/edt_psd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="5dp"
+                    />
+            </LinearLayout>
+            <include layout="@layout/horizontal_line" />
+
             <LinearLayout
                 android:id="@+id/ll_qq"
                 android:layout_width="match_parent"
@@ -185,6 +218,7 @@
                     android:drawablePadding="5dp"
                     />
             </LinearLayout>
+
             <include layout="@layout/horizontal_line" />
             <LinearLayout
                 android:layout_marginTop="10dp"

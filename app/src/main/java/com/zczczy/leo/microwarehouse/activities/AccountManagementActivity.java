@@ -1,8 +1,10 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
@@ -33,7 +35,7 @@ import java.util.HashMap;
 public class AccountManagementActivity extends  BaseActivity {
 
     @ViewById
-    EditText edt_realname,edt_qq,edt_blog,edt_email;
+    EditText edt_realname,edt_qq,edt_blog,edt_email,edt_psd;
     @RestService
     MyRestClient myRestClient;
 
@@ -41,6 +43,8 @@ public class AccountManagementActivity extends  BaseActivity {
     Button btn_save,btn_exit;
     @ViewById
     ImageView img_avatar;
+    @ViewById
+    LinearLayout ll_psd;
 
 
 
@@ -77,6 +81,10 @@ public class AccountManagementActivity extends  BaseActivity {
             edt_email.setText(bmj.Data.MemberEmail);
             edt_qq.setText(bmj.Data.MemberQQ);
             edt_blog.setText(bmj.Data.MemberBlog);
+            if (edt_psd==null){
+                ll_psd.setVisibility(View.VISIBLE);
+            }
+
             if (!StringUtils.isEmpty(bmj.Data.HeadImg)) {
                 Picasso.with(this).load(bmj.Data.HeadImg).placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
             }
@@ -88,18 +96,23 @@ public class AccountManagementActivity extends  BaseActivity {
     @Click
     void btn_save(){
 
-        changeInfo(edt_realname.getText().toString().trim(),edt_qq.getText().toString().trim(),edt_blog.getText().toString().trim(),
+        changeInfo(edt_realname.getText().toString().trim(),edt_psd.getText().toString().trim(),edt_qq.getText().toString().trim(),edt_blog.getText().toString().trim(),
                 edt_email.getText().toString().trim());
     }
 
 
 
     @Background
-    void changeInfo(String MemberRealName,String MemberQQ,String MemberBlog,String MemberEmail){
+    void changeInfo(String MemberRealName,String UserPw,String MemberQQ,String MemberBlog,String MemberEmail){
         myRestClient.setHeader("Token","D463CF459CE7AF242A727787E2DCDC8EC555869244E957647E08EDB14C9597C28CE9FA19437D1EA2");
         myRestClient.setHeader("Kbn","1");
         HashMap map =new HashMap();
         map.put("MemberRealName",MemberRealName);
+        if (edt_psd==null){
+        map.put("UserPw",UserPw);}
+        else {
+            map.put("UserPw","");
+        }
         map.put("MemberQQ",MemberQQ);
         map.put("MemberBlog",MemberBlog);
         map.put("MemberEmail",MemberEmail);
