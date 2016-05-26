@@ -126,6 +126,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     void card_buy() {
         if (checkUserIsLogin()) {
             if (isCanBy) {
+                AndroidTool.showLoadDialog(this);
                 addShoppingCart();
             } else {
                 AndroidTool.showToast(this, tip);
@@ -183,6 +184,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
 
     @UiThread
     void afterAddShoppingCart(BaseModel result) {
+        AndroidTool.dismissLoadDialog();
         if (result == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!result.Successful) {

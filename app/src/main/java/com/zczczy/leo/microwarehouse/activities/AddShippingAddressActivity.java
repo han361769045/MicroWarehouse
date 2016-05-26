@@ -89,7 +89,7 @@ public class AddShippingAddressActivity extends BaseActivity {
         } else {
             edt_shipping.setText(bmj.Data.ReceiptName);
             edt_phone.setText(bmj.Data.Mobile);
-            txt_p_c_a.setText(bmj.Data.ProvinceName + bmj.Data.CityName + bmj.Data.AreaName);
+            txt_p_c_a.setText(bmj.Data.ProvinceName.concat(bmj.Data.CityName + bmj.Data.AreaName));
             txt_detail_address.setText(bmj.Data.DetailAddress);
             areaId = bmj.Data.AreaId;
         }
@@ -114,8 +114,6 @@ public class AddShippingAddressActivity extends BaseActivity {
         if (AndroidTool.checkIsNull(edt_shipping)) {
             AndroidTool.showToast(this, "收货人不能为空");
         } else if (AndroidTool.checkIsNull(edt_phone)) {
-            AndroidTool.showToast(this, "联系电话不能为空");
-        } else if (AndroidTool.checkMPhone(edt_phone)) {
             AndroidTool.showToast(this, "联系电话不能为空");
         } else if (areaId == 0) {
             AndroidTool.showToast(this, "请选择省、市、区");

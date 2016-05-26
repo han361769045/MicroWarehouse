@@ -40,7 +40,7 @@ public class GoodsVerticalItemView extends ItemView<GoodsModel> {
     TextView goods_name, goods_sell_count, goods_price, goods_bat_price;
 
     @StringRes
-    String text_goods_sell_count, text_goods_price,tip;
+    String text_goods_sell_count, text_goods_price, tip;
 
     @Pref
     MyPrefs_ pre;

@@ -107,6 +107,9 @@ public class AccountManagementActivity extends BaseActivity {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.CAMERA);
             }
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
             if (permissions.size() > 0) {
                 requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
             } else {
@@ -121,20 +124,21 @@ public class AccountManagementActivity extends BaseActivity {
         PhotoPickerIntent intent = new PhotoPickerIntent(AccountManagementActivity.this);
         intent.setPhotoCount(1);
         intent.setShowCamera(true);
-        intent.setShowGif(true);
+        intent.setShowGif(false);
         startActivityForResult(intent, 1000);
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         // TODO Auto-generated method stub
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            takePhoto();
-        } else {
-            AndroidTool.showToast(this, "您拒绝授权，该功能不可用");
+        for (int grantResult : grantResults) {
+            if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                AndroidTool.showToast(this, "您拒绝授权，该功能不可用");
+                return;
+            }
         }
+        takePhoto();
     }
 
 
@@ -309,7 +313,7 @@ public class AccountManagementActivity extends BaseActivity {
 
     @Click
     void rl_mian_ze() {
-        CommonWebViewActivity_.intent(this).linkUrl(Constants.ROOT_URL +"Disclaimer").title(text_mian_ze).start();
+        CommonWebViewActivity_.intent(this).linkUrl(Constants.ROOT_URL + "Disclaimer").title(text_mian_ze).start();
     }
 
     @Click
