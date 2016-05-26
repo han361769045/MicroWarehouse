@@ -6,11 +6,16 @@ import android.support.v7.widget.RecyclerView;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
+import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
  * Created by Leo on 2016/5/21.
@@ -29,6 +34,18 @@ public abstract class BaseRecyclerViewActivity<T> extends BaseActivity {
     BaseRecyclerViewAdapter<T> myAdapter;
 
     Paint paint = new Paint();
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+    @RestService
+    MyRestClient myRestClient;
+
+
+    @AfterInject
+    void afterRecyclerInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+    }
 
     @AfterViews
     void afterRecyclerView() {

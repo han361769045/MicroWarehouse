@@ -1,4 +1,4 @@
-package com.zczczy.leo.microwarehouse.fragments;
+package com.zczczy.leo.microwarehouse.activities;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
-import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity_;
 import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
@@ -23,7 +21,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -32,10 +30,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Leo on 2016/5/20.
+ * Created by Leo on 2016/5/26.
  */
-@EFragment(R.layout.fragment_cart)
-public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
+@EActivity(R.layout.fragment_cart)
+public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
 
     @ViewById
     MyTitleBar myTitleBar;
@@ -70,6 +68,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     @AfterViews
     void afterView() {
+        bus.register(this);
         txt_total_lb.setText(String.format(cart_total, 0.0));
         txt_checkout.setText(String.format(text_buy, count));
         list = new ArrayList<>();
@@ -88,6 +87,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
                 }
             }
         });
+
     }
 
     @Bean
@@ -96,15 +96,21 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        myAdapter.getMoreData();
+    }
+
     @Click
     void ll_delete() {
         calcMoney();
         if (count > 0) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton(text_delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    AndroidTool.showLoadDialog(CartFragment.this);
+                    AndroidTool.showLoadDialog(CartActivity.this);
                     deleteShopping();
                 }
             }).setNegativeButton(text_cancel, null).setIcon(R.mipmap.ic_launcher).create().show();
@@ -163,11 +169,11 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
             myAdapter.getMoreData();
         } else {
             if (adb == null) {
-                adb = new AlertDialog.Builder(getActivity());
+                adb = new AlertDialog.Builder(this);
                 adb.setTitle("提示").setMessage("请先登录？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        LoginActivity_.intent(CartFragment.this).start();
+                        LoginActivity_.intent(CartActivity.this).start();
                     }
                 }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher);
                 alertDialog = adb.create();
@@ -175,25 +181,6 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
             if (!alertDialog.isShowing()) {
                 alertDialog.show();
             }
-        }
-
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden) {
-            bus.unregister(this);
-        } else {
-            txt_total_lb.setText(String.format(cart_total, 0.0));
-            txt_checkout.setText(String.format(text_buy, count = 0));
-            ll_delete.setVisibility(View.GONE);
-            myTitleBar.setRightText(text_edit);
-            ll_checkout.setVisibility(View.VISIBLE);
-            cb_all.setChecked(false);
-            bus.register(this);
-            check();
-
         }
     }
 
@@ -230,5 +217,10 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         }
         txt_total_lb.setText(String.format(cart_total, totalMoney));
         txt_checkout.setText(String.format(text_buy, count));
+    }
+
+    public void finish() {
+        super.finish();
+        bus.unregister(this);
     }
 }

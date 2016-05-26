@@ -103,6 +103,18 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
                     }
                 });
 
+        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkUserIsLogin()) {
+                    CartActivity_.intent(GoodsDetailActivity.this).start();
+                } else {
+                    AndroidTool.showToast(GoodsDetailActivity.this, "请登录");
+                }
+            }
+        });
+
+
         settings = web_view.getSettings();
         settings.setJavaScriptEnabled(true);
         web_view.getSettings().setAllowFileAccess(true);
@@ -179,6 +191,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
             AndroidTool.showToast(this, "添加成功");
         }
     }
+
 
     @Click
     void ll_review() {

@@ -184,7 +184,7 @@ public class LoginActivity extends BaseActivity {
     void login() {
         BaseModelJson<String> bmj = myRestClient.login(editUsername.getText().toString().trim(),
                 rb_code.isChecked() ? edit_code.getText().toString().trim() : editPassword.getText().toString().trim(),
-                Constants.MOBILE_LOGIN, Constants.ANDROID);
+                rb_code.isChecked() ? Constants.MOBILE_LOGIN : Constants.NORMAL_LOGIN, Constants.ANDROID);
         afterLogin(bmj);
     }
 

@@ -1,6 +1,9 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.ImageView;
@@ -91,11 +94,47 @@ public class AccountManagementActivity extends BaseActivity {
 
     @Click
     void rl_avatar() {
+
+        getPermissions();
+    }
+
+    private void getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ArrayList<String> permissions = new ArrayList<>();
+            /***
+             * 定位权限为必须权限，用户如果禁止，则每次进入都会申请
+             */
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.CAMERA);
+            }
+            if (permissions.size() > 0) {
+                requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
+            } else {
+                takePhoto();
+            }
+        } else {
+            takePhoto();
+        }
+    }
+
+    void takePhoto() {
         PhotoPickerIntent intent = new PhotoPickerIntent(AccountManagementActivity.this);
         intent.setPhotoCount(1);
         intent.setShowCamera(true);
         intent.setShowGif(true);
         startActivityForResult(intent, 1000);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // TODO Auto-generated method stub
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0]==PackageManager.PERMISSION_GRANTED) {
+            takePhoto();
+        } else {
+            AndroidTool.showToast(this, "您拒绝授权，该功能不可用");
+        }
     }
 
 

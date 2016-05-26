@@ -125,7 +125,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             rc.into(imageViewList.get(i));
             imageViewList.get(i).setContentDescription(advertModel.JumpType + "," + advertModel.InfoId);
             i++;
-            if (i == 9) {
+            if (i == 11) {
                 break;
             }
         }

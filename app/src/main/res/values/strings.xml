@@ -35,6 +35,9 @@
     <string name="text_goods_detail">商品详情</string>
     <string name="text_add_cart">加入购物车</string>
     <string name="text_goods_review">商品评价</string>
+    <string name="text_goods_by">快递：</string>
+    <string name="text_sell_count">月销量:</string>
+    <string name="text_store_count">库存:</string>
 
     <!--login-->
     <string name="text_manager">账户管理</string>

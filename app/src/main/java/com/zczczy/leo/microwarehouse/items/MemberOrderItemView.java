@@ -221,7 +221,8 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_canceled.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
         } else if (_data.MorderStatus == Constants.SHIPPING) {
-            ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
+//            ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
+            btn_finish.setVisibility(View.VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_finish.setVisibility(VISIBLE);
             btn_cancel_order.setVisibility(GONE);

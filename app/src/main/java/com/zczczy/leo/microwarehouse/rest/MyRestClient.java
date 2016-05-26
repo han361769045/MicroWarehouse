@@ -43,9 +43,8 @@ import java.util.Map;
 
 /**
  * Created by Leo on 2016/3/2.
+ * http://wcapia.zczczy.com/
  * http://218.61.203.50:8018/
- * http://192.168.0.198:8002/
- * http://appapia.86fuwuwang.com/
  */
 @Rest(rootUrl = "http://218.61.203.50:8018/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},

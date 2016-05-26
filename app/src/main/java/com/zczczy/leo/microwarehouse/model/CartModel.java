@@ -28,5 +28,5 @@ public class CartModel implements Serializable {
     public double GoodsPrice; //产品价格
     public String GodosName;  //产品名称
     public int GoodsStock;  //产品库存
-    public boolean isChecked;
+    public boolean isChecked = true;
 }

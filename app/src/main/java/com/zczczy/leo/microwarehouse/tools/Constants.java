@@ -5,11 +5,12 @@ package com.zczczy.leo.microwarehouse.tools;
  */
 public class Constants {
 
-
     public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
     public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
-    //正式环境
 //    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
+//正式环境
+
+//    public static final String ROOT_URL = "http://wcapia.zczczy.com/ContentView/";
 
 
     public static final String ANDROID = "1";//请求类型  android

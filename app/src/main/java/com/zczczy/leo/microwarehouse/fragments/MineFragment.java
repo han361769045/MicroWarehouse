@@ -150,7 +150,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_all_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(2).title("").start();
+            MemberOrderActivity_.intent(this).orderState(2).title("全部").start();
         } else {
             LoginActivity_.intent(this).start();
         }

@@ -101,6 +101,7 @@ public class OrderDetailActivity extends BaseActivity {
             tv_shipping.setText(String.format(text_shipping, result.Data.ShrName));
             txt_phone.setText(result.Data.Lxdh);
             tv_shipping_address.setText(String.format(text_take_shipping_address, result.Data.DetailAddress));
+            ll_pre_order_item.removeAllViews();
             for (OrderDetailModel orderDetailModel : result.Data.MOrderDetailList) {
                 TakeOrderItemView preOrderItemView = TakeOrderItemView_.build(this);
                 preOrderItemView.init(orderDetailModel);
@@ -150,7 +151,8 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_canceled.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.SHIPPING) {
-                ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
+                ll_take.setVisibility(View.VISIBLE);
+//                ll_take.setVisibility((!btn_finish.isShown() && StringUtils.isEmpty(result.Data.TrackingNo)) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_finish.setVisibility(View.VISIBLE);
                 btn_cancel_order.setVisibility(View.GONE);

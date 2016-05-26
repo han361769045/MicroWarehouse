@@ -88,8 +88,9 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
+        quantityView.setMaxQuantity(_data.GoodsStock);
         quantityView.setQuantity(_data.ProductCount);
-        quantityView.setMaxQuantity(_data.GoodsStock > 99 ? 99 : _data.GoodsStock);
+
         txt_goods_name.setText(_data.GodosName);
         txt_goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
         cb_select.setChecked(_data.isChecked);

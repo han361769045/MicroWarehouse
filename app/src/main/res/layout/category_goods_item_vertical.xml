@@ -120,7 +120,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/goods_cart" />
+                    android:src="@drawable/title_cart" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
