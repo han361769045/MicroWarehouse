@@ -62,7 +62,6 @@ public class ChangePwdActivity extends BaseActivity {
         ll_gar_old.setVisibility(StringUtils.isEmpty(memberInfoModel.UserPw) ? View.GONE : View.VISIBLE);
     }
 
-
     @Click
     void btn_change() {
         if (ll_gar_old.isShown() && AndroidTool.checkIsNull(gar_old)) {
@@ -75,7 +74,6 @@ public class ChangePwdActivity extends BaseActivity {
             AndroidTool.showToast(this, "两次密码输入不一致");
         } else {
             AndroidTool.showLoadDialog(this);
-
             if (ll_gar_old.isShown()) {
                 changePassword();
             } else {
@@ -121,7 +119,6 @@ public class ChangePwdActivity extends BaseActivity {
             AndroidTool.showToast(this, "网络连接失败");
         } else if (bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
-
             setResult(1001);
             finish();
         } else {

@@ -154,4 +154,9 @@
     <string name="text_all_review">查看全部评论</string>
 
 
+    <!--feedback-->
+    <string name="text_feedback">意见反馈</string>
+    <string name="text_feedback_tip">请输入您对我们的宝贵意见！</string>
+
+
 </resources>

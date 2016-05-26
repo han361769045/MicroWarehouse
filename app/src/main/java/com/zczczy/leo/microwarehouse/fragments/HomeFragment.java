@@ -121,6 +121,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", bannerModel);
             textSliderView.bundle(bundle);
+            textSliderView.setScaleType(BaseSliderView.ScaleType.Fit);
             textSliderView.setOnSliderClickListener(this);
             homeSlider.addSlider(textSliderView);
         }

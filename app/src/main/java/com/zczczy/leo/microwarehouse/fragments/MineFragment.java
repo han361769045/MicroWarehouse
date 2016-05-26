@@ -8,6 +8,7 @@ import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
 import com.zczczy.leo.microwarehouse.activities.ApplyDealerActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
+import com.zczczy.leo.microwarehouse.activities.FeedbackActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
@@ -110,7 +111,6 @@ public class MineFragment extends BaseFragment {
         }
     }
 
-
     @Click
     void txt_manager() {
         if (checkUserIsLogin()) {
@@ -197,6 +197,14 @@ public class MineFragment extends BaseFragment {
         CommonWebViewActivity_.intent(this).title("关于86微仓").linkUrl(Constants.ROOT_URL + "Index").start();
     }
 
+    @Click
+    void rl_feedback() {
+        if (checkUserIsLogin()) {
+            FeedbackActivity_.intent(this).start();
+        } else {
+            LoginActivity_.intent(this).start();
+        }
+    }
 
     @Click
     void rl_apply() {

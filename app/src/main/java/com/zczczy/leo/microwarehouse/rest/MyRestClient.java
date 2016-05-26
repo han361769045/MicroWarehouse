@@ -475,5 +475,15 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModel dealerApply(@Body DealerApplyModel model);
 
+    /**
+     * 意见反馈
+     *
+     * @param map 反馈内容
+     * @return
+     */
+    @Post("api/Member/InsertFeedBack")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel insertFeedback(@Body Map map);
+
 }
 
