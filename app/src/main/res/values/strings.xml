@@ -9,6 +9,8 @@
     <string name="mine">我的</string>
     <string name="progress_de">%1$s\%</string>
 
+
+
     <!--common-->
     <string name="text_tip">提示</string>
     <string name="text_tip_confirm">确定要删除吗?</string>

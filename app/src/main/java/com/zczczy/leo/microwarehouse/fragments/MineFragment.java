@@ -46,7 +46,7 @@ public class MineFragment extends BaseFragment {
     TextView txt_username, txt_user_type;
 
     @StringRes
-    String text_username, text_no_pay_order, text_take_goods_order, text_order;
+    String text_username, text_no_pay_order, text_take_goods_order, text_order, text_about_us;
 
     @RestService
     MyRestClient myRestClient;
@@ -194,7 +194,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_about_us() {
-        CommonWebViewActivity_.intent(this).title("关于86微仓").linkUrl(Constants.ROOT_URL + "Index").start();
+        CommonWebViewActivity_.intent(this).title(text_about_us).linkUrl(Constants.ROOT_URL + "Index").start();
     }
 
     @Click
