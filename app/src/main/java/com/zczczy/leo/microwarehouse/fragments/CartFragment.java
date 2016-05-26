@@ -188,6 +188,9 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         } else {
             txt_total_lb.setText(String.format(cart_total, 0.0));
             txt_checkout.setText(String.format(text_buy, count = 0));
+            ll_delete.setVisibility(View.GONE);
+            myTitleBar.setRightText(text_edit);
+            ll_checkout.setVisibility(View.VISIBLE);
             cb_all.setChecked(false);
             bus.register(this);
             check();

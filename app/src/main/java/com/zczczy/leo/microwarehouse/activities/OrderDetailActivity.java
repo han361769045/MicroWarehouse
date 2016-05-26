@@ -80,7 +80,6 @@ public class OrderDetailActivity extends BaseActivity {
     void afterView() {
         AndroidTool.showLoadDialog(this);
         ll_next.setVisibility(View.GONE);
-        getOrderDetailById();
     }
 
     @Background
@@ -110,22 +109,18 @@ public class OrderDetailActivity extends BaseActivity {
             txt_order_no.setText(String.format(text_order_no, "  " + result.Data.MOrderNo));
             txt_sub_express_charges.setText(String.format(text_goods_price, result.Data.Postage));
             txt_pay_total_rmb.setText(String.format(text_goods_price, result.Data.MOrderMoney));
-
             ll_tracking_no.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
             txt_tracking_no.setText(String.format(text_tracking_no, result.Data.TrackingNo));
             ll_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
-
-
             txt_take_order_time.setText(String.format(text_take_order_time, result.Data.CreateTime));
             txt_pay_order_time.setText(String.format(text_pay_order_time, result.Data.PayTime));
             txt_receiver_order_time.setText(String.format(text_receiver_order_time, result.Data.DepotJdTime));
             txt_shipping_time.setText(String.format(text_shipping_time, result.Data.FhTime));
             txt_finish_time.setText(String.format(text_finish_time, result.Data.ShTime));
-
             if (result.Data.MorderStatus == Constants.DUEPAYMENT) {
                 ll_take.setVisibility(View.VISIBLE);
                 btn_cancel_order.setVisibility(View.VISIBLE);
-                btn_pay.setVisibility(View.VISIBLE);
+                btn_pay.setVisibility(result.Data.MPaymentType == 1 ? View.VISIBLE : View.GONE);
                 btn_canceled.setVisibility(View.GONE);
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
@@ -187,7 +182,6 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
             }
-
         }
     }
 
@@ -202,7 +196,6 @@ public class OrderDetailActivity extends BaseActivity {
             }
         }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher).create().show();
     }
-
 
     @Background
     void cancelOrder() {
@@ -224,7 +217,6 @@ public class OrderDetailActivity extends BaseActivity {
             setResult(RESULT_OK);
         }
     }
-
 
     @Click
     void btn_finish() {
@@ -271,13 +263,13 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Click
     void btn_pay() {
-//        UnionPay order = new UnionPay();
-//        order.ChrCode = mAppOrder.chrCode;
-//        order.MerSign = mAppOrder.merSign;
-//        order.TransId = mAppOrder.transId;
-//        UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).start();
+        UmspayActivity_.intent(this).order(mAppOrder).start();
 //        finish();
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrderDetailById();
+    }
 }

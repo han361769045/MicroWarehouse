@@ -64,6 +64,7 @@ public class UmspayActivity extends BaseActivity {
                 Log.e("onPageStarted", url);
                 if (url.contains("http://www.zczczy.com")) {
 //                    OrderDetailActivity_.intent(UmspayActivity.this).orderId(order.MOrderId).start();
+                    Log.e("onPageStarted",url);
                     finish();
                 } else {
                     AndroidTool.showLoadDialog(UmspayActivity.this);

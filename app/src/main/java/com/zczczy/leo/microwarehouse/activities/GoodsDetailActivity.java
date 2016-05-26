@@ -78,7 +78,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
     String goodsId;
 
     @StringRes
-    String text_goods_price, text_bat_price, text_price;
+    String text_goods_price, text_bat_price, text_price, tip;
 
     WebSettings settings;
 
@@ -116,7 +116,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
             if (isCanBy) {
                 addShoppingCart();
             } else {
-                AndroidTool.showToast(this, "该商品已下架");
+                AndroidTool.showToast(this, tip);
             }
 
         } else {

@@ -36,7 +36,7 @@
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="288dp"
                     android:background="@drawable/goods_default"
                     app:pager_animation="Accordion" />
 

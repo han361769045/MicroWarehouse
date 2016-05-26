@@ -136,10 +136,8 @@ public class AccountManagementActivity extends BaseActivity {
      */
     @Background
     void updateMemberInfoImg(String img) {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
-        Map<String,String> map = new HashMap<>(1);
-        map.put("HeadImg",img);
+        Map<String, String> map = new HashMap<>(1);
+        map.put("HeadImg", img);
         afterUpdateMemberInfoImg(myRestClient.updateMemberInfoImg(map));
     }
 

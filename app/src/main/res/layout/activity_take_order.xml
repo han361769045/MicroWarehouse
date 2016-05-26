@@ -114,11 +114,11 @@
                 <include layout="@layout/horizontal_line" />
 
                 <RelativeLayout
+                    android:id="@+id/rl_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/common_shadow_selector"
-                    android:gravity="center_vertical"
-                    android:padding="10dp">
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:id="@+id/img_comment"
@@ -136,7 +136,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/img_next"
                         android:layout_toRightOf="@+id/img_comment"
-                        android:text="多发时段发生发生多发时段发生发生多发时段发生发生多发时段发生发生多发时段发生发生" />
+                        android:hint="@string/text_comment"
+                        android:maxLines="2" />
 
                     <ImageView
                         android:id="@+id/img_next"

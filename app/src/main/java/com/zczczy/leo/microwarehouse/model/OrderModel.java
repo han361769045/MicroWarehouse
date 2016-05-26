@@ -40,39 +40,39 @@ public class OrderModel implements Serializable {
      * MarkInfo : sample string 28
      */
 
-    public String BuyCardIds;
-    public String MOrderId;
-    public String DepotId;
-    public String UserInfoId;
-    public int LogisticsInfoId;
-    public String MOrderNo;
-    public String CreateTime;
-    public double MOrderMoney;
-    public int MPaymentType;
-    public int PsType;
-    public int AreaId;
-    public String ProvinceName;
-    public String CityName;
-    public String AreaName;
-    public String ShrName;
-    public String Lxdh;
-    public String DetailAddress;
-    public String Coordinates;
-    public String chrCode;
-    public String transId;
-    public String merSign;
-    public int MorderStatus;
-    public String MorderStatusDisp;
-    public int GoodsAllCount;
-    public String TrackingNo;
-    public double Postage;
-    public String PayTime;
-    public String SelDepotTime;
-    public String DepotJdTime;
-    public String FhTime;
-    public String ShTime;
-    public String MarkInfo;
-    public String MerchantId;
+    public String BuyCardIds; //购物车选择的记录ID
+    public String MOrderId; //订单主键ID
+    public String DepotId; //发货仓库ID
+    public String UserInfoId; //用户主键ID
+    public int LogisticsInfoId; //物流主键ID
+    public String MOrderNo; //订单编号
+    public String CreateTime; //订单创建时间
+    public double MOrderMoney; //订单总金额
+    public int MPaymentType; //支付方式（1网银，2货到付款）
+    public int PsType; //配送方式(1:邮寄，2：线下配送)
+    public int AreaId; //区ID
+    public String ProvinceName; //区域名称
+    public String CityName; //城市名称
+    public String AreaName; //省名称
+    public String ShrName; //收货人姓名
+    public String Lxdh; //联系电话
+    public String DetailAddress; //详细地址
+    public String Coordinates; //地理坐标
+    public String chrCode; //银联商户信息
+    public String MerchantId; //银联特征码
+    public String transId;  //银联编号
+    public String merSign; //银联签名
+    public int MorderStatus; //订单状态(0:待支付，1：已支付，2：仓库选择，3：仓库接单，4：已发货，5：确认收货，6：交易完成，9：取消订单)
+    public String MorderStatusDisp; //订单状态描述
+    public int GoodsAllCount; //商品总数量
+    public String TrackingNo; //运单号
+    public double Postage; //邮费合计
+    public String PayTime; //支付时间
+    public String SelDepotTime; //客服选择仓库时间
+    public String DepotJdTime; //仓库接单时间
+    public String FhTime; //发货时间
+    public String ShTime; //确认收货时间
+    public String MarkInfo; //备注说明
 
-    public List<OrderDetailModel> MOrderDetailList;
+    public List<OrderDetailModel> MOrderDetailList; //订单明细
 }

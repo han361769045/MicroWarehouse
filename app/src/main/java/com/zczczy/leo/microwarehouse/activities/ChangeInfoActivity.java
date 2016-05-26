@@ -68,6 +68,8 @@ public class ChangeInfoActivity extends BaseActivity {
             myTitleBar.setTitle("修改博客");
         } else if ("4".equals(flagT)) {
             myTitleBar.setTitle("修改邮箱");
+        } else if ("5".equals(flagT)) {
+            myTitleBar.setTitle("留言");
         }
     }
 
@@ -77,17 +79,32 @@ public class ChangeInfoActivity extends BaseActivity {
         if (AndroidTool.checkIsNull(edt_content)) {
             AndroidTool.showToast(this, "请输入内容！");
         } else {
-            if ("1".equals(flagT)) {
-                memberInfoModel.MemberRealName = edt_content.getText().toString();
-            } else if ("2".equals(flagT)) {
-                memberInfoModel.MemberQQ = edt_content.getText().toString();
-            } else if ("3".equals(flagT)) {
-                memberInfoModel.MemberBlog = edt_content.getText().toString();
-            } else if ("4".equals(flagT)) {
-                memberInfoModel.MemberEmail = edt_content.getText().toString();
-            }
             AndroidTool.showLoadDialog(this);
-            changeInfo();
+            switch (flagT) {
+                case "1":
+                    memberInfoModel.MemberRealName = edt_content.getText().toString();
+                    changeInfo();
+                    break;
+                case "2":
+                    memberInfoModel.MemberQQ = edt_content.getText().toString();
+                    changeInfo();
+                    break;
+                case "3":
+                    memberInfoModel.MemberBlog = edt_content.getText().toString();
+                    changeInfo();
+                    break;
+                case "4":
+                    memberInfoModel.MemberEmail = edt_content.getText().toString();
+                    changeInfo();
+                    break;
+                case "5":
+                    AndroidTool.dismissLoadDialog();
+                    Intent intent = new Intent();
+                    intent.putExtra("contents", edt_content.getText().toString());
+                    setResult(1005, intent);
+                    finish();
+                    break;
+            }
         }
     }
 

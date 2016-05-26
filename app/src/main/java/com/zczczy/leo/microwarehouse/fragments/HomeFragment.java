@@ -1,11 +1,14 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -21,11 +24,13 @@ import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
+import com.zczczy.leo.microwarehouse.service.LocationService;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
@@ -43,7 +48,7 @@ import java.util.List;
  * Created by Leo on 2016/5/20.
  */
 @EFragment(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements BaseSliderView.OnSliderClickListener {
+public class HomeFragment extends BaseFragment implements BaseSliderView.OnSliderClickListener, BDLocationListener {
 
     @ViewById
     MyTitleBar myTitleBar;
@@ -72,13 +77,24 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     @DrawableRes
     Drawable home_search_bg;
 
+    LocationService locationService;
+
     int i;
 
     int noticeIndex;
 
+    @AfterInject
+    void afterInject() {
+        locationService = app.locationService;
+    }
+
     @AfterViews
     void afterView() {
         bus.register(this);
+        locationService.registerListener(this);
+        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        locationService.start();
+
         if (app.getNewBannerList().size() >= 0) {
             setBanner();
         } else {
@@ -183,6 +199,17 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             bus.register(this);
             setNotice();
         }
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        Log.e("11111111111111", bdLocation.getProvince() + bdLocation.getCity() + bdLocation.getAddrStr() + bdLocation.getStreet() + bdLocation.getBuildingName() + bdLocation.getLocationDescribe());
+        Log.e("11111111111111", bdLocation.getAddrStr());
+        Log.e("11111111111111", bdLocation.getStreet() + "");
+        Log.e("11111111111111", bdLocation.getBuildingName() + "");
+        Log.e("11111111111111", bdLocation.getLocationDescribe() + "");
+        Log.e("11111111111111", bdLocation.getAddress().province + bdLocation.getAddress().city + bdLocation.getAddress().address + bdLocation.getAddress().street + "");
+        myTitleBar.setLeftText(bdLocation.getCity());
     }
 
 }

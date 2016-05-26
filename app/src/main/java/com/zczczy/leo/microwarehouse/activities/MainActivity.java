@@ -57,7 +57,7 @@ import java.util.Date;
  * Created by Leo on 2016/5/20.
  */
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements BDLocationListener {
+public class MainActivity extends BaseActivity {
 
 
     @ViewById
@@ -88,8 +88,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
 
     Drawable[] drawables = new Drawable[4];
 
-    LocationService locationService;
-
     BaseModelJson<UpdateAppModel> appInfo;
 
     View view;
@@ -116,15 +114,11 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         drawables[2] = cart_selector;
         drawables[3] = mine_selector;
         myRestClient.setRestErrorHandler(myErrorHandler);
-        locationService = app.locationService;
     }
 
     @AfterViews
     void afterView() {
         initTab();
-        locationService.registerListener(this);
-        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-        locationService.start();
         getUpdateApp();
     }
 
@@ -260,7 +254,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-
             }
         });
 
@@ -275,16 +268,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         return view;
     }
 
-    @Override
-    public void onReceiveLocation(BDLocation bdLocation) {
-        Log.e("11111111111111", bdLocation.getProvince() + bdLocation.getCity() + bdLocation.getAddrStr() + bdLocation.getStreet() + bdLocation.getBuildingName() + bdLocation.getLocationDescribe());
-        Log.e("11111111111111", bdLocation.getAddrStr());
-        Log.e("11111111111111", bdLocation.getStreet() + "");
-        Log.e("11111111111111", bdLocation.getBuildingName() + "");
-        Log.e("11111111111111", bdLocation.getLocationDescribe() + "");
-        Log.e("11111111111111", bdLocation.getAddress().province + bdLocation.getAddress().city + bdLocation.getAddress().address + bdLocation.getAddress().street + "");
-
-    }
 
     @Override
     public void onBackPressed() {

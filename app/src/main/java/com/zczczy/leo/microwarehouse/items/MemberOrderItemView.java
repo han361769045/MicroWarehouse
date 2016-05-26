@@ -65,12 +65,14 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
     @StringRes
     String no_net, text_count, text_goods_price;
 
+    MemberOrderActivity memberOrderActivity;
 
     Context context;
 
     public MemberOrderItemView(Context context) {
         super(context);
         this.context = context;
+        memberOrderActivity = (MemberOrderActivity) context;
     }
 
 
@@ -162,7 +164,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
 
     @Click
     void btn_pay() {
-        UmspayActivity_.intent(context).order(_data).start();
+        UmspayActivity_.intent(memberOrderActivity).order(_data).startForResult(1000);
     }
 
     @Click
@@ -189,7 +191,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
         if (_data.MorderStatus == Constants.DUEPAYMENT) {
             ll_take.setVisibility(VISIBLE);
             btn_cancel_order.setVisibility(VISIBLE);
-            btn_pay.setVisibility(VISIBLE);
+            btn_pay.setVisibility(_data.MPaymentType == 1 ? VISIBLE : GONE);
             btn_canceled.setVisibility(GONE);
             btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);

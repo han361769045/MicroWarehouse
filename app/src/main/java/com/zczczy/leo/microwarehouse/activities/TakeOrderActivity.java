@@ -1,7 +1,5 @@
 package com.zczczy.leo.microwarehouse.activities;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -46,7 +44,7 @@ public class TakeOrderActivity extends BaseActivity {
     LinearLayout ll_shipping, ll_store, ll_pre_order_item;
 
     @ViewById
-    RelativeLayout rl_postal;
+    RelativeLayout rl_postal, rl_comment;
 
     @RestService
     MyRestClient myRestClient;
@@ -61,7 +59,7 @@ public class TakeOrderActivity extends BaseActivity {
     RadioButton rb_umpay, rb_cash;
 
     @StringRes
-    String text_goods_price, text_shipping, text_take_shipping_address;
+    String text_goods_price, text_shipping, text_take_shipping_address, text_comment;
 
     @Extra
     String ids;
@@ -104,9 +102,9 @@ public class TakeOrderActivity extends BaseActivity {
                 model = null;
             } else {
                 model.DetailAddress = result.Data.DetailAddress;
-                model.ProvinceName = "";
-                model.CityName = "";
-                model.AreaName = "";
+                model.ProvinceName = result.Data.ProvinceName;
+                model.CityName = result.Data.CityName;
+                model.AreaName = result.Data.AreaName;
                 model.ReceiptName = result.Data.ShrName;
                 model.Mobile = result.Data.Lxdh;
             }
@@ -183,6 +181,18 @@ public class TakeOrderActivity extends BaseActivity {
                 UmspayActivity_.intent(this).order(result.Data).start();
             }
             finish();
+        }
+    }
+
+    @Click
+    void rl_comment() {
+        ChangeInfoActivity_.intent(this).content(text_comment).flagT("5").startForResult(1000);
+    }
+
+    @OnActivityResult(1000)
+    void onCommnet(int resultCode, @OnActivityResult.Extra String contents) {
+        if (resultCode == 1005) {
+            txt_comment.setText(contents);
         }
     }
 }

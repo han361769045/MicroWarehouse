@@ -7,6 +7,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.model.CityModel;
+import com.zczczy.leo.microwarehouse.model.DealerApplyModel;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
@@ -257,7 +258,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @param image
      * @return
      */
-    @Post("http://updimage.86fuwuwang.com/FileHandler.ashx?type=&folder=Shop")
+    @Post("http://updimage.86fuwuwang.com/FileHandler.ashx?type=17&folder=user")
     String uploadAvatar(@Part FileSystemResource image);
 
     /**
@@ -463,6 +464,17 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Member/GetLogistics?MOrderId={MOrderId}")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<List<LogisticsInfoModel>> getLogistics(@Path String MOrderId);
+
+    /**
+     * 申请经销商
+     *
+     * @param model DealerApplyModel
+     * @return DealerApplyModel
+     * @see
+     */
+    @Post("api/Member/DealerApply")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel dealerApply(@Body DealerApplyModel model);
 
 }
 

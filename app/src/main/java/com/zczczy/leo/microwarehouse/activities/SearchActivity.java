@@ -1,6 +1,7 @@
 package com.zczczy.leo.microwarehouse.activities;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
@@ -48,11 +49,24 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
             }
         });
         myAdapter.getMoreData(0, 0);
+
+        myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search();
+            }
+        });
     }
 
     @EditorAction
     void text_search(int actionId) {
-        if (!AndroidTool.checkIsNull(text_search) && actionId == EditorInfo.IME_ACTION_SEARCH) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            search();
+        }
+    }
+
+    void search() {
+        if (!AndroidTool.checkIsNull(text_search)) {
             searchHistory = new SearchHistory();
             searchHistory.setSearchContent(text_search.getText().toString());
             searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));

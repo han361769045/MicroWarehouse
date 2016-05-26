@@ -19,6 +19,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -39,7 +40,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     TextView goods_name, goods_sell_count, goods_price, goods_bat_price;
 
     @StringRes
-    String text_goods_sell_count, text_goods_price;
+    String text_goods_sell_count, text_goods_price,tip;
 
     @Pref
     MyPrefs_ pre;
@@ -84,7 +85,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
             if (isCanBy) {
                 addShoppingCart();
             } else {
-                AndroidTool.showToast(context, "该商品已下架");
+                AndroidTool.showToast(context, tip);
             }
         }
     }

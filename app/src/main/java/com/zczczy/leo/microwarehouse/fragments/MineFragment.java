@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
+import com.zczczy.leo.microwarehouse.activities.ApplyDealerActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
@@ -104,6 +105,7 @@ public class MineFragment extends BaseFragment {
             AndroidTool.showToast(this, bmj.Error);
         } else {
             pre.userTypeStr().put(bmj.Data.UserTypeStr);
+            pre.avatar().put(bmj.Data.HeadImg);
             txt_user_type.setText(pre.userTypeStr().get());
         }
     }
@@ -148,7 +150,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_all_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(2).title(text_order).start();
+            MemberOrderActivity_.intent(this).orderState(2).title("").start();
 
         } else {
             LoginActivity_.intent(this).start();
@@ -194,6 +196,17 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_about_us() {
         CommonWebViewActivity_.intent(this).title("关于86微仓").methodName("Index").start();
+    }
+
+
+    @Click
+    void rl_apply() {
+        if (checkUserIsLogin()) {
+            ApplyDealerActivity_.intent(this).start();
+        } else {
+            LoginActivity_.intent(this).start();
+        }
+
     }
 
     @Click
