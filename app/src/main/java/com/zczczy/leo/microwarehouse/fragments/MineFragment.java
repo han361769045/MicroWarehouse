@@ -194,7 +194,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_about_us() {
-        CommonWebViewActivity_.intent(this).title("关于86微仓").methodName("Index").start();
+        CommonWebViewActivity_.intent(this).title("关于86微仓").linkUrl(Constants.ROOT_URL + "Index").start();
     }
 
 

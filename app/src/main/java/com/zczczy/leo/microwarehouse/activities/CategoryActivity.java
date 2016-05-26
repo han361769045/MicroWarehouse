@@ -58,7 +58,9 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     @Subscribe
     public void notifyUI(BaseModel bm) {
         if (bm.Successful) {
-            changeFragment(myAdapter.getItemData(0));
+            if (myAdapter.getItemData(0) != null) {
+                changeFragment(myAdapter.getItemData(0));
+            }
         }
     }
 

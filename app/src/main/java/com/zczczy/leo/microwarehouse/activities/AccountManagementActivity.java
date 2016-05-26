@@ -130,7 +130,7 @@ public class AccountManagementActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         // TODO Auto-generated method stub
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults[0]==PackageManager.PERMISSION_GRANTED) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             takePhoto();
         } else {
             AndroidTool.showToast(this, "您拒绝授权，该功能不可用");
@@ -304,12 +304,12 @@ public class AccountManagementActivity extends BaseActivity {
 
     @Click
     void rl_xie_yi() {
-        CommonWebViewActivity_.intent(this).methodName("RegisterProtocol").title(text_zhu_ce).start();
+        CommonWebViewActivity_.intent(this).linkUrl(Constants.ROOT_URL + "RegisterProtocol").title(text_zhu_ce).start();
     }
 
     @Click
     void rl_mian_ze() {
-        CommonWebViewActivity_.intent(this).methodName("Disclaimer").title(text_mian_ze).start();
+        CommonWebViewActivity_.intent(this).linkUrl(Constants.ROOT_URL +"Disclaimer").title(text_mian_ze).start();
     }
 
     @Click

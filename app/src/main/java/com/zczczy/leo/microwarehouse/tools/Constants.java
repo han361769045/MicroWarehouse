@@ -4,12 +4,12 @@ package com.zczczy.leo.microwarehouse.tools;
  * Created by Leo on 2016/5/21.
  */
 public class Constants {
-
+    //测试环境
     public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
     public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
-//    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
-//正式环境
 
+    //正式环境
+    //    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
 //    public static final String ROOT_URL = "http://wcapia.zczczy.com/ContentView/";
 
 

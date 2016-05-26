@@ -1,6 +1,7 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
+import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
@@ -116,6 +118,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         for (BannerModel bannerModel : app.getNewBannerList()) {
             TextSliderView textSliderView = new TextSliderView(getActivity());
             textSliderView.image(bannerModel.BannerImgUrl);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("bannerModel", bannerModel);
+            textSliderView.bundle(bundle);
             textSliderView.setOnSliderClickListener(this);
             homeSlider.addSlider(textSliderView);
         }
@@ -184,7 +189,17 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-
+        if (slider.getBundle() != null && slider.getBundle().get("bannerModel") != null) {
+            BannerModel bannerModel = (BannerModel) slider.getBundle().get("bannerModel");
+            if (bannerModel != null) {
+                //链接分类(1:商品详细，2：网页WebView)
+                if (bannerModel.LinkType == 1) {
+                    GoodsDetailActivity_.intent(getActivity()).goodsId(bannerModel.LinkUrl).start();
+                } else if (bannerModel.LinkType == 2) {
+                    CommonWebViewActivity_.intent(this).title(bannerModel.BannerName).linkUrl(bannerModel.LinkUrl).start();
+                }
+            }
+        }
     }
 
     @Override
