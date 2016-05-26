@@ -151,7 +151,6 @@ public class MineFragment extends BaseFragment {
     void rl_all_order() {
         if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(2).title("").start();
-
         } else {
             LoginActivity_.intent(this).start();
         }
