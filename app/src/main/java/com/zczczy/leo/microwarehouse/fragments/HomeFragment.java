@@ -181,11 +181,26 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     @Click
     void txt_one() {
 //        SearchResultActivity_.intent(this).start();
+        AndroidTool.showToast(this, "敬请期待");
+
     }
 
     @Click
     void txt_two() {
 //        SearchActivity_.intent(this).start();
+        AndroidTool.showToast(this, "敬请期待");
+    }
+
+    @Click
+    void txt_three() {
+//        SearchResultActivity_.intent(this).start();
+        AndroidTool.showToast(this, "敬请期待");
+    }
+
+    @Click
+    void txt_four() {
+//        SearchActivity_.intent(this).start();
+        AndroidTool.showToast(this, "敬请期待");
     }
 
     @Override
