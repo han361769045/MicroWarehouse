@@ -46,7 +46,7 @@ import java.util.Map;
  * http://wcapia.zczczy.com/
  * http://218.61.203.50:8018/
  */
-@Rest(rootUrl = "http://wcapia.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8018/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class
 )
@@ -196,7 +196,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Content/GetGoodsTypeListByPid?GoodsTypePid={GoodsTypePid}")
     BaseModelJson<List<GoodsTypeModel>> getGoodsTypeListByPid(@Path String GoodsTypePid);
 
-
     /**
      * 根据商品类别ID查询商品信息
      *
@@ -208,7 +207,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     BaseModelJson<List<GoodsModel>> getGoodsInfoByTypeId(@Path String GoodsTypeId, @Path String Top);
 
     //==============================================================================================
-    // 需要传入token
+    // 需要传入token 和 token
 
     /**
      * 查询用户信息
