@@ -307,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/home_apply"
+                    android:drawableLeft="@drawable/feedback"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:text="@string/text_feedback" />

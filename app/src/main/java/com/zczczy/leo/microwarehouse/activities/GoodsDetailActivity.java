@@ -109,7 +109,7 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
                 if (checkUserIsLogin()) {
                     CartActivity_.intent(GoodsDetailActivity.this).start();
                 } else {
-                    AndroidTool.showToast(GoodsDetailActivity.this, "请登录");
+                    LoginActivity_.intent(GoodsDetailActivity.this).start();
                 }
             }
         });
@@ -131,9 +131,8 @@ public class GoodsDetailActivity extends BaseActivity implements MyScrollView.On
             } else {
                 AndroidTool.showToast(this, tip);
             }
-
         } else {
-            AndroidTool.showToast(this, "请登录");
+            LoginActivity_.intent(this).start();
         }
     }
 

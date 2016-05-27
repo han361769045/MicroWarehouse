@@ -5,7 +5,8 @@ package com.zczczy.leo.microwarehouse.tools;
  */
 public class Constants {
     //测试环境
-    public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
+//    public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
+    public static final String ROOT_URL = "http://192.168.0.198:8018/ContentView/";
     public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
 
     //正式环境

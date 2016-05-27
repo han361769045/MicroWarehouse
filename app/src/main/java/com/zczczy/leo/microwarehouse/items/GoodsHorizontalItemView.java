@@ -40,7 +40,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     TextView goods_name, goods_sell_count, goods_price, goods_bat_price;
 
     @StringRes
-    String text_goods_sell_count, text_goods_price,tip;
+    String text_goods_sell_count, text_goods_price, tip, no_net;
 
     @Pref
     MyPrefs_ pre;
@@ -83,6 +83,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
             AndroidTool.showToast(context, "请登录");
         } else {
             if (isCanBy) {
+                AndroidTool.showLoadDialog(context);
                 addShoppingCart();
             } else {
                 AndroidTool.showToast(context, tip);
@@ -99,8 +100,9 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
 
     @UiThread
     void afterAddShoppingCart(BaseModel result) {
+        AndroidTool.dismissLoadDialog();
         if (result == null) {
-
+            AndroidTool.showToast(context,no_net);
         } else if (!result.Successful) {
             AndroidTool.showToast(context, result.Error);
         } else {

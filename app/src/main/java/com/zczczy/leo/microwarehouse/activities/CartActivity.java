@@ -53,10 +53,6 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     @Bean
     OttoBus bus;
 
-    AlertDialog.Builder adb;
-
-    AlertDialog alertDialog;
-
     //总钱数
     int count = 0;
 
@@ -100,6 +96,10 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     public void onResume() {
         super.onResume();
         myAdapter.getMoreData();
+        if (myAdapter.getItemCount() == 0) {
+            txt_total_lb.setText(String.format(cart_total, 0.0));
+            txt_checkout.setText(String.format(text_buy, count = 0));
+        }
     }
 
     @Click
@@ -162,26 +162,6 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
         myAdapter.notifyItemRangeChanged(0, myAdapter.getItemCount());
         //计算
         calcMoney();
-    }
-
-    void check() {
-        if (checkUserIsLogin()) {
-            myAdapter.getMoreData();
-        } else {
-            if (adb == null) {
-                adb = new AlertDialog.Builder(this);
-                adb.setTitle("提示").setMessage("请先登录？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        LoginActivity_.intent(CartActivity.this).start();
-                    }
-                }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher);
-                alertDialog = adb.create();
-            }
-            if (!alertDialog.isShowing()) {
-                alertDialog.show();
-            }
-        }
     }
 
     @Subscribe

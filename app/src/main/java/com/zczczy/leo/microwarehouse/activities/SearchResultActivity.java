@@ -47,6 +47,7 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
     @AfterViews
     void afterView() {
         text_search.setText(searchContent);
+        empty_view.setText(empty_search);
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
