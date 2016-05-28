@@ -48,7 +48,7 @@ android {
         }
         debug {
 
-            minifyEnabled false
+            minifyEnabled true
             // 显示Log
             buildConfigField "boolean", "LEO_DEBUG", "true"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
