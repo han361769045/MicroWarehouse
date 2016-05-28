@@ -52,7 +52,7 @@
         </service>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Gu7a6OYSdBi0EIYERGrh3Io0FNAZxApB" />
+            android:value="317lH1ZCmzwHlkQyKskPqWGO4DpjTLwG" />
 
         <activity
             android:name=".activities.IndexActivity_"

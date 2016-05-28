@@ -96,10 +96,6 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     public void onResume() {
         super.onResume();
         myAdapter.getMoreData();
-        if (myAdapter.getItemCount() == 0) {
-            txt_total_lb.setText(String.format(cart_total, 0.0));
-            txt_checkout.setText(String.format(text_buy, count = 0));
-        }
     }
 
     @Click

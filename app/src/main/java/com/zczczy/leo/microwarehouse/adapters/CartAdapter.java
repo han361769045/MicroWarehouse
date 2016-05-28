@@ -46,6 +46,9 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
         } else {
             clear();
             insertAll(result.Data, getItemCount());
+            if (result.Data.size() == 0) {
+                itemNotify(false);
+            }
         }
     }
 

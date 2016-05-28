@@ -123,7 +123,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_coupon() {
         if (checkUserIsLogin()) {
-            AndroidTool.showToast(this, "开发中");
+            AndroidTool.showToast(this, "敬请期待");
         } else {
             LoginActivity_.intent(this).start();
         }
@@ -132,7 +132,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_my_review() {
         if (checkUserIsLogin()) {
-            AndroidTool.showToast(this, "开发中");
+            AndroidTool.showToast(this, "敬请期待");
         } else {
             LoginActivity_.intent(this).start();
         }
@@ -141,7 +141,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_bookmark() {
         if (checkUserIsLogin()) {
-            AndroidTool.showToast(this, "开发中");
+            AndroidTool.showToast(this, "敬请期待");
         } else {
             LoginActivity_.intent(this).start();
         }
@@ -218,13 +218,19 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_share() {
-
+        if (checkUserIsLogin()) {
+            AndroidTool.showToast(this, "敬请期待");
+        } else {
+            LoginActivity_.intent(this).start();
+        }
     }
 
     @Click
     void rl_scan() {
-
+        if (checkUserIsLogin()) {
+            AndroidTool.showToast(this, "敬请期待");
+        } else {
+            LoginActivity_.intent(this).start();
+        }
     }
-
-
 }

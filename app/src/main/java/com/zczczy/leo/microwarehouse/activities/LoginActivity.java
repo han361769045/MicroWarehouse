@@ -1,6 +1,9 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -33,6 +36,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +67,8 @@ public class LoginActivity extends BaseActivity {
     @StringRes
     String text_send_message, text_timer;
 
+    boolean isRegister;
+
     CountDownTimer countDownTimer;
 
     ReadSmsContent readSmsContent;
@@ -77,13 +83,43 @@ public class LoginActivity extends BaseActivity {
         getCountDownTimer();
         if (AndroidTool.getCodeTime(pre.loginTimerCode().get()) < 120000L) {
             countDownTimer.start();
-//            edit_code.setEnabled(true);
-        } else {
-//            edit_code.setEnabled(false);
         }
-        readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+        getPermissions();
     }
+
+
+    private void getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ArrayList<String> permissions = new ArrayList<>();
+
+            if (checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.READ_SMS);
+            }
+            if (permissions.size() > 0) {
+                requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
+            } else {
+                isRegister = true;
+                readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
+                this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+            }
+        } else {
+            isRegister = true;
+            readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
+            this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // TODO Auto-generated method stub
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            isRegister = true;
+            readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
+            this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+        }
+    }
+
 
     @Click
     void login_btn() {
@@ -126,7 +162,6 @@ public class LoginActivity extends BaseActivity {
             if (pre.loginTimerCode().get() == 0L || AndroidTool.getCodeTime(pre.loginTimerCode().get()) >= 120000L) {
                 getCountDownTimer();
                 countDownTimer.start();
-//                edit_code.setEnabled(true);
                 sendCode();
             }
         }
@@ -204,8 +239,10 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void finish() {
-        //注销内容监听者
-        this.getContentResolver().unregisterContentObserver(readSmsContent);
+        if (isRegister) {
+            //注销内容监听者
+            this.getContentResolver().unregisterContentObserver(readSmsContent);
+        }
         super.finish();
     }
 

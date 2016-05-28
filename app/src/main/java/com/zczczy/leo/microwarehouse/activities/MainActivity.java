@@ -1,12 +1,15 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +26,7 @@ import com.zczczy.leo.microwarehouse.fragments.CartFragment_;
 import com.zczczy.leo.microwarehouse.fragments.FindFragment_;
 import com.zczczy.leo.microwarehouse.fragments.HomeFragment_;
 import com.zczczy.leo.microwarehouse.fragments.MineFragment_;
+import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.UpdateAppModel;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
@@ -51,6 +55,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -163,7 +168,7 @@ public class MainActivity extends BaseActivity {
                 adb = new AlertDialog.Builder(MainActivity.this);
                 ad = adb.setView(view).create();
                 ad.setCancelable(false);
-                downloadApk();
+                getPermissions();
                 ad.show();
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -176,7 +181,6 @@ public class MainActivity extends BaseActivity {
 
     @Background
     void downloadApk() {
-
         try {
             // 判断SD卡是否存在，并且是否具有读写权限
             if (Environment.getExternalStorageState().equals(
@@ -197,7 +201,7 @@ public class MainActivity extends BaseActivity {
                 if (!file.exists()) {
                     file.mkdir();
                 }
-                downloadName = AndroidTool.getYYYYMMDDHHMMSS(new Date()) + "microwarehouse.apk";
+                downloadName = AndroidTool.getYYYYMMDDHHMMSS(new Date()) + "microWarehouse.apk";
                 apkFile = new File(mSavePath, downloadName);
                 FileOutputStream fos = new FileOutputStream(apkFile);
                 int count = 0;
@@ -258,6 +262,36 @@ public class MainActivity extends BaseActivity {
         });
 
     }
+
+    private void getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ArrayList<String> permissions = new ArrayList<>();
+
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+            if (permissions.size() > 0) {
+                requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
+            } else {
+                downloadApk();
+            }
+        } else {
+            downloadApk();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // TODO Auto-generated method stub
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            downloadApk();
+        } else {
+            p_downloadApk.setPercent(0);
+            p_text.setText("您拒绝授权！导致应用无法更新");
+        }
+    }
+
 
     protected View buildIndicator(int position) {
         View view = layoutInflater.inflate(R.layout.tab_indicator, null);

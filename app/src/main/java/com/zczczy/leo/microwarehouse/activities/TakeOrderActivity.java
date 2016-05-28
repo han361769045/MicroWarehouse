@@ -97,6 +97,8 @@ public class TakeOrderActivity extends BaseActivity {
             AndroidTool.showToast(this, result.Error);
         } else {
             model = result.Data;
+            rb_umpay.setChecked(Constants.UM_PAY == model.MPaymentType);
+            rb_cash.setChecked(Constants.CASH == model.MPaymentType);
             ShippingAddressModel model = new ShippingAddressModel();
             if (StringUtils.isEmpty(result.Data.ShrName) || StringUtils.isEmpty(result.Data.Lxdh) || StringUtils.isEmpty(result.Data.DetailAddress)) {
                 model = null;
