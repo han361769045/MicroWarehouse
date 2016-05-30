@@ -18,8 +18,11 @@
 -optimizationpasses 5  # 指定代码的压缩级别
 #【混淆时不会产生形形色色的类名 】  # 是否使用大小写混合
 -dontusemixedcaseclassnames
+-keepattributes Exceptions,InnerClasses
 #【指定不去忽略非公共的库类。 】
 -dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontshrink
 #【不预校验】
 -dontpreverify
 -verbose
@@ -27,6 +30,8 @@
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 -dontobfuscate
 -dontoptimize
+
+-ignorewarnings
 
 
 -dontwarn org.springframework.**
@@ -69,6 +74,17 @@
 -keep class in.srain.cube.views.ptr.** { *; }
 -keep class de.hdodenhof.circleimageview.** { *; }
 -keep class okio.** { *; }
+
+
+-libraryjars libs/alipaySDK-20150610.jar
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+-keep class com.alipay.sdk.app.PayTask{ public *;}
+-keep class com.alipay.sdk.app.AuthTask{ public *;}
+
+
 
 
 -keep public class * extends android.app.Application
