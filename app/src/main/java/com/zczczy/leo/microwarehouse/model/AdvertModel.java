@@ -1,5 +1,7 @@
 package com.zczczy.leo.microwarehouse.model;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
+
 import java.io.Serializable;
 
 /**
