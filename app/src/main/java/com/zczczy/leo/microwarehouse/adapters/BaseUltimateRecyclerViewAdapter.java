@@ -167,6 +167,9 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
     @Override
     public BaseUltimateViewHolder onCreateViewHolder(ViewGroup parent) {
         final View view = onCreateItemView(parent);
+        //修正 item不充满
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(params);
         final BaseUltimateViewHolder baseViewHolder = getViewHolder(view);
         SwipeLayout swipeLayout = baseViewHolder.swipeLayout;
         if (swipeLayout != null) {

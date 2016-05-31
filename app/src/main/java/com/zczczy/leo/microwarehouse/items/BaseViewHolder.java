@@ -10,6 +10,7 @@ public class BaseViewHolder  extends RecyclerView.ViewHolder {
 
 
     public BaseViewHolder(View itemView) {
+
         super(itemView);
     }
 }
