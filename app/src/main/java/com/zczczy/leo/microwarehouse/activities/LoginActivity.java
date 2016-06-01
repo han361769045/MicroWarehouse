@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -31,6 +33,7 @@ import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -47,7 +50,13 @@ import java.util.Map;
 public class LoginActivity extends BaseActivity {
 
     @ViewById
-    EditText editUsername, editPassword, edit_code;
+    EditText editPassword, edit_code;
+
+    @ViewById
+    TextInputEditText editUsername;
+
+    @ViewById
+    TextInputLayout til_username;
 
     @ViewById
     LinearLayout ll_code, ll_password, ll_forget;
@@ -85,6 +94,12 @@ public class LoginActivity extends BaseActivity {
             countDownTimer.start();
         }
         getPermissions();
+
+    }
+
+    @TextChange
+    void editUsername() {
+
     }
 
 

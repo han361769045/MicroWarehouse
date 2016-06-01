@@ -48,7 +48,7 @@ public class OrderModel implements Serializable {
     public String MOrderNo; //订单编号
     public String CreateTime; //订单创建时间
     public double MOrderMoney; //订单总金额
-    public int MPaymentType; //支付方式（1网银，2货到付款）
+    public int MPaymentType; //支付方式（1网银，2货到付款 3支付宝 4 微信）
     public int PsType; //配送方式(1:邮寄，2：线下配送)
     public int AreaId; //区ID
     public String ProvinceName; //区域名称
@@ -73,6 +73,7 @@ public class OrderModel implements Serializable {
     public String FhTime; //发货时间
     public String ShTime; //确认收货时间
     public String MarkInfo; //备注说明
+    public String AlipayInfo;//支付宝支付信息
 
     public List<OrderDetailModel> MOrderDetailList; //订单明细
 }

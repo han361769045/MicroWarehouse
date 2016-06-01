@@ -117,7 +117,7 @@ public class OrderDetailActivity extends BaseActivity {
             if (result.Data.MorderStatus == Constants.DUEPAYMENT) {
                 ll_take.setVisibility(View.VISIBLE);
                 btn_cancel_order.setVisibility(View.VISIBLE);
-                btn_pay.setVisibility(result.Data.MPaymentType == 1 ? View.VISIBLE : View.GONE);
+                btn_pay.setVisibility(result.Data.MPaymentType == 2 ? View.GONE : View.VISIBLE);
                 btn_canceled.setVisibility(View.GONE);
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
@@ -261,8 +261,22 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Click
     void btn_pay() {
-        UmspayActivity_.intent(this).order(mAppOrder).start();
+
 //        finish();
+        switch (mAppOrder.MPaymentType) {
+            case Constants.CASH:
+                OrderDetailActivity_.intent(this).orderId(mAppOrder.MOrderId).start();
+                break;
+            case Constants.UM_PAY:
+                UmspayActivity_.intent(this).order(mAppOrder).start();
+                break;
+            case Constants.ALI_PAY:
+                
+                break;
+            case Constants.WEI_PAY:
+                break;
+        }
+
     }
 
     @Override

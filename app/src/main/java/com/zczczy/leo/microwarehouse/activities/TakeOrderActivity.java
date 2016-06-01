@@ -72,7 +72,7 @@ public class TakeOrderActivity extends BaseActivity {
     TextView tv_shipping, txt_phone, tv_shipping_address, txt_sub_express_charges, txt_comment, txt_total;
 
     @ViewById
-    RadioButton rb_umpay, rb_cash;
+    RadioButton rb_umpay, rb_cash, rb_bao_pay, rb_wechat_pay;
 
     @StringRes
     String text_goods_price, text_shipping, text_take_shipping_address, text_comment;
@@ -117,6 +117,8 @@ public class TakeOrderActivity extends BaseActivity {
             model = result.Data;
             rb_umpay.setChecked(Constants.UM_PAY == model.MPaymentType);
             rb_cash.setChecked(Constants.CASH == model.MPaymentType);
+            rb_bao_pay.setChecked(Constants.ALI_PAY == model.MPaymentType);
+            rb_wechat_pay.setChecked(Constants.WEI_PAY == model.MPaymentType);
             ShippingAddressModel model = new ShippingAddressModel();
             if (StringUtils.isEmpty(result.Data.ShrName) || StringUtils.isEmpty(result.Data.Lxdh) || StringUtils.isEmpty(result.Data.DetailAddress)) {
                 model = null;
@@ -174,7 +176,15 @@ public class TakeOrderActivity extends BaseActivity {
             AndroidTool.showToast(this, "请选择收货地址");
         } else {
             AndroidTool.showLoadDialog(this);
-            model.MPaymentType = rb_umpay.isChecked() ? Constants.UM_PAY : Constants.CASH;
+            if (rb_umpay.isChecked()) {
+                model.MPaymentType = Constants.UM_PAY;
+            } else if (rb_bao_pay.isChecked()) {
+                model.MPaymentType = Constants.ALI_PAY;
+            } else if (rb_wechat_pay.isChecked()) {
+                model.MPaymentType = Constants.WEI_PAY;
+            } else {
+                model.MPaymentType = Constants.CASH;
+            }
             model.MarkInfo = txt_comment.getText().toString().trim();
             takeOrder();
 //            test();
@@ -196,12 +206,28 @@ public class TakeOrderActivity extends BaseActivity {
         } else if (!result.Successful) {
             AndroidTool.showToast(this, result.Error);
         } else {
-            if (Constants.CASH == result.Data.MPaymentType) {
-                OrderDetailActivity_.intent(this).orderId(result.Data.MOrderId).start();
-            } else {
-                UmspayActivity_.intent(this).order(result.Data).start();
+
+            switch (result.Data.MPaymentType) {
+                case Constants.CASH:
+                    OrderDetailActivity_.intent(this).orderId(result.Data.MOrderId).start();
+                    finish();
+                    break;
+                case Constants.UM_PAY:
+                    UmspayActivity_.intent(this).order(result.Data).start();
+                    finish();
+                    break;
+                case Constants.ALI_PAY:
+                    alipay(result.Data.AlipayInfo);
+                    break;
+                case Constants.WEI_PAY:
+                    break;
             }
-            finish();
+
+//            if (Constants.CASH == result.Data.MPaymentType) {
+//                OrderDetailActivity_.intent(this).orderId(result.Data.MOrderId).start();
+//            } else if (Constants.UM_PAY) {
+//                UmspayActivity_.intent(this).order(result.Data).start();
+//            }
         }
     }
 

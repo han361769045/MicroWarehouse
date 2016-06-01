@@ -191,7 +191,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
         if (_data.MorderStatus == Constants.DUEPAYMENT) {
             ll_take.setVisibility(VISIBLE);
             btn_cancel_order.setVisibility(VISIBLE);
-            btn_pay.setVisibility(_data.MPaymentType == 1 ? VISIBLE : GONE);
+            btn_pay.setVisibility(_data.MPaymentType == 2 ? GONE : VISIBLE);
             btn_canceled.setVisibility(GONE);
             btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);
