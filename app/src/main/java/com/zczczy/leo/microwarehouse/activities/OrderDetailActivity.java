@@ -14,6 +14,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -61,6 +62,9 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Bean
     MyErrorHandler myErrorHandler;
+
+    @Bean
+    MyBackgroundTask myBackgroundTask;
 
     @Extra
     String orderId;
@@ -261,17 +265,15 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Click
     void btn_pay() {
-
-//        finish();
         switch (mAppOrder.MPaymentType) {
             case Constants.CASH:
-                OrderDetailActivity_.intent(this).orderId(mAppOrder.MOrderId).start();
+//                OrderDetailActivity_.intent(this).orderId(mAppOrder.MOrderId).start();
                 break;
             case Constants.UM_PAY:
                 UmspayActivity_.intent(this).order(mAppOrder).start();
                 break;
             case Constants.ALI_PAY:
-                
+                myBackgroundTask.aliPay(mAppOrder.AlipayInfo, this, mAppOrder.MOrderId);
                 break;
             case Constants.WEI_PAY:
                 break;

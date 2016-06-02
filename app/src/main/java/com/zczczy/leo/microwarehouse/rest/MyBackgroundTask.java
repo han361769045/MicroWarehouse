@@ -1,15 +1,20 @@
 package com.zczczy.leo.microwarehouse.rest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
+import com.alipay.sdk.app.PayTask;
 import com.zczczy.leo.microwarehouse.MyApplication;
+import com.zczczy.leo.microwarehouse.activities.OrderDetailActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
+import com.zczczy.leo.microwarehouse.model.PayResult;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
@@ -114,5 +119,48 @@ public class MyBackgroundTask {
         }
         bus.post(bmj);
     }
+
+
+    @Background
+    public void aliPay(String payInfo, Activity activity, String orderId) {
+        PayTask aliPay = new PayTask(activity);
+        afterAliPay(aliPay.pay(payInfo, true), activity, orderId);
+    }
+
+    @UiThread
+    void afterAliPay(String result, Activity activity, String orderId) {
+        AndroidTool.dismissLoadDialog();
+        PayResult payResult = new PayResult(result);
+        /**
+         * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
+         * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
+         * docType=1) 建议商户依赖异步通知
+         */
+        String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+        String resultStatus = payResult.getResultStatus();
+        switch (resultStatus) {
+            case "9000":
+                AndroidTool.showToast(context, "支付成功");
+                OrderDetailActivity_.intent(activity).orderId(orderId).start();
+                activity.finish();
+                break;
+            case "8000":
+                AndroidTool.showToast(context, "支付结果确认中");
+                break;
+            case "4000":
+                AndroidTool.showToast(context, "订单支付失败");
+                break;
+            case "6001":
+                AndroidTool.showToast(context, "用户中途取消");
+                break;
+            case "6002":
+                AndroidTool.showToast(context, "网络连接出错");
+                break;
+            default: {
+                AndroidTool.showToast(context, "网络连接出错");
+            }
+        }
+    }
+
 
 }

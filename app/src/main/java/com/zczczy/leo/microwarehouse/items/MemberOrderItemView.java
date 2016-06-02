@@ -17,6 +17,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -33,9 +34,6 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by leo on 2016/5/6.
@@ -58,6 +56,8 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
 
     @Bean
     MyErrorHandler myErrorHandler;
+
+    MyBackgroundTask mMyBackgroundTask;
 
     @Pref
     MyPrefs_ pre;
@@ -164,7 +164,19 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
 
     @Click
     void btn_pay() {
-        UmspayActivity_.intent(memberOrderActivity).order(_data).startForResult(1000);
+        switch (_data.MPaymentType) {
+            case Constants.CASH:
+                OrderDetailActivity_.intent(memberOrderActivity).orderId(_data.MOrderId).startForResult(1000);
+                break;
+            case Constants.UM_PAY:
+                UmspayActivity_.intent(memberOrderActivity).order(_data).startForResult(1000);
+                break;
+            case Constants.ALI_PAY:
+                mMyBackgroundTask.aliPay(_data.AlipayInfo, memberOrderActivity, _data.MOrderId);
+                break;
+            case Constants.WEI_PAY:
+                break;
+        }
     }
 
     @Click
