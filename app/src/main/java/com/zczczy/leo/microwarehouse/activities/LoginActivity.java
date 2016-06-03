@@ -187,7 +187,7 @@ public class LoginActivity extends BaseActivity {
     void sendCode() {
         Map<String, String> map = new HashMap<>();
         map.put("Mobile", editUsername.getText().toString());
-        map.put("SendType", Constants.LOING_CODE + "");
+        map.put("SendType", Constants.LOGIN_CODE + "");
         afterSendCode(myRestClient.sendMsg(map));
     }
 

@@ -226,17 +226,6 @@ public class TakeOrderActivity extends BaseActivity {
         }
     }
 
-
-    /**
-     * sign the order info. 对订单信息进行签名
-     *
-     * @param content 待签名订单信息
-     */
-    private String sign(String content) {
-        return SignUtils.sign(content, Constants.RSA_PRIVATE);
-    }
-
-
     void testWxPay() {
         api = WXAPIFactory.createWXAPI(this, "wxb4ba3c02aa476ea1");
         String url = "http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=android";
