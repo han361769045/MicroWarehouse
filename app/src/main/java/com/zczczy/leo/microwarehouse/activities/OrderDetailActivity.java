@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.PayTask;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView_;
@@ -14,7 +15,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
-import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
+import com.zczczy.leo.microwarehouse.model.PayResult;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -63,9 +64,6 @@ public class OrderDetailActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Bean
-    MyBackgroundTask myBackgroundTask;
-
     @Extra
     String orderId;
 
@@ -74,6 +72,8 @@ public class OrderDetailActivity extends BaseActivity {
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
     }
 
     @AfterViews
@@ -84,8 +84,6 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Background
     void getOrderDetailById() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterGetOrderDetailById(myRestClient.getOrderInfoById(orderId));
     }
 
@@ -201,8 +199,6 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Background
     void cancelOrder() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterCancelOrder(myRestClient.cancelOrderByOrderId(mAppOrder.MOrderId));
     }
 
@@ -234,8 +230,6 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Background
     void confirmReceipt() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterConfirm(myRestClient.confirmSh(mAppOrder.MOrderId));
     }
 
@@ -273,13 +267,57 @@ public class OrderDetailActivity extends BaseActivity {
                 UmspayActivity_.intent(this).order(mAppOrder).start();
                 break;
             case Constants.ALI_PAY:
-                myBackgroundTask.aliPay(mAppOrder.AlipayInfo, this, mAppOrder.MOrderId);
+                aliPay(mAppOrder.AlipayInfo);
                 break;
             case Constants.WEI_PAY:
                 break;
         }
 
     }
+
+
+    @Background
+    public void aliPay(String payInfo) {
+        PayTask aliPay = new PayTask(this);
+        afterAliPay(aliPay.pay(payInfo, true));
+    }
+
+    @UiThread
+    void afterAliPay(String result) {
+        AndroidTool.dismissLoadDialog();
+        PayResult payResult = new PayResult(result);
+        /**
+         * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
+         * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
+         * docType=1) 建议商户依赖异步通知
+         */
+        String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+        String resultStatus = payResult.getResultStatus();
+        switch (resultStatus) {
+            case "9000":
+                AndroidTool.showToast(this, "支付成功");
+                btn_pay.setVisibility(View.GONE);
+                btn_finish.setVisibility(View.VISIBLE);
+                setResult(RESULT_OK);
+                break;
+            case "8000":
+                AndroidTool.showToast(this, "支付结果确认中");
+                break;
+            case "4000":
+                AndroidTool.showToast(this, "订单支付失败");
+                break;
+            case "6001":
+                AndroidTool.showToast(this, "用户中途取消");
+                break;
+            case "6002":
+                AndroidTool.showToast(this, "网络连接出错");
+                break;
+            default: {
+                AndroidTool.showToast(this, "网络连接出错");
+            }
+        }
+    }
+
 
     @Override
     public void onResume() {

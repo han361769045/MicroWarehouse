@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.items;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.PayTask;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.LogisticsInfoActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity;
@@ -16,6 +18,7 @@ import com.zczczy.leo.microwarehouse.activities.UmspayActivity_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
+import com.zczczy.leo.microwarehouse.model.PayResult;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
@@ -56,8 +59,6 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
 
     @Bean
     MyErrorHandler myErrorHandler;
-
-    MyBackgroundTask mMyBackgroundTask;
 
     @Pref
     MyPrefs_ pre;
@@ -172,12 +173,54 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
                 UmspayActivity_.intent(memberOrderActivity).order(_data).startForResult(1000);
                 break;
             case Constants.ALI_PAY:
-                mMyBackgroundTask.aliPay(_data.AlipayInfo, memberOrderActivity, _data.MOrderId);
+                aliPay(_data.AlipayInfo);
                 break;
             case Constants.WEI_PAY:
                 break;
         }
     }
+
+    @Background
+    public void aliPay(String payInfo) {
+        PayTask aliPay = new PayTask(memberOrderActivity);
+        afterAliPay(aliPay.pay(payInfo, true));
+    }
+
+    @UiThread
+    void afterAliPay(String result) {
+        AndroidTool.dismissLoadDialog();
+        PayResult payResult = new PayResult(result);
+        /**
+         * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
+         * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
+         * docType=1) 建议商户依赖异步通知
+         */
+        String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+        String resultStatus = payResult.getResultStatus();
+        switch (resultStatus) {
+            case "9000":
+                AndroidTool.showToast(context, "支付成功");
+                baseUltimateRecyclerViewAdapter.getItems().remove(_data);
+                baseUltimateRecyclerViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                break;
+            case "8000":
+                AndroidTool.showToast(context, "支付结果确认中");
+                break;
+            case "4000":
+                AndroidTool.showToast(context, "订单支付失败");
+                break;
+            case "6001":
+                AndroidTool.showToast(context, "用户中途取消");
+                break;
+            case "6002":
+                AndroidTool.showToast(context, "网络连接出错");
+                break;
+            default: {
+                AndroidTool.showToast(context, "网络连接出错");
+            }
+        }
+    }
+
 
     @Click
     void btn_finished() {
