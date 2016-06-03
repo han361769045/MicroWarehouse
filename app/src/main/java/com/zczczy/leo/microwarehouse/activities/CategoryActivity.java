@@ -29,7 +29,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     OttoBus bus;
 
     @Extra
-    String id;
+    String id, title;
 
     FragmentManager fragmentManager;
 
@@ -43,6 +43,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
 
     @AfterViews
     void afterView() {
+        myTitleBar.setTitle(title);
         myAdapter.getMoreData(id);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override

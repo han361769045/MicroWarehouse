@@ -210,7 +210,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             if (bannerModel != null) {
                 //链接分类(1:商品详细，2：网页WebView)
                 if (bannerModel.LinkType == 1) {
-                    GoodsDetailActivity_.intent(getActivity()).goodsId(bannerModel.LinkUrl).start();
+                    GoodsDetailActivity_.intent(this).goodsId(bannerModel.LinkUrl).start();
                 } else if (bannerModel.LinkType == 2) {
                     CommonWebViewActivity_.intent(this).title(bannerModel.BannerName).linkUrl(bannerModel.LinkUrl).start();
                 }
