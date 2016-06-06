@@ -24,7 +24,7 @@ public class BannerModel implements Serializable {
     public int LinkType;
     public String LinkUrl;
     public int BannerSort;
-    public int BannerStatus;
+//    public int BannerStatus;
 
 
 }
