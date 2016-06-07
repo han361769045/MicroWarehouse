@@ -59,7 +59,7 @@
                         android:drawablePadding="5dp"
                         android:drawableTop="@drawable/pao_tui"
                         android:gravity="center_horizontal|bottom"
-                        android:text="微仓服务" />
+                        android:text="@string/text_one" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -75,7 +75,7 @@
                         android:drawablePadding="5dp"
                         android:drawableTop="@drawable/tool_rent"
                         android:gravity="center_horizontal|bottom"
-                        android:text="老人专区" />
+                        android:text="@string/text_two" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -91,7 +91,7 @@
                         android:drawablePadding="5dp"
                         android:drawableTop="@drawable/village"
                         android:gravity="center_horizontal|bottom"
-                        android:text="微仓黄页" />
+                        android:text="@string/text_three" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,7 +107,7 @@
                         android:drawablePadding="5dp"
                         android:drawableTop="@drawable/express"
                         android:gravity="center_horizontal|bottom"
-                        android:text="倾心洗衣" />
+                        android:text="@string/text_four" />
                 </LinearLayout>
 
             </LinearLayout>

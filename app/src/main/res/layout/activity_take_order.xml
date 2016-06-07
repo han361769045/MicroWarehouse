@@ -70,14 +70,16 @@
                     style="@style/PayCheckboxTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_bao_pay" />
+                    android:text="@string/text_bao_pay"
+                    android:visibility="gone" />
 
                 <RadioButton
                     android:id="@+id/rb_wechat_pay"
                     style="@style/PayCheckboxTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_wechat_pay" />
+                    android:text="@string/text_wechat_pay"
+                    android:visibility="gone" />
 
 
             </RadioGroup>

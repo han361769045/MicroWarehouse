@@ -10,6 +10,17 @@
     <string name="progress_de">%1$s\%</string>
 
 
+    <!--home-->
+    <!--<string name="text_one">微仓服务</string>-->
+    <!--<string name="text_two">老人专区</string>-->
+    <!--<string name="text_three">微仓黄页</string>-->
+    <!--<string name="text_four">倾心洗衣</string>-->
+
+    <!--home-->
+    <string name="text_one">微仓跑腿</string>
+    <string name="text_two">工具租赁</string>
+    <string name="text_three">小区黄页</string>
+    <string name="text_four">快递代收</string>
 
     <!--common-->
     <string name="text_tip">提示</string>

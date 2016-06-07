@@ -50,16 +50,10 @@ import java.util.Map;
 public class LoginActivity extends BaseActivity {
 
     @ViewById
-    EditText editPassword, edit_code;
+    EditText editPassword, editUsername, edit_code;
 
     @ViewById
-    TextInputEditText editUsername;
-
-    @ViewById
-    TextInputLayout til_username;
-
-    @ViewById
-    LinearLayout ll_code, ll_password, ll_forget;
+    LinearLayout ll_code, ll_username, ll_password, ll_forget;
 
     @RestService
     MyRestClient myRestClient;

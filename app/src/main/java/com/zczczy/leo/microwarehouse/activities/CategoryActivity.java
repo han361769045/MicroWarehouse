@@ -18,6 +18,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/5/21.
@@ -43,7 +44,9 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
 
     @AfterViews
     void afterView() {
-        myTitleBar.setTitle(title);
+        if (!StringUtils.isEmpty(title)) {
+            myTitleBar.setTitle(title);
+        }
         myAdapter.getMoreData(id);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override

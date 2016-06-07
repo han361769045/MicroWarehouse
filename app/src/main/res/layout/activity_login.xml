@@ -66,22 +66,15 @@
 
             </RadioGroup>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_username"
+            <LinearLayout
+                android:id="@+id/ll_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="10"
-                app:counterOverflowTextAppearance="@color/red"
-                app:counterTextAppearance="@color/red"
-                app:errorEnabled="true"
-                app:errorTextAppearance="@color/red"
-                app:hintEnabled="true">
+                android:layout_marginTop="10dp">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/edit_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,7 +91,7 @@
                     android:textColor="@color/gray"
                     android:textSize="15sp" />
 
-            </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_code"
