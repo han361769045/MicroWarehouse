@@ -205,7 +205,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @return
      */
     @Get("api/Content/GetGoodsInfoByTypeId?GoodsTypeId={GoodsTypeId}&Top={Top}")
-    BaseModelJson<List<GoodsModel>> getGoodsInfoByTypeId(@Path String GoodsTypeId, @Path String Top);
+    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path String GoodsTypeId, @Path String Top);
 
     //==============================================================================================
     // 需要传入token 和 token

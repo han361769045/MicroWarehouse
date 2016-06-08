@@ -1,18 +1,18 @@
 package com.zczczy.leo.microwarehouse.adapters;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
 import com.zczczy.leo.microwarehouse.items.CommonCategoryHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.items.CommonCategoryVerticalItemView_;
-import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
-import com.zczczy.leo.microwarehouse.items.GoodsVerticalItemView_;
 import com.zczczy.leo.microwarehouse.items.ItemView;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
-import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
+import com.zczczy.leo.microwarehouse.model.PagerResult;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
 
@@ -22,29 +22,42 @@ import java.util.List;
  * Created by leo on 2016/5/4.
  */
 @EBean
-public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsModel> {
+public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
 
 
     @Override
-    public void getMoreData(Object... objects) {
+    public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
+        this.isRefresh = isRefresh;
         afterGetData(myRestClient.getGoodsInfoByTypeId(objects[0].toString(), objects[1].toString()));
     }
 
     @UiThread
-    void afterGetData(BaseModelJson<List<GoodsModel>> bmj) {
+    void afterGetData(BaseModelJson<PagerResult<GoodsModel>> bmj) {
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
-            if (bmj.Data.size() > 0) {
-                insertAll(bmj.Data, getItems().size());
+            if (isRefresh) {
+                clear();
             }
+            setTotal(bmj.Data.RowCount);
+            if (bmj.Data.ListData.size() > 0) {
+                insertAll(bmj.Data.ListData, getItems().size());
+            }
+        } else {
+            AndroidTool.showToast(context, bmj.Error);
         }
+        bus.post(bmj);
+    }
+
+
+    @Override
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 
     @Override
-    protected View onCreateItemView(ViewGroup parent, int viewType) {
+    protected View onCreateItemView(ViewGroup parent) {
         ItemView<GoodsModel> itemView = null;
         switch (verticalAndHorizontal) {
             case Horizontal:
@@ -55,5 +68,15 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsModel> {
                 break;
         }
         return itemView;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+        return null;
+    }
+
+    @Override
+    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+
     }
 }

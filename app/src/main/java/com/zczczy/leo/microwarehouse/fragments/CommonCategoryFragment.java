@@ -18,7 +18,7 @@ import org.androidannotations.annotations.FragmentArg;
  * Created by Leo on 2016/5/21.
  */
 @EFragment(R.layout.fragment_common_category)
-public class CommonCategoryFragment extends BaseRecyclerViewFragment<GoodsModel> {
+public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
 
 
     @FragmentArg
@@ -32,14 +32,22 @@ public class CommonCategoryFragment extends BaseRecyclerViewFragment<GoodsModel>
 
     @AfterViews
     void afterView() {
-        myAdapter.getMoreData(goodsId, 20);
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
                 GoodsDetailActivity_.intent(CommonCategoryFragment.this).goodsId(obj.GoodsInfoId).start();
+            }
+
+            @Override
+            public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+
             }
         });
 //        horizontalItem();
     }
 
+    @Override
+    void afterLoadMore() {
+//        myAdapter.getMoreData(goodsId, 20);
+    }
 }
