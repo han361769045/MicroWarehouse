@@ -40,6 +40,9 @@ public abstract class BaseFragment extends Fragment {
     @ColorRes
     int line_color;
 
+    @StringRes
+    String empty_search, empty_order, empty_review, empty_no_review, empty_logistics;
+
     /**
      * 判断用户是否登录
      *

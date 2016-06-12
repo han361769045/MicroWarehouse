@@ -11,16 +11,13 @@ import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.activities.BaseActivity;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
@@ -49,7 +46,6 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
     @ViewById
     MyTitleBar myTitleBar;
 
-
     LinearLayoutManager linearLayoutManager;
 
     GridLayoutManager gridLayoutManager;
@@ -58,13 +54,14 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
 
     MaterialHeader materialHeader;
 
-        Paint paint = new Paint();
+    Paint paint = new Paint();
 
     boolean isRefresh;
 
     @AfterViews
     void afterRecyclerView() {
         ultimateRecyclerView.setHasFixedSize(true);
+//        linearLayoutManager = new CustomLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
         verticalItem();
@@ -75,7 +72,7 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(BaseUltimateRecyclerViewFragment.this, "没有更多的数据了！~");
+//                    AndroidTool.showToast(BaseUltimateRecyclerViewFragment.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
                     myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {

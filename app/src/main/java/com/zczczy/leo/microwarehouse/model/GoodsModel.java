@@ -18,8 +18,8 @@ public class GoodsModel {
 
     public String GoodsInfoId; //商品主键ID
     public String GodosName;  //商品名称
-    public double GoodsPrice;  //商品零售价格
-    public double GoodsBatPrice; //商品批发价格
+    public String GoodsPrice;  //商品零售价格
+    public String GoodsBatPrice; //商品批发价格
 
     public int GoodsTypeId;  //商品分类主键
     public String StaticHtmlUrl;  //静态页地址

@@ -37,4 +37,7 @@ public interface MyPrefs {
     @DefaultString("")
     String userTypeStr();
 
+    @DefaultString("")
+    String userType();
+
 }

@@ -44,6 +44,9 @@ public class Constants {
     public static final int Goods_UP = 1; //1：上架，0：下架
     public static final int Goods_DOWN = 0; //1：上架，0：下架
 
+    public static final String DEALER = "3";// 经销商
+    public static final String NORMAL = "1";// 普通会员
+
 
     public static final int DUEPAYMENT = 0; //0:待支付
     public static final int PAID = 1;   //1：已支付

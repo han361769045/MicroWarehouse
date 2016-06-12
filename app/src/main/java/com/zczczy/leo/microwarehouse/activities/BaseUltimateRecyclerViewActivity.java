@@ -75,7 +75,7 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(BaseUltimateRecyclerViewActivity.this, "没有更多的数据了！~");
+//                    AndroidTool.showToast(BaseUltimateRecyclerViewActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
                     myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {

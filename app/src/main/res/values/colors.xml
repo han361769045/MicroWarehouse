@@ -22,6 +22,10 @@
     <color name="textColor">#010101</color>
     <color name="search_bg">#e9e9e9</color>
 
+    <color name="price">#ff1e00</color>
+    <color name="goods_detail_bg">#faf8f9</color>
+    <color name="add_cart">#4d4d4d</color>
+
 
     <color name="buy_button">#ff9900</color>
     <color name="line_color">#e1e1e1</color>
