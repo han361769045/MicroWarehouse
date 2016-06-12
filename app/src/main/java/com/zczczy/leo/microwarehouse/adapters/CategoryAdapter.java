@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.zczczy.leo.microwarehouse.activities.CategoryActivity;
 import com.zczczy.leo.microwarehouse.items.CategoryItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
@@ -14,6 +15,7 @@ import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -27,8 +29,8 @@ import java.util.List;
 @EBean
 public class CategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel> {
 
-    @Bean
-    OttoBus bus;
+    @RootContext
+    CategoryActivity categoryActivity;
 
     @Override
     public void getMoreData(Object... objects) {
@@ -47,7 +49,7 @@ public class CategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel> {
                 insertAll(bmj.Data, getItems().size());
             }
         }
-        bus.post(bmj);
+        categoryActivity.notifyUI(bmj);
     }
 
 

@@ -12,6 +12,7 @@ import com.zczczy.leo.microwarehouse.fragments.CommonCategoryFragment;
 import com.zczczy.leo.microwarehouse.fragments.CommonCategoryFragment_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
+import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 
 import org.androidannotations.annotations.AfterViews;
@@ -20,14 +21,13 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * Created by Leo on 2016/5/21.
  */
 @EActivity(R.layout.activity_category)
 public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
-
-    @Bean
-    OttoBus bus;
 
     @Extra
     String id, title;
@@ -58,9 +58,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
         });
     }
 
-
-    @Subscribe
-    public void notifyUI(BaseModel bm) {
+    public void notifyUI(BaseModelJson<List<GoodsTypeModel>> bm) {
         if (bm.Successful) {
             if (myAdapter.getItemData(0) != null) {
                 changeFragment(myAdapter.getItemData(0));
@@ -91,18 +89,4 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();
     }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        bus.unregister(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        bus.register(this);
-    }
-
 }

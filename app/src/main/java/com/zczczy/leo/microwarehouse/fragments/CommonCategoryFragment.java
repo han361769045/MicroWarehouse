@@ -8,6 +8,7 @@ import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.adapters.CommonCategoryAdapter;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
+import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -48,6 +49,6 @@ public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<Goo
 
     @Override
     void afterLoadMore() {
-//        myAdapter.getMoreData(goodsId, 20);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, goodsId);
     }
 }

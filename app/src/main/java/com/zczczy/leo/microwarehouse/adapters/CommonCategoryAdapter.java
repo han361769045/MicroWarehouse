@@ -28,7 +28,7 @@ public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<Goods
     @Override
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
-        afterGetData(myRestClient.getGoodsInfoByTypeId(objects[0].toString(), objects[1].toString()));
+        afterGetData(myRestClient.getGoodsInfoByTypeId(pageIndex,pageSize, objects[0].toString()));
     }
 
     @UiThread

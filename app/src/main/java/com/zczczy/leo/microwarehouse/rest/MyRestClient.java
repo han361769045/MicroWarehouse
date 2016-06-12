@@ -47,7 +47,7 @@ import java.util.Map;
  * http://wcapia.zczczy.com/
  * http://218.61.203.50:8018/
  */
-@Rest(rootUrl = "http://wcapia.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8018/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class
 )
@@ -200,12 +200,13 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     /**
      * 根据商品类别ID查询商品信息
      *
-     * @param GoodsTypeId 分类id
-     * @param Top         数量
+     * @param PageIndex   当前页面
+     * @param PageSize    页面大小
+     * @param GoodsTypeId 商品Id
      * @return
      */
-    @Get("api/Content/GetGoodsInfoByTypeId?GoodsTypeId={GoodsTypeId}&Top={Top}")
-    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path String GoodsTypeId, @Path String Top);
+    @Get("api/Content/GetGoodsInfoByTypeId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsTypeId={GoodsTypeId}")
+    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path int PageIndex, @Path int PageSize,@Path String GoodsTypeId);
 
     //==============================================================================================
     // 需要传入token 和 token
