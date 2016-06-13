@@ -24,5 +24,7 @@ public class MemberInfoModel implements Serializable {
     public String MemberBlog;
     public String HeadImg;
     public String MemberRealName;
-    public String UserTypeStr; //用户类型
+    public String UserTypeStr; //用户类型描述
+    public String UserType;//用户类型
+    public String Token;//token
 }

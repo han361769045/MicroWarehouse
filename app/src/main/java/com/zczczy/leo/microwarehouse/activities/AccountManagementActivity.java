@@ -281,6 +281,7 @@ public class AccountManagementActivity extends BaseActivity {
             }
             memberInfoModel = bmj.Data;
             pre.userTypeStr().put(memberInfoModel.UserTypeStr);
+            pre.userType().put(bmj.Data.UserType);
         }
     }
 

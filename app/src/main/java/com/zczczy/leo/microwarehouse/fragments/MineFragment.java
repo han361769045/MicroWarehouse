@@ -108,6 +108,7 @@ public class MineFragment extends BaseFragment {
             pre.userTypeStr().put(bmj.Data.UserTypeStr);
             pre.avatar().put(bmj.Data.HeadImg);
             txt_user_type.setText(pre.userTypeStr().get());
+            pre.userType().put(bmj.Data.UserType);
         }
     }
 

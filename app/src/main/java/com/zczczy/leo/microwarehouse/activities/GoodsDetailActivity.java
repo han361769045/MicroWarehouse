@@ -20,6 +20,7 @@ import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsImgModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
@@ -193,11 +194,13 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                     sliderLayout.addSlider(textSliderView);
                 }
             }
-            if (bmj.Data.GoodsComments != null) {
-                GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
-                goodsCommentsItemView.init(bmj.Data.GoodsComments);
-                ll_review.addView(goodsCommentsItemView);
-                ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
+            if (bmj.Data.GoodsCommentsList != null) {
+                for (GoodsCommentsModel goodsCommentsModel : bmj.Data.GoodsCommentsList) {
+                    GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
+                    goodsCommentsItemView.init(goodsCommentsModel);
+                    ll_review.addView(goodsCommentsItemView);
+                    ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
+                }
             }
         }
     }

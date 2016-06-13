@@ -1,7 +1,9 @@
 package com.zczczy.leo.microwarehouse.items;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -37,10 +39,13 @@ public class CommonCategoryVerticalItemView extends ItemView<GoodsModel> {
     ImageView pic, img_add_cart;
 
     @ViewById
-    TextView goods_name, goods_sell_count, goods_price, goods_bat_price;
+    TextView goods_name, goods_sell_count, goods_price, goods_bat_price, goods_delete_price;
 
     @StringRes
     String no_net, text_goods_sell_count, text_goods_price, tip;
+
+    @ViewById
+    LinearLayout ll_bat_price, ll_price, ll_delete_price;
 
     @Pref
     MyPrefs_ pre;
@@ -71,8 +76,19 @@ public class CommonCategoryVerticalItemView extends ItemView<GoodsModel> {
         }
         goods_name.setText(_data.GodosName);
         goods_sell_count.setText(String.format(text_goods_sell_count, _data.GoodsXl));
-        goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
-        goods_bat_price.setText(String.format(text_goods_price, _data.GoodsBatPrice));
+        if (Constants.DEALER.equals(pre.userType().get())) {
+            ll_bat_price.setVisibility(VISIBLE);
+            ll_delete_price.setVisibility(VISIBLE);
+            ll_price.setVisibility(GONE);
+            goods_bat_price.setText(String.format(text_goods_price, _data.GoodsBatPrice));
+            goods_delete_price.setText(String.format(text_goods_price, _data.GoodsPrice));
+            goods_delete_price.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            ll_bat_price.setVisibility(GONE);
+            ll_delete_price.setVisibility(GONE);
+            ll_price.setVisibility(VISIBLE);
+            goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
+        }
         isCanBy = (Constants.Goods_UP == _data.GoodsStatus && _data.GoodsStock > 0);
     }
 

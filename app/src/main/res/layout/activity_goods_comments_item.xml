@@ -17,9 +17,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/default_avatar"
-            app:civ_border_color="@color/common_button"
-            app:civ_border_width="2dp" />
+            android:src="@drawable/default_header"
+            app:civ_border_color="@color/common_button" />
 
         <LinearLayout
             android:layout_width="wrap_content"

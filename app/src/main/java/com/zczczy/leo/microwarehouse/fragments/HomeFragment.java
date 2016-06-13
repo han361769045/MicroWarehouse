@@ -29,12 +29,11 @@ import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.tools.DensityUtil;
+import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -96,6 +95,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         locationService.registerListener(this);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
+
+//        homeSlider.setDuration(4000);
+        homeSlider.setCustomAnimation(new CustomDescriptionAnimation());
 
         if (app.getNewBannerList().size() >= 0) {
             setBanner();

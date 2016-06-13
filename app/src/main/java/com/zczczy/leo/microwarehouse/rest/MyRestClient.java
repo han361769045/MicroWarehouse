@@ -63,7 +63,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @return
      */
     @Get("api/Content/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
-    BaseModelJson<String> login(@Path String UserName, @Path String UserPw, @Path int LoginType, @Path String Kbn);
+    BaseModelJson<MemberInfoModel> login(@Path String UserName, @Path String UserPw, @Path int LoginType, @Path String Kbn);
 
     /**
      * 验证app是否需要更新

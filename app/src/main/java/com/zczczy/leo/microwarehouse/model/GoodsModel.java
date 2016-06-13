@@ -35,7 +35,7 @@ public class GoodsModel {
     public String PjNum; //评价数量
     public String PJBfb; //评价百分比
 
-    public GoodsCommentsModel GoodsComments;  //商品评价
+    public List<GoodsCommentsModel> GoodsCommentsList;  //商品评价
 
     public List<GoodsImgModel> GoodsImgList;  //商品图片集合
 

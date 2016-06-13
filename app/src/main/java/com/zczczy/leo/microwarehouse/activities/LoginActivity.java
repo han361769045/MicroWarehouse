@@ -20,6 +20,7 @@ import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -226,25 +227,30 @@ public class LoginActivity extends BaseActivity {
 
     @Background
     void login() {
-        BaseModelJson<String> bmj = myRestClient.login(editUsername.getText().toString().trim(),
+        BaseModelJson<MemberInfoModel> bmj = myRestClient.login(editUsername.getText().toString().trim(),
                 rb_code.isChecked() ? edit_code.getText().toString().trim() : editPassword.getText().toString().trim(),
                 rb_code.isChecked() ? Constants.MOBILE_LOGIN : Constants.NORMAL_LOGIN, Constants.ANDROID);
         afterLogin(bmj);
     }
 
     @UiThread
-    void afterLogin(BaseModelJson<String> bmj) {
+    void afterLogin(BaseModelJson<MemberInfoModel> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            pre.token().put(bmj.Data);
+            pre.token().put(bmj.Data.Token);
             pre.nickName().put(editUsername.getText().toString());
+            pre.userTypeStr().put(bmj.Data.UserTypeStr);
+            pre.avatar().put(bmj.Data.HeadImg);
+            pre.userType().put(bmj.Data.UserType);
             finish();
         } else {
+
             AndroidTool.showToast(this, bmj.Error);
         }
     }
+
 
     @Override
     public void finish() {
