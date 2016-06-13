@@ -15,7 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_bat_price"
-            android:textColor="@color/second_font_color" />
+            android:textColor="@color/second_font_color"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/goods_bat_price"
@@ -24,7 +25,7 @@
             android:gravity="center_vertical"
             android:text="@string/text_goods_price"
             android:textColor="@color/main_font_color"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -38,16 +39,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_price"
-            android:textSize="12sp"
-            android:textColor="@color/second_font_color" />
+            android:textColor="@color/second_font_color"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/goods_delete_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/second_font_color"
             android:gravity="center_vertical"
             android:text="@string/text_goods_price"
+            android:textColor="@color/second_font_color"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -62,7 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_price"
-            android:textColor="@color/second_font_color" />
+            android:textColor="@color/second_font_color"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/goods_price"
@@ -71,7 +73,7 @@
             android:gravity="center_vertical"
             android:text="@string/text_goods_price"
             android:textColor="@color/main_font_color"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 
