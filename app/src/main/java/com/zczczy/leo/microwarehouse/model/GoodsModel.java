@@ -39,4 +39,6 @@ public class GoodsModel {
 
     public List<GoodsImgModel> GoodsImgList;  //商品图片集合
 
+    public String PlUrl;//更多评论URL
+
 }

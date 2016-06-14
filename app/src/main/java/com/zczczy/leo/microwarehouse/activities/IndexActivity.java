@@ -1,14 +1,17 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.fragments.CustomPresentationPagerFragment;
+import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
+import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -18,17 +21,21 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/5/20.
  */
 @EActivity(R.layout.activity_index)
-public class IndexActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener {
+public class IndexActivity extends BaseActivity {
 
-    @ViewById
-    SliderLayout sliderLayout;
 
-    @ViewById
-    PagerIndicator custom_indicator;
+    int versionCode = 0;
 
     @AfterViews
     void afterView() {
-        if (pre.isFirst().get()) {
+
+        try {
+            // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
+            versionCode = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (versionCode > pre.verCode().get()) {
             showIndex();
         } else {
             WelcomeActivity_.intent(this).start();
@@ -37,51 +44,10 @@ public class IndexActivity extends BaseActivity implements BaseSliderView.OnSlid
     }
 
     void showIndex() {
-        sliderLayout.stopAutoCycle();
-
-        DefaultSliderView textSliderView = new DefaultSliderView(this);
-        textSliderView.image(R.drawable.goods_default);
-        textSliderView.setOnSliderClickListener(this);
-        sliderLayout.addSlider(textSliderView);
-
-        DefaultSliderView textSliderView1 = new DefaultSliderView(this);
-        textSliderView1.image(R.drawable.goods_default);
-        textSliderView1.setOnSliderClickListener(this);
-        sliderLayout.addSlider(textSliderView1);
-
-        DefaultSliderView textSliderView2 = new DefaultSliderView(this);
-        textSliderView2.image(R.drawable.goods_default);
-        textSliderView2.setOnSliderClickListener(this);
-        sliderLayout.addSlider(textSliderView2);
-
-//        sliderLayout.setCustomIndicator(custom_indicator);
-
-        sliderLayout.addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.e("onPageScrolled", "position=" + position + ",positionOffset=" + positionOffset + ",positionOffsetPixels=" + positionOffsetPixels);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Log.e("onPageSelected", "position=" + position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                Log.e("onPageScrollStateC", "state=" + state);
-            }
-        });
+        int[] resIds = {R.drawable.index_one, R.drawable.index_two, R.drawable.index_three, R.drawable.index_four, R.drawable.index_five};
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, new CustomPresentationPagerFragment());
+        fragmentTransaction.commit();
     }
 
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-        Log.e("111111111", "sliderLayout=" + sliderLayout.getCurrentPosition() + "------" + (sliderLayout.getChildCount() - 1));
-        if (sliderLayout.getCurrentPosition() == 2) {
-            WelcomeActivity_.intent(this).start();
-            pre.isFirst().put(false);
-            finish();
-        }
-    }
 }

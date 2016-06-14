@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
     tools:context=".activities.IndexActivity">
 
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider_layout"
+    <!--<Button-->
+    <!--android:id="@+id/bRetry"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:stateListAnimator="@android:animator/fade_in"-->
+    <!--android:text="Retry" />-->
+
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/goods_default"
-        app:pager_animation="Accordion" />
+        android:layout_height="match_parent" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
-        android:id="@+id/custom_indicator"
-        style="@style/AndroidImageSlider_Corner_Oval_Orange" />
-
-</LinearLayout>
+</RelativeLayout>

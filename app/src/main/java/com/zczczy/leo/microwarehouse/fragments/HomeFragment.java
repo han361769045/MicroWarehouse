@@ -25,11 +25,13 @@ import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
+import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
+import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -55,13 +57,13 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     MyTitleBar myTitleBar;
 
     @ViewById
-    SliderLayout homeSlider;
+    SliderLayout homeSlider, slider_horn;
 
     @Bean
     MyBackgroundTask myBackgroundTask;
 
     @ViewById
-    TextView txt_one, txt_two, txt_three, txt_four, txt_horn;
+    TextView txt_one, txt_two, txt_three, txt_four;
 
     @ViewById
     LinearLayout ll_born;
@@ -82,8 +84,6 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     int i;
 
-    int noticeIndex;
-
     @AfterInject
     void afterInject() {
         locationService = app.locationService;
@@ -95,10 +95,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         locationService.registerListener(this);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
-
-//        homeSlider.setDuration(4000);
+        //设置自定义描述动画  ---- 去掉秒速灰色透明背景
         homeSlider.setCustomAnimation(new CustomDescriptionAnimation());
-
+        //判断首页数据是否加载出来 如果没有 就重新拉去数据
         if (app.getNewBannerList().size() >= 0) {
             setBanner();
         } else {
@@ -117,7 +116,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     }
 
     void setBanner() {
+        //设置首页 轮播图
         for (BannerModel bannerModel : app.getNewBannerList()) {
+            //显示 描述和图片sliderView
             TextSliderView textSliderView = new TextSliderView(getActivity());
             textSliderView.image(bannerModel.BannerImgUrl);
             Bundle bundle = new Bundle();
@@ -127,32 +128,33 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             textSliderView.setOnSliderClickListener(this);
             homeSlider.addSlider(textSliderView);
         }
+        //设置首页 公告信息
+        if (app.getNoticeInfoModelList().size() > 0) {
+            for (NoticeInfoModel noticeInfoModel : app.getNoticeInfoModelList()) {
+                //自定义只显示文字描述的SliderView
+                HornSliderView textSliderView = new HornSliderView(getActivity());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("noticeInfoModel", noticeInfoModel);
+                textSliderView.bundle(bundle);
+                textSliderView.setOnSliderClickListener(this);
+                textSliderView.description(noticeInfoModel.NoticeInfoTitle);
+                slider_horn.addSlider(textSliderView);
+            }
+        } else {
+            ll_born.setVisibility(View.GONE);
+        }
+        //设置首页广告位
         int i = 0;
         for (AdvertModel advertModel : app.getAdvertModelList()) {
             RequestCreator rc = Picasso.with(getActivity()).load(advertModel.AdvertImg);
             rc.into(imageViewList.get(i));
-            imageViewList.get(i).setContentDescription(advertModel.JumpType + "," + advertModel.InfoId);
+            //为每一个广告位添加描述（传参数）
+            imageViewList.get(i).setContentDescription(advertModel.JumpType + "," + advertModel.InfoId + "," + advertModel.AdvertName);
             i++;
             if (i == 11) {
                 break;
             }
         }
-
-        if (app.getNoticeInfoModelList().size() > 0) {
-            setNotice();
-        } else {
-            ll_born.setVisibility(View.GONE);
-        }
-    }
-
-    @UiThread(delay = 3000, id = "notice")
-    void setNotice() {
-        if (noticeIndex >= app.getNoticeInfoModelList().size()) {
-            noticeIndex = noticeIndex % app.getNoticeInfoModelList().size();
-        }
-        txt_horn.setText(app.getNoticeInfoModelList().get(noticeIndex).NoticeInfoTitle);
-        noticeIndex++;
-        setNotice();
     }
 
 
@@ -169,10 +171,10 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     void imageViewList(ImageView imageView) {
         if (imageView.getContentDescription() != null) {
             String[] temp = imageView.getContentDescription().toString().split(",");
-            if (temp.length == 2) {
+            if (temp.length == 3) {
                 //跳转标识(1:商品类别页，2：商品明细)
                 if (Constants.GOODS_TYPE.equals(temp[0])) {
-                    CategoryActivity_.intent(getActivity()).id(temp[1]).start();
+                    CategoryActivity_.intent(getActivity()).id(temp[1]).title(temp[2]).start();
                 } else {
                     GoodsDetailActivity_.intent(getActivity()).goodsId(temp[1]).start();
                 }
@@ -218,6 +220,19 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
                 }
             }
         }
+        if (slider.getBundle() != null && slider.getBundle().get("noticeInfoModel") != null) {
+            NoticeInfoModel noticeInfoModel = (NoticeInfoModel) slider.getBundle().get("noticeInfoModel");
+            if (noticeInfoModel != null) {
+                //链接分类(1:商品详细，2：网页WebView ，3.商品分类)
+                if (noticeInfoModel.JumpType == 1) {
+                    GoodsDetailActivity_.intent(this).goodsId(noticeInfoModel.TargetAddress).start();
+                } else if (noticeInfoModel.JumpType == 2) {
+                    CommonWebViewActivity_.intent(this).title(noticeInfoModel.NoticeInfoTitle).linkUrl(noticeInfoModel.TargetAddress).start();
+                } else if (noticeInfoModel.JumpType == 3) {
+                    CategoryActivity_.intent(getActivity()).id(noticeInfoModel.TargetAddress).title(noticeInfoModel.NoticeInfoTitle).start();
+                }
+            }
+        }
     }
 
     @Override
@@ -226,11 +241,11 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         if (hidden) {
             bus.unregister(this);
             homeSlider.stopAutoCycle();
-            UiThreadExecutor.cancelAll("notice");
+            slider_horn.stopAutoCycle();
         } else {
             homeSlider.startAutoCycle();
+            slider_horn.startAutoCycle();
             bus.register(this);
-            setNotice();
         }
     }
 

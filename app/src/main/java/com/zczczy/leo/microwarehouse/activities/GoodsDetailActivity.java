@@ -12,8 +12,6 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment;
-import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment_;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment_;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView;
@@ -27,6 +25,7 @@ import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
+import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -80,11 +79,9 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     FragmentManager fragmentManager;
 
-    GoodsDetailFragment goodsDetailFragment;
+    GoodsDetailFragment goodsDetailFragment, goodsCommentsFragment;
 
-    GoodsCommentsFragment goodsCommentsFragment;
-
-    String linkUrl;
+    String linkUrl, PlUrl;
 
     @AfterInject
     void afterInject() {
@@ -94,7 +91,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @AfterViews
     void afterView() {
-
+        sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,38 +108,13 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         getGoodsDetailById(goodsId);
     }
 
-    void changeFragment(String parameter) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (goodsDetailFragment != null) {
-            transaction.hide(goodsDetailFragment);
-        }
-        if (goodsCommentsFragment != null) {
-            transaction.hide(goodsCommentsFragment);
-        }
-        if (rb_good_detail.isChecked()) {
-            if (goodsDetailFragment == null) {
-                goodsDetailFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
-                transaction.add(R.id.goods_detail_fragment, goodsDetailFragment);
-            } else {
-                transaction.show(goodsDetailFragment);
-            }
-        } else {
-            if (goodsCommentsFragment == null) {
-                goodsCommentsFragment = GoodsCommentsFragment_.builder().goodsId(parameter).build();
-                transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
-            } else {
-                transaction.show(goodsCommentsFragment);
-            }
-        }
-        transaction.commit();
-    }
 
     @CheckedChange
     void rb_good_detail(boolean isChecked) {
         if (isChecked) {
             changeFragment(linkUrl);
         } else {
-            changeFragment(goodsId);
+            changeFragment(PlUrl);
         }
     }
 
@@ -161,6 +133,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         }
     }
 
+    @Click
+    void txt_more_review() {
+        rb_good_review.setChecked(true);
+    }
+
     @Background
     void getGoodsDetailById(String goodsInfoId) {
         afterGetGoodsDetailById(myRestClient.getGoodsInfoDetailById(goodsInfoId));
@@ -177,6 +154,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             goods_by.setText(bmj.Data.GoodsIsBy == 0 ? bmj.Data.Postage : "包邮");
             goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
             linkUrl = bmj.Data.StaticHtmlUrl;
+            PlUrl = bmj.Data.PlUrl;
             changeFragment(bmj.Data.StaticHtmlUrl);
 
             txt_price_delete.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
@@ -199,7 +177,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                     GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
                     goodsCommentsItemView.init(goodsCommentsModel);
                     ll_review.addView(goodsCommentsItemView);
-                    ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
+                    ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, ll_review, false));
                 }
             }
         }
@@ -228,6 +206,32 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         } else {
             AndroidTool.showToast(this, "添加成功");
         }
+    }
+
+    void changeFragment(String parameter) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (goodsDetailFragment != null) {
+            transaction.hide(goodsDetailFragment);
+        }
+        if (goodsCommentsFragment != null) {
+            transaction.hide(goodsCommentsFragment);
+        }
+        if (rb_good_detail.isChecked()) {
+            if (goodsDetailFragment == null) {
+                goodsDetailFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
+                transaction.add(R.id.goods_detail_fragment, goodsDetailFragment);
+            } else {
+                transaction.show(goodsDetailFragment);
+            }
+        } else {
+            if (goodsCommentsFragment == null) {
+                goodsCommentsFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
+                transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
+            } else {
+                transaction.show(goodsCommentsFragment);
+            }
+        }
+        transaction.commit();
     }
 
 

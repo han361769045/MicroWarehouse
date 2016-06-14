@@ -136,15 +136,12 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/home_horn" />
 
-                <TextView
-                    android:id="@+id/txt_horn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:text="" />
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider_horn"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    app:indicator_visibility="invisible"
+                    app:pager_animation="Default" />
 
             </LinearLayout>
 

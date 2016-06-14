@@ -27,4 +27,5 @@ public class AdvertModel implements Serializable {
     public int JumpType;
     public int AdvertStatus;
     public String CreateTime;
+    public String AdvertName;
 }
