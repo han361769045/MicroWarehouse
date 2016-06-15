@@ -209,7 +209,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Content/GetGoodsInfoByTypeId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsTypeId={GoodsTypeId}")
     BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path int PageIndex, @Path int PageSize, @Path String GoodsTypeId);
 
-
     /**
      * 查询微仓黄页列表信息
      *
@@ -406,7 +405,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Post("api/Member/CreateOrder")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<OrderModel> createOrder(@Body OrderModel model);
-
 
     @Get("api/Member/GetOrderInfoById?MorderId={MorderId}")
     @RequiresHeader(value = {"Token", "Kbn"})

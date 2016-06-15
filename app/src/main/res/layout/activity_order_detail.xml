@@ -180,7 +180,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
-                    android:text="下单时间：2016-01-01"
                     android:textColor="@color/second_font_color" />
 
                 <TextView
@@ -199,6 +198,13 @@
 
                 <TextView
                     android:id="@+id/txt_shipping_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textColor="@color/second_font_color" />
+
+                <TextView
+                    android:id="@+id/txt_pay_order_time_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="15dp"

@@ -1,11 +1,12 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.annotation.SuppressLint;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.zczczy.leo.microwarehouse.R;
 
-import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
@@ -27,6 +28,7 @@ public class GoodsDetailFragment extends BaseFragment {
 
     WebSettings settings;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @AfterViews
     void afterView() {
         settings = web_view.getSettings();
@@ -34,6 +36,9 @@ public class GoodsDetailFragment extends BaseFragment {
         web_view.getSettings().setAllowFileAccess(true);
         web_view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
         web_view.loadUrl(linkUrl);
+        web_view.setWebChromeClient(new WebChromeClient() {
+
+        });
     }
 
 }

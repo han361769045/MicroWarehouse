@@ -56,7 +56,7 @@ public class OrderDetailActivity extends BaseActivity {
     String text_take_order_time, text_pay_order_time, text_receiver_order_time, text_shipping_time, text_finish_time;
 
     @ViewById
-    TextView txt_take_order_time, txt_pay_order_time, txt_receiver_order_time, txt_shipping_time, txt_finish_time;
+    TextView txt_take_order_time, txt_pay_order_time, txt_receiver_order_time, txt_shipping_time, txt_pay_order_time_two, txt_finish_time;
 
     @RestService
     MyRestClient myRestClient;
@@ -111,10 +111,17 @@ public class OrderDetailActivity extends BaseActivity {
             ll_tracking_no.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
             txt_tracking_no.setText(String.format(text_tracking_no, result.Data.TrackingNo));
             ll_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
-            txt_take_order_time.setText(String.format(text_take_order_time, result.Data.CreateTime));
+
+            if (Constants.CASH == result.Data.MPaymentType) {
+                txt_pay_order_time_two.setText(String.format(text_take_order_time, result.Data.CreateTime));
+            } else {
+                txt_take_order_time.setText(String.format(text_take_order_time, result.Data.CreateTime));
+            }
             txt_pay_order_time.setText(String.format(text_pay_order_time, result.Data.PayTime));
             txt_receiver_order_time.setText(String.format(text_receiver_order_time, result.Data.DepotJdTime));
             txt_shipping_time.setText(String.format(text_shipping_time, result.Data.FhTime));
+
+
             txt_finish_time.setText(String.format(text_finish_time, result.Data.ShTime));
             if (result.Data.MorderStatus == Constants.DUEPAYMENT) {
                 ll_take.setVisibility(View.VISIBLE);
