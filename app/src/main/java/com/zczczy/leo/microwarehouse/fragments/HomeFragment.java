@@ -19,6 +19,7 @@ import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
+import com.zczczy.leo.microwarehouse.activities.DepotActivity_;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
@@ -197,8 +198,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Click
     void txt_three() {
-//        SearchResultActivity_.intent(this).start();
-        AndroidTool.showToast(this, "敬请期待");
+        DepotActivity_.intent(this).start();
     }
 
     @Click

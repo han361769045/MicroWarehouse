@@ -8,6 +8,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.model.CityModel;
 import com.zczczy.leo.microwarehouse.model.DealerApplyModel;
+import com.zczczy.leo.microwarehouse.model.DepotModel;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
@@ -206,7 +207,19 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @return
      */
     @Get("api/Content/GetGoodsInfoByTypeId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsTypeId={GoodsTypeId}")
-    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path int PageIndex, @Path int PageSize,@Path String GoodsTypeId);
+    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path int PageIndex, @Path int PageSize, @Path String GoodsTypeId);
+
+
+    /**
+     * 查询微仓黄页列表信息
+     *
+     * @param PageIndex 当前页面
+     * @param PageSize  页面大小
+     * @return
+     */
+    @Get("api/Content/GetDepotList?PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<DepotModel>> getDepotList(@Path int PageIndex, @Path int PageSize);
+
 
     //==============================================================================================
     // 需要传入token 和 token

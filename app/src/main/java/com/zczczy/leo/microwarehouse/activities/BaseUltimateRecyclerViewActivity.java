@@ -48,7 +48,6 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
     @ViewById
     MyTitleBar myTitleBar;
 
-
     LinearLayoutManager linearLayoutManager;
 
     GridLayoutManager gridLayoutManager;

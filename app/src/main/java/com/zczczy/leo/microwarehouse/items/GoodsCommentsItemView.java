@@ -24,7 +24,7 @@ public class GoodsCommentsItemView extends ItemView<GoodsCommentsModel> {
     ImageView img_avatar;
 
     @ViewById
-    TextView txt_name, txt_comments, txt_time;
+    TextView txt_comments, txt_time;
 
     @ViewById
     RatingBar ratingBar;
@@ -38,12 +38,12 @@ public class GoodsCommentsItemView extends ItemView<GoodsCommentsModel> {
 
     @Override
     protected void init(Object... objects) {
-        txt_name.setText(_data.UserLogin);
+//        txt_name.setText(_data.UserLogin);
         txt_comments.setText(_data.GoodsCommentsNr);
         txt_time.setText(_data.PlTime);
         ratingBar.setRating(_data.XNum);
         if (!StringUtils.isEmpty(_data.HeadImg)) {
-            Picasso.with(context).load(_data.HeadImg).resize(100, 100).
+            Picasso.with(context).load(_data.HeadImg).resize(50, 50).
                     centerCrop().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(img_avatar);
         }
     }

@@ -49,7 +49,6 @@ public class CustomPresentationPagerFragment extends SimplePagerFragment {
                 break;
             default:
 
-                Log.e("aaaa", position + "");
                 break;
         }
         return FirstIndexPageFragment_.builder().layoutResId(layoutResId).build();
