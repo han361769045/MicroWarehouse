@@ -13,8 +13,10 @@ import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
+import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.model.OrderCountModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
@@ -34,6 +36,11 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
+import cn.bingoogolapple.badgeview.BGABadgeLinearLayout;
+import cn.bingoogolapple.badgeview.BGABadgeTextView;
+import cn.bingoogolapple.badgeview.BGABadgeView;
+import cn.bingoogolapple.badgeview.BGABadgeViewHelper;
+
 /**
  * Created by Leo on 2016/5/20.
  */
@@ -45,6 +52,9 @@ public class MineFragment extends BaseFragment {
 
     @ViewById
     TextView txt_username, txt_user_type;
+
+    @ViewById
+    BGABadgeLinearLayout ll_hole_order, ll_waiting_order, ll_review;
 
     @StringRes
     String text_username, text_no_pay_order, text_take_goods_order, text_order, text_about_us;
@@ -58,8 +68,6 @@ public class MineFragment extends BaseFragment {
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
     }
 
     @AfterViews
@@ -95,6 +103,8 @@ public class MineFragment extends BaseFragment {
     //获取会员信息
     @Background
     void getMemberInfo() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterGetMemberInfo(myRestClient.getMemberInfo());
     }
 
@@ -159,7 +169,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @Click
-    void txt_hole_order() {
+    void ll_hole_order() {
         if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(0).title(text_no_pay_order).start();
         } else {
@@ -168,7 +178,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @Click
-    void txt_waiting_order() {
+    void ll_waiting_order() {
         if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(1).title(text_take_goods_order).start();
         } else {
@@ -177,7 +187,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @Click
-    void txt_review() {
+    void ll_review() {
         if (checkUserIsLogin()) {
             ReviewActivity_.intent(this).start();
         } else {
@@ -235,4 +245,35 @@ public class MineFragment extends BaseFragment {
             LoginActivity_.intent(this).start();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (checkUserIsLogin()) {
+            getUserOrderCount();
+        }
+    }
+
+    @Background
+    void getUserOrderCount() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterGetUserOrderCount(myRestClient.getUserOrderCount());
+    }
+
+    @UiThread
+    void afterGetUserOrderCount(BaseModelJson<OrderCountModel> result) {
+        if (result != null && result.Successful) {
+            ll_hole_order.showTextBadge(result.Data.DfkCount + "");
+            ll_hole_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+            ll_hole_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+            ll_waiting_order.showTextBadge(result.Data.DshCount + "");
+            ll_waiting_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+            ll_waiting_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+            ll_review.showTextBadge(result.Data.DpjCount + "");
+            ll_review.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+            ll_review.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+        }
+    }
+
 }

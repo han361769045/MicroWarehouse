@@ -15,6 +15,7 @@ import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
+import com.zczczy.leo.microwarehouse.model.OrderCountModel;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
@@ -508,5 +509,13 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModel insertFeedback(@Body Map map);
 
+    /**
+     * 查询用户各订单状态的数量
+     *
+     * @return OrderCountModel
+     */
+    @Get("api/Member/GetUserOrderCount")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<OrderCountModel> getUserOrderCount();
 }
 

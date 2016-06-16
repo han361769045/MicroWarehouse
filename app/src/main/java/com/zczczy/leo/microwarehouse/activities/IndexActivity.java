@@ -36,6 +36,7 @@ public class IndexActivity extends BaseActivity {
             e.printStackTrace();
         }
         if (versionCode > pre.verCode().get()) {
+            pre.verCode().put(versionCode);
             showIndex();
         } else {
             WelcomeActivity_.intent(this).start();
