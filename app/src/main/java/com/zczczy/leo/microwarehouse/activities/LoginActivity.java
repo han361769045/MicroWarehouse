@@ -21,6 +21,7 @@ import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -64,6 +65,9 @@ public class LoginActivity extends BaseActivity {
 
     @Bean
     MyErrorHandler myErrorHandler;
+
+    @Bean
+    MyBackgroundTask myBackgroundTask;
 
     @ViewById
     Button btn_send_code;
@@ -244,6 +248,8 @@ public class LoginActivity extends BaseActivity {
             pre.userTypeStr().put(bmj.Data.UserTypeStr);
             pre.avatar().put(bmj.Data.HeadImg);
             pre.userType().put(bmj.Data.UserType);
+            pre.jPushAlias().put(bmj.Data.UserInfoId);
+            myBackgroundTask.setAlias();
             finish();
         } else {
 

@@ -113,8 +113,12 @@ public class OrderDetailActivity extends BaseActivity {
             ll_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
 
             if (Constants.CASH == result.Data.MPaymentType) {
+                txt_pay_order_time.setVisibility(View.GONE);
+                txt_pay_order_time_two.setVisibility(View.VISIBLE);
                 txt_pay_order_time_two.setText(String.format(text_take_order_time, result.Data.CreateTime));
             } else {
+                txt_pay_order_time.setVisibility(View.VISIBLE);
+                txt_pay_order_time_two.setVisibility(View.GONE);
                 txt_take_order_time.setText(String.format(text_take_order_time, result.Data.CreateTime));
             }
             txt_pay_order_time.setText(String.format(text_pay_order_time, result.Data.PayTime));

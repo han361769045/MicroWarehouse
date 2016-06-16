@@ -21,6 +21,15 @@ public interface MyPrefs {
     String token();
 
     @DefaultString("")
+    String jPushAlias();
+
+    @DefaultBoolean(false)
+    boolean isSetAlias();
+
+    @DefaultBoolean(true)
+    boolean isFirst();
+
+    @DefaultString("")
     String avatar();
 
     @DefaultInt(0)

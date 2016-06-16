@@ -57,4 +57,7 @@ public class Constants {
     public static final int FINISH = 6; //5:交易完成
     public static final int ALL_ORDER = 9; //9.取消订单
 
+
+    public static final String KBN_ORDER = "order";
+
 }

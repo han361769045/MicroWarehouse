@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -68,6 +69,9 @@ public class AccountManagementActivity extends BaseActivity {
 
     @Bean
     MyErrorHandler myErrorHandler;
+
+    @Bean
+    MyBackgroundTask myBackgroundTask;
 
     MemberInfoModel memberInfoModel;
 
@@ -295,6 +299,7 @@ public class AccountManagementActivity extends BaseActivity {
     void setPassword(int resultCode) {
         if (resultCode == 1000) {
             pre.clear();
+            myBackgroundTask.registerAlias();
             finish();
             LoginActivity_.intent(this).start();
         } else if (resultCode == 1001) {
@@ -320,6 +325,7 @@ public class AccountManagementActivity extends BaseActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     pre.clear();
+                    myBackgroundTask.registerAlias();
                     finish();
 
                 }

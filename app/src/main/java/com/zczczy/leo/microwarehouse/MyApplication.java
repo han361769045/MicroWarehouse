@@ -9,21 +9,36 @@ import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
+import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EApplication;
 import org.androidannotations.annotations.SystemService;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Leo on 2016/4/27.
  */
 @EApplication
 public class MyApplication extends Application {
+
+
+    @Pref
+    MyPrefs_ pre;
+
+    @Bean
+    MyBackgroundTask myBackgroundTask;
 
     //首页banner
     private List<BannerModel> newBannerList;
@@ -48,9 +63,11 @@ public class MyApplication extends Application {
         newBannerList = new ArrayList<>();
         goodsTypeModelList = new ArrayList<>();
         noticeInfoModelList = new ArrayList<>();
-        //百度地图
-//        locationService = new LocationService(this);
-//        mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
+        if (pre.isFirst().get()) {
+            JPushInterface.setAliasAndTags(this, "", null, myBackgroundTask);
+        }
+        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);            // 初始化 JPush
     }
 
 

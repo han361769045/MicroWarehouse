@@ -1,12 +1,17 @@
 package com.zczczy.leo.microwarehouse.broadcast;
 
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.zczczy.leo.microwarehouse.activities.OrderDetailActivity_;
+import com.zczczy.leo.microwarehouse.model.NotificationModel;
+import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EReceiver;
 import org.androidannotations.annotations.ReceiverAction;
 import org.androidannotations.api.support.content.AbstractBroadcastReceiver;
-
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * @author Created by LuLeo on 2016/6/15.
@@ -16,12 +21,49 @@ import cn.jpush.android.api.JPushInterface;
 @EReceiver
 public class MyJPushReceiver extends AbstractBroadcastReceiver {
 
-    final static String ACTION_REGISTRATION_ID = JPushInterface.ACTION_REGISTRATION_ID;
+    Gson gson = new Gson();
 
+    /**
+     * 接收到通知
+     *
+     * @param extra 额外参数
+     */
+    @ReceiverAction(actions = {"cn.jpush.android.intent.NOTIFICATION_RECEIVED"})
+    void onReceivedNotification(@ReceiverAction.Extra("cn.jpush.android.EXTRA") String extra) {
+        Log.e("", extra);
+        gson.fromJson(extra, NotificationModel.class);
+    }
 
-    @ReceiverAction(actions = {"ACTION_REGISTRATION_ID", Intent.ACTION_VIEW})
-    void onRe() {
+    /**
+     * 当用户点击通知时
+     *
+     * @param context context
+     * @param extra   额外参数
+     */
+    @ReceiverAction(actions = {"cn.jpush.android.intent.NOTIFICATION_OPENED"})
+    void onOpenNotification(Context context, @ReceiverAction.Extra("cn.jpush.android.EXTRA") String extra) {
+        NotificationModel model = gson.fromJson(extra, NotificationModel.class);
+        if (model != null) {
+            if (Constants.KBN_ORDER.equals(model.kbn)) {
+                if (context instanceof OrderDetailActivity_) {
+                    ((OrderDetailActivity_) context).finish();
+                }
+                OrderDetailActivity_.intent(context).flags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .flags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .orderId(model.InfoId)
+                        .start();
+            }
+        }
+    }
 
+    /**
+     * 接收自定义消息
+     *
+     * @param message 自定义消息内容
+     * @param extra   额外参数
+     */
+    @ReceiverAction(actions = {"cn.jpush.android.intent.MESSAGE_RECEIVED"})
+    void onReceivedMessage(@ReceiverAction.Extra("cn.jpush.android.MESSAGE") String message, @ReceiverAction.Extra("cn.jpush.android.EXTRA") String extra) {
     }
 
 }

@@ -396,6 +396,17 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     BaseModelJson<OrderModel> createTempOrder(@Body Map map);
 
     /**
+     * (立即购买按钮)生成临时订单信息
+     *
+     * @param GoodsInfoId 商品id
+     * @param Num         数量
+     * @return
+     */
+    @RequiresHeader(value = {"Token", "Kbn"})
+    @Get("api/Member/CreateSingleTempOrder?GoodsInfoId={GoodsInfoId}&Num={Num}")
+    BaseModelJson<OrderModel> createSingleTempOrder(@Path String GoodsInfoId, @Path int Num);
+
+    /**
      * 生成订单信息
      *
      * @param model d订单对象

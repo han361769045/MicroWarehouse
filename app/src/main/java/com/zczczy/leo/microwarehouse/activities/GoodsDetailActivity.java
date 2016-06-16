@@ -21,6 +21,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsImgModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
+import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -49,7 +50,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @ViewById
     SliderLayout sliderLayout;
-
 
     @ViewById
     MyTitleBar myTitleBar;
@@ -86,6 +86,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         fragmentManager = getSupportFragmentManager();
     }
 
@@ -186,13 +188,38 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @Click
     void txt_buy() {
-
+        if (checkUserIsLogin()) {
+            if (isCanBy) {
+                AndroidTool.showLoadDialog(this);
+                buy();
+            } else {
+                AndroidTool.showToast(this, tip);
+            }
+        } else {
+            LoginActivity_.intent(this).start();
+        }
     }
 
     @Background
+    void buy() {
+        afterBuy(myRestClient.createSingleTempOrder(goodsId, 1));
+    }
+
+    @UiThread
+    void afterBuy(BaseModelJson<OrderModel> result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!result.Successful) {
+            AndroidTool.showToast(this, result.Error);
+        } else {
+            TakeOrderActivity_.intent(this).model(result.Data).start();
+        }
+    }
+
+
+    @Background
     void addShoppingCart() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterAddShoppingCart(myRestClient.addShoppingCart(goodsId));
     }
 

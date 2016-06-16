@@ -29,6 +29,7 @@ import com.zczczy.leo.microwarehouse.fragments.MineFragment_;
 import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.UpdateAppModel;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.service.LocationService;
@@ -58,6 +59,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by Leo on 2016/5/20.
  */
@@ -85,6 +88,9 @@ public class MainActivity extends BaseActivity {
 
     @StringRes
     String progress_de;
+
+    @Bean
+    MyBackgroundTask myBackgroundTask;
 
     long firstTime = 0;
 
@@ -125,6 +131,7 @@ public class MainActivity extends BaseActivity {
     void afterView() {
         initTab();
         getUpdateApp();
+        myBackgroundTask.setAlias();
     }
 
 
@@ -313,5 +320,17 @@ public class MainActivity extends BaseActivity {
             finish();
             System.exit(-1);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JPushInterface.onResume(MainActivity.this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JPushInterface.onPause(MainActivity.this);
     }
 }

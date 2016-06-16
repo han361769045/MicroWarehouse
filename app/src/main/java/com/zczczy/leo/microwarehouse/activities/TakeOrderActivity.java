@@ -73,6 +73,7 @@ public class TakeOrderActivity extends BaseActivity {
 
     IWXAPI api;
 
+    @Extra
     OrderModel model;
 
     @AfterInject
@@ -83,7 +84,16 @@ public class TakeOrderActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
-        createTempOrderInfo();
+        //立即购买时直接加载数据
+        if (StringUtils.isEmpty(ids)) {
+            BaseModelJson<OrderModel> result = new BaseModelJson<>();
+            result.Data = model;
+            result.Successful = true;
+            afterCreateTempOrderInfo(result);
+        } else {
+            createTempOrderInfo();
+        }
+
     }
 
 

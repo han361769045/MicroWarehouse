@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 检查当前网络是否可用
      */
-    public boolean isNetworkAvailable(Activity activity) {
+    public boolean isNetworkAvailable() {
         // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）
         if (connectivityManager == null) {
             return false;

@@ -3,9 +3,13 @@ package com.zczczy.leo.microwarehouse.rest;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
 import com.zczczy.leo.microwarehouse.MyApplication;
+import com.zczczy.leo.microwarehouse.activities.BaseActivity;
+import com.zczczy.leo.microwarehouse.activities.LoginActivity;
 import com.zczczy.leo.microwarehouse.activities.OrderDetailActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
@@ -28,14 +32,21 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by Leo on 2016/4/29.
  */
 @EBean
-public class MyBackgroundTask {
+public class MyBackgroundTask implements TagAliasCallback {
+
+    private static final String TAG = "JPush";
 
     @RootContext
     Context context;
@@ -44,7 +55,7 @@ public class MyBackgroundTask {
     String no_net;
 
     @SystemService
-    ConnectivityManager connManager;
+    ConnectivityManager connectivityManager;
 
     @RestService
     MyRestClient myRestClient;
@@ -162,5 +173,73 @@ public class MyBackgroundTask {
         }
     }
 
+    @Background
+    public void setAlias() {
+        if (!StringUtils.isEmpty(pre.jPushAlias().get()) && !pre.isSetAlias().get()) {
+            JPushInterface.setAliasAndTags(context.getApplicationContext(), pre.jPushAlias().get(), null, this);
+        }
+    }
 
+    @Background
+    public void registerAlias() {
+        if (StringUtils.isEmpty(pre.jPushAlias().get())) {
+            JPushInterface.setAliasAndTags(context.getApplicationContext(), "", null, this);
+        }
+    }
+
+
+    @Override
+    @UiThread
+    public void gotResult(int code, String alias, Set<String> tags) {
+        String logs;
+        switch (code) {
+            case 0:
+                if (StringUtils.isEmpty(alias)) {
+                    pre.isFirst().put(false);
+                } else {
+                    pre.isSetAlias().put(true);
+                }
+                logs = "Set tag and alias success";
+                Log.e(TAG, logs);
+                break;
+            case 6002:
+                logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                Log.e(TAG, logs);
+                if (isNetworkAvailable()) {
+                    setAlias();
+                } else {
+                    Log.e(TAG, "No network");
+                }
+                break;
+
+            default:
+                logs = "Failed with errorCode = " + code;
+                Log.e(TAG, logs);
+        }
+    }
+
+    /**
+     * 检查当前网络是否可用
+     */
+    public boolean isNetworkAvailable() {
+        // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）
+        if (connectivityManager == null) {
+            return false;
+        } else {
+            // 获取NetworkInfo对象
+            NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();
+            if (networkInfo != null && networkInfo.length > 0) {
+                for (int i = 0; i < networkInfo.length; i++) {
+                    System.out.println(i + "===状态===" + networkInfo[i].getState());
+                    System.out.println(i + "===类型===" + networkInfo[i].getTypeName());
+                    // 判断当前网络状态是否为连接状态
+                    if (networkInfo[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }

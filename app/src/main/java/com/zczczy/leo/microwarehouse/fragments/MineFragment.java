@@ -15,6 +15,7 @@ import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
+import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
