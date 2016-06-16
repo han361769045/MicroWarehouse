@@ -3,9 +3,11 @@ package com.zczczy.leo.microwarehouse.fragments;
 import android.graphics.Paint;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 import android.widget.TextView;
 
+import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
@@ -14,6 +16,7 @@ import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
+import com.zczczy.leo.microwarehouse.viewgroup.FullyLinearLayoutManager;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -62,7 +65,8 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
     void afterRecyclerView() {
         ultimateRecyclerView.setHasFixedSize(true);
 //        linearLayoutManager = new CustomLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager = new FullyLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
+//        linearLayoutManager = new LinearLayoutManager(getActivity());
         gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
         verticalItem();
         afterLoadMore();

@@ -3,15 +3,19 @@ package com.zczczy.leo.microwarehouse.activities;
 import android.graphics.Paint;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ScrollingView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment;
+import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment_;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment_;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView;
@@ -42,6 +46,8 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.HashMap;
+
 /**
  * Created by Leo on 2016/5/23.
  */
@@ -69,6 +75,9 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @RestService
     MyRestClient myRestClient;
 
+    @ViewById
+    ScrollView myScrollView;
+
     @Extra
     String goodsId;
 
@@ -79,9 +88,15 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     FragmentManager fragmentManager;
 
-    GoodsDetailFragment goodsDetailFragment, goodsCommentsFragment;
+    GoodsDetailFragment goodsDetailFragment;
+
+    GoodsCommentsFragment goodsCommentsFragment;
 
     String linkUrl, PlUrl;
+
+    HashMap<Integer, Integer> itemHeight = new HashMap<>();
+
+    int sumHeight;
 
     @AfterInject
     void afterInject() {
@@ -108,6 +123,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         ll_bat_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.VISIBLE : View.GONE);
         ll_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.GONE : View.VISIBLE);
         getGoodsDetailById(goodsId);
+
     }
 
 
@@ -116,7 +132,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         if (isChecked) {
             changeFragment(linkUrl);
         } else {
-            changeFragment(PlUrl);
+            changeFragment(goodsId);
         }
     }
 
@@ -156,7 +172,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             goods_by.setText(bmj.Data.GoodsIsBy == 0 ? bmj.Data.Postage : "包邮");
             goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
             linkUrl = bmj.Data.StaticHtmlUrl;
-            PlUrl = bmj.Data.PlUrl;
+//            PlUrl = bmj.Data.PlUrl;
+            PlUrl = goodsId;
             changeFragment(bmj.Data.StaticHtmlUrl);
 
             txt_price_delete.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
@@ -252,7 +269,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             }
         } else {
             if (goodsCommentsFragment == null) {
-                goodsCommentsFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
+//                goodsCommentsFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
+                goodsCommentsFragment = GoodsCommentsFragment_.builder().goodsId(parameter).build();
                 transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
             } else {
                 transaction.show(goodsCommentsFragment);

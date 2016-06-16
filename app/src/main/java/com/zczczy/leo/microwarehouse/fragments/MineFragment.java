@@ -273,7 +273,10 @@ public class MineFragment extends BaseFragment {
             ll_review.showTextBadge(result.Data.DpjCount + "");
             ll_review.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
             ll_review.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+        } else {
+            ll_hole_order.showTextBadge("");
+            ll_waiting_order.showTextBadge("");
+            ll_review.showTextBadge("");
         }
     }
-
 }

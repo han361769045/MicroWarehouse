@@ -21,7 +21,7 @@
         app:mTitle="商品详情"
         app:mTitleTextColor="@color/white" />
 
-    <ScrollView
+    <com.zczczy.leo.microwarehouse.viewgroup.MyRecyclerScrollview
         android:id="@+id/myScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
 
             <include layout="@layout/horizontal_line" />
         </LinearLayout>
-    </ScrollView>
+    </com.zczczy.leo.microwarehouse.viewgroup.MyRecyclerScrollview>
 
     <LinearLayout
         android:id="@+id/ll_buy"

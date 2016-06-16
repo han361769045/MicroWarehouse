@@ -64,6 +64,8 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     public VerticalAndHorizontal verticalAndHorizontal;
 
+    private DynamicHeight dynamicHeight;
+
     @RestService
     MyRestClient myRestClient;
 
@@ -115,6 +117,8 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
      */
     @Override
     public void onBindViewHolder(BaseUltimateViewHolder viewHolder, int position) {
+
+
         if (getItemViewType(position) == VIEW_TYPES.NORMAL) {
             ItemView<T> itemView = (ItemView) viewHolder.itemView;
             itemView.init(items.get(customHeaderView != null ? position - 1 : position), this, viewHolder);
@@ -141,6 +145,11 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
             mLastPosition = position;
         } else {
             ViewHelper.clear(viewHolder.itemView);
+        }
+        if (dynamicHeight != null && position==0) {
+//            int cellWidth = viewHolder.itemView.getWidth();// this will give you cell width dynamically
+//            int cellHeight = viewHolder.itemView.height;// this will give you cell height dynamically
+            dynamicHeight.HeightChange(position, 55); //call your iterface hear
         }
     }
 
@@ -476,4 +485,15 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         Horizontal
     }
 
+    public interface DynamicHeight {
+        void HeightChange(int position, int height);
+    }
+
+    public DynamicHeight getDynamicHeight() {
+        return dynamicHeight;
+    }
+
+    public void setDynamicHeight(DynamicHeight dynamicHeight) {
+        this.dynamicHeight = dynamicHeight;
+    }
 }
