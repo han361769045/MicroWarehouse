@@ -73,9 +73,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clickable="true"
+                        android:drawableEnd="@drawable/white_next"
                         android:drawablePadding="10dp"
-                        android:drawableRight="@drawable/white_next"
-                        android:gravity="center_vertical|right"
+                        android:gravity="center_vertical|end"
                         android:text="@string/text_manager"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -96,12 +96,12 @@
                     android:id="@+id/txt_coupon"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/common_shadow_selector"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/coupon"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/coupon"
                     android:gravity="center_vertical"
                     android:text="@string/text_coupon"
                     android:textSize="18sp" />
@@ -119,12 +119,12 @@
                     android:id="@+id/txt_my_review"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="27dp"
+                    android:layout_marginStart="27dp"
                     android:layout_weight="1"
                     android:background="@drawable/common_shadow_selector"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/my_review"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/my_review"
                     android:gravity="center_vertical"
                     android:text="@string/text_my_review"
                     android:textSize="18sp" />
@@ -141,11 +141,11 @@
                     android:id="@+id/txt_bookmark"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="27dp"
+                    android:layout_marginStart="27dp"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/bookmark"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/bookmark"
                     android:gravity="center_vertical"
                     android:text="@string/text_bookmark"
                     android:textSize="18sp" />
@@ -165,17 +165,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/my_order"
                     android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/my_order"
                     android:text="@string/text_my_order"
                     android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:drawableEnd="@drawable/next"
                     android:drawablePadding="5dp"
-                    android:drawableRight="@drawable/next"
                     android:text="@string/text_all_order" />
 
 
@@ -267,16 +267,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/my_location"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/my_location"
                     android:gravity="center_vertical"
                     android:text="@string/text_my_address" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next" />
 
@@ -298,16 +298,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/home_apply"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/home_apply"
                     android:gravity="center_vertical"
                     android:text="@string/text_apply_dealer" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/next" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/horizontal_line" />
+
+            <RelativeLayout
+                android:id="@+id/rl_my_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_shadow_selector"
+                android:clickable="true"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/task"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_my_task" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next" />
 
@@ -328,16 +357,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/feedback"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/feedback"
                     android:gravity="center_vertical"
                     android:text="@string/text_feedback" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next" />
 
@@ -358,16 +387,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/about_us"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/about_us"
                     android:gravity="center_vertical"
                     android:text="@string/text_about_us" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next" />
 
@@ -381,22 +410,23 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/share"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/share"
                     android:gravity="center_vertical"
                     android:text="@string/text_share" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next" />
 
@@ -410,21 +440,22 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/scan"
+                    android:layout_marginStart="5dp"
                     android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/scan"
                     android:gravity="center_vertical"
                     android:text="@string/text_scan" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next" />
             </RelativeLayout>

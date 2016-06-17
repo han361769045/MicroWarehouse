@@ -94,10 +94,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     String linkUrl, PlUrl;
 
-    HashMap<Integer, Integer> itemHeight = new HashMap<>();
-
-    int sumHeight;
-
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);

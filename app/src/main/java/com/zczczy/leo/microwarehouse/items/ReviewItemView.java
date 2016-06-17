@@ -24,11 +24,9 @@ public class ReviewItemView extends ItemView<OrderDetailModel> {
     @ViewById
     TextView txt_name, txt_des;
 
-    Context context;
 
     public ReviewItemView(Context context) {
         super(context);
-        this.context = context;
     }
 
     @Override

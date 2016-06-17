@@ -11,6 +11,7 @@ import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
 import com.zczczy.leo.microwarehouse.activities.FeedbackActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
+import com.zczczy.leo.microwarehouse.activities.MemberTaskOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
@@ -130,6 +131,11 @@ public class MineFragment extends BaseFragment {
         } else {
             LoginActivity_.intent(this).start();
         }
+    }
+
+    @Click
+    void rl_my_task() {
+        MemberTaskOrderActivity_.intent(this).start();
     }
 
     @Click

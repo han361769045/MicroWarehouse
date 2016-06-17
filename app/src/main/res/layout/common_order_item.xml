@@ -16,8 +16,8 @@
             android:id="@+id/txt_store"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawableLeft="@drawable/cart_store_icon"
             android:drawablePadding="5dp"
+            android:drawableStart="@drawable/cart_store_icon"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
@@ -27,7 +27,7 @@
             android:id="@+id/txt_do_message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right"
+            android:gravity="end"
             android:textColor="@color/main_font_color"
             android:visibility="gone" />
     </LinearLayout>

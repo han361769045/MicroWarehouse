@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:padding="15dp"
                         android:text="@string/text_postal" />
 
@@ -106,7 +106,7 @@
                         android:id="@+id/txt_sub_express_charges"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:padding="15dp" />
                 </RelativeLayout>
 
@@ -123,7 +123,7 @@
                         android:id="@+id/img_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:padding="15dp"
                         android:src="@drawable/order_comment" />
@@ -133,8 +133,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/img_next"
-                        android:layout_toRightOf="@+id/img_comment"
+                        android:layout_toEndOf="@+id/img_comment"
+                        android:layout_toStartOf="@+id/img_next"
                         android:hint="@string/text_comment"
                         android:maxLines="2" />
 
@@ -142,7 +142,7 @@
                         android:id="@+id/img_next"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:padding="15dp"
                         android:src="@drawable/next" />
@@ -177,9 +177,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_weight="2"
-            android:gravity="left|center_vertical"
+            android:gravity="start|center_vertical"
             android:orientation="horizontal">
 
             <TextView

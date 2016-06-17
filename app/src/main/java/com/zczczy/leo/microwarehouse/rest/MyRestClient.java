@@ -21,6 +21,7 @@ import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.model.ProvinceModel;
 import com.zczczy.leo.microwarehouse.model.ShippingAddressModel;
+import com.zczczy.leo.microwarehouse.model.TaskOrderModel;
 import com.zczczy.leo.microwarehouse.model.UpdateAppModel;
 
 import org.androidannotations.rest.spring.annotations.Body;
@@ -219,6 +220,16 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Get("api/Content/GetDepotList?PageIndex={PageIndex}&PageSize={PageSize}")
     BaseModelJson<PagerResult<DepotModel>> getDepotList(@Path int PageIndex, @Path int PageSize);
+
+    /**
+     * 查询待跑腿的任务信息
+     *
+     * @param PageIndex 当前页面
+     * @param PageSize  页面大小
+     * @return
+     */
+    @Get("api/Content/GetTaskOrderList?PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<TaskOrderModel>> getTaskOrderList(@Path int PageIndex, @Path int PageSize);
 
 
     //==============================================================================================
@@ -517,5 +528,60 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Member/GetUserOrderCount")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<OrderCountModel> getUserOrderCount();
+
+    /**
+     * 会员发布跑腿任务
+     *
+     * @param model OrderCountModel
+     * @return
+     * @see OrderCountModel
+     */
+    @Post("api/Member/PublisherTaskOrder")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel publisherTaskOrder(@Body TaskOrderModel model);
+
+
+    /**
+     * 查询我的任务列表信息
+     *
+     * @param PageIndex 当前页面
+     * @param PageSize  页面大小
+     * @param kbn       区分（0：我发布的任务，1：我接受的任务）
+     * @return
+     */
+    @Get("api/Member/GetMyTaskOrderList?PageIndex={PageIndex}&PageSize={PageSize}&kbn={kbn}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<PagerResult<TaskOrderModel>> getMyTaskOrderList(@Path int PageIndex, @Path int PageSize, @Path String kbn);
+
+    /**
+     * 会员抢跑腿任务
+     *
+     * @param TaskOrderId 任务id
+     * @return
+     */
+    @Post("api/Member/FinishTaskOrder")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel finishTaskOrder(@Body Integer TaskOrderId);
+
+    /**
+     * 任务完成
+     *
+     * @param TaskOrderId 任务id
+     * @return
+     */
+    @Post("api/Member/LootTaskOrder")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModel LootTaskOrder(@Body Integer TaskOrderId);
+
+    /**
+     * 根据任务ID查询任务明细
+     *
+     * @param TaskOrderId 任务id
+     * @return
+     */
+    @Get("api/Member/GetTaskOrderById?TaskOrderId={TaskOrderId}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<PagerResult<TaskOrderModel>> getTaskOrderById(@Path int TaskOrderId);
+
 }
 

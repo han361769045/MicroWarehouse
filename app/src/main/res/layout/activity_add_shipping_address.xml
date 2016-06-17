@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:drawableRight="@drawable/next"
+                    android:drawableEnd="@drawable/next"
                     android:focusable="false"
                     android:gravity="top"
                     android:singleLine="true"

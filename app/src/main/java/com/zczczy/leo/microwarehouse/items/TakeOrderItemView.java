@@ -25,14 +25,11 @@ public class TakeOrderItemView extends ItemView<OrderDetailModel> {
     @ViewById
     TextView txt_cart_goods_product, txt_goods_price, txt_goods_bat_price, txt_num;
 
-    Context context;
-
     @StringRes
     String text_goods_price;
 
     public TakeOrderItemView(Context context) {
         super(context);
-        this.context = context;
     }
 
     @Override

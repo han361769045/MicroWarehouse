@@ -68,11 +68,8 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
 
     MemberOrderActivity memberOrderActivity;
 
-    Context context;
-
     public MemberOrderItemView(Context context) {
         super(context);
-        this.context = context;
         memberOrderActivity = (MemberOrderActivity) context;
     }
 

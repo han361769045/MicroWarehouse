@@ -26,11 +26,8 @@ public class DepotItemView extends ItemView<DepotModel> {
     @ViewById
     ImageView img_depot;
 
-    Context context;
-
     public DepotItemView(Context context) {
         super(context);
-        this.context = context;
     }
 
     @Override

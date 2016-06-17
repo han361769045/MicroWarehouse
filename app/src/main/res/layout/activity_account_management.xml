@@ -47,7 +47,7 @@
                     android:id="@+id/avatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:src="@drawable/default_avatar"
                     app:civ_border_color="@color/common_button"
                     app:civ_border_width="2dp" />
@@ -76,7 +76,7 @@
                     android:id="@+id/txt_real_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -101,7 +101,7 @@
                     android:id="@+id/txt_qq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -126,7 +126,7 @@
                     android:id="@+id/txt_blog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -151,7 +151,7 @@
                     android:id="@+id/txt_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -177,8 +177,8 @@
                     android:id="@+id/txt_safe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:drawableRight="@drawable/next"
+                    android:layout_alignParentEnd="true"
+                    android:drawableEnd="@drawable/next"
                     android:text="@string/text_change_pass" />
             </RelativeLayout>
 
@@ -204,8 +204,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:drawableRight="@drawable/next" />
+                    android:layout_alignParentEnd="true"
+                    android:drawableEnd="@drawable/next" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -230,8 +230,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:drawableRight="@drawable/next" />
+                    android:layout_alignParentEnd="true"
+                    android:drawableEnd="@drawable/next" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -248,7 +248,7 @@
                 android:padding="15dp"
                 android:text="@string/text_logout"
                 android:textColor="#ffffff"
-                android:textSize="17dp" />
+                android:textSize="17sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

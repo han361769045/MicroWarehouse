@@ -2,47 +2,44 @@ package com.zczczy.leo.microwarehouse.items;
 
 import android.content.Context;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
+import com.zczczy.leo.microwarehouse.model.TaskOrderModel;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.springframework.util.StringUtils;
 
-
 /**
- * Created by Leo on 2016/5/1.
+ * @author Created by LuLeo on 2016/6/17.
+ *         you can contact me at :361769045@qq.com
+ * @since 2016/6/17.
  */
-@EViewGroup(R.layout.activity_goods_comments_item)
-public class GoodsCommentsItemView extends ItemView<GoodsCommentsModel> {
+@EViewGroup(R.layout.activity_task_order_item)
+public class TaskOrderItemView extends ItemView<TaskOrderModel> {
 
     @ViewById
     ImageView img_avatar;
 
     @ViewById
-    TextView txt_comments, txt_time;
+    TextView txt_title, txt_publish_time, txt_publisher, txt_content;
 
-    @ViewById
-    RatingBar ratingBar;
-
-    public GoodsCommentsItemView(Context context) {
+    public TaskOrderItemView(Context context) {
         super(context);
     }
 
     @Override
     protected void init(Object... objects) {
-//        txt_name.setText(_data.UserLogin);
-        txt_comments.setText(_data.GoodsCommentsNr);
-        txt_time.setText(_data.PlTime);
-        ratingBar.setRating(_data.XNum);
-        if (!StringUtils.isEmpty(_data.HeadImg)) {
-            Picasso.with(context).load(_data.HeadImg).resize(50, 50).
+        if (!StringUtils.isEmpty(_data.PublishHeadImg)) {
+            Picasso.with(context).load(_data.PublishHeadImg).resize(50, 50).
                     centerCrop().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(img_avatar);
         }
+        txt_title.setText(_data.TaskTitle);
+        txt_publish_time.setText(_data.PublishTime);
+        txt_publisher.setText(_data.PublishLogin);
+        txt_content.setText(_data.TaskOrderContent);
     }
 
     @Override
