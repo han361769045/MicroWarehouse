@@ -553,24 +553,24 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     BaseModelJson<PagerResult<TaskOrderModel>> getMyTaskOrderList(@Path int PageIndex, @Path int PageSize, @Path String kbn);
 
     /**
-     * 会员抢跑腿任务
+     * 任务完成
      *
-     * @param TaskOrderId 任务id
+     * @param map TaskOrderId 任务id
      * @return
      */
     @Post("api/Member/FinishTaskOrder")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModel finishTaskOrder(@Body Integer TaskOrderId);
+    BaseModel finishTaskOrder(@Body Map map);
 
     /**
-     * 任务完成
+     * 会员抢跑腿任务
      *
-     * @param TaskOrderId 任务id
+     * @param map TaskOrderId 任务id
      * @return
      */
     @Post("api/Member/LootTaskOrder")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModel LootTaskOrder(@Body Integer TaskOrderId);
+    BaseModel lootTaskOrder(@Body Map map);
 
     /**
      * 根据任务ID查询任务明细

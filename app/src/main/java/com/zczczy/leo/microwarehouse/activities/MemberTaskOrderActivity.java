@@ -62,7 +62,6 @@ public class MemberTaskOrderActivity extends BaseActivity {
                 transaction.show(memberReceiverTaskOrderFragment);
             }
         }
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

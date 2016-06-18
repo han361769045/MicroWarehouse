@@ -176,6 +176,10 @@
     <string name="text_task_title">任务标题：</string>
     <string name="text_task_content">任务内容：</string>
     <string name="text_task_tip">请描述任务内容&#8230;</string>
+    <string name="text_publisher">任务发布者:</string>
+    <string name="text_receiver">任务接受者:</string>
+    <string name="text_receive">接受</string>
+    <string name="text_task_finish">完成</string>
 
     <string name="text_publish_task_order">发布的任务</string>
     <string name="text_receive_task_order">接收的任务</string>

@@ -47,7 +47,11 @@ public class TaskOrderActivity extends BaseUltimateRecyclerViewActivity<TaskOrde
 
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, TaskOrderModel obj, int position) {
-
+                if (checkUserIsLogin()) {
+                    TaskOrderDetailActivity_.intent(TaskOrderActivity.this).TaskOrderId(String.valueOf(obj.TaskOrderId)).start();
+                } else {
+                    LoginActivity_.intent(TaskOrderActivity.this).start();
+                }
             }
 
             @Override

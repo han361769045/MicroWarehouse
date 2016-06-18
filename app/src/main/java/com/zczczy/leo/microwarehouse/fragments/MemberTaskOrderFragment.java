@@ -26,7 +26,6 @@ public class MemberTaskOrderFragment extends BaseUltimateRecyclerViewFragment<Ta
     @FragmentArg
     String type;
 
-
     @Bean
     void setMyAdapter(TaskOrderAdapter myAdapter) {
         this.myAdapter = myAdapter;
@@ -38,10 +37,10 @@ public class MemberTaskOrderFragment extends BaseUltimateRecyclerViewFragment<Ta
         if ("0".equals(type)) {
             bus.register(this);
         }
-        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<TaskOrderModel>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, Object obj, int position) {
-                TaskOrderDetailActivity_.intent(MemberTaskOrderFragment.this).start();
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, TaskOrderModel obj, int position) {
+                TaskOrderDetailActivity_.intent(MemberTaskOrderFragment.this).TaskOrderId(String.valueOf(obj.TaskOrderId)).start();
             }
 
             @Override

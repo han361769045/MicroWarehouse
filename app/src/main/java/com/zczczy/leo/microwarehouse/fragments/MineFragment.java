@@ -14,11 +14,9 @@ import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberTaskOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
-import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.model.OrderCountModel;
-import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
@@ -30,7 +28,6 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -38,8 +35,6 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
 import cn.bingoogolapple.badgeview.BGABadgeLinearLayout;
-import cn.bingoogolapple.badgeview.BGABadgeTextView;
-import cn.bingoogolapple.badgeview.BGABadgeView;
 import cn.bingoogolapple.badgeview.BGABadgeViewHelper;
 
 /**
@@ -135,7 +130,11 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_my_task() {
-        MemberTaskOrderActivity_.intent(this).start();
+        if (checkUserIsLogin()) {
+            MemberTaskOrderActivity_.intent(this).start();
+        } else {
+            LoginActivity_.intent(this).start();
+        }
     }
 
     @Click
