@@ -56,9 +56,9 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     private int mLastPosition = 5;
 
-    private OnItemClickListener onItemClickListener;
+    private OnItemClickListener<T> onItemClickListener;
 
-    private OnItemLongClickListener onItemLongClickListener;
+    private OnItemLongClickListener<T> onItemLongClickListener;
 
     private BindHeaderViewHolder bindHeaderViewHolder;
 
@@ -449,7 +449,7 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
     /**
      * @param onItemClickListener
      */
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -461,7 +461,7 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
         this.onItemLongClickListener = onItemLongClickListener;
     }
 

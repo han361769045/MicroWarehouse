@@ -34,7 +34,6 @@ public class CityAdapter extends BaseRecyclerViewAdapter<CityModel> {
                 insertAll(bmj.Data, getItems().size());
             }
         }
-
     }
 
     @Override

@@ -24,7 +24,6 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Leo on 2016/5/3.
@@ -34,11 +33,13 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     private List<T> items = new ArrayList<>();
 
-    private OnItemClickListener onItemClickListener;
+    private OnItemClickListener<T> onItemClickListener;
 
-    private OnItemLongClickListener onItemLongClickListener;
+    private OnItemLongClickListener<T> onItemLongClickListener;
 
     public VerticalAndHorizontal verticalAndHorizontal;
+
+    private DynamicHeight dynamicHeight;
 
     @Background
     public abstract void getMoreData(Object... objects);
@@ -88,6 +89,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         ItemView<T> itemView = (ItemView) viewHolder.itemView;
         itemView.init(items.get(position), this, viewHolder);
         setNormalClick(viewHolder);
+        if (dynamicHeight != null) {
+//            int cellWidth = viewHolder.itemView.getWidth();// this will give you cell width dynamically
+//            int cellHeight = viewHolder.itemView.height;// this will give you cell height dynamically
+            dynamicHeight.HeightChange(position, 55); //call your iterface hear
+        }
     }
 
     /**
@@ -169,7 +175,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     /**
      * @param onItemClickListener
      */
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -179,7 +185,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
         this.onItemLongClickListener = onItemLongClickListener;
     }
 
@@ -199,5 +205,17 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     public enum VerticalAndHorizontal {
         Vertical,
         Horizontal
+    }
+
+    public interface DynamicHeight {
+        void HeightChange(int position, int height);
+    }
+
+    public DynamicHeight getDynamicHeight() {
+        return dynamicHeight;
+    }
+
+    public void setDynamicHeight(DynamicHeight dynamicHeight) {
+        this.dynamicHeight = dynamicHeight;
     }
 }
