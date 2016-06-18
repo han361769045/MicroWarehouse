@@ -1,10 +1,8 @@
 package com.zczczy.leo.microwarehouse;
 
 import android.app.Application;
-import android.app.Service;
 import android.os.Vibrator;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
@@ -14,13 +12,10 @@ import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 
 import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EApplication;
 import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.sharedpreferences.Pref;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +54,7 @@ public class MyApplication extends Application {
 
     @AfterInject
     void afterInject() {
-        advertModelList = new ArrayList<>(9);
+        advertModelList = new ArrayList<>(14);
         newBannerList = new ArrayList<>();
         goodsTypeModelList = new ArrayList<>();
         noticeInfoModelList = new ArrayList<>();

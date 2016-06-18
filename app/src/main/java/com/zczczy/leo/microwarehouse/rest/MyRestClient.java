@@ -40,7 +40,6 @@ import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import java.util.List;
 import java.util.Map;
@@ -581,7 +580,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Get("api/Member/GetTaskOrderById?TaskOrderId={TaskOrderId}")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModelJson<PagerResult<TaskOrderModel>> getTaskOrderById(@Path int TaskOrderId);
+    BaseModelJson<TaskOrderModel> getTaskOrderById(@Path String TaskOrderId);
 
 }
 

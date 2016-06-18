@@ -7,7 +7,6 @@ import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;

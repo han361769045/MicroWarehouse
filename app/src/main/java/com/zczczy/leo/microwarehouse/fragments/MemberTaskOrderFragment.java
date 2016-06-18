@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.TaskOrderDetailActivity_;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.adapters.TaskOrderAdapter;
 import com.zczczy.leo.microwarehouse.model.TaskOrderModel;
@@ -34,10 +35,13 @@ public class MemberTaskOrderFragment extends BaseUltimateRecyclerViewFragment<Ta
     @AfterViews
     void afterView() {
         myTitleBar.setVisibility(View.GONE);
+        if ("0".equals(type)) {
+            bus.register(this);
+        }
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Object obj, int position) {
-
+                TaskOrderDetailActivity_.intent(MemberTaskOrderFragment.this).start();
             }
 
             @Override

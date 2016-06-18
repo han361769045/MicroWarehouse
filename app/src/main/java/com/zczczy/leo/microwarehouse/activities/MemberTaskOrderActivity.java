@@ -32,7 +32,6 @@ public class MemberTaskOrderActivity extends BaseActivity {
     void afterView() {
         fragmentManager = getSupportFragmentManager();
         changeFragment("0");
-
     }
 
     @CheckedChange
@@ -42,30 +41,28 @@ public class MemberTaskOrderActivity extends BaseActivity {
 
     void changeFragment(String parameter) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        if (memberPublishTaskOrderFragment != null) {
-//            transaction.hide(memberPublishTaskOrderFragment);
-//        }
-//        if (memberReceiverTaskOrderFragment != null) {
-//            transaction.hide(memberReceiverTaskOrderFragment);
-//        }
-//        if (rb_publish.isChecked()) {
-//            if (memberPublishTaskOrderFragment == null) {
-//                memberPublishTaskOrderFragment = MemberTaskOrderFragment_.builder().type(parameter).build();
-//                transaction.add(R.id.task_fragment, memberPublishTaskOrderFragment);
-//            } else {
-//                transaction.show(memberPublishTaskOrderFragment);
-//            }
-//        } else {
-//            if (memberReceiverTaskOrderFragment == null) {
-//                memberReceiverTaskOrderFragment = MemberTaskOrderFragment_.builder().type(parameter).build();
-//                transaction.add(R.id.task_fragment, memberReceiverTaskOrderFragment);
-//            } else {
-//                transaction.show(memberReceiverTaskOrderFragment);
-//            }
-//        }
-        memberPublishTaskOrderFragment = MemberTaskOrderFragment_.builder().type(parameter).build();
-        transaction.replace(R.id.task_fragment, memberPublishTaskOrderFragment);
-
+        if (memberPublishTaskOrderFragment != null) {
+            transaction.hide(memberPublishTaskOrderFragment);
+        }
+        if (memberReceiverTaskOrderFragment != null) {
+            transaction.hide(memberReceiverTaskOrderFragment);
+        }
+        if (rb_publish.isChecked()) {
+            if (memberPublishTaskOrderFragment == null) {
+                memberPublishTaskOrderFragment = MemberTaskOrderFragment_.builder().type(parameter).build();
+                transaction.add(R.id.task_fragment, memberPublishTaskOrderFragment);
+            } else {
+                transaction.show(memberPublishTaskOrderFragment);
+            }
+        } else {
+            if (memberReceiverTaskOrderFragment == null) {
+                memberReceiverTaskOrderFragment = MemberTaskOrderFragment_.builder().type(parameter).build();
+                transaction.add(R.id.task_fragment, memberReceiverTaskOrderFragment);
+            } else {
+                transaction.show(memberReceiverTaskOrderFragment);
+            }
+        }
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }
