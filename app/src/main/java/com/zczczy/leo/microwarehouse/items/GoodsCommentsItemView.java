@@ -41,7 +41,7 @@ public class GoodsCommentsItemView extends ItemView<GoodsCommentsModel> {
         ratingBar.setRating(_data.XNum);
         if (!StringUtils.isEmpty(_data.HeadImg)) {
             Picasso.with(context).load(_data.HeadImg).resize(50, 50).
-                    centerCrop().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(img_avatar);
+                    centerCrop().placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
         }
     }
 

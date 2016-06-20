@@ -12,7 +12,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
@@ -32,7 +32,6 @@ import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
 import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
@@ -41,11 +40,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
 import org.androidannotations.annotations.res.DrawableRes;
-import org.androidannotations.api.UiThreadExecutor;
 
 import java.util.List;
 
@@ -72,7 +69,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @ViewsById(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four,
             R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine,
-            R.id.ad_ten, R.id.ad_eleven
+            R.id.ad_ten, R.id.ad_eleven, R.id.ad_twelve, R.id.ad_thirteen, R.id.ad_fourteenth
     })
     List<ImageView> imageViewList;
 
@@ -98,7 +95,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
         //设置自定义描述动画  ---- 去掉秒速灰色透明背景
-        homeSlider.setCustomAnimation(new CustomDescriptionAnimation());
+//        homeSlider.setCustomAnimation(new CustomDescriptionAnimation());
         //判断首页数据是否加载出来 如果没有 就重新拉去数据
         if (app.getNewBannerList().size() >= 0) {
             setBanner();
@@ -121,7 +118,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         //设置首页 轮播图
         for (BannerModel bannerModel : app.getNewBannerList()) {
             //显示 描述和图片sliderView
-            TextSliderView textSliderView = new TextSliderView(getActivity());
+            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
             textSliderView.image(bannerModel.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", bannerModel);
@@ -153,7 +150,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             //为每一个广告位添加描述（传参数）
             imageViewList.get(i).setContentDescription(advertModel.JumpType + "," + advertModel.InfoId + "," + advertModel.AdvertName);
             i++;
-            if (i == 11) {
+            if (i == 14) {
                 break;
             }
         }
@@ -169,7 +166,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         }
     }
 
-    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine, R.id.ad_ten, R.id.ad_eleven})
+    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine, R.id.ad_ten, R.id.ad_eleven, R.id.ad_twelve, R.id.ad_thirteen, R.id.ad_fourteenth})
     void imageViewList(ImageView imageView) {
         if (imageView.getContentDescription() != null) {
             String[] temp = imageView.getContentDescription().toString().split(",");

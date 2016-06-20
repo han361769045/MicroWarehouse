@@ -1,5 +1,7 @@
 package com.zczczy.leo.microwarehouse.model;
 
+import com.tencent.mm.sdk.modelpay.PayReq;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -74,6 +76,8 @@ public class OrderModel implements Serializable {
     public String ShTime; //确认收货时间
     public String MarkInfo; //备注说明
     public String AlipayInfo;//支付宝支付信息
+
+    public com.tencent.mm.sdk.modelpay.PayReq PayReq;
 
     public List<OrderDetailModel> MOrderDetailList; //订单明细
 }

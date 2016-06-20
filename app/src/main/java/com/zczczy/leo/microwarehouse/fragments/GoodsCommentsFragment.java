@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.squareup.otto.Subscribe;
@@ -9,6 +10,7 @@ import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
+import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -35,7 +37,6 @@ public class GoodsCommentsFragment extends BaseRecyclerViewFragment<GoodsComment
 
     @AfterViews
     void afterView() {
-        bus.register(this);
         afterLoadMore();
     }
 
@@ -46,13 +47,19 @@ public class GoodsCommentsFragment extends BaseRecyclerViewFragment<GoodsComment
 
     @Subscribe
     public void notifyUI(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
-        float density = getActivity().getResources().getDisplayMetrics().density;
-        float viewHeight = 55 * density;
-        parent.getLayoutParams().height = (int) viewHeight * 10;
+        parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 60)));
     }
-
 
     void afterLoadMore() {
         myAdapter.getMoreData(goodsId);
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean isHidden) {
+        if (isHidden) {
+            bus.unregister(this);
+        } else
+            bus.register(this);
     }
 }

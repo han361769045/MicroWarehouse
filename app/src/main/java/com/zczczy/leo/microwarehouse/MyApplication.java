@@ -3,6 +3,8 @@ package com.zczczy.leo.microwarehouse;
 import android.app.Application;
 import android.os.Vibrator;
 
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
@@ -10,6 +12,7 @@ import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
+import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Bean;
@@ -44,6 +47,7 @@ public class MyApplication extends Application {
 
     private List<NoticeInfoModel> noticeInfoModelList;
 
+    public IWXAPI iWXApi;
 
     //百度地图
     @Bean
@@ -58,6 +62,9 @@ public class MyApplication extends Application {
         newBannerList = new ArrayList<>();
         goodsTypeModelList = new ArrayList<>();
         noticeInfoModelList = new ArrayList<>();
+
+        iWXApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+        iWXApi.registerApp(Constants.APP_ID);
         if (pre.isFirst().get()) {
             JPushInterface.setAliasAndTags(this, "", null, myBackgroundTask);
         }

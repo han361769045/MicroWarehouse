@@ -1,6 +1,8 @@
 package com.zczczy.leo.microwarehouse.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +47,7 @@ public class TaskOrderDetailActivity extends BaseActivity {
     RelativeLayout rl_publisher, rl_receiver;
 
     @ViewById
-    Button btn_receive, btn_cancel, btn_finish;
+    Button btn_reviewing, btn_receive, btn_cancel, btn_finish, btn_finished;
 
     @Extra
     String TaskOrderId;
@@ -88,15 +90,45 @@ public class TaskOrderDetailActivity extends BaseActivity {
             txt_task_price.setText(result.Data.Expense);
             txt_publisher.setText(result.Data.PublishLogin);
             txt_receiver.setText(result.Data.ReveiveLogin);
-            if (result.Data.TaskStatus == 0) {
+            if (result.Data.TaskStatus == 0 && pre.nickName().get().equals(result.Data.PublishLogin)) {
+                btn_reviewing.setVisibility(View.VISIBLE);
+            } else if (result.Data.TaskStatus == 1 && !pre.nickName().get().equals(result.Data.PublishLogin)) {
                 btn_receive.setVisibility(View.VISIBLE);
-            } else if (result.Data.TaskStatus == 1 && pre.nickName().get().equals(result.Data.ReveiveLogin)) {
-                btn_cancel.setVisibility(View.VISIBLE);
             } else if (result.Data.TaskStatus == 2 && pre.nickName().get().equals(result.Data.PublishLogin)) {
+                rl_receiver.setVisibility(View.VISIBLE);
+                btn_finish.setVisibility(View.VISIBLE);
+            } else if (result.Data.TaskStatus == 2 && pre.nickName().get().equals(result.Data.ReveiveLogin)) {
+                rl_receiver.setVisibility(View.VISIBLE);
+//                btn_cancel.setVisibility(View.VISIBLE);
+            } else if (result.Data.TaskStatus == 3) {
+                rl_receiver.setVisibility(View.VISIBLE);
+                btn_finished.setVisibility(View.VISIBLE);
+            } else if (result.Data.TaskStatus == 4) {
                 btn_finish.setVisibility(View.VISIBLE);
             }
         }
     }
+
+    @Click
+    void rl_publisher() {
+        if (!AndroidTool.checkTextViewIsNull(txt_publisher)) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            Uri data = Uri.parse("tel:" + txt_publisher.getText().toString().trim());
+            intent.setData(data);
+            startActivity(intent);
+        }
+    }
+
+    @Click
+    void rl_receiver() {
+        if (!AndroidTool.checkTextViewIsNull(txt_receiver)) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            Uri data = Uri.parse("tel:" + txt_receiver.getText().toString().trim());
+            intent.setData(data);
+            startActivity(intent);
+        }
+    }
+
 
     @Click
     void btn_receive() {

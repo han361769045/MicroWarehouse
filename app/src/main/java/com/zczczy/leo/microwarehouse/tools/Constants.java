@@ -60,4 +60,8 @@ public class Constants {
 
     public static final String KBN_ORDER = "order";
 
+    // APP_ID 替换为你的应用从官方网站申请到的合法appId
+    public static final String APP_ID = "wxb4ba3c02aa476ea1";
+//    public static final String APP_ID = "wx9e5c4b886b25f997";
+
 }

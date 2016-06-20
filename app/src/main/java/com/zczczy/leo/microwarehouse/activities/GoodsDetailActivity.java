@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment;
@@ -104,7 +105,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @AfterViews
     void afterView() {
-        sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +119,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         ll_bat_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.VISIBLE : View.GONE);
         ll_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.GONE : View.VISIBLE);
         getGoodsDetailById(goodsId);
-
     }
 
 
@@ -181,7 +180,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             isCanBy = (Constants.Goods_UP == bmj.Data.GoodsStatus && bmj.Data.GoodsStock > 0);
             if (bmj.Data.GoodsImgList != null) {
                 for (GoodsImgModel goodsImgModel : bmj.Data.GoodsImgList) {
-                    TextSliderView textSliderView = new TextSliderView(this);
+                    DefaultSliderView textSliderView = new DefaultSliderView(this);
                     textSliderView.image(goodsImgModel.GoodsImgUrl);
                     textSliderView.setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
