@@ -104,7 +104,7 @@ dependencies {
     compile 'com.liulishuo.magicprogresswidget:library:1.0.7'
     compile 'com.cleveroad:slidingtutorial:0.9.5'
     compile 'cn.bingoogolapple:bga-badgeview:1.1.2@aar'
-    compile 'com.tencent.bugly:crashreport:2.1.7'  //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.8
+    compile 'com.tencent.bugly:crashreport:2.1.7'  //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.1.7
 
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"

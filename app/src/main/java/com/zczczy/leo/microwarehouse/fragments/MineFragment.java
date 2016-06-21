@@ -256,6 +256,10 @@ public class MineFragment extends BaseFragment {
         super.onResume();
         if (checkUserIsLogin()) {
             getUserOrderCount();
+        } else {
+            ll_hole_order.hiddenBadge();
+            ll_waiting_order.hiddenBadge();
+            ll_review.hiddenBadge();
         }
     }
 
