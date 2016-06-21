@@ -8,9 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
+import com.squareup.otto.Subscribe;
+import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView_;
+import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
@@ -67,6 +70,9 @@ public class OrderDetailActivity extends BaseActivity {
     @Extra
     String orderId;
 
+    @Bean
+    OttoBus bus;
+
     OrderModel mAppOrder;
 
     @AfterInject
@@ -78,6 +84,7 @@ public class OrderDetailActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        bus.register(this);
         AndroidTool.showLoadDialog(this);
         ll_next.setVisibility(View.GONE);
     }
@@ -115,13 +122,13 @@ public class OrderDetailActivity extends BaseActivity {
             if (Constants.CASH == result.Data.MPaymentType) {
                 txt_pay_order_time.setVisibility(View.GONE);
                 txt_pay_order_time_two.setVisibility(View.VISIBLE);
-                txt_pay_order_time_two.setText(String.format(text_take_order_time, result.Data.CreateTime));
+                txt_pay_order_time_two.setText(String.format(text_pay_order_time, result.Data.PayTime));
             } else {
                 txt_pay_order_time.setVisibility(View.VISIBLE);
+                txt_pay_order_time.setText(String.format(text_pay_order_time, result.Data.PayTime));
                 txt_pay_order_time_two.setVisibility(View.GONE);
-                txt_take_order_time.setText(String.format(text_take_order_time, result.Data.CreateTime));
             }
-            txt_pay_order_time.setText(String.format(text_pay_order_time, result.Data.PayTime));
+            txt_take_order_time.setText(String.format(text_take_order_time, result.Data.CreateTime));
             txt_receiver_order_time.setText(String.format(text_receiver_order_time, result.Data.DepotJdTime));
             txt_shipping_time.setText(String.format(text_shipping_time, result.Data.FhTime));
 
@@ -260,7 +267,6 @@ public class OrderDetailActivity extends BaseActivity {
     @Click
     void ll_logistics() {
         LogisticsInfoActivity_.intent(this).MOrderId(mAppOrder.MOrderId).start();
-
     }
 
     @Click
@@ -281,11 +287,13 @@ public class OrderDetailActivity extends BaseActivity {
                 aliPay(mAppOrder.AlipayInfo);
                 break;
             case Constants.WEI_PAY:
+                if (mAppOrder.WxPayData != null) {
+                    mAppOrder.WxPayData.extData = mAppOrder.MOrderId;
+                    app.iWXApi.sendReq(mAppOrder.WxPayData);
+                }
                 break;
         }
-
     }
-
 
     @Background
     public void aliPay(String payInfo) {
@@ -333,6 +341,31 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        AndroidTool.showLoadDialog(this);
         getOrderDetailById();
     }
+
+    @Subscribe
+    public void NotifyUI(PayResp resp) {
+        switch (resp.errCode) {
+            case 0:
+                AndroidTool.showLoadDialog(this);
+                getOrderDetailById();
+                break;
+            case -1:
+                AndroidTool.showToast(this, "支付异常");
+                break;
+            case -2:
+                AndroidTool.showToast(this, "您取消了支付");
+                break;
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        bus.unregister(this);
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package net.sourceforge.simcpux.wxapi;
+package com.zczczy.leo.microwarehouse.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.listener.OttoBus_;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 /**
@@ -26,12 +28,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     private IWXAPI api;
 
+    OttoBus_ bus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_result);
-
         api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
         api.handleIntent(getIntent(), this);
     }
@@ -49,12 +51,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp resp) {
-        Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
+        if (bus == null) {
+            bus = OttoBus_.getInstance_(this);
+        }
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.app_tip);
-            builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
-            builder.show();
+            bus.post(resp);
+            finish();
         }
     }
 }

@@ -130,7 +130,14 @@
             android:name=".activities.TakeOrderActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified" />
+            android:windowSoftInputMode="adjustUnspecified">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx9e5c4b886b25f997" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".activities.UmspayActivity_"
             android:label="@string/app_name"
@@ -238,7 +245,7 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
 
         <activity
@@ -257,9 +264,10 @@
         </receiver>
 
         <activity
-            android:name="net.sourceforge.simcpux.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

@@ -269,19 +269,32 @@ public class MineFragment extends BaseFragment {
     @UiThread
     void afterGetUserOrderCount(BaseModelJson<OrderCountModel> result) {
         if (result != null && result.Successful) {
-            ll_hole_order.showTextBadge(result.Data.DfkCount + "");
-            ll_hole_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
-            ll_hole_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
-            ll_waiting_order.showTextBadge(result.Data.DshCount + "");
-            ll_waiting_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
-            ll_waiting_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
-            ll_review.showTextBadge(result.Data.DpjCount + "");
-            ll_review.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
-            ll_review.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+            if (result.Data.DfkCount > 0) {
+                ll_hole_order.showTextBadge(result.Data.DfkCount + "");
+                ll_hole_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+                ll_hole_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+            } else {
+                ll_hole_order.hiddenBadge();
+            }
+            if (result.Data.DshCount > 0) {
+                ll_waiting_order.showTextBadge(result.Data.DshCount + "");
+                ll_waiting_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+                ll_waiting_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+            } else {
+                ll_waiting_order.hiddenBadge();
+            }
+            if (result.Data.DpjCount > 0) {
+                ll_review.showTextBadge(result.Data.DpjCount + "");
+                ll_review.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+                ll_review.getBadgeViewHelper().setBadgeHorizontalMarginDp(35);
+            } else {
+                ll_review.hiddenBadge();
+            }
+
         } else {
-            ll_hole_order.showTextBadge("");
-            ll_waiting_order.showTextBadge("");
-            ll_review.showTextBadge("");
+            ll_hole_order.hiddenBadge();
+            ll_waiting_order.hiddenBadge();
+            ll_review.hiddenBadge();
         }
     }
 }

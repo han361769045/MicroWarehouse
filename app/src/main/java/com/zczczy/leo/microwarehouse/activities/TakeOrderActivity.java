@@ -5,12 +5,13 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.squareup.otto.Subscribe;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView_;
+import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
@@ -20,7 +21,6 @@ import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.tools.SignUtils;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -72,6 +72,9 @@ public class TakeOrderActivity extends BaseActivity {
     @Extra
     String ids;
 
+    @Bean
+    OttoBus bus;
+
     @Extra
     OrderModel model;
 
@@ -82,6 +85,7 @@ public class TakeOrderActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        bus.register(this);
         AndroidTool.showLoadDialog(this);
         //立即购买时直接加载数据
         if (StringUtils.isEmpty(ids)) {
@@ -92,7 +96,6 @@ public class TakeOrderActivity extends BaseActivity {
         } else {
             createTempOrderInfo();
         }
-
     }
 
 
@@ -218,7 +221,10 @@ public class TakeOrderActivity extends BaseActivity {
                     mMyBackgroundTask.aliPay(result.Data.AlipayInfo, this, result.Data.MOrderId);
                     break;
                 case Constants.WEI_PAY:
-                    wxPay(result.Data.PayReq);
+                    if (result.Data.WxPayData != null) {
+                        result.Data.WxPayData.extData = result.Data.MOrderId;
+                        app.iWXApi.sendReq(result.Data.WxPayData);
+                    }
                     break;
             }
         }
@@ -236,12 +242,25 @@ public class TakeOrderActivity extends BaseActivity {
         }
     }
 
-    void wxPay(PayReq req) {
-        try {
-            app.iWXApi.sendReq(req);
-        } catch (Exception e) {
+    @Subscribe
+    public void NotifyUI(PayResp resp) {
+        switch (resp.errCode) {
+            case 0:
+                break;
+            case -1:
+                AndroidTool.showToast(this, "支付异常");
+                break;
+            case -2:
+                AndroidTool.showToast(this, "您取消了支付");
+                break;
         }
+        OrderDetailActivity_.intent(this).orderId(resp.extData).start();
+        finish();
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+        bus.unregister(this);
+    }
 }

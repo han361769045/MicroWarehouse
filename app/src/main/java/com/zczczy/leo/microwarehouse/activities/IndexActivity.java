@@ -10,6 +10,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.fragments.CustomPresentationPagerFragment;
+import com.zczczy.leo.microwarehouse.fragments.CustomPresentationPagerFragment_;
 import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
 import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
 
@@ -36,7 +37,6 @@ public class IndexActivity extends BaseActivity {
             e.printStackTrace();
         }
         if (versionCode > pre.verCode().get()) {
-            pre.verCode().put(versionCode);
             showIndex();
         } else {
             WelcomeActivity_.intent(this).start();
@@ -47,7 +47,7 @@ public class IndexActivity extends BaseActivity {
     void showIndex() {
         int[] resIds = {R.drawable.index_one, R.drawable.index_two, R.drawable.index_three, R.drawable.index_four, R.drawable.index_five};
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, new CustomPresentationPagerFragment());
+        fragmentTransaction.replace(R.id.container, CustomPresentationPagerFragment_.builder().build());
         fragmentTransaction.commit();
     }
 

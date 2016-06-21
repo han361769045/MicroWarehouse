@@ -1,6 +1,5 @@
 package com.zczczy.leo.microwarehouse.items;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
+import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.LogisticsInfoActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity;
@@ -20,13 +20,13 @@ import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PayResult;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
-import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -62,6 +62,9 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
 
     @Pref
     MyPrefs_ pre;
+
+    @App
+    MyApplication app;
 
     @StringRes
     String no_net, text_count, text_goods_price;
@@ -173,6 +176,10 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
                 aliPay(_data.AlipayInfo);
                 break;
             case Constants.WEI_PAY:
+                if (_data.WxPayData != null) {
+                    _data.WxPayData.extData = _data.MOrderId;
+                    app.iWXApi.sendReq(_data.WxPayData);
+                }
                 break;
         }
     }

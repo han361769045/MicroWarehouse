@@ -129,11 +129,10 @@ public class TaskOrderDetailActivity extends BaseActivity {
         }
     }
 
-
     @Click
     void btn_receive() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
-        adb.setTitle("提示").setMessage("确定要完成？").setPositiveButton("完成", new DialogInterface.OnClickListener() {
+        adb.setTitle("提示").setMessage("确定要接单吗？").setPositiveButton("接单", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AndroidTool.showLoadDialog(TaskOrderDetailActivity.this);
@@ -158,6 +157,7 @@ public class TaskOrderDetailActivity extends BaseActivity {
             AndroidTool.showToast(this, result.Error);
         } else {
             btn_receive.setVisibility(View.GONE);
+            finishActivity(RESULT_OK);
         }
     }
 
@@ -194,6 +194,7 @@ public class TaskOrderDetailActivity extends BaseActivity {
             AndroidTool.showToast(this, result.Error);
         } else {
             btn_finish.setVisibility(View.GONE);
+            btn_finished.setVisibility(View.VISIBLE);
         }
     }
 

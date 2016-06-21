@@ -3,6 +3,7 @@ package com.zczczy.leo.microwarehouse;
 import android.app.Application;
 import android.os.Vibrator;
 
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
@@ -63,13 +64,14 @@ public class MyApplication extends Application {
         goodsTypeModelList = new ArrayList<>();
         noticeInfoModelList = new ArrayList<>();
 
-        iWXApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+        iWXApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
         iWXApi.registerApp(Constants.APP_ID);
         if (pre.isFirst().get()) {
             JPushInterface.setAliasAndTags(this, "", null, myBackgroundTask);
         }
         JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);            // 初始化 JPush
+        CrashReport.initCrashReport(getApplicationContext(), Constants.BUGLY_APP_ID, false);
     }
 
 

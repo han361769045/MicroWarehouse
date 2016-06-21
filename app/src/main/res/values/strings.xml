@@ -166,6 +166,7 @@
     <string name="text_add_comment">添加评论</string>
     <string name="text_goods_reviews">商品评论</string>
     <string name="text_all_review">查看全部评论</string>
+    <string name="text_review_describe">描述相符</string>
 
 
     <!--feedback-->

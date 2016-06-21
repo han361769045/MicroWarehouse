@@ -1,16 +1,26 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.cleveroad.slidingtutorial.CirclePageIndicator;
 import com.cleveroad.slidingtutorial.PageFragment;
 import com.cleveroad.slidingtutorial.SimplePagerFragment;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.WelcomeActivity_;
+import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 
 /**
  * @author Created by LuLeo on 2016/6/14.
@@ -20,6 +30,11 @@ import org.androidannotations.annotations.EFragment;
 @EFragment
 public class CustomPresentationPagerFragment extends SimplePagerFragment {
 
+    @ViewById
+    ImageView start;
+
+    @Pref
+    MyPrefs_ pre;
 
     @Override
     protected int getPagesCount() {
@@ -95,20 +110,42 @@ public class CustomPresentationPagerFragment extends SimplePagerFragment {
     @Override
     public void onPageSelected(int position) {
         if (!isInfiniteScrollEnabled() && position == getPagesCount()) {
-            getActivity().finish();
+            pre.verCode().put(getVersionCode());
             WelcomeActivity_.intent(this).start();
+            getActivity().finish();
         }
         if (position != 4) {
-            getSkipButton().setVisibility(View.INVISIBLE);
+            start.setVisibility(View.GONE);
+            getPagerIndicator().setVisibility(View.VISIBLE);
         } else {
-            getSkipButton().setVisibility(View.VISIBLE);
+            start.setVisibility(View.VISIBLE);
+            getPagerIndicator().setVisibility(View.GONE);
         }
+    }
+
+    @Click
+    void start() {
+        pre.verCode().put(getVersionCode());
+        WelcomeActivity_.intent(this).start();
+        getActivity().finish();
+    }
+
+    int getVersionCode() {
+        int versionCode = 0;
+        try {
+            // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
+            versionCode = this.getActivity().getPackageManager().getPackageInfo(this.getActivity().getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getSkipButton().setVisibility(View.INVISIBLE);
+        getSeparator().setVisibility(View.GONE);
     }
 
 }

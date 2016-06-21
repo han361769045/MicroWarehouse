@@ -11,6 +11,7 @@ import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.activities.BaseActivity;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity;
 import com.zczczy.leo.microwarehouse.activities.OrderDetailActivity_;
+import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
@@ -157,18 +158,28 @@ public class MyBackgroundTask implements TagAliasCallback {
                 break;
             case "8000":
                 AndroidTool.showToast(context, "支付结果确认中");
+                OrderDetailActivity_.intent(activity).orderId(orderId).start();
+                activity.finish();
                 break;
             case "4000":
                 AndroidTool.showToast(context, "订单支付失败");
+                OrderDetailActivity_.intent(activity).orderId(orderId).start();
+                activity.finish();
                 break;
             case "6001":
                 AndroidTool.showToast(context, "用户中途取消");
+                OrderDetailActivity_.intent(activity).orderId(orderId).start();
+                activity.finish();
                 break;
             case "6002":
                 AndroidTool.showToast(context, "网络连接出错");
+                OrderDetailActivity_.intent(activity).orderId(orderId).start();
+                activity.finish();
                 break;
             default: {
                 AndroidTool.showToast(context, "网络连接出错");
+                OrderDetailActivity_.intent(activity).orderId(orderId).start();
+                activity.finish();
             }
         }
     }

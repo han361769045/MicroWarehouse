@@ -77,7 +77,7 @@ public class OrderModel implements Serializable {
     public String MarkInfo; //备注说明
     public String AlipayInfo;//支付宝支付信息
 
-    public com.tencent.mm.sdk.modelpay.PayReq PayReq;
+    public com.tencent.mm.sdk.modelpay.PayReq WxPayData;
 
     public List<OrderDetailModel> MOrderDetailList; //订单明细
 }
