@@ -23,6 +23,7 @@ import com.zczczy.leo.microwarehouse.activities.DepotActivity_;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchActivity_;
 import com.zczczy.leo.microwarehouse.activities.TaskOrderActivity_;
+import com.zczczy.leo.microwarehouse.activities.WashingActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
@@ -198,7 +199,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Click
     void txt_four() {
-        AndroidTool.showToast(this, "敬请期待");
+        WashingActivity_.intent(this).start();
     }
 
     @Override
