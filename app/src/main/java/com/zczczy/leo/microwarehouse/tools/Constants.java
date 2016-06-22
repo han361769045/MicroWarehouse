@@ -5,13 +5,13 @@ package com.zczczy.leo.microwarehouse.tools;
  */
 public class Constants {
     //测试环境
-    public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
+//    public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
     //    public static final String ROOT_URL = "http://192.168.0.198:8018/ContentView/";
-    public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
+//    public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
 
     //正式环境
-//    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
-//    public static final String ROOT_URL = "http://wcapia.zczczy.com/ContentView/";
+    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
+    public static final String ROOT_URL = "http://wcapib.zczczy.com/ContentView/";
 
 
     public static final String ANDROID = "1";//请求类型  android
@@ -59,9 +59,9 @@ public class Constants {
 
 
     public static final String KBN_ORDER = "order";
+    public static final String KBN_SERVICE = "service";
 
     // APP_ID 替换为你的应用从官方网站申请到的合法appId
-//    public static final String APP_ID = "wxb4ba3c02aa476ea1";
     public static final String APP_ID = "wx9e5c4b886b25f997";
 
     // 腾讯bugly

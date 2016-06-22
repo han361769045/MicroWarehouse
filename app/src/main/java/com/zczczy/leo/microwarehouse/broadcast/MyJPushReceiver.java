@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.zczczy.leo.microwarehouse.activities.OrderDetailActivity_;
+import com.zczczy.leo.microwarehouse.activities.TaskOrderDetailActivity_;
 import com.zczczy.leo.microwarehouse.model.NotificationModel;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
@@ -51,6 +52,15 @@ public class MyJPushReceiver extends AbstractBroadcastReceiver {
                 OrderDetailActivity_.intent(context).flags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .flags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         .orderId(model.InfoId)
+                        .start();
+            }
+            if (Constants.KBN_SERVICE.equals(model.kbn)) {
+                if (context instanceof OrderDetailActivity_) {
+                    ((TaskOrderDetailActivity_) context).finish();
+                }
+                TaskOrderDetailActivity_.intent(context).flags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .flags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .TaskOrderId(model.InfoId)
                         .start();
             }
         }

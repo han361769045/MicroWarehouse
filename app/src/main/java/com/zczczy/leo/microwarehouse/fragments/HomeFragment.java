@@ -189,7 +189,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Click
     void txt_two() {
-        AndroidTool.showToast(this, "敬请期待");
+        CategoryActivity_.intent(getActivity()).id("49").title("老人专区").start();
     }
 
     @Click
@@ -210,7 +210,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
                 //链接分类(1:商品详细，2：网页WebView)
                 if (bannerModel.LinkType == 1) {
                     GoodsDetailActivity_.intent(this).goodsId(bannerModel.LinkUrl).start();
-                } else if (bannerModel.LinkType == 2) {
+                } else if (bannerModel.LinkType == 2 && !"#".equals(bannerModel.LinkUrl)) {
                     CommonWebViewActivity_.intent(this).title(bannerModel.BannerName).linkUrl(bannerModel.LinkUrl).start();
                 }
             }
@@ -221,7 +221,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
                 //链接分类(1:商品详细，2：网页WebView ，3.商品分类)
                 if (noticeInfoModel.JumpType == 1) {
                     GoodsDetailActivity_.intent(this).goodsId(noticeInfoModel.TargetAddress).start();
-                } else if (noticeInfoModel.JumpType == 2) {
+                } else if (noticeInfoModel.JumpType == 2 && !"#".equals(noticeInfoModel.TargetAddress)) {
                     CommonWebViewActivity_.intent(this).title(noticeInfoModel.NoticeInfoTitle).linkUrl(noticeInfoModel.TargetAddress).start();
                 } else if (noticeInfoModel.JumpType == 3) {
                     CategoryActivity_.intent(getActivity()).id(noticeInfoModel.TargetAddress).title(noticeInfoModel.NoticeInfoTitle).start();

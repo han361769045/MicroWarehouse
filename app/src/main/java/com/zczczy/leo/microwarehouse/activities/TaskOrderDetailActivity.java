@@ -99,6 +99,7 @@ public class TaskOrderDetailActivity extends BaseActivity {
                 btn_finish.setVisibility(View.VISIBLE);
             } else if (result.Data.TaskStatus == 2 && pre.nickName().get().equals(result.Data.ReveiveLogin)) {
                 rl_receiver.setVisibility(View.VISIBLE);
+                btn_receive.setVisibility(View.GONE);
 //                btn_cancel.setVisibility(View.VISIBLE);
             } else if (result.Data.TaskStatus == 3) {
                 rl_receiver.setVisibility(View.VISIBLE);
@@ -156,8 +157,9 @@ public class TaskOrderDetailActivity extends BaseActivity {
         } else if (!result.Successful) {
             AndroidTool.showToast(this, result.Error);
         } else {
-            btn_receive.setVisibility(View.GONE);
-            finishActivity(RESULT_OK);
+            AndroidTool.showLoadDialog(this);
+            getTaskOrderById();
+            setResult(RESULT_OK);
         }
     }
 

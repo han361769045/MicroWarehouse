@@ -70,6 +70,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     @AfterViews
     void afterView() {
+        myTitleBar.hideNavButtonView();
         txt_total_lb.setText(String.format(cart_total, 0.0));
         txt_checkout.setText(String.format(text_buy, count));
         list = new ArrayList<>();

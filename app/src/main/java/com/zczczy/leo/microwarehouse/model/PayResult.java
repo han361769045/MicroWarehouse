@@ -9,6 +9,7 @@ public class PayResult {
     private String resultStatus;
     private String result;
     private String memo;
+    private String orderId;
 
     public PayResult(String rawResult) {
 
@@ -60,5 +61,13 @@ public class PayResult {
      */
     public String getResult() {
         return result;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

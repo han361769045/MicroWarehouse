@@ -150,7 +150,6 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             AndroidTool.showToast(context, no_net);
         } else if (!result.Successful) {
             AndroidTool.showToast(context, result.Error);
-
         } else {
             baseUltimateRecyclerViewAdapter.getItems().remove(_data);
             baseUltimateRecyclerViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());

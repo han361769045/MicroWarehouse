@@ -670,4 +670,16 @@ public class MyTitleBar extends RelativeLayout {
         if (mRightTextView != null)
             mRightTextView.setVisibility(GONE);
     }
+
+    public void showNavButtonView() {
+        if (mNavButtonView != null) {
+            mNavButtonView.setVisibility(VISIBLE);
+        }
+    }
+
+    public void hideNavButtonView() {
+        if (mNavButtonView != null) {
+            mNavButtonView.setVisibility(GONE);
+        }
+    }
 }

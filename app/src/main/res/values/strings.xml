@@ -192,4 +192,14 @@
     <string name="text_receive_task_order">接收的任务</string>
 
 
+    <string name="text_washing" formatted="false">
+        <![CDATA[
+        <div style="width:100%; font-family:FangSong;margin-top:10px">
+            &nbsp;&nbsp;&nbsp;&nbsp;倾心洗衣工坊是大连金领阳光商务服务有限公司为商务人士、白领精英精心打造的便捷洗衣品牌。致力于为您省时、省心、省力，专业洗护您的每一件衣物。
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;我们迎合现在市场需求，优化传统洗衣理念，注重洗衣环境，采用线上、线下一体的经营模式，提供上门取送服务，为客户不同的需求定制不同的洗衣计划。洁净清新的每一天让您的工作、生活更加顺心如意。</p>
+            业务范围:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;各类服饰、皮衣、皮具、鞋、包、奢侈品护理 、汽车皮毛坐垫、亚麻垫，地毯、窗帘、床上用品、各种工装、工服等清洁洗护，承接各类单位、团体业务。
+        </div>
+        ]]>
+    </string>
 </resources>

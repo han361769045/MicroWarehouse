@@ -46,10 +46,10 @@ import java.util.Map;
 
 /**
  * Created by Leo on 2016/3/2.
- * http://wcapia.zczczy.com/
+ * http://wcapib.zczczy.com/
  * http://218.61.203.50:8018/
  */
-@Rest(rootUrl = "http://218.61.203.50:8018/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://wcapib.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class
 )

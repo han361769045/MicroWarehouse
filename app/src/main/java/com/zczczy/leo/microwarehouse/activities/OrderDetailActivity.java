@@ -227,9 +227,10 @@ public class OrderDetailActivity extends BaseActivity {
             AndroidTool.showToast(this, no_net);
         } else if (!result.Successful) {
             AndroidTool.showToast(this, result.Error);
-
         } else {
             btn_cancel_order.setVisibility(View.GONE);
+            btn_pay.setVisibility(View.GONE);
+            btn_canceled.setVisibility(View.VISIBLE);
             setResult(RESULT_OK);
         }
     }
