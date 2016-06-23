@@ -37,8 +37,9 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
         afterGetMoreData(result);
     }
 
-    @UiThread
-    void afterGetMoreData(BaseModelJson<List<CartModel>> result) {
+    @Override
+    protected void afterGetMoreData(BaseModelJson<List<CartModel>> result) {
+        AndroidTool.dismissLoadDialog();
         if (result == null) {
             AndroidTool.showToast(context, no_net);
         } else if (!result.Successful) {

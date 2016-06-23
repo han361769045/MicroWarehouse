@@ -27,29 +27,8 @@ public class MemberOrderAdapter extends BaseUltimateRecyclerViewAdapter<OrderMod
         this.isRefresh = isRefresh;
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterGetData(myRestClient.getOrderInfoListByStatus(pageIndex, pageSize, Integer.valueOf(objects[0].toString())));
+        afterGetMoreData(myRestClient.getOrderInfoListByStatus(pageIndex, pageSize, Integer.valueOf(objects[0].toString())));
     }
-
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<OrderModel>> bmj) {
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
-    }
-
 
     @Override
     protected View onCreateItemView(ViewGroup parent) {

@@ -8,6 +8,7 @@ import com.zczczy.leo.microwarehouse.activities.LogisticsInfoActivity;
 import com.zczczy.leo.microwarehouse.items.LogisticsInfoItemView_;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.Background;
@@ -39,6 +40,7 @@ public class LogisticsInfoAdapter extends BaseRecyclerViewAdapter<LogisticsInfoM
 
     @UiThread
     void afterGetData(BaseModelJson<List<LogisticsInfoModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj != null && bmj.Successful) {
             if (bmj.Data.size() > 0) {
                 bmj.Data.get(0).isLast = true;

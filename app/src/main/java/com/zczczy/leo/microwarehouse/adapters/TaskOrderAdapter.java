@@ -37,27 +37,7 @@ public class TaskOrderAdapter extends BaseUltimateRecyclerViewAdapter<TaskOrderM
                 myRestClient.setHeader("Kbn", Constants.ANDROID);
                 bmj = myRestClient.getMyTaskOrderList(pageIndex, pageSize, objects[1].toString());
         }
-        afterGetData(bmj);
-    }
-
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<TaskOrderModel>> bmj) {
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
+        afterGetMoreData(bmj);
     }
 
 

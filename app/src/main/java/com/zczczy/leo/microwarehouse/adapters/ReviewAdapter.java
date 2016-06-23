@@ -35,6 +35,7 @@ public class ReviewAdapter extends BaseRecyclerViewAdapter<OrderDetailModel> {
 
     @UiThread
     void afterGetData(BaseModelJson<List<OrderDetailModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(context, no_net);
             reviewActivity.notifyUI();

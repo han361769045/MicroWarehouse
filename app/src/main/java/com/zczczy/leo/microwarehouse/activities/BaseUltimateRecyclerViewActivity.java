@@ -62,6 +62,7 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     @AfterViews
     void afterRecyclerView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -92,7 +93,6 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     //线性布局
     void verticalItem() {
-        ultimateRecyclerView.setAdapter(null);
         myAdapter.verticalAndHorizontal = BaseUltimateRecyclerViewAdapter.VerticalAndHorizontal.Vertical;
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
         ultimateRecyclerView.setAdapter(myAdapter);
@@ -100,7 +100,6 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     //网格布局
     void horizontalItem() {
-        ultimateRecyclerView.setAdapter(null);
         myAdapter.verticalAndHorizontal = BaseUltimateRecyclerViewAdapter.VerticalAndHorizontal.Horizontal;
         ultimateRecyclerView.setLayoutManager(gridLayoutManager);
         ultimateRecyclerView.setAdapter(myAdapter);

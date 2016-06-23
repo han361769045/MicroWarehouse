@@ -271,7 +271,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                 transaction.show(goodsCommentsFragment);
             }
         }
-        transaction.commit();
+        //transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
 

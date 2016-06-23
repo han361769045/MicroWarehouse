@@ -28,26 +28,7 @@ public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<Goods
     @Override
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
-        afterGetData(myRestClient.getGoodsInfoByTypeId(pageIndex,pageSize, objects[0].toString()));
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<GoodsModel>> bmj) {
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
+        afterGetMoreData(myRestClient.getGoodsInfoByTypeId(pageIndex, pageSize, objects[0].toString()));
     }
 
 

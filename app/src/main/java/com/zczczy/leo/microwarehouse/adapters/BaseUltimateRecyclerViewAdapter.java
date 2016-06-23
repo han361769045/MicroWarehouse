@@ -19,9 +19,12 @@ import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
 import com.zczczy.leo.microwarehouse.items.ItemView;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
+import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
@@ -29,6 +32,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -111,13 +115,31 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
     public abstract void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects);
 
 
+    @UiThread
+    protected void afterGetMoreData(BaseModelJson<PagerResult<T>> bmj) {
+        AndroidTool.dismissLoadDialog();
+        if (bmj == null) {
+            bmj = new BaseModelJson<>();
+        } else if (bmj.Successful) {
+            if (isRefresh) {
+                clear();
+            }
+            setTotal(bmj.Data.RowCount);
+            if (bmj.Data.ListData.size() > 0) {
+                insertAll(bmj.Data.ListData, getItems().size());
+            }
+        } else {
+            AndroidTool.showToast(context, bmj.Error);
+        }
+        bus.post(bmj);
+    }
+
     /**
      * @param viewHolder
      * @param position
      */
     @Override
     public void onBindViewHolder(BaseUltimateViewHolder viewHolder, int position) {
-
 
         if (getItemViewType(position) == VIEW_TYPES.NORMAL) {
             ItemView<T> itemView = (ItemView) viewHolder.itemView;
@@ -146,7 +168,7 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         } else {
             ViewHelper.clear(viewHolder.itemView);
         }
-        if (dynamicHeight != null && position==0) {
+        if (dynamicHeight != null && position == 0) {
 //            int cellWidth = viewHolder.itemView.getWidth();// this will give you cell width dynamically
 //            int cellHeight = viewHolder.itemView.height;// this will give you cell height dynamically
             dynamicHeight.HeightChange(position, 55); //call your iterface hear

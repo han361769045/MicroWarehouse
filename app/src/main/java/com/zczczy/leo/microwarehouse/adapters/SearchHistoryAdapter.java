@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.zczczy.leo.microwarehouse.dao.SearchHistory;
 import com.zczczy.leo.microwarehouse.dao.SearchHistoryDao;
 import com.zczczy.leo.microwarehouse.items.SearchHistoryItemView_;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
@@ -27,11 +28,12 @@ public class SearchHistoryAdapter extends BaseRecyclerViewAdapter<SearchHistory>
 
     @Override
     public void getMoreData(Object... objects) {
-        afterGetData(searchHistoryDao.getAll());
+        afterGetMoreData(searchHistoryDao.getAll());
     }
 
     @UiThread
-    void afterGetData(List<SearchHistory> bmj) {
+    void afterGetMoreData(List<SearchHistory> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (getItemCount() > 0) {
             clear();
         }

@@ -9,6 +9,7 @@ import com.zczczy.leo.microwarehouse.items.CategoryItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
@@ -40,6 +41,7 @@ public class CategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel> {
 
     @UiThread
     void afterGetData(BaseModelJson<List<GoodsTypeModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

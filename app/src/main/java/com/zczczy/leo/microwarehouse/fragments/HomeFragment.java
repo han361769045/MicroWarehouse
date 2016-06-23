@@ -234,15 +234,24 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            bus.unregister(this);
+            try {
+                bus.unregister(this);
+            } catch (Exception e) {
+                Log.e("bus.unregister", e.getMessage());
+            }
             homeSlider.stopAutoCycle();
             slider_horn.stopAutoCycle();
         } else {
             homeSlider.startAutoCycle();
             slider_horn.startAutoCycle();
-            bus.register(this);
+            try {
+                bus.register(this);
+            } catch (Exception e) {
+                Log.e("bus.register", e.getMessage());
+            }
         }
     }
+
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {

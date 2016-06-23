@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.ItemView;
+import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.ShippingAddressModel;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
@@ -18,6 +21,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -40,9 +44,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     public VerticalAndHorizontal verticalAndHorizontal;
 
     private DynamicHeight dynamicHeight;
-
-    @Background
-    public abstract void getMoreData(Object... objects);
 
     @RestService
     MyRestClient myRestClient;
@@ -76,6 +77,23 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         return new BaseViewHolder(view);
     }
 
+    @Background
+    public abstract void getMoreData(Object... objects);
+
+    @UiThread
+    protected void afterGetMoreData(BaseModelJson<List<T>> result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            result = new BaseModelJson<>();
+//            AndroidTool.showToast(context, no_net);
+        } else if (result.Successful) {
+            clear();
+            if (result.Data.size() > 0) {
+                insertAll(result.Data, getItemCount());
+            }
+        }
+    }
+
     /**
      * 设置 ItemView
      *
@@ -83,6 +101,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
      * @return
      */
     protected abstract View onCreateItemView(ViewGroup parent, int viewType);
+
 
     @Override
     public void onBindViewHolder(BaseViewHolder viewHolder, int position) {

@@ -8,6 +8,7 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -49,6 +50,7 @@ public abstract class BaseRecyclerViewActivity<T> extends BaseActivity {
 
     @AfterViews
     void afterRecyclerView() {
+        AndroidTool.showLoadDialog(this);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(linearLayoutManager);

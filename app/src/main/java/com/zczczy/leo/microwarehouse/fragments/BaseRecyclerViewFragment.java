@@ -53,6 +53,7 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
 
     @AfterViews
     void afterRecyclerView() {
+        AndroidTool.showLoadDialog(this);
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);

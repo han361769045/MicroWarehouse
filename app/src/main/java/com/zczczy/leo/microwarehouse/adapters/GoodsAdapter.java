@@ -41,25 +41,6 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
         afterGetMoreData(result);
     }
 
-    @UiThread
-    void afterGetMoreData(BaseModelJson<PagerResult<GoodsModel>> result) {
-        if (result == null) {
-            result = new BaseModelJson<>();
-        } else if (!result.Successful) {
-            AndroidTool.showToast(context, result.Error);
-        } else {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(result.Data.RowCount);
-            if (result.Data.ListData.size() > 0) {
-                insertAll(result.Data.ListData, getItems().size());
-            }
-        }
-        bus.post(result);
-    }
-
-
     @Override
     void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 

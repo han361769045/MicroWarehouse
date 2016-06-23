@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.zczczy.leo.microwarehouse.items.AreaItemView_;
 import com.zczczy.leo.microwarehouse.model.AreaModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
@@ -26,6 +27,7 @@ public class AreaAdapter extends BaseRecyclerViewAdapter<AreaModel> {
 
     @UiThread
     void afterGetData(BaseModelJson<List<AreaModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

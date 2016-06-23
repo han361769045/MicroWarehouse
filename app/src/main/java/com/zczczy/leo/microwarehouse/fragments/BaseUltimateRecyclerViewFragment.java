@@ -15,6 +15,7 @@ import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.viewgroup.FullyLinearLayoutManager;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
@@ -62,6 +63,7 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
 
     @AfterViews
     void afterRecyclerView() {
+        AndroidTool.showLoadDialog(this);
         ultimateRecyclerView.setHasFixedSize(true);
 //        linearLayoutManager = new CustomLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
         linearLayoutManager = new FullyLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);

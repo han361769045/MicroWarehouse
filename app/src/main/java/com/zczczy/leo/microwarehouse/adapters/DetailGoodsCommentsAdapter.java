@@ -8,6 +8,7 @@ import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
@@ -29,6 +30,7 @@ public class DetailGoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCom
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

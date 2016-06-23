@@ -21,20 +21,7 @@ public class CityAdapter extends BaseRecyclerViewAdapter<CityModel> {
 
     @Override
     public void getMoreData(Object... objects) {
-        afterGetData(myRestClient.getCityListByProvinceId(objects[0].toString()));
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<List<CityModel>> bmj) {
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (bmj.Data.size() > 0) {
-                insertAll(bmj.Data, getItems().size());
-            }
-        }
-
+        afterGetMoreData(myRestClient.getCityListByProvinceId(objects[0].toString()));
     }
 
     @Override

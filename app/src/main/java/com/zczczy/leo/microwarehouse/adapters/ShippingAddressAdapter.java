@@ -24,20 +24,7 @@ public class ShippingAddressAdapter extends BaseRecyclerViewAdapter<ShippingAddr
     public void getMoreData(Object... objects) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterGetData(myRestClient.getMReceiptAddressListByUserInfoId());
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<List<ShippingAddressModel>> bmj) {
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            clear();
-            if (bmj.Data.size() > 0) {
-                insertAll(bmj.Data, getItemCount());
-            }
-        }
+        afterGetMoreData(myRestClient.getMReceiptAddressListByUserInfoId());
     }
 
     @Override
