@@ -35,7 +35,13 @@ public class TakeOrderItemView extends ItemView<OrderDetailModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
+            Picasso.with(context)
+                    .load(_data.GoodsImgSl)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .into(img_cart_goods_img);
         }
         txt_cart_goods_product.setText(_data.ProductName);
         txt_goods_price.setText(String.format(text_goods_price, _data.ProductPrice));

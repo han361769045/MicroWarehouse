@@ -70,6 +70,8 @@ public class MineFragment extends BaseFragment {
     void afterView() {
         if (checkUserIsLogin()) {
             getMemberInfo();
+        } else {
+            AndroidTool.dismissLoadDialog();
         }
     }
 

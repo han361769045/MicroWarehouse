@@ -21,7 +21,6 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -71,8 +70,13 @@ public class CommonCategoryVerticalItemView extends ItemView<GoodsModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).resize(200, 200).
-                    centerCrop().placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(pic);
+            Picasso.with(context)
+                    .load(_data.GoodsImgSl)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .into(pic);
         }
         goods_name.setText(_data.GodosName);
         goods_sell_count.setText(String.format(text_goods_sell_count, _data.GoodsXl));

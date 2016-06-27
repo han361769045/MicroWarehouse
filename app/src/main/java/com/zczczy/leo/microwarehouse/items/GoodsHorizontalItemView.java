@@ -21,7 +21,6 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -70,7 +69,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).resize(200, 200).
+            Picasso.with(context).load(_data.GoodsImgSl).fit().
                     centerCrop().placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(pic);
         }
 
@@ -118,7 +117,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     void afterAddShoppingCart(BaseModel result) {
         AndroidTool.dismissLoadDialog();
         if (result == null) {
-            AndroidTool.showToast(context,no_net);
+            AndroidTool.showToast(context, no_net);
         } else if (!result.Successful) {
             AndroidTool.showToast(context, result.Error);
         } else {

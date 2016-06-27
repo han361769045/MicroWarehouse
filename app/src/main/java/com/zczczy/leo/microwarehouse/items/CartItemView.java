@@ -29,8 +29,6 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
-
 import me.himanshusoni.quantityview.QuantityView;
 
 /**
@@ -86,7 +84,13 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
+            Picasso.with(context)
+                    .load(_data.GoodsImgSl)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .into(img_cart_goods_img);
         }
         quantityView.setMaxQuantity(_data.GoodsStock);
         _data.ProductCount = _data.ProductCount > _data.GoodsStock ? _data.GoodsStock : _data.ProductCount;

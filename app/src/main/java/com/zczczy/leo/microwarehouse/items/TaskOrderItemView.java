@@ -33,8 +33,13 @@ public class TaskOrderItemView extends ItemView<TaskOrderModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.PublishHeadImg)) {
-            Picasso.with(context).load(_data.PublishHeadImg).resize(50, 50).
-                    centerCrop().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(img_avatar);
+            Picasso.with(context)
+                    .load(_data.PublishHeadImg)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.default_avatar)
+                    .error(R.drawable.default_avatar)
+                    .into(img_avatar);
         }
         txt_title.setText(_data.TaskTitle);
         txt_publish_time.setText(_data.PublishTime);

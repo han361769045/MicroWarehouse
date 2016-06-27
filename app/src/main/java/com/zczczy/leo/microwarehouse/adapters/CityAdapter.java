@@ -4,13 +4,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.CityItemView_;
-import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CityModel;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
-
-import java.util.List;
 
 /**
  * Created by Leo on 2016/5/4.
