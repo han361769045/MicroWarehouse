@@ -98,8 +98,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
         fragmentManager = getSupportFragmentManager();
     }
 
@@ -214,6 +212,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @Background
     void buy() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterBuy(myRestClient.createSingleTempOrder(goodsId, 1));
     }
 
@@ -232,6 +232,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @Background
     void addShoppingCart() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterAddShoppingCart(myRestClient.addShoppingCart(goodsId));
     }
 

@@ -121,16 +121,18 @@ public class LoginActivity extends BaseActivity {
             if (permissions.size() > 0) {
                 requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
             } else {
-                isRegister = true;
-                readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-                this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+                //自动读取短信
+//                isRegister = true;
+//                readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
+//                this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
                 editUsername.setText(StringUtils.isEmpty(telephonyManager.getLine1Number()) ? "" : telephonyManager.getLine1Number().substring(3));
                 Selection.setSelection(editUsername.getText(), editUsername.length());
             }
         } else {
-            isRegister = true;
-            readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-            this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+            //自动读取短信
+//            isRegister = true;
+//            readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
+//            this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
             editUsername.setText(StringUtils.isEmpty(telephonyManager.getLine1Number()) ? "" : telephonyManager.getLine1Number().substring(3));
             Selection.setSelection(editUsername.getText(), editUsername.length());
         }
@@ -145,9 +147,10 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
         }
-        isRegister = true;
-        readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
+        //自动读取短信
+//        isRegister = true;
+//        readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
+//        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
         editUsername.setText(StringUtils.isEmpty(telephonyManager.getLine1Number()) ? "" : telephonyManager.getLine1Number().substring(3));
         Selection.setSelection(editUsername.getText(), editUsername.length());
 
@@ -271,7 +274,6 @@ public class LoginActivity extends BaseActivity {
             myBackgroundTask.setAlias();
             finish();
         } else {
-
             AndroidTool.showToast(this, bmj.Error);
         }
     }

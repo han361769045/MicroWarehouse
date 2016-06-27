@@ -324,7 +324,9 @@ public class AccountManagementActivity extends BaseActivity {
             adb.setTitle("提示").setMessage("确定要注销吗？").setPositiveButton("注销", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    int verCode = pre.verCode().get();
                     pre.clear();
+                    pre.verCode().put(verCode);
                     myBackgroundTask.registerAlias();
                     finish();
 

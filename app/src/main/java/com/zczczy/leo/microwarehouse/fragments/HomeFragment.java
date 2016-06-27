@@ -91,6 +91,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         locationService.registerListener(this);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
