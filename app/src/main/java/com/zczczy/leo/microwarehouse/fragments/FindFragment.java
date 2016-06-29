@@ -50,16 +50,23 @@ public class FindFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
             }
         });
 
-        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+//        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (myTitleBar.getmRightButtonView().isSelected()) {
+//                    myTitleBar.getmRightButtonView().setSelected(false);
+//                    verticalItem();
+//                } else {
+//                    myTitleBar.getmRightButtonView().setSelected(true);
+//                    horizontalItem();
+//                }
+//            }
+//        });
+
+        myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (myTitleBar.getmRightButtonView().isSelected()) {
-                    myTitleBar.getmRightButtonView().setSelected(false);
-                    verticalItem();
-                } else {
-                    myTitleBar.getmRightButtonView().setSelected(true);
-                    horizontalItem();
-                }
+            public void onClick(View view) {
+                SearchActivity_.intent(FindFragment.this).start();
             }
         });
     }

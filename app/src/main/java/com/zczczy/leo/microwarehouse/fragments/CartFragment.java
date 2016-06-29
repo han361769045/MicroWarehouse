@@ -163,6 +163,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         if (checkUserIsLogin()) {
             myAdapter.getMoreData();
         } else {
+            AndroidTool.dismissLoadDialog();
             if (adb == null) {
                 adb = new AlertDialog.Builder(getActivity());
                 adb.setTitle("提示").setMessage("请先登录？").setPositiveButton("确认", new DialogInterface.OnClickListener() {

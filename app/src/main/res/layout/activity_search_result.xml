@@ -15,7 +15,9 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/search_result"
         app:mNavButtonIcon="@drawable/title_back"
-        app:mRightButtonIcon="@drawable/linear_grid" />
+        app:mRightText="@string/search"
+        app:mRightTextMarginRight="15dp" />
+    <!--   app:mRightButtonIcon="@drawable/linear_grid"-->
 
     <RadioGroup
         android:layout_width="match_parent"

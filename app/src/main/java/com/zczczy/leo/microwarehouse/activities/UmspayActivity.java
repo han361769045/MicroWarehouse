@@ -47,7 +47,7 @@ public class UmspayActivity extends BaseActivity {
         String postData = "merSign=" + order.merSign +
                 "&chrCode=" + order.chrCode +
                 "&tranId=" + order.transId +
-                "&mchantUserCode=1234567890123456" +
+                "&mchantUserCode=" + pre.token().get() +
                 "&url=http://www.zczczy.com" +
                 "&bankName=&cardType=";
         wv_web.postUrl(Constants.PAY_URL, postData.getBytes());
@@ -64,7 +64,7 @@ public class UmspayActivity extends BaseActivity {
                 Log.e("onPageStarted", url);
                 if (url.contains("http://www.zczczy.com")) {
 //                    OrderDetailActivity_.intent(UmspayActivity.this).orderId(order.MOrderId).start();
-                    Log.e("onPageStarted",url);
+                    Log.e("onPageStarted", url);
                     finish();
                 } else {
                     AndroidTool.showLoadDialog(UmspayActivity.this);
@@ -89,6 +89,7 @@ public class UmspayActivity extends BaseActivity {
     //如果希望浏览的网页后退而不是退出浏览器，需要WebView覆盖URL加载，让它自动生成历史访问记录，那样就可以通过前进或后退访问已访问过的站点。
     @Override
     public void onBackPressed() {
+        super.finish();
         finish();
     }
 }

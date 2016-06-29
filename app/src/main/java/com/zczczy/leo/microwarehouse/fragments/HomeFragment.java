@@ -44,6 +44,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
 import org.androidannotations.annotations.res.DrawableRes;
+import org.androidannotations.annotations.res.StringRes;
 
 import java.util.List;
 
@@ -64,6 +65,9 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @ViewById
     TextView txt_one, txt_two, txt_three, txt_four;
+
+    @StringRes
+    String text_two, text_four;
 
     @ViewById
     LinearLayout ll_born;
@@ -91,7 +95,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
+//        AndroidTool.showLoadDialog(this);
         bus.register(this);
         locationService.registerListener(this);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
@@ -190,7 +194,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Click
     void txt_two() {
-        CategoryActivity_.intent(getActivity()).id("49").title("老人专区").start();
+        CategoryActivity_.intent(getActivity()).id("49").title(text_two).start();
     }
 
     @Click
@@ -200,7 +204,8 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @Click
     void txt_four() {
-        WashingActivity_.intent(this).start();
+//        WashingActivity_.intent(this).start();
+        CommonWebViewActivity_.intent(this).title(text_four).linkUrl(Constants.ROOT_URL + "Qxxy").start();
     }
 
     @Override
