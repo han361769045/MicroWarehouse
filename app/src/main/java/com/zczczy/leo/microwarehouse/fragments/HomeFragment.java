@@ -15,7 +15,6 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
@@ -151,8 +150,12 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         //设置首页广告位
         int i = 0;
         for (AdvertModel advertModel : app.getAdvertModelList()) {
-            RequestCreator rc = Picasso.with(getActivity()).load(advertModel.AdvertImg);
-            rc.into(imageViewList.get(i));
+            Picasso.with(getActivity())
+                    .load(advertModel.AdvertImg)
+                    .fit().centerCrop()
+                    .error(R.drawable.goods_default)
+                    .placeholder(R.drawable.goods_default)
+                    .into(imageViewList.get(i));
             //为每一个广告位添加描述（传参数）
             imageViewList.get(i).setContentDescription(advertModel.JumpType + "," + advertModel.InfoId + "," + advertModel.AdvertName);
             i++;

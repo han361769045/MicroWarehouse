@@ -40,8 +40,12 @@ public class GoodsCommentsItemView extends ItemView<GoodsCommentsModel> {
         txt_time.setText(_data.PlTime);
         ratingBar.setRating(_data.XNum);
         if (!StringUtils.isEmpty(_data.HeadImg)) {
-            Picasso.with(context).load(_data.HeadImg).resize(50, 50).
-                    centerCrop().placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
+            Picasso.with(context).load(_data.HeadImg)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.default_header)
+                    .error(R.drawable.default_header)
+                    .into(img_avatar);
         }
     }
 

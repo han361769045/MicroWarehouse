@@ -68,6 +68,11 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     //
     List<CartModel> list;
 
+    @Bean
+    void setAdapter(CartAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
+
     @AfterViews
     void afterView() {
         myTitleBar.hideNavButtonView();
@@ -89,13 +94,8 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
                 }
             }
         });
-    }
 
-    @Bean
-    void setAdapter(CartAdapter myAdapter) {
-        this.myAdapter = myAdapter;
     }
-
 
     @Click
     void ll_delete() {
@@ -177,8 +177,8 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
             if (!alertDialog.isShowing()) {
                 alertDialog.show();
             }
+            AndroidTool.dismissLoadDialog();
         }
-
     }
 
     @Override
@@ -195,7 +195,6 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
             cb_all.setChecked(false);
             bus.register(this);
             check();
-
         }
     }
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_bg_color"
-    android:orientation="vertical"
-    tools:context=".fragments.HomeFragment">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_bg_color"
+              android:orientation="vertical"
+              tools:context=".fragments.HomeFragment">
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -20,7 +20,7 @@
         app:mLeftText="全国"
         app:mLeftTextColor="@color/white"
         app:mLeftTextMarginLeft="10dp"
-        app:mLeftTextRightDrawable="@drawable/title_down" />
+        app:mLeftTextRightDrawable="@drawable/title_down"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 app:indicator_visibility="visible"
-                app:pager_animation="Accordion" />
+                app:pager_animation="Accordion"/>
 
 
             <LinearLayout
@@ -61,7 +61,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_one"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -79,7 +79,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_two"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,7 +97,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_three"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -115,7 +115,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_four"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -132,7 +132,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.87"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_thirteen"
@@ -142,7 +142,7 @@
                     android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_fourteenth"
@@ -150,11 +150,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.87"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <LinearLayout
                 android:id="@+id/ll_born"
@@ -168,18 +168,18 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/home_horn" />
+                    android:src="@drawable/home_horn"/>
 
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider_horn"
                     android:layout_width="match_parent"
                     android:layout_height="18dp"
                     app:indicator_visibility="invisible"
-                    app:pager_animation="Default" />
+                    app:pager_animation="Default"/>
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -195,7 +195,7 @@
                     android:layout_marginEnd="2dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
 
                 <LinearLayout
@@ -210,7 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="63dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/goods_default" />
+                        android:src="@drawable/goods_default"/>
 
                     <ImageView
                         android:id="@+id/ad_three"
@@ -218,7 +218,7 @@
                         android:layout_height="63dp"
                         android:layout_marginTop="3dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/goods_default" />
+                        android:src="@drawable/goods_default"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -234,7 +234,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_five"
@@ -244,7 +244,7 @@
                     android:layout_marginStart="1dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_six"
@@ -252,7 +252,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
             <LinearLayout
@@ -266,7 +266,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_eight"
@@ -274,7 +274,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
             <LinearLayout
@@ -288,7 +288,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_ten"
@@ -298,7 +298,7 @@
                     android:layout_marginStart="1dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_eleven"
@@ -306,7 +306,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
         </LinearLayout>

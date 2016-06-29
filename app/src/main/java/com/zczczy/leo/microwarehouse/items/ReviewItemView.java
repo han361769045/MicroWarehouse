@@ -32,7 +32,13 @@ public class ReviewItemView extends ItemView<OrderDetailModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_avatar);
+            Picasso.with(context)
+                    .load(_data.GoodsImgSl)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .into(img_avatar);
         }
         txt_name.setText(_data.ProductName);
 //        txt_des.setText(_data.GoodsDesc);

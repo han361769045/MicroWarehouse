@@ -38,8 +38,13 @@ public class DepotItemView extends ItemView<DepotModel> {
         txt_depot_address.setText(_data.Address);
 
         if (!StringUtils.isEmpty(_data.DepotImgUrl)) {
-            Picasso.with(context).load(_data.DepotImgUrl).placeholder(R.drawable.goods_default)
-                    .error(R.drawable.goods_default).resize(100, 100).into(img_depot);
+            Picasso.with(context)
+                    .load(_data.DepotImgUrl)
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .fit()
+                    .centerCrop()
+                    .into(img_depot);
         }
 
     }
