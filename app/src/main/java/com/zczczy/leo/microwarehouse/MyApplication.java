@@ -65,6 +65,7 @@ public class MyApplication extends Application {
         noticeInfoModelList = new ArrayList<>();
 
         iWXApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
+        iWXApi.unregisterApp();
         iWXApi.registerApp(Constants.APP_ID);
         if (pre.isFirst().get()) {
             JPushInterface.setAliasAndTags(this, "", null, myBackgroundTask);
