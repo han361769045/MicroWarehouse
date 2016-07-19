@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
@@ -342,6 +343,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     }
 
     public void onDestroy() {
+        Glide.get(this).clearMemory();
         super.onDestroy();
     }
 

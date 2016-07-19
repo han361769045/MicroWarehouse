@@ -23,7 +23,7 @@ import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.tools.MyViewGroup;
+import com.zczczy.leo.microwarehouse.viewgroup.MyViewGroup;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
