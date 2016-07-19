@@ -3,7 +3,7 @@ package com.zczczy.leo.microwarehouse.fragments;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
 import com.zczczy.leo.microwarehouse.activities.ApplyDealerActivity_;
@@ -78,7 +78,8 @@ public class MineFragment extends BaseFragment {
     void setData() {
         if (checkUserIsLogin()) {
             if (!StringUtils.isEmpty(pre.avatar().get())) {
-                Picasso.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
+                Glide.with(getActivity()).load(pre.avatar().get())
+                        .placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
             }
             txt_username.setText(pre.nickName().get());
             txt_user_type.setText(pre.userTypeStr().get());

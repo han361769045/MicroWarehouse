@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 /**
  * @author Created by LuLeo on 2016/6/14.
@@ -16,7 +16,7 @@ import com.zczczy.leo.microwarehouse.R;
  *         Only show textview(description)
  * @since 2016/6/14.
  */
-public class HornSliderView extends BaseSliderView {
+public class HornSliderView extends GlideSliderView {
 
     public HornSliderView(Context context) {
         super(context);

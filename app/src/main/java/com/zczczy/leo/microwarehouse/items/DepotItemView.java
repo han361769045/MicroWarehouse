@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.DepotModel;
 
@@ -38,11 +38,12 @@ public class DepotItemView extends ItemView<DepotModel> {
         txt_depot_address.setText(_data.Address);
 
         if (!StringUtils.isEmpty(_data.DepotImgUrl)) {
-            Picasso.with(context)
+            Glide.with(context)
                     .load(_data.DepotImgUrl)
                     .placeholder(R.drawable.goods_default)
                     .error(R.drawable.goods_default)
-                    .fit()
+                    .skipMemoryCache(true)
+                    .crossFade()
                     .centerCrop()
                     .into(img_depot);
         }

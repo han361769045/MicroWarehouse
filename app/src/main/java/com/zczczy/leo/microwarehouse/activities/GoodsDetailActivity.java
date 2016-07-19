@@ -1,12 +1,18 @@
 package com.zczczy.leo.microwarehouse.activities;
 
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ScrollingView;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -21,6 +27,8 @@ import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment_;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView_;
+import com.zczczy.leo.microwarehouse.items.GoodsPropertiesPopup;
+import com.zczczy.leo.microwarehouse.items.GoodsPropertiesPopup_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
@@ -33,6 +41,7 @@ import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
+import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -59,6 +68,9 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     SliderLayout sliderLayout;
 
     @ViewById
+    RelativeLayout parent;
+
+    @ViewById
     MyTitleBar myTitleBar;
 
     @ViewById
@@ -82,6 +94,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @Extra
     String goodsId;
 
+    GoodsModel goods;
+
     @StringRes
     String text_goods_price, tip;
 
@@ -93,6 +107,10 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     GoodsCommentsFragment goodsCommentsFragment;
 
+    PopupWindow popupWindow;
+
+    GoodsPropertiesPopup goodsPropertiesPopup;
+
     String linkUrl, PlUrl;
 
     @AfterInject
@@ -103,6 +121,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
+        goodsPropertiesPopup = GoodsPropertiesPopup_.build(this);
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +149,19 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         }
     }
 
+    void showProperties(boolean isCart) {
+        if (popupWindow == null) {
+            popupWindow = new PopupWindow(goodsPropertiesPopup, ViewGroup.LayoutParams.MATCH_PARENT, parent.getHeight(), true);
+            goodsPropertiesPopup.setData(popupWindow, goods);
+            //实例化一个ColorDrawable颜色为半透明
+            ColorDrawable dw = new ColorDrawable(0xb0000000);
+            //设置SelectPicPopupWindow弹出窗体的背景
+            popupWindow.setBackgroundDrawable(dw);
+        }
+        goodsPropertiesPopup.setCart(isCart);
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    }
+
 
     @Click
     void txt_add_cart() {
@@ -138,6 +171,12 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                 addShoppingCart();
             } else {
                 AndroidTool.showToast(this, tip);
+            }
+            if (goods != null && goods.IsUsing == 1 && goods.GoodsAttributeList != null && goods.GoodsAttributeList.size() > 0) {
+                showProperties(true);
+            } else {
+                AndroidTool.showLoadDialog(this);
+                addShoppingCart();
             }
         } else {
             LoginActivity_.intent(this).start();
@@ -156,6 +195,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @UiThread
     void afterGetGoodsDetailById(BaseModelJson<GoodsModel> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bmj.Successful) {
@@ -178,7 +218,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             isCanBy = (Constants.Goods_UP == bmj.Data.GoodsStatus && bmj.Data.GoodsStock > 0);
             if (bmj.Data.GoodsImgList != null) {
                 for (GoodsImgModel goodsImgModel : bmj.Data.GoodsImgList) {
-                    DefaultSliderView textSliderView = new DefaultSliderView(this);
+                    GlideSliderView textSliderView = new GlideSliderView(this);
                     textSliderView.image(goodsImgModel.GoodsImgUrl);
                     textSliderView.setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
@@ -199,11 +239,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @Click
     void txt_buy() {
         if (checkUserIsLogin()) {
-            if (isCanBy) {
+            if (goods != null && goods.IsUsing == 1 && goods.GoodsAttributeList != null && goods.GoodsAttributeList.size() > 0) {
+                showProperties(false);
+            } else {
                 AndroidTool.showLoadDialog(this);
                 buy();
-            } else {
-                AndroidTool.showToast(this, tip);
             }
         } else {
             LoginActivity_.intent(this).start();
@@ -300,4 +340,9 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         super.onResume();
         sliderLayout.startAutoCycle();
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
 }

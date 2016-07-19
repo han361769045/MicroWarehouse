@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
@@ -192,7 +192,7 @@ public class AccountManagementActivity extends BaseActivity {
             AndroidTool.showToast(this, "上传失败");
         } else {
             pre.avatar().put(bmj.Data);
-            Picasso.with(this).load(bmj.Data).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
+            Glide.with(this).load(bmj.Data).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
         }
     }
 
@@ -281,7 +281,7 @@ public class AccountManagementActivity extends BaseActivity {
             txt_qq.setText(bmj.Data.MemberQQ);
             txt_blog.setText(bmj.Data.MemberBlog);
             if (!StringUtils.isEmpty(bmj.Data.HeadImg)) {
-                Picasso.with(this).load(bmj.Data.HeadImg).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
+                Glide.with(this).load(bmj.Data.HeadImg).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
             }
             memberInfoModel = bmj.Data;
             pre.userTypeStr().put(memberInfoModel.UserTypeStr);

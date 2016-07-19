@@ -29,4 +29,7 @@
 
     <color name="buy_button">#ff9900</color>
     <color name="line_color">#e1e1e1</color>
+
+    <color name="tab_text">#ff7800</color>
+    <color name="pop_pu_bg">#11000000</color>
 </resources>

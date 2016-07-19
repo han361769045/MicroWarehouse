@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
@@ -69,7 +69,9 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).fit().
+            Glide.with(context).load(_data.GoodsImgSl)
+                    .skipMemoryCache(true)
+                    .crossFade().
                     centerCrop().placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(pic);
         }
 

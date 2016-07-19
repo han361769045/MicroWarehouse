@@ -34,10 +34,13 @@ public class GoodsModel {
     public int PostageType;  //邮费类型（0包邮，1不累计，2多件累计）
     public String PjNum; //评价数量
     public String PJBfb; //评价百分比
+    public int IsUsing;
 
     public List<GoodsCommentsModel> GoodsCommentsList;  //商品评价
 
     public List<GoodsImgModel> GoodsImgList;  //商品图片集合
+
+    public List<GoodsAttribute> GoodsAttributeList;//
 
     public String PlUrl;//更多评论URL
 

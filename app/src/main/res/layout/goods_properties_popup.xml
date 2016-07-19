@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pop_pu_bg"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical"
+    tools:context=".items.GoodsPropertiesPopup">
+
+    <LinearLayout
+        android:id="@+id/ll_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_price_storage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="90dp">
+
+                <include layout="@layout/rmb_lb" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_store_count"
+                        android:textColor="@color/second_font_color" />
+
+                    <TextView
+                        android:id="@+id/txt_store_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_goods"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/goods_default" />
+
+            <ImageView
+                android:id="@+id/img_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:src="@drawable/goods_properties_close" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:text="属性规格"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.zczczy.leo.microwarehouse.viewgroup.MyViewGroup
+                android:id="@+id/myViewGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="top"/>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="购买数量"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <me.himanshusoni.quantityview.QuantityView
+                android:id="@+id/quantityView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                app:qv_addButtonBackground="@drawable/car_plus"
+                app:qv_addButtonText=""
+                app:qv_addButtonTextColor="@color/buy_button"
+                app:qv_maxQuantity="100"
+                app:qv_minQuantity="1"
+                app:qv_quantity="1"
+                app:qv_quantityBackground="@drawable/quantity_bg"
+                app:qv_quantityPadding="10dp"
+                app:qv_removeButtonBackground="@drawable/car_minus"
+                app:qv_removeButtonText=""
+                app:qv_removeButtonTextColor="@color/buy_button" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/tab_text"
+            android:text="@string/text_confirm"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

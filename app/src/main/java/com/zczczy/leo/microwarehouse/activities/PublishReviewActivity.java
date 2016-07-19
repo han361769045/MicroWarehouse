@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
@@ -63,7 +63,7 @@ public class PublishReviewActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         if (!StringUtils.isEmpty(model.GoodsImgSl)) {
-            Picasso.with(this).load(model.GoodsImgSl).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_store_pic);
+            Glide.with(this).load(model.GoodsImgSl).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_store_pic);
         }
     }
 

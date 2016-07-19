@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
@@ -22,7 +22,6 @@ import com.zczczy.leo.microwarehouse.activities.DepotActivity_;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.activities.SearchActivity_;
 import com.zczczy.leo.microwarehouse.activities.TaskOrderActivity_;
-import com.zczczy.leo.microwarehouse.activities.WashingActivity_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
@@ -34,6 +33,7 @@ import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
+import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -123,7 +123,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         //设置首页 轮播图
         for (BannerModel bannerModel : app.getNewBannerList()) {
             //显示 描述和图片sliderView
-            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
+            GlideSliderView textSliderView = new GlideSliderView(getActivity());
             textSliderView.image(bannerModel.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", bannerModel);
@@ -150,9 +150,11 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         //设置首页广告位
         int i = 0;
         for (AdvertModel advertModel : app.getAdvertModelList()) {
-            Picasso.with(getActivity())
+            Glide.with(getActivity())
                     .load(advertModel.AdvertImg)
-                    .fit().centerCrop()
+                    .centerCrop()
+                    .skipMemoryCache(true)
+                    .crossFade()
                     .error(R.drawable.goods_default)
                     .placeholder(R.drawable.goods_default)
                     .into(imageViewList.get(i));

@@ -18,6 +18,7 @@
 
 
     <!--common-->
+    <string name="text_confirm">确定</string>
     <string name="text_tip">提示</string>
     <string name="text_tip_confirm">确定要删除吗?</string>
     <string name="empty_search">找不到您想要的结果</string>
