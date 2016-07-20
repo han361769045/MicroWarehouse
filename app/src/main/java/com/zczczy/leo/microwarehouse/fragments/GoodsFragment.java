@@ -6,9 +6,11 @@ import android.widget.LinearLayout;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.DetailGoodsCommentsAdapter;
+import com.zczczy.leo.microwarehouse.adapters.GoodsAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
+import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 
@@ -24,7 +26,7 @@ import org.androidannotations.annotations.ViewById;
  * @since 2016/6/16.
  */
 @EFragment(R.layout.fragment_goods_comments)
-public class GoodsCommentsFragment extends BaseRecyclerViewFragment<GoodsCommentsModel> {
+public class GoodsFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
 
     @Bean
     OttoBus bus;
@@ -41,7 +43,7 @@ public class GoodsCommentsFragment extends BaseRecyclerViewFragment<GoodsComment
     }
 
     @Bean
-    void setMyAdapter(DetailGoodsCommentsAdapter myAdapter) {
+    void setMyAdapter(GoodsAdapter myAdapter) {
         this.myAdapter = myAdapter;
     }
 
@@ -51,7 +53,7 @@ public class GoodsCommentsFragment extends BaseRecyclerViewFragment<GoodsComment
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(goodsId);
+//        myAdapter.getMoreData(goodsId);
     }
 
 

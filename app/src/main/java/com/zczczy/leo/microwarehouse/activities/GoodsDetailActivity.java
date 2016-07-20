@@ -4,8 +4,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ScrollingView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment;
-import com.zczczy.leo.microwarehouse.fragments.GoodsCommentsFragment_;
+import com.zczczy.leo.microwarehouse.fragments.GoodsFragment;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment_;
+import com.zczczy.leo.microwarehouse.fragments.GoodsFragment_;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView_;
 import com.zczczy.leo.microwarehouse.items.GoodsPropertiesPopup;
@@ -40,7 +36,6 @@ import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
@@ -56,8 +51,6 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
-
-import java.util.HashMap;
 
 /**
  * Created by Leo on 2016/5/23.
@@ -106,7 +99,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     GoodsDetailFragment goodsDetailFragment;
 
-    GoodsCommentsFragment goodsCommentsFragment;
+    GoodsFragment goodsCommentsFragment;
 
     PopupWindow popupWindow;
 
@@ -182,11 +175,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         } else {
             LoginActivity_.intent(this).start();
         }
-    }
-
-    @Click
-    void txt_more_review() {
-        rb_good_review.setChecked(true);
     }
 
     @Background
@@ -308,7 +296,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         } else {
             if (goodsCommentsFragment == null) {
 //                goodsCommentsFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
-                goodsCommentsFragment = GoodsCommentsFragment_.builder().goodsId(parameter).build();
+                goodsCommentsFragment = GoodsFragment_.builder().goodsId(parameter).build();
                 transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
             } else {
                 transaction.show(goodsCommentsFragment);
