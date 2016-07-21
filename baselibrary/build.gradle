@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+def AAVersion = '4.0.0'
+
+
+apt {
+    arguments {
+        library "true"
+    }
+}
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    // 移除lint检查的error
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:24.1.0'
+    compile 'com.android.support:cardview-v7:24.1.0'
+    compile 'com.android.support:recyclerview-v7:24.1.0'
+    compile 'com.android.support:design:24.1.0'
+    compile 'com.android.support:percent:24.1.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'com.j256.ormlite:ormlite-core:4.48'
+    compile 'com.squareup:otto:1.3.8'
+    compile 'com.hkm.ui:ultimaterecyclerview:0.5.92'
+
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:ormlite-api:$AAVersion"
+    apt "org.androidannotations:ormlite:$AAVersion"
+    apt "org.androidannotations:otto:$AAVersion"
+    compile "org.androidannotations:rest-spring-api:$AAVersion"
+    apt "org.androidannotations:rest-spring:$AAVersion"
+}

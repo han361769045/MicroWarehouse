@@ -49,7 +49,7 @@ import java.util.Map;
  * http://wcapia.zczczy.com/
  * http://218.61.203.50:8018/
  */
-@Rest(rootUrl = "http://wcapia.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8018/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class)
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
@@ -359,12 +359,14 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * 商品加入购物车
      * 购物车加1
      *
-     * @param id GoodsInfoId 商品ID
+     * @param map GoodsInfoId 商品ID
+     *            ProductCount 购买数量
+     *            GoodsAttributeId 商品属性ID
      * @return
      */
-    @Post("api/Member/AddShoppingCart/{id}")
+    @Post("api/Member/AddShoppingCart")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModel addShoppingCart(@Path String id);
+    BaseModel addShoppingCart(@Body Map map);
 
     /**
      * 购物车减1
@@ -413,8 +415,8 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @return
      */
     @RequiresHeader(value = {"Token", "Kbn"})
-    @Get("api/Member/CreateSingleTempOrder?GoodsInfoId={GoodsInfoId}&Num={Num}")
-    BaseModelJson<OrderModel> createSingleTempOrder(@Path String GoodsInfoId, @Path int Num);
+    @Get("api/Member/CreateSingleTempOrder?GoodsInfoId={GoodsInfoId}&Num={Num}&GoodsAttributeId={GoodsAttributeId}")
+    BaseModelJson<OrderModel> createSingleTempOrder(@Path String GoodsInfoId, @Path int Num, @Path int GoodsAttributeId);
 
     /**
      * 生成订单信息

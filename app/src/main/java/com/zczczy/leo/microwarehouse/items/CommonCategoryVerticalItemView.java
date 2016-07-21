@@ -116,7 +116,7 @@ public class CommonCategoryVerticalItemView extends ItemView<GoodsModel> {
     void addShoppingCart() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterAddShoppingCart(myRestClient.addShoppingCart(_data.GoodsInfoId));
+//        afterAddShoppingCart(myRestClient.addShoppingCart(_data.GoodsInfoId));
     }
 
     @UiThread

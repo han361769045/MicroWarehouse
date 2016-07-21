@@ -41,7 +41,9 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.himanshusoni.quantityview.QuantityView;
@@ -182,7 +184,7 @@ public class GoodsPropertiesPopup extends LinearLayout {
     void buy() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterBuy(myRestClient.createSingleTempOrder(goods.GoodsInfoId, 1));
+        afterBuy(myRestClient.createSingleTempOrder(goods.GoodsInfoId, quantityView.getQuantity(), selectedId));
     }
 
     @UiThread
@@ -206,7 +208,11 @@ public class GoodsPropertiesPopup extends LinearLayout {
     void addShoppingCart() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterAddShoppingCart(myRestClient.addShoppingCart(goods.GoodsInfoId));
+        Map<String, String> map = new HashMap<>(3);
+        map.put("GoodsInfoId", goods.GoodsInfoId);
+        map.put("ProductCount", String.valueOf(quantityView.getQuantity()));
+        map.put("GoodsAttributeId", String.valueOf(selectedId));
+        afterAddShoppingCart(myRestClient.addShoppingCart(map));
     }
 
     /**

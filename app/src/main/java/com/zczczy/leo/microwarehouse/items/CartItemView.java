@@ -29,6 +29,9 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import me.himanshusoni.quantityview.QuantityView;
 
 /**
@@ -150,7 +153,11 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     void addShoppingCart(int newQuantity) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterAddShoppingCart(myRestClient.addShoppingCart(_data.GoodsInfoId), newQuantity);
+        Map<String, String> map = new HashMap<>(3);
+        map.put("GoodsInfoId", _data.GoodsInfoId);
+        map.put("ProductCount", String.valueOf(newQuantity));
+        map.put("GoodsAttributeId", String.valueOf(_data.GoodsAttributeId));
+        afterAddShoppingCart(myRestClient.addShoppingCart(map), newQuantity);
     }
 
     @UiThread

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="line_color">#e1e1e1</color>
+    <color name="gray">#aaaaaa</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#3366CC</color>
+</resources>

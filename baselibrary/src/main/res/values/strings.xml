@@ -1,0 +1,9 @@
+<resources>
+    <string name="no_net">网络连接失败</string>
+
+    <string name="empty_search">找不到您想要的结果</string>
+    <string name="empty_order">目前没有%1$s订单</string>
+    <string name="empty_review">暂时还没有评论</string>
+    <string name="empty_no_review">暂时还没有要评论的商品</string>
+    <string name="empty_logistics">暂时还没有物流信息</string>
+</resources>

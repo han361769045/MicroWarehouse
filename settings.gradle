@@ -1,1 +1,1 @@
-include ':app', ':mouth'
+include ':app', ':mouth', ':baselibrary'

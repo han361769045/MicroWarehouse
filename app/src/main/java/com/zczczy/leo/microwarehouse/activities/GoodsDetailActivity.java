@@ -52,6 +52,9 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Leo on 2016/5/23.
  */
@@ -160,12 +163,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @Click
     void txt_add_cart() {
         if (checkUserIsLogin()) {
-            if (isCanBy) {
-                AndroidTool.showLoadDialog(this);
-                addShoppingCart();
-            } else {
-                AndroidTool.showToast(this, tip);
-            }
             if (goods != null && goods.IsUsing == 1 && goods.GoodsAttributeList != null && goods.GoodsAttributeList.size() > 0) {
                 showProperties(true);
             } else {
@@ -190,6 +187,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
         } else {
+            goods = bmj.Data;
             goods_name.setText(bmj.Data.GodosName);
             goods_by.setText(bmj.Data.GoodsIsBy == 0 ? bmj.Data.Postage : "包邮");
             goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
@@ -243,7 +241,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     void buy() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterBuy(myRestClient.createSingleTempOrder(goodsId, 1));
+        afterBuy(myRestClient.createSingleTempOrder(goodsId, 1, 0));
     }
 
     @UiThread
@@ -263,7 +261,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     void addShoppingCart() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterAddShoppingCart(myRestClient.addShoppingCart(goodsId));
+        Map<String, String> map = new HashMap<>(3);
+        map.put("GoodsInfoId", goods.GoodsInfoId);
+        map.put("ProductCount", "1");
+        map.put("GoodsAttributeId", "0");
+        afterAddShoppingCart(myRestClient.addShoppingCart(map));
     }
 
     @UiThread

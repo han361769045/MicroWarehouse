@@ -42,6 +42,4 @@ public class GoodsModel {
 
     public List<GoodsAttribute> GoodsAttributeList;//
 
-    public String PlUrl;//更多评论URL
-
 }
