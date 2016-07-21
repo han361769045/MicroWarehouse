@@ -126,20 +126,11 @@ public class GoodsPropertiesPopup extends LinearLayout {
         isCart = cart;
     }
 
-    public void setData(PopupWindow popupWindow, GoodsModel goods) {
+    public void setData(PopupWindow popupWindow, GoodsModel good) {
         this.popupWindow = popupWindow;
-        this.goods = goods;
+        this.goods = good;
         textViews = new ArrayList<>();
         int i = 0;
-        if (!StringUtils.isEmpty(goods.GoodsImgSl)) {
-            Glide.with(context).load(goods.GoodsImgSl)
-                    .centerCrop()
-                    .crossFade()
-                    .error(R.drawable.goods_default)
-                    .bitmapTransform(new RoundedCornersTransformation(context, 10, 0))
-                    .placeholder(R.drawable.goods_default)
-                    .into(img_goods);
-        }
         for (final GoodsAttribute g : goods.GoodsAttributeList) {
             final TextView textView = new TextView(context);
             textView.setText(g.GoodsAttributeName);
@@ -159,6 +150,25 @@ public class GoodsPropertiesPopup extends LinearLayout {
                     txt_rmb.setVisibility(View.VISIBLE);
                     txt_rmb.setText(String.format(text_goods_price, g.GoodsAttributePrice));
                     selectedId = g.GoodsAttributeId;
+                    if (!StringUtils.isEmpty(g.GoodsAttributeImgUrl)) {
+                        Glide.with(context).load(g.GoodsAttributeImgUrl)
+                                .centerCrop()
+                                .crossFade()
+                                .error(R.drawable.goods_default)
+                                .bitmapTransform(new RoundedCornersTransformation(context, 10, 0))
+                                .placeholder(R.drawable.goods_default)
+                                .into(img_goods);
+                    } else {
+                        if (!StringUtils.isEmpty(goods.GoodsImgSl)) {
+                            Glide.with(context).load(goods.GoodsImgSl)
+                                    .centerCrop()
+                                    .crossFade()
+                                    .error(R.drawable.goods_default)
+                                    .bitmapTransform(new RoundedCornersTransformation(context, 10, 0))
+                                    .placeholder(R.drawable.goods_default)
+                                    .into(img_goods);
+                        }
+                    }
                 }
             });
             if (i == 0) {

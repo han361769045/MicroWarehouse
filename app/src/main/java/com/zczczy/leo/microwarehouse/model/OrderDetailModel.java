@@ -31,6 +31,7 @@ public class OrderDetailModel implements Serializable {
     public String GoodsInfoId;
     public String GoodsImgSl;
     public String CreateTime;
+    public String GoodsAttributeName;
 
 
 }

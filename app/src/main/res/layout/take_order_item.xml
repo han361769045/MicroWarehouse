@@ -36,6 +36,12 @@
             android:maxLines="2"
             android:textColor="@color/black" />
 
+        <TextView
+            android:id="@+id/txt_attr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/second_font_color" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

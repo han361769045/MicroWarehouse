@@ -23,7 +23,7 @@ public class TakeOrderItemView extends ItemView<OrderDetailModel> {
     ImageView img_cart_goods_img;
 
     @ViewById
-    TextView txt_cart_goods_product, txt_goods_price, txt_goods_bat_price, txt_num;
+    TextView txt_cart_goods_product, txt_goods_price, txt_goods_bat_price, txt_num, txt_attr;
 
     @StringRes
     String text_goods_price;
@@ -47,6 +47,7 @@ public class TakeOrderItemView extends ItemView<OrderDetailModel> {
         txt_cart_goods_product.setText(_data.ProductName);
         txt_goods_price.setText(String.format(text_goods_price, _data.ProductPrice));
         txt_num.setText("x".concat(String.valueOf(_data.ProductNum)));
+        txt_attr.setText(_data.GoodsAttributeName);
     }
 
 

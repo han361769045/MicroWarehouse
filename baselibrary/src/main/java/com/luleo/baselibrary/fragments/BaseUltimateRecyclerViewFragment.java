@@ -36,7 +36,7 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 /**
  * Created by Leo on 2016/5/21.
  */
-@EFragment()
+@EFragment
 public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
 
     @ViewById

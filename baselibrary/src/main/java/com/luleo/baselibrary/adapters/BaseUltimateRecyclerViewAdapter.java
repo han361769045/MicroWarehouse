@@ -44,8 +44,6 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
     private int total = 0;
     private boolean isFirstOnly = true;
     private Interpolator mInterpolator = new LinearInterpolator();
-    private int mDuration = 300;
-    private int mLastPosition = 5;
     private OnItemClickListener<T> onItemClickListener;
     private OnItemLongClickListener<T> onItemLongClickListener;
 
@@ -104,12 +102,11 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         } else if (getItemViewType(position) == VIEW_TYPES.FOOTER) {
 
         }
-        if (!isFirstOnly || position > mLastPosition) {
+        if (!isFirstOnly) {
             for (Animator anim : getAdapterAnimations(viewHolder.itemView, AdapterAnimationType.ScaleIn)) {
-                anim.setDuration(mDuration).start();
+                anim.setDuration(300).start();
                 anim.setInterpolator(mInterpolator);
             }
-            mLastPosition = position;
         } else {
             ViewHelper.clear(viewHolder.itemView);
         }

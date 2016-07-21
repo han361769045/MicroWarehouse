@@ -1,13 +1,11 @@
 package com.luleo.baselibrary.activities;
 
 import android.graphics.Paint;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.luleo.baselibrary.R;
 import com.luleo.baselibrary.adapters.BaseUltimateRecyclerViewAdapter;
@@ -34,7 +32,7 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 /**
  * Created by Leo on 2016/5/21.
  */
-@EActivity()
+@EActivity
 public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     @ViewById
@@ -50,6 +48,8 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     @Bean
     OttoBus bus;
+
+    int layoutId;
 
     LinearLayoutManager linearLayoutManager;
 
@@ -72,10 +72,12 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         gridLayoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         //设置 layoutManger
-        verticalItem();
+        setLayoutManager();
 
-        //设置视差header
-        enableParallaxHeader();
+        if (layoutId > 0) {
+            //设置视差header
+            enableParallaxHeader(layoutId);
+        }
 
         //设置空视图
         enableEmptyViewPolicy();
@@ -101,6 +103,15 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
         paint.setColor(line_color);
         ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(leftMargin, rightMargin).paint(paint).build());
     }
+
+    /**
+     * set layoutManager
+     * you can  override
+     */
+    void setLayoutManager() {
+        verticalItem();
+    }
+
 
     //线性布局
     void verticalItem() {
@@ -132,22 +143,6 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
         StaggeredGridLayoutManager gaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         rv.setLayoutManager(gaggeredGridLayoutManager);
     }
-
-
-    /**
-     * 设置默认的 下拉刷新
-     */
-    void defaultOnRefresh() {
-        ultimateRecyclerView.setDefaultOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                isRefresh = true;
-                pageIndex = 1;
-                afterLoadMore();
-            }
-        });
-    }
-
 
     /**
      * 设置 Material 下拉刷新
@@ -237,16 +232,19 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     /**
      * 设置 启用 ParallaxHeader（视差header）
+     * you can override
      */
-    void enableParallaxHeader() {
-//        ultimateRecyclerView.setParallaxHeader(getLayoutInflater().inflate(R.layout.parallax_recyclerview_header, ultimateRecyclerView.mRecyclerView, false));
-//        ultimateRecyclerView.setOnParallaxScroll(new UltimateRecyclerView.OnParallaxScroll() {
-//            @Override
-//            public void onParallaxScroll(float percentage, float offset, View parallax) {
-//
-//            }
-//        });
+    void enableParallaxHeader(int layoutId) {
+        View view = layoutInflater.inflate(layoutId, ultimateRecyclerView.mRecyclerView, false);
+        ultimateRecyclerView.setParallaxHeader(view);
+        ultimateRecyclerView.setOnParallaxScroll(new UltimateRecyclerView.OnParallaxScroll() {
+            @Override
+            public void onParallaxScroll(float percentage, float offset, View parallax) {
+
+            }
+        });
     }
+
 
     void enableLoadMore() {
         ultimateRecyclerView.setLoadMoreView(R.layout.custom_bottom_progressbar);
@@ -255,9 +253,7 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
             public void loadMore(int itemsCount, final int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
 //                    AndroidTool.showToast(BaseUltimateRecyclerViewActivity.this, "没有更多的数据了！~");
-                    Toast.makeText(BaseUltimateRecyclerViewActivity.this, "没有更多的数据了", Toast.LENGTH_SHORT).show();
                     ultimateRecyclerView.disableLoadmore();
-//                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();

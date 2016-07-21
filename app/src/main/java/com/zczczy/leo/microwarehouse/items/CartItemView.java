@@ -47,7 +47,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     ImageView img_cart_goods_img;
 
     @ViewById
-    TextView txt_goods_name, txt_goods_price;
+    TextView txt_goods_name, txt_goods_price, txt_attr;
 
     @StringRes
     String text_goods_price;
@@ -99,7 +99,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
         quantityView.setMaxQuantity(_data.GoodsStock);
         _data.ProductCount = _data.ProductCount > _data.GoodsStock ? _data.GoodsStock : _data.ProductCount;
         quantityView.setQuantity(_data.ProductCount);
-
+        txt_attr.setText(_data.GoodsAttributeName);
         txt_goods_name.setText(_data.GodosName);
         txt_goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
         cb_select.setChecked(_data.isChecked);
@@ -155,7 +155,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
         myRestClient.setHeader("Kbn", Constants.ANDROID);
         Map<String, String> map = new HashMap<>(3);
         map.put("GoodsInfoId", _data.GoodsInfoId);
-        map.put("ProductCount", String.valueOf(newQuantity));
+        map.put("ProductCount", "1");
         map.put("GoodsAttributeId", String.valueOf(_data.GoodsAttributeId));
         afterAddShoppingCart(myRestClient.addShoppingCart(map), newQuantity);
     }
