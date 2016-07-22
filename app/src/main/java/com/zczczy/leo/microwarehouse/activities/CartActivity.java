@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
+import com.zczczy.leo.microwarehouse.items.CartRecommendItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.CartModel;
@@ -45,7 +46,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     CheckBox cb_all;
 
     @ViewById
-    TextView txt_total_lb, txt_checkout;
+    TextView txt_total_lb, txt_checkout, txt_delete;
 
     @StringRes
     String cart_total, text_buy, text_edit, text_delete, text_cancel, text_tip, text_tip_confirm;
@@ -65,8 +66,10 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     @AfterViews
     void afterView() {
         bus.register(this);
+
         txt_total_lb.setText(String.format(cart_total, 0.0));
         txt_checkout.setText(String.format(text_buy, count));
+        txt_delete.setText(String.format(text_delete, count));
         list = new ArrayList<>();
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +92,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     @Bean
     void setAdapter(CartAdapter myAdapter) {
         this.myAdapter = myAdapter;
+        myAdapter.enableFooterView=true;
     }
 
 
@@ -103,7 +107,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
         calcMoney();
         if (count > 0) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton(text_delete, new DialogInterface.OnClickListener() {
+            adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton("删除", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     AndroidTool.showLoadDialog(CartActivity.this);
@@ -193,6 +197,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
         }
         txt_total_lb.setText(String.format(cart_total, totalMoney));
         txt_checkout.setText(String.format(text_buy, count));
+        txt_delete.setText(String.format(text_delete, count));
     }
 
     public void finish() {

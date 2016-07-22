@@ -32,6 +32,7 @@ import org.springframework.util.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import jp.wasabeef.glide.transformations.gpu.ContrastFilterTransformation;
 import me.himanshusoni.quantityview.QuantityView;
 
 /**
@@ -48,9 +49,6 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
 
     @ViewById
     TextView txt_goods_name, txt_goods_price, txt_attr;
-
-    @StringRes
-    String text_goods_price;
 
     @ViewById
     QuantityView quantityView;
@@ -89,11 +87,11 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Glide.with(context)
                     .load(_data.GoodsImgSl)
-                    .skipMemoryCache(true)
                     .crossFade()
                     .centerCrop()
                     .placeholder(R.drawable.goods_default)
                     .error(R.drawable.goods_default)
+                    .bitmapTransform(new ContrastFilterTransformation(context, 2.0f))
                     .into(img_cart_goods_img);
         }
         quantityView.setMaxQuantity(_data.GoodsStock);
@@ -101,7 +99,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
         quantityView.setQuantity(_data.ProductCount);
         txt_attr.setText(_data.GoodsAttributeName);
         txt_goods_name.setText(_data.GodosName);
-        txt_goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
+        txt_goods_price.setText(String.valueOf(_data.GoodsPrice));
         cb_select.setChecked(_data.isChecked);
     }
 

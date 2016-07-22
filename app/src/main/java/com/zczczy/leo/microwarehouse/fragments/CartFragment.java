@@ -47,7 +47,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     CheckBox cb_all;
 
     @ViewById
-    TextView txt_total_lb, txt_checkout;
+    TextView txt_total_lb, txt_checkout,txt_delete;
 
     @StringRes
     String cart_total, text_buy, text_edit, text_delete, text_cancel, text_tip, text_tip_confirm;
@@ -78,6 +78,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         myTitleBar.hideNavButtonView();
         txt_total_lb.setText(String.format(cart_total, 0.0));
         txt_checkout.setText(String.format(text_buy, count));
+        txt_delete.setText(String.format(text_delete, count));
         list = new ArrayList<>();
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +103,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         calcMoney();
         if (count > 0) {
             AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-            adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton(text_delete, new DialogInterface.OnClickListener() {
+            adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton("删除", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     AndroidTool.showLoadDialog(CartFragment.this);
@@ -231,5 +232,6 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
         }
         txt_total_lb.setText(String.format(cart_total, totalMoney));
         txt_checkout.setText(String.format(text_buy, count));
+        txt_delete.setText(String.format(text_delete, count));
     }
 }

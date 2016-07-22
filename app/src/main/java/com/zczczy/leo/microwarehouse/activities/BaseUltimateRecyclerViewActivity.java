@@ -87,7 +87,7 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
         ultimateRecyclerView.setCustomSwipeToRefresh();
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
+        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(21).paint(paint).build());
         refreshingMaterial();
     }
 

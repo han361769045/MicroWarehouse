@@ -26,27 +26,20 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
     private int[] mMeasuredDimension = new int[2];
 
     @Override
-    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
-                          int widthSpec, int heightSpec) {
+    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
 
         final int widthMode = View.MeasureSpec.getMode(widthSpec);
         final int heightMode = View.MeasureSpec.getMode(heightSpec);
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
         final int heightSize = View.MeasureSpec.getSize(heightSpec);
 
-//        Log.i(TAG, "onMeasure called. \nwidthMode " + widthMode
-//                + " \nheightMode " + heightSpec
-//                + " \nwidthSize " + widthSize
-//                + " \nheightSize " + heightSize
-//                + " \ngetItemCount() " + getItemCount());
-
         int width = 0;
         int height = 0;
         for (int i = 0; i < getItemCount(); i++) {
-            measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
+            measureScrapChild(recycler, i, View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     mMeasuredDimension);
+
 
             if (getOrientation() == HORIZONTAL) {
                 width = width + mMeasuredDimension[0];
@@ -98,8 +91,6 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
         }
     }
-
 }

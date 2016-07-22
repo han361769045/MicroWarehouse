@@ -3,7 +3,9 @@ package com.zczczy.leo.microwarehouse.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.CartItemView_;
+import com.zczczy.leo.microwarehouse.items.CartRecommendItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.CartModel;
@@ -33,7 +35,6 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
         result = myRestClient.getBuyCartInfo();
-
         afterGetMoreData(result);
     }
 
@@ -51,6 +52,16 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
                 itemNotify(false);
             }
         }
+    }
+
+
+    public void onBindHeaderViewHolder(BaseViewHolder viewHolder){
+
+    }
+
+    public View onCreateFooterView(ViewGroup parent, int viewType) {
+        customFooterView = CartRecommendItemView_.build(context);
+        return customFooterView;
     }
 
     @Override

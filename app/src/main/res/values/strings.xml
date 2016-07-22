@@ -91,7 +91,7 @@
     <string name="text_cart">我的购物车</string>
     <string name="text_all_select">全选</string>
     <string name="text_buy">结算(%1$s)</string>
-    <string name="text_delete">删除</string>
+    <string name="text_delete">删除(%1$s)</string>
     <string name="text_cancel">取消</string>
     <string name="text_edit">编辑</string>
     <string name="cart_total">合计:%1$s</string>

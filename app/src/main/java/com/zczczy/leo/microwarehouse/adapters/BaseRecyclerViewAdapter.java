@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.MyApplication;
+import com.zczczy.leo.microwarehouse.activities.PublishTaskOrderActivity;
+import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
 import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.ItemView;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
@@ -36,14 +38,13 @@ import java.util.List;
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     private List<T> items = new ArrayList<>();
-
     private OnItemClickListener<T> onItemClickListener;
-
     private OnItemLongClickListener<T> onItemLongClickListener;
-
     public VerticalAndHorizontal verticalAndHorizontal;
-
     private DynamicHeight dynamicHeight;
+    protected View customFooterView;
+    protected View customHeaderView;
+    public boolean enableFooterView;
 
     @RestService
     MyRestClient myRestClient;
@@ -70,12 +71,24 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = onCreateItemView(parent, viewType);
+        View view;
+        if (VIEW_TYPES.FOOTER == viewType) {
+            view = onCreateFooterView(parent, viewType);
+        } else if (VIEW_TYPES.HEADER == viewType) {
+            view = customHeaderView;
+        } else {
+            view = onCreateItemView(parent, viewType);
+        }
         //修正 item不充满
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         return new BaseViewHolder(view);
     }
+
+    public View onCreateFooterView(ViewGroup parent, int viewType) {
+        return customFooterView;
+    }
+
 
     @Background
     public abstract void getMoreData(Object... objects);
@@ -102,17 +115,33 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
      */
     protected abstract View onCreateItemView(ViewGroup parent, int viewType);
 
-
     @Override
     public void onBindViewHolder(BaseViewHolder viewHolder, int position) {
-        ItemView<T> itemView = (ItemView) viewHolder.itemView;
-        itemView.init(items.get(position), this, viewHolder);
-        setNormalClick(viewHolder);
-        if (dynamicHeight != null) {
+
+        if (getItemViewType(position) == VIEW_TYPES.NORMAL) {
+            ItemView<T> itemView = (ItemView) viewHolder.itemView;
+            int tempPosition = position;
+            if (customHeaderView != null) {
+                tempPosition--;
+            }
+            if (enableFooterView) {
+                tempPosition--;
+            }
+            itemView.init(items.get(tempPosition), this, viewHolder);
+            setNormalClick(viewHolder);
+            if (dynamicHeight != null) {
 //            int cellWidth = viewHolder.itemView.getWidth();// this will give you cell width dynamically
 //            int cellHeight = viewHolder.itemView.height;// this will give you cell height dynamically
-            dynamicHeight.HeightChange(position, 55); //call your iterface hear
+                dynamicHeight.HeightChange(position, 55); //call your iterface hear
+            }
+        } else if (getItemViewType(position) == VIEW_TYPES.FOOTER) {
+            onBindHeaderViewHolder(viewHolder);
         }
+
+    }
+
+    public void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+
     }
 
     /**
@@ -141,10 +170,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     }
 
     public void insertAll(List<T> list, int position) {
-        items.addAll(position, list);
+        items.addAll(enableFooterView ? position - 1 : position, list);
         notifyItemInserted(position);
     }
-
 
     public void itemNotify(Object... objects) {
 
@@ -182,12 +210,24 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public int getItemCount() {
-        return items.size();
+        int count = items.size();
+        if (enableFooterView) {
+            count++;
+        }
+        if (customHeaderView != null) {
+            count++;
+        }
+        return count;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        if (position == getItemCount() - 1 && enableFooterView) {
+            return VIEW_TYPES.FOOTER;
+        }
+        if (position == 0 && customHeaderView != null)
+            return VIEW_TYPES.HEADER;
+        return VIEW_TYPES.NORMAL;
     }
 
 
@@ -236,5 +276,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     public void setDynamicHeight(DynamicHeight dynamicHeight) {
         this.dynamicHeight = dynamicHeight;
+    }
+
+    public class VIEW_TYPES {
+        public static final int NORMAL = 0;
+        public static final int HEADER = 1;
+        public static final int FOOTER = 2;
     }
 }
