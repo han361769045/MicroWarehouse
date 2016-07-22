@@ -3,14 +3,14 @@ package com.zczczy.leo.microwarehouse.items;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
 
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
+import com.zczczy.leo.microwarehouse.adapters.CartRecommendGoodsAdapter;
+import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.viewgroup.FullyLinearLayoutManager;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -29,26 +29,26 @@ public class CartRecommendItemView extends ItemView {
 
     FullyLinearLayoutManager linearLayoutManager;
 
-    @Bean(CartAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    @Bean(CartRecommendGoodsAdapter.class)
+    BaseRecyclerViewAdapter<GoodsModel> myAdapter;
 
     public CartRecommendItemView(Context context) {
         super(context);
-
     }
 
     @Override
     protected void init(Object... objects) {
-
-    }
-
-    @AfterViews
-    void afterView() {
-//        linearLayoutManager = new FullyLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setNestedScrollingEnabled(false);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.setAdapter(myAdapter);
-//        myAdapter.getMoreData();
+        linearLayoutManager = new FullyLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(myAdapter);
+        myAdapter.getMoreData();
+        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
+                GoodsDetailActivity_.intent(context).goodsId(obj.GoodsInfoId).start();
+            }
+        });
     }
 
     @Override

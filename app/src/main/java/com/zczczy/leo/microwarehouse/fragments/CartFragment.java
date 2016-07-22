@@ -47,7 +47,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     CheckBox cb_all;
 
     @ViewById
-    TextView txt_total_lb, txt_checkout,txt_delete;
+    TextView txt_total_lb, txt_checkout, txt_delete;
 
     @StringRes
     String cart_total, text_buy, text_edit, text_delete, text_cancel, text_tip, text_tip_confirm;
@@ -71,6 +71,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     @Bean
     void setAdapter(CartAdapter myAdapter) {
         this.myAdapter = myAdapter;
+        myAdapter.isFooter = true;
     }
 
     @AfterViews

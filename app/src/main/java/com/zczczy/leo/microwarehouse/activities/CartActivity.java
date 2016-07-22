@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
-import com.zczczy.leo.microwarehouse.items.CartRecommendItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.CartModel;
@@ -92,7 +91,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     @Bean
     void setAdapter(CartAdapter myAdapter) {
         this.myAdapter = myAdapter;
-        myAdapter.enableFooterView=true;
+        myAdapter.isFooter = true;
     }
 
 

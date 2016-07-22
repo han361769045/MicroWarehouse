@@ -11,12 +11,8 @@ import com.zczczy.leo.microwarehouse.items.ItemView;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
-
-import java.util.ArrayList;
 
 /**
  * Created by Leo on 2016/5/21.

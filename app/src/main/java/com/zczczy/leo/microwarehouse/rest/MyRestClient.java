@@ -229,6 +229,14 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Content/GetTaskOrderList?PageIndex={PageIndex}&PageSize={PageSize}")
     BaseModelJson<PagerResult<TaskOrderModel>> getTaskOrderList(@Path int PageIndex, @Path int PageSize);
 
+    /**
+     * 查询购物车下的推荐商品信息
+     *
+     * @param Top
+     * @return
+     */
+    @Get("api/Content/GetCartRecommendedGoodsList?Top={Top}")
+    BaseModelJson<List<GoodsModel>> getCartRecommendedGoodsList(@Path int Top);
 
     //==============================================================================================
     // 需要传入token 和 token
