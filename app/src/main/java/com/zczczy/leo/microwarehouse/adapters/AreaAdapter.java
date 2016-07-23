@@ -5,13 +5,8 @@ import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.AreaItemView_;
 import com.zczczy.leo.microwarehouse.model.AreaModel;
-import com.zczczy.leo.microwarehouse.model.BaseModelJson;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
-
-import java.util.List;
 
 /**
  * Created by Leo on 2016/5/4.
@@ -22,21 +17,7 @@ public class AreaAdapter extends BaseRecyclerViewAdapter<AreaModel> {
 
     @Override
     public void getMoreData(Object... objects) {
-        afterGetData(myRestClient.getAreaListByCityId(objects[0].toString()));
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<List<AreaModel>> bmj) {
-        AndroidTool.dismissLoadDialog();
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (bmj.Data.size() > 0) {
-                insertAll(bmj.Data, getItems().size());
-            }
-        }
-
+        afterGetMoreData(myRestClient.getAreaListByCityId(objects[0].toString()));
     }
 
     @Override

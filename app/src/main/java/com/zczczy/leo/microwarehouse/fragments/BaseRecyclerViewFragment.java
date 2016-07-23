@@ -37,6 +37,8 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
     @RestService
     MyRestClient myRestClient;
 
+    int gridCount = 3;
+
     BaseRecyclerViewAdapter<T> myAdapter;
 
     GridLayoutManager gridLayoutManager;
@@ -50,11 +52,10 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
-
     @AfterViews
     void afterRecyclerView() {
         AndroidTool.showLoadDialog(this);
-        gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        gridLayoutManager = new GridLayoutManager(getActivity(), gridCount);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
         paint.setStrokeWidth(1);

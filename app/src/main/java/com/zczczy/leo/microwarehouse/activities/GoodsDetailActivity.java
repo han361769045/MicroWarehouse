@@ -102,13 +102,13 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     GoodsDetailFragment goodsDetailFragment;
 
-    GoodsFragment goodsCommentsFragment;
+    GoodsFragment goodsRecommendFragment;
 
     PopupWindow popupWindow;
 
     GoodsPropertiesPopup goodsPropertiesPopup;
 
-    String linkUrl, PlUrl;
+    String linkUrl;
 
     @AfterInject
     void afterInject() {
@@ -192,8 +192,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             goods_by.setText(bmj.Data.GoodsIsBy == 0 ? bmj.Data.Postage : "包邮");
             goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
             linkUrl = bmj.Data.StaticHtmlUrl;
-//            PlUrl = bmj.Data.PlUrl;
-            PlUrl = goodsId;
             changeFragment(bmj.Data.StaticHtmlUrl);
 
             txt_price_delete.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
@@ -285,8 +283,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         if (goodsDetailFragment != null) {
             transaction.hide(goodsDetailFragment);
         }
-        if (goodsCommentsFragment != null) {
-            transaction.hide(goodsCommentsFragment);
+        if (goodsRecommendFragment != null) {
+            transaction.hide(goodsRecommendFragment);
         }
         if (rb_good_detail.isChecked()) {
             if (goodsDetailFragment == null) {
@@ -296,12 +294,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                 transaction.show(goodsDetailFragment);
             }
         } else {
-            if (goodsCommentsFragment == null) {
-//                goodsCommentsFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
-                goodsCommentsFragment = GoodsFragment_.builder().goodsId(parameter).build();
-                transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
+            if (goodsRecommendFragment == null) {
+                goodsRecommendFragment = GoodsFragment_.builder().mGoodsModel(goods).build();
+                transaction.add(R.id.goods_detail_fragment, goodsRecommendFragment);
             } else {
-                transaction.show(goodsCommentsFragment);
+                transaction.show(goodsRecommendFragment);
             }
         }
         //transaction.commit();

@@ -1,11 +1,12 @@
 package com.zczczy.leo.microwarehouse.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Leo on 2016/5/21.
  */
-public class GoodsModel {
+public class GoodsModel implements Serializable{
 
     /**
      * GoodsInfoId : sample string 1
@@ -41,5 +42,7 @@ public class GoodsModel {
     public List<GoodsImgModel> GoodsImgList;  //商品图片集合
 
     public List<GoodsAttribute> GoodsAttributeList;//
+
+    public List<GoodsModel> RecommendedGoodsList;//推荐商品
 
 }

@@ -3,40 +3,45 @@ package com.zczczy.leo.microwarehouse.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView_;
+import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
-import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
-import com.zczczy.leo.microwarehouse.model.PagerResult;
+import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
 
+import java.util.List;
+
 /**
  * Created by leo on 2016/6/18.
  */
 @EBean
-public class DetailGoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCommentsModel> {
+public class DetailGoodsRecommendAdapter extends BaseRecyclerViewAdapter<GoodsModel> {
 
     @Bean
     OttoBus bus;
 
     @Override
     public void getMoreData(Object... objects) {
-        afterGetData(myRestClient.getGoodsCommentsByGoodsInfoId(1, 20, objects[0].toString()));
+        BaseModelJson<List<GoodsModel>> result = new BaseModelJson<>();
+        result.Data = (List<GoodsModel>) objects[0];
+        result.Data.addAll(result.Data);
+        result.Successful = true;
+        afterGetData(result);
     }
 
     @UiThread
-    void afterGetData(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
+    void afterGetData(BaseModelJson<List<GoodsModel>> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
+            if (bmj.Data.size() > 0) {
+                insertAll(bmj.Data, getItems().size());
                 bus.post(bmj);
             }
         }
@@ -45,7 +50,7 @@ public class DetailGoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCom
 
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
-        return GoodsCommentsItemView_.build(parent.getContext());
+        return  GoodsHorizontalItemView_.build(context);
     }
 }
 

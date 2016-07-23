@@ -5,20 +5,20 @@ import android.widget.LinearLayout;
 
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.adapters.DetailGoodsCommentsAdapter;
-import com.zczczy.leo.microwarehouse.adapters.GoodsAdapter;
+import com.zczczy.leo.microwarehouse.adapters.DetailGoodsRecommendAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
-import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
-import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.List;
 
 /**
  * @author Created by LuLeo on 2016/6/16.
@@ -26,7 +26,7 @@ import org.androidannotations.annotations.ViewById;
  * @since 2016/6/16.
  */
 @EFragment(R.layout.fragment_goods_comments)
-public class GoodsFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
+public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
 
     @Bean
     OttoBus bus;
@@ -35,25 +35,31 @@ public class GoodsFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> 
     LinearLayout parent;
 
     @FragmentArg
-    String goodsId;
+    GoodsModel mGoodsModel;
+
+    @AfterInject
+    void afterInject() {
+        gridCount = 2;
+    }
 
     @AfterViews
     void afterView() {
+        horizontalItem();
         afterLoadMore();
     }
 
     @Bean
-    void setMyAdapter(GoodsAdapter myAdapter) {
+    void setMyAdapter(DetailGoodsRecommendAdapter myAdapter) {
         this.myAdapter = myAdapter;
     }
 
     @Subscribe
-    public void notifyUI(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
-        parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 60)));
+    public void notifyUI(BaseModelJson<List<GoodsModel>> bmj) {
+        parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 141)));
     }
 
     void afterLoadMore() {
-//        myAdapter.getMoreData(goodsId);
+        myAdapter.getMoreData(mGoodsModel.RecommendedGoodsList);
     }
 
 
