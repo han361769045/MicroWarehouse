@@ -1,8 +1,13 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.provider.FixedLoadProvider;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.VerticalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.DetailGoodsRecommendAdapter;
@@ -45,6 +50,22 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
     @AfterViews
     void afterView() {
         horizontalItem();
+        itemDecoration = new HorizontalDividerItemDecoration.Builder(getActivity()).margin(21)
+                .visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+                    @Override
+                    public boolean shouldHideDivider(int position, RecyclerView parent) {
+                        return position == 0;
+                    }
+                }).paint(paint).build();
+
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.addItemDecoration(new VerticalDividerItemDecoration.Builder(getActivity())
+                .margin(21).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+                    @Override
+                    public boolean shouldHideDivider(int position, RecyclerView parent) {
+                        return position == 0;
+                    }
+                }).paint(paint).build());
         afterLoadMore();
     }
 

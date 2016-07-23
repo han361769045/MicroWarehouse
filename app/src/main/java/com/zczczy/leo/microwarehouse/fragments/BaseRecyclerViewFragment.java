@@ -39,6 +39,8 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
 
     int gridCount = 3;
 
+    RecyclerView.ItemDecoration itemDecoration;
+
     BaseRecyclerViewAdapter<T> myAdapter;
 
     GridLayoutManager gridLayoutManager;
@@ -60,7 +62,8 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(21).paint(paint).build());
+        itemDecoration = new HorizontalDividerItemDecoration.Builder(getActivity()).margin(21).paint(paint).build();
+        recyclerView.addItemDecoration(itemDecoration);
         verticalItem();
     }
 

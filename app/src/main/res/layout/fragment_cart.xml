@@ -21,12 +21,32 @@
         app:mTitle="@string/text_cart"
         app:mTitleTextColor="@color/white" />
 
+    <LinearLayout
+        android:id="@+id/ll_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/my_title_bar"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart_nothing" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的购物车还没有商品" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/line"
-        android:layout_below="@+id/my_title_bar"
+        android:layout_below="@+id/ll_nothing"
         android:background="@color/white" />
 
     <include
@@ -59,9 +79,9 @@
                 android:layout_gravity="center"
                 android:checked="true"
                 android:gravity="center"
-                android:textSize="12sp"
                 android:padding="5dp"
-                android:text="@string/text_all_select" />
+                android:text="@string/text_all_select"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

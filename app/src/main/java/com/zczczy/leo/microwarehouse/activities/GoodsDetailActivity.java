@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
@@ -37,6 +38,7 @@ import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
+import com.zczczy.leo.microwarehouse.views.BadgeView;
 import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
@@ -96,6 +98,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @StringRes
     String text_goods_price, tip;
 
+    BadgeView badgeView;
+
     boolean isCanBy;
 
     FragmentManager fragmentManager;
@@ -114,6 +118,10 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
         fragmentManager = getSupportFragmentManager();
+        badgeView = new BadgeView(this);
+        badgeView.setBackground(8, Color.WHITE);
+        badgeView.setTextColor(Color.RED);
+        badgeView.setBadgeMargin(0, 10, 10, 0);
     }
 
     @AfterViews
@@ -134,6 +142,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         ll_bat_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.VISIBLE : View.GONE);
         ll_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.GONE : View.VISIBLE);
         getGoodsDetailById(goodsId);
+        if (checkUserIsLogin())
+            getMyBuyCartCount();
     }
 
 
@@ -221,6 +231,24 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     }
 
 
+    @Background
+    void getMyBuyCartCount() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterGetMyBuyCartCount(myRestClient.getMyBuyCartCount());
+    }
+
+    @UiThread
+    void afterGetMyBuyCartCount(BaseModelJson<Integer> result) {
+        if (result != null && result.Successful) {
+            //myTitleBar.setBadgeCount(result.Data);
+            badgeView.setTargetView(myTitleBar.getmRightButtonView());
+            badgeView.setBadgeCount(result.Data);
+
+        }
+    }
+
+
     @Click
     void txt_buy() {
         if (checkUserIsLogin()) {
@@ -275,6 +303,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             AndroidTool.showToast(this, result.Error);
         } else {
             AndroidTool.showToast(this, "添加成功");
+            badgeView.incrementBadgeCount(1);
         }
     }
 
@@ -315,6 +344,10 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @Override
     public void onSliderClick(BaseSliderView slider) {
 
+    }
+
+    public void incrementBadgeCount(int count) {
+        badgeView.incrementBadgeCount(count);
     }
 
 

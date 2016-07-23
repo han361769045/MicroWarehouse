@@ -317,22 +317,4 @@ public class AccountManagementActivity extends BaseActivity {
         CommonWebViewActivity_.intent(this).linkUrl(Constants.ROOT_URL + "Disclaimer").title(text_mian_ze).start();
     }
 
-    @Click
-    void btn_exit() {
-        if (checkUserIsLogin()) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("提示").setMessage("确定要注销吗？").setPositiveButton("注销", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    int verCode = pre.verCode().get();
-                    pre.clear();
-                    pre.verCode().put(verCode);
-                    myBackgroundTask.registerAlias();
-                    finish();
-
-                }
-            }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher).create().show();
-        }
-    }
-
 }

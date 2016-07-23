@@ -3,6 +3,7 @@ package com.zczczy.leo.microwarehouse.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.microwarehouse.items.CartRecommendGoodsItemView_;
 import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 
@@ -21,6 +22,6 @@ public class CartRecommendGoodsAdapter extends BaseRecyclerViewAdapter<GoodsMode
 
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
-        return GoodsHorizontalItemView_.build(parent.getContext());
+        return CartRecommendGoodsItemView_.build(parent.getContext());
     }
 }

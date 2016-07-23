@@ -36,6 +36,8 @@ public abstract class BaseRecyclerViewActivity<T> extends BaseActivity {
 
     Paint paint = new Paint();
 
+    RecyclerView.ItemDecoration itemDecoration;
+
     @Bean
     MyErrorHandler myErrorHandler;
 
@@ -57,7 +59,8 @@ public abstract class BaseRecyclerViewActivity<T> extends BaseActivity {
         recyclerView.setAdapter(myAdapter);
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
+        itemDecoration = new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build();
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
 

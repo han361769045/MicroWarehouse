@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity;
 import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
@@ -94,6 +95,8 @@ public class GoodsPropertiesPopup extends LinearLayout {
 
     Context context;
 
+    GoodsDetailActivity goodsDetailActivity;
+
     PopupWindow popupWindow;
 
     List<TextView> textViews;
@@ -105,6 +108,7 @@ public class GoodsPropertiesPopup extends LinearLayout {
     public GoodsPropertiesPopup(Context context) {
         super(context);
         this.context = context;
+        goodsDetailActivity = (GoodsDetailActivity) context;
     }
 
     @AfterInject
@@ -238,6 +242,7 @@ public class GoodsPropertiesPopup extends LinearLayout {
         } else if (bm.Successful) {
             popupWindow.dismiss();
             AndroidTool.showToast(context, "商品添加成功");
+            goodsDetailActivity.incrementBadgeCount(quantityView.getQuantity());
         } else {
             AndroidTool.showToast(context, bm.Error);
         }

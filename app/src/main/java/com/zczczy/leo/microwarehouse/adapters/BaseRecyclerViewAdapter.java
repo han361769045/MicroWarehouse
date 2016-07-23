@@ -187,7 +187,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     public void deleteItemRange(List<T> t) {
         items.removeAll(t);
-//        notifyItemRangeRemoved();
         notifyDataSetChanged();
     }
 

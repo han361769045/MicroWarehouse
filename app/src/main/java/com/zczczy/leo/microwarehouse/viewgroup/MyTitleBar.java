@@ -2,6 +2,7 @@ package com.zczczy.leo.microwarehouse.viewgroup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -34,7 +35,7 @@ public class MyTitleBar extends RelativeLayout {
 
     private CharSequence mTitleText, mLeftText, mRightText, mSearchHintText;
 
-    private TextView mLeftTextView, mRightTextView;
+    private TextView mLeftTextView, mRightTextView, mRightButtonViewBadge;
 
     private ImageButton mNavButtonView;
 
@@ -367,6 +368,30 @@ public class MyTitleBar extends RelativeLayout {
     }
 
 
+    public void setBadgeCount(int count) {
+        ensureBadge();
+        mRightButtonViewBadge.setText(String.valueOf(count));
+        if (count > 0) {
+            mRightButtonViewBadge.setVisibility(VISIBLE);
+        } else {
+            mRightButtonViewBadge.setVisibility(GONE);
+        }
+
+    }
+
+    private void ensureBadge() {
+        if (mRightButtonViewBadge == null) {
+            mRightButtonViewBadge = new TextView(getContext());
+            mRightButtonViewBadge.setBackgroundColor(Color.RED);
+            mRightButtonViewBadge.setTextColor(Color.WHITE);
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            mRightButtonViewBadge.setPadding(5, 5, 5, 5);
+            mRightButtonViewBadge.setLayoutParams(layoutParams);
+            addView(mRightButtonViewBadge, layoutParams);
+        }
+    }
+
     private void ensureRightButtonView() {
         if (mRightButtonView == null) {
             mRightButtonView = new ImageButton(getContext(), null, R.attr.toolbarNavigationButtonStyle);
@@ -478,7 +503,7 @@ public class MyTitleBar extends RelativeLayout {
                 if (mLeftTextColor != 0) {
                     mLeftTextView.setTextColor(mLeftTextColor);
                 } else {
-                    mLeftTextView.setTextColor(getResources().getColor(R.color.white));
+                    mLeftTextView.setTextColor(Color.WHITE);
                 }
                 if (mLeftTextSize != 0) {
                     mLeftTextView.setTextSize(mLeftTextSize);
@@ -541,7 +566,7 @@ public class MyTitleBar extends RelativeLayout {
                 if (mRightTextColor != 0) {
                     mRightTextView.setTextColor(mRightTextColor);
                 } else {
-                    mRightTextView.setTextColor(getResources().getColor(R.color.white));
+                    mRightTextView.setTextColor(Color.WHITE);
                 }
                 if (mRightTextSize != 0) {
                     mRightTextView.setTextSize(mRightTextSize);
@@ -682,4 +707,6 @@ public class MyTitleBar extends RelativeLayout {
             mNavButtonView.setVisibility(GONE);
         }
     }
+
+
 }

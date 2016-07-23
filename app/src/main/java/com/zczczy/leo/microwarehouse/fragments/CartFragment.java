@@ -2,11 +2,14 @@ package com.zczczy.leo.microwarehouse.fragments;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
@@ -77,6 +80,13 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     @AfterViews
     void afterView() {
         myTitleBar.hideNavButtonView();
+        itemDecoration = new HorizontalDividerItemDecoration.Builder(getActivity()).margin(21)
+                .visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+                    @Override
+                    public boolean shouldHideDivider(int position, RecyclerView parent) {
+                        return position == parent.getAdapter().getItemCount() - 2;
+                    }
+                }).paint(paint).build();
         txt_total_lb.setText(String.format(cart_total, 0.0));
         txt_checkout.setText(String.format(text_buy, count));
         txt_delete.setText(String.format(text_delete, count));

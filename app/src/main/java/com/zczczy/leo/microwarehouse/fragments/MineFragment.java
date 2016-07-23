@@ -13,6 +13,7 @@ import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberTaskOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
+import com.zczczy.leo.microwarehouse.activities.SettingActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
@@ -89,6 +90,12 @@ public class MineFragment extends BaseFragment {
             avatar.setImageResource(R.drawable.default_avatar);
         }
 
+    }
+
+
+    @Click
+    void img_setting() {
+        SettingActivity_.intent(this).start();
     }
 
     @Override

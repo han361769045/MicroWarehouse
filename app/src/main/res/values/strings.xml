@@ -203,4 +203,7 @@
         </div>
         ]]>
     </string>
+
+    <string name="text_setting">更多设置</string>
+
 </resources>

@@ -18,7 +18,7 @@
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back"
         app:mRightButtonIcon="@drawable/title_cart"
-        app:mTitle="商品详情"
+        app:mTitle="@string/text_goods_detail"
         app:mTitleTextColor="@color/white" />
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyRecyclerScrollview
@@ -166,8 +166,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:drawablePadding="10dp"
                         android:drawableEnd="@drawable/next"
+                        android:drawablePadding="10dp"
                         android:padding="10dp"
                         android:text="@string/text_all_review"
                         android:textColor="@color/main_font_color" />

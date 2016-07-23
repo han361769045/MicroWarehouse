@@ -243,6 +243,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".activities.SettingActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
 
         <!-- alipay sdk begin -->
         <activity

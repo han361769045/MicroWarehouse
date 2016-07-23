@@ -3,6 +3,7 @@ package com.zczczy.leo.microwarehouse.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.microwarehouse.items.GoodsDetailRecommendItemView_;
 import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
@@ -28,7 +29,6 @@ public class DetailGoodsRecommendAdapter extends BaseRecyclerViewAdapter<GoodsMo
     public void getMoreData(Object... objects) {
         BaseModelJson<List<GoodsModel>> result = new BaseModelJson<>();
         result.Data = (List<GoodsModel>) objects[0];
-        result.Data.addAll(result.Data);
         result.Successful = true;
         afterGetData(result);
     }
@@ -50,7 +50,7 @@ public class DetailGoodsRecommendAdapter extends BaseRecyclerViewAdapter<GoodsMo
 
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
-        return  GoodsHorizontalItemView_.build(context);
+        return GoodsDetailRecommendItemView_.build(context);
     }
 }
 

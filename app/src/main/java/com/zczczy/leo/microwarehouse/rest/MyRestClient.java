@@ -592,5 +592,14 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<TaskOrderModel> getTaskOrderById(@Path String TaskOrderId);
 
+    /**
+     * 查询会员自己的购物车数量
+     *
+     * @return
+     */
+    @Get("api/Member/GetMyBuyCartCount")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<Integer> getMyBuyCartCount();
+
 }
 
