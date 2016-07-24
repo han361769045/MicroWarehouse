@@ -1,7 +1,9 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -117,6 +119,16 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
                 SearchActivity_.intent(HomeFragment.this).start();
             }
         });
+
+        myTitleBar.setLeftTextOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setView(R.layout.perfect_infor_dialog);
+                adb.create().show();
+            }
+        });
+
     }
 
     void setBanner() {

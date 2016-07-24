@@ -132,6 +132,9 @@ public class MainActivity extends BaseActivity {
         initTab();
         getUpdateApp();
         myBackgroundTask.setAlias();
+
+
+
     }
 
 
