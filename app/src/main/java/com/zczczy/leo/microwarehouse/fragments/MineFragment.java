@@ -89,13 +89,16 @@ public class MineFragment extends BaseFragment {
             txt_user_type.setText(pre.userTypeStr().get());
             avatar.setImageResource(R.drawable.default_avatar);
         }
-
     }
 
 
     @Click
     void img_setting() {
-        SettingActivity_.intent(this).start();
+        if (checkUserIsLogin()) {
+            SettingActivity_.intent(this).start();
+        } else {
+            LoginActivity_.intent(this).start();
+        }
     }
 
     @Override

@@ -8,13 +8,6 @@
     android:orientation="vertical"
     tools:context=".activities.LoginActivity">
 
-    <!--<com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar-->
-    <!--android:id="@+id/my_title_bar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:background="@color/main_tab_color"-->
-    <!--android:minHeight="50dp" />-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

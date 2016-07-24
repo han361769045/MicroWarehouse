@@ -37,6 +37,7 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
 
     boolean isSelected;
 
+
     String orderBy = Constants.ZONG_HE;
 
     @Bean
@@ -67,18 +68,6 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
             }
         });
 
-//        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (myTitleBar.getmRightButtonView().isSelected()) {
-//                    myTitleBar.getmRightButtonView().setSelected(false);
-//                    verticalItem();
-//                } else {
-//                    myTitleBar.getmRightButtonView().setSelected(true);
-//                    horizontalItem();
-//                }
-//            }
-//        });
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +79,7 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
     }
 
     @CheckedChange
-    void rb_others(boolean isChecked) {
+    void rb_filter(boolean isChecked) {
         if (isChecked) {
             orderBy = Constants.ZONG_HE;
             isRefresh = true;

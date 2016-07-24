@@ -17,15 +17,27 @@
         app:mNavButtonIcon="@drawable/title_back"
         app:mTitle="@string/find" />
 
+    <include layout="@layout/filter_condition" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.08"
+            android:background="@color/main_tab_color" />
+
 
         <fragment
             android:id="@+id/common_fragment"
