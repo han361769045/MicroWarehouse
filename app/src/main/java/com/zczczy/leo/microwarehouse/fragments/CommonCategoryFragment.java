@@ -32,7 +32,7 @@ public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<Goo
 
 
     @FragmentArg
-    String goodsId;
+    String goodsId, orderBy, priceMin, priceMax;
 
     @Bean
     void setMyAdapter(CommonCategoryAdapter myAdapter) {
@@ -57,6 +57,6 @@ public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<Goo
 
     @Override
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, goodsId);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, goodsId, orderBy, priceMin, priceMax);
     }
 }

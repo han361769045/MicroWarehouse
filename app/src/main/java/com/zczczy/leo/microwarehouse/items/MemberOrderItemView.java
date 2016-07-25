@@ -52,7 +52,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
     LinearLayout ll_pre_order_item, ll_take;
 
     @ViewById
-    Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished;
+    Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished, btn_delete_order;
 
     @RestService
     MyRestClient myRestClient;
@@ -254,6 +254,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
+            btn_delete_order.setVisibility(VISIBLE);
         } else if (_data.MorderStatus == Constants.PAID) {
             ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
@@ -262,6 +263,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_pay.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
+            btn_delete_order.setVisibility(GONE);
         } else if (_data.MorderStatus == Constants.SELECT_) {
             ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
@@ -270,6 +272,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
+            btn_delete_order.setVisibility(GONE);
         } else if (_data.MorderStatus == Constants.RECEIVER) {
             ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
@@ -278,6 +281,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
+            btn_delete_order.setVisibility(GONE);
         } else if (_data.MorderStatus == Constants.SHIPPING) {
             ll_take.setVisibility(VISIBLE);
             btn_finish.setVisibility(View.VISIBLE);
@@ -286,6 +290,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_pay.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
+            btn_delete_order.setVisibility(GONE);
         } else if (_data.MorderStatus == Constants.CONFIRM) {
             ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
@@ -294,6 +299,7 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_pay.setVisibility(GONE);
             btn_finished.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
+            btn_delete_order.setVisibility(GONE);
         } else if (_data.MorderStatus == Constants.FINISH) {
             ll_take.setVisibility(VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
@@ -302,7 +308,8 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_finished.setVisibility(VISIBLE);
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
-        } else if (_data.MorderStatus == Constants.ALL_ORDER) {
+            btn_delete_order.setVisibility(VISIBLE);
+        } else if (_data.MorderStatus == Constants.CANCELED_ORDER) {
             ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
             btn_finish.setVisibility(GONE);
@@ -310,8 +317,42 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_finished.setVisibility(VISIBLE);
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
+            btn_delete_order.setVisibility(VISIBLE);
         }
     }
+
+    @Click
+    void btn_delete_order() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setTitle("提示").setMessage("确认删除订单？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AndroidTool.showLoadDialog(context);
+                delOrderByOrderId();
+            }
+        }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher).create().show();
+    }
+
+    @Background
+    void delOrderByOrderId() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterDelOrderByOrderId(myRestClient.delOrderByOrderId(_data.MOrderId));
+    }
+
+    @UiThread
+    void afterDelOrderByOrderId(BaseModel result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            AndroidTool.showToast(context, no_net);
+        } else if (!result.Successful) {
+            AndroidTool.showToast(context, result.Error);
+        } else {
+            baseUltimateRecyclerViewAdapter.getItems().remove(_data);
+            baseUltimateRecyclerViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+        }
+    }
+
 
     @Override
     public void onItemSelected() {

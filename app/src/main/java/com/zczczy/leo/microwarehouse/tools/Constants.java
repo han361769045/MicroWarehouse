@@ -34,10 +34,10 @@ public class Constants {
     public static final String GOODS_DETAIL = "2"; //跳转标识(1:商品类别页，2：商品明细)
 
 
-    public static final String ZONG_HE = "1"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
-    public static final String SELL_COUNT = "2"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
-    public static final String PRICE_DESC = "3"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
-    public static final String PRICE_ASC = "4"; //1:综合排序，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_FILTER = "1"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
+    public static final String SELL_COUNT = "2"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_DESC = "3"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_ASC = "4"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
 
 
     public static final int Goods_UP = 1; //1：上架，0：下架
@@ -54,7 +54,7 @@ public class Constants {
     public static final int SHIPPING = 4; //4:已发货
     public static final int CONFIRM = 5; //5:确认收货
     public static final int FINISH = 6; //5:交易完成
-    public static final int ALL_ORDER = 9; //9.取消订单
+    public static final int CANCELED_ORDER = 9; //9.取消订单
 
 
     public static final String KBN_ORDER = "order";

@@ -53,6 +53,8 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     @ViewById
     RadioGroup radio_group;
 
+    String priceMin, priceMax;
+
     EditText edt_min_price, edt_max_price;
 
     boolean isRefresh;
@@ -61,13 +63,44 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
 
     View view;
 
-    String orderBy = Constants.ZONG_HE;
+    String orderBy = Constants.SELL_COUNT;
 
     boolean isSelected;
+
+    GoodsTypeModel currentGoodsTypeModel;
+
+
+    @Bean
+    void setMyAdapter(CategoryAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+        fragmentManager = getSupportFragmentManager();
+    }
+
+    @AfterViews
+    void afterView() {
+        if (!StringUtils.isEmpty(title)) {
+            myTitleBar.setTitle(title);
+        }
+        priceMin = "0";
+        priceMax = "0";
+        myAdapter.getMoreData(id);
+        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
+                if (!obj.isSelected) {
+                    changeFragment(obj);
+
+                    rb_filter();
+                }
+            }
+        });
+    }
 
     @Click
     void rb_filter() {
         if (rb_filter.isChecked()) {
+            orderBy = Constants.PRICE_FILTER;
+            isRefresh = true;
             showProperties();
         }
     }
@@ -80,13 +113,13 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
             isSelected = false;
             rb_price.setSelected(isSelected);
             orderBy = Constants.PRICE_ASC;
-//            afterLoadMore();
+            changeFragment(currentGoodsTypeModel);
         } else if (rb_price.isChecked() && !isSelected) {
             isRefresh = true;
             isSelected = true;
             rb_price.setSelected(isSelected);
             orderBy = Constants.PRICE_DESC;
-            //            afterLoadMore();
+            changeFragment(currentGoodsTypeModel);
         }
     }
 
@@ -95,7 +128,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
         if (isChecked) {
             orderBy = Constants.SELL_COUNT;
             isRefresh = true;
-//            afterLoadMore();
+            changeFragment(currentGoodsTypeModel);
         }
     }
 
@@ -115,40 +148,26 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
             view.findViewById(R.id.txt_confirm).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AndroidTool.showToast(CategoryActivity.this, "1111111");
+                    priceMin = "".equals(edt_min_price.getText().toString()) ? "0" : edt_min_price.getText().toString();
+                    priceMax = "".equals(edt_max_price.getText().toString()) ? "0" : edt_max_price.getText().toString();
+                    closeInputMethod(view);
+                    popupWindow.dismiss();
+                    changeFragment(currentGoodsTypeModel);
                 }
             });
-
-
             popupWindow = new PopupWindow(view, DensityUtil.dip2px(this, 220), DensityUtil.dip2px(this, 110), true);
 //            //实例化一个ColorDrawable颜色为半透明
 //            ColorDrawable dw = new ColorDrawable(0xb0000000);
 //            //设置SelectPicPopupWindow弹出窗体的背景
 //            popupWindow.setBackgroundDrawable(dw);
+            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    closeInputMethod(view);
+                }
+            });
         }
         popupWindow.showAsDropDown(rb_filter);
-    }
-
-    @Bean
-    void setMyAdapter(CategoryAdapter myAdapter) {
-        this.myAdapter = myAdapter;
-        fragmentManager = getSupportFragmentManager();
-    }
-
-    @AfterViews
-    void afterView() {
-        if (!StringUtils.isEmpty(title)) {
-            myTitleBar.setTitle(title);
-        }
-        myAdapter.getMoreData(id);
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
-                if (!obj.isSelected) {
-                    changeFragment(obj);
-                }
-            }
-        });
     }
 
     public void notifyUI(BaseModelJson<List<GoodsTypeModel>> bm) {
@@ -160,13 +179,15 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     }
 
     void changeFragment(GoodsTypeModel model) {
-        if (edt_min_price != null) {
-            edt_min_price.setText("");
+        if (model != currentGoodsTypeModel) {
+            if (edt_min_price != null && edt_max_price != null) {
+                edt_min_price.setText("");
+                edt_max_price.setText("");
+            }
+            priceMin = "0";
+            priceMax = "0";
         }
-        if (edt_max_price != null) {
-            edt_max_price.setText("");
-        }
-
+        currentGoodsTypeModel = model;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         int firstPosition = 0;
         int lastPosition = 0;
@@ -185,7 +206,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
         myAdapter.notifyItemChanged(lastPosition);
 //        AndroidTool.showToast(this, firstPosition + "=====" + lastPosition);
         linearLayoutManager.scrollToPosition(firstPosition);
-        commonCategoryFragment = CommonCategoryFragment_.builder().goodsId(model.GoodsTypeId + "").build();
+        commonCategoryFragment = CommonCategoryFragment_.builder().goodsId(model.GoodsTypeId + "").orderBy(orderBy).priceMin(priceMin).priceMax(priceMax).build();
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();
     }

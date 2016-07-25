@@ -208,6 +208,13 @@
         ]]>
     </string>
 
+     <string name="text_perfect" formatted="false">
+        <![CDATA[
+            请完善以下信息(<font color="red">*</font>为必填项)
+        ]]>
+    </string>
+
+
     <!--setting-->
     <string name="text_setting">更多设置</string>
     <string name="text_setting_push">消息推送设置</string>

@@ -5,7 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 
 import com.zczczy.leo.microwarehouse.MyApplication;
@@ -85,19 +87,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void finish() {
-        closeInputMethod(this);
+        closeInputMethod();
         super.finish();
     }
 
 
     //隐藏软键盘
-    void closeInputMethod(Activity activity) {
+    void closeInputMethod() {
         /*隐藏软键盘*/
         if (inputMethodManager != null) {
             if (inputMethodManager.isActive()) {
-                if (activity.getCurrentFocus() != null) {
-                    inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+                if (getCurrentFocus() != null) {
+                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 }
+            }
+        }
+    }
+
+    //隐藏软键盘
+    void closeInputMethod(View editText) {
+        /*隐藏软键盘*/
+        if (inputMethodManager != null) {
+            if (inputMethodManager.isActive()) {
+                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
             }
         }
     }

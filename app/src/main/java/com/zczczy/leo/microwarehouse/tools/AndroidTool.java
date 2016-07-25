@@ -324,6 +324,20 @@ public class AndroidTool {
     }
 
     /**
+     * 判断EditText  的 值是否不想等！ 如果不想等 返回true 否者返回false
+     *
+     * @param one
+     * @param two
+     * @return
+     */
+    public static boolean checkIsNotEqual(EditText one, EditText two) {
+        if (one == null || two == null) {
+            return true;
+        }
+        return !one.getText().toString().trim().equals(two.getText().toString().trim());
+    }
+
+    /**
      * 判断TextView是否为空！ 如果为空 返回true 否者返回false
      *
      * @param e

@@ -19,6 +19,7 @@ public class MemberInfoModel implements Serializable {
     public String MInfoId;
     public String UserInfoId;
     public String UserPw;
+    public String ConfirmUserPw;
     public String MemberEmail;
     public String MemberQQ;
     public String MemberBlog;
@@ -27,4 +28,7 @@ public class MemberInfoModel implements Serializable {
     public String UserTypeStr; //用户类型描述
     public String UserType;//用户类型
     public String Token;//token
+    public String Mobile;
+    public String UserLoginStr;
+    public boolean CheckUserInfo;
 }

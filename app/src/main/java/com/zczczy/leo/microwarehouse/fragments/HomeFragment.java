@@ -123,9 +123,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         myTitleBar.setLeftTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-                adb.setView(R.layout.perfect_infor_dialog);
-                adb.create().show();
+
             }
         });
 

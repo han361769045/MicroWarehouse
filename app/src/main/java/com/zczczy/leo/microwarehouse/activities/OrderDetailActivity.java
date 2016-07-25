@@ -47,7 +47,7 @@ public class OrderDetailActivity extends BaseActivity {
     LinearLayout ll_shipping, ll_pre_order_item, ll_logistics, ll_next, ll_tracking_no, ll_take;
 
     @ViewById
-    Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished;
+    Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished, btn_delete_order;
 
     @ViewById
     TextView tv_shipping, txt_phone, tv_shipping_address, txt_order_no, txt_sub_express_charges, txt_pay_total_rmb, txt_tracking_no;
@@ -142,6 +142,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.VISIBLE);
             } else if (result.Data.MorderStatus == Constants.PAID) {
                 ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
@@ -150,6 +151,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.SELECT_) {
                 ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
@@ -158,6 +160,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.RECEIVER) {
                 ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
@@ -166,6 +169,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.SHIPPING) {
                 ll_take.setVisibility(View.VISIBLE);
 //                ll_take.setVisibility((!btn_finish.isShown() && StringUtils.isEmpty(result.Data.TrackingNo)) ? View.GONE : View.VISIBLE);
@@ -175,6 +179,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.CONFIRM) {
                 ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
@@ -183,6 +188,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_finished.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.FINISH) {
                 ll_take.setVisibility(View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
@@ -191,7 +197,8 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_finished.setVisibility(View.VISIBLE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
-            } else if (result.Data.MorderStatus == Constants.ALL_ORDER) {
+                btn_delete_order.setVisibility(View.VISIBLE);
+            } else if (result.Data.MorderStatus == Constants.CANCELED_ORDER) {
                 ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
@@ -199,6 +206,7 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                btn_delete_order.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -234,6 +242,40 @@ public class OrderDetailActivity extends BaseActivity {
             setResult(RESULT_OK);
         }
     }
+
+    @Click
+    void btn_delete_order() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("提示").setMessage("确认删除订单？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AndroidTool.showLoadDialog(OrderDetailActivity.this);
+                delOrderByOrderId();
+            }
+        }).setNegativeButton("取消", null).setIcon(R.mipmap.ic_launcher).create().show();
+    }
+
+    @Background
+    void delOrderByOrderId() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterDelOrderByOrderId(myRestClient.delOrderByOrderId(mAppOrder.MOrderId));
+    }
+
+    @UiThread
+    void afterDelOrderByOrderId(BaseModel result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!result.Successful) {
+            AndroidTool.showToast(this, result.Error);
+        } else {
+            AndroidTool.showToast(this, "删除成功");
+            setResult(RESULT_OK);
+            finish();
+        }
+    }
+
 
     @Click
     void btn_finish() {
