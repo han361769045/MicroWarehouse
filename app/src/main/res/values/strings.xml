@@ -45,7 +45,7 @@
     <string name="text_add_cart">加入购物车</string>
     <string name="text_goods_buy">立即购买</string>
     <string name="text_goods_review">商品评价</string>
-    <string name="text_goods_more_review">更多评价</string>
+    <string name="text_goods_more_review">店铺推荐</string>
     <string name="text_goods_by">快递：</string>
     <string name="text_sell_count">月销量:</string>
     <string name="text_store_count">库存:</string>
