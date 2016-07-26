@@ -107,10 +107,16 @@ public class OrderDetailActivity extends BaseActivity {
             txt_phone.setText(result.Data.Lxdh);
             tv_shipping_address.setText(String.format(text_take_shipping_address, result.Data.DetailAddress));
             ll_pre_order_item.removeAllViews();
-            for (OrderDetailModel orderDetailModel : result.Data.MOrderDetailList) {
+            for (final OrderDetailModel orderDetailModel : result.Data.MOrderDetailList) {
                 TakeOrderItemView preOrderItemView = TakeOrderItemView_.build(this);
                 preOrderItemView.init(orderDetailModel);
                 ll_pre_order_item.addView(preOrderItemView);
+                preOrderItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        GoodsDetailActivity_.intent(OrderDetailActivity.this).goodsId(orderDetailModel.GoodsInfoId).start();
+                    }
+                });
             }
             txt_order_no.setText(String.format(text_order_no, "  " + result.Data.MOrderNo));
             txt_sub_express_charges.setText(String.format(text_goods_price, result.Data.Postage));
