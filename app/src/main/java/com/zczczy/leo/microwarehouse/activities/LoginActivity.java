@@ -14,9 +14,11 @@ import android.text.Html;
 import android.text.Selection;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -44,6 +46,7 @@ import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.AnimationRes;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
@@ -62,7 +65,7 @@ public class LoginActivity extends BaseActivity {
     EditText editPassword, editUsername, edit_code;
 
     @ViewById
-    LinearLayout ll_code, ll_username, ll_password, ll_forget;
+    LinearLayout ll_code, ll_username, ll_password, ll_forget, ll_login;
 
     @RestService
     MyRestClient myRestClient;
@@ -84,6 +87,12 @@ public class LoginActivity extends BaseActivity {
 
     @SystemService
     TelephonyManager telephonyManager;
+
+    @ViewById
+    ImageView img_logo;
+
+    @AnimationRes
+    Animation logo_anim, login_anim;
 
     MemberInfoModel model;
 
@@ -114,55 +123,8 @@ public class LoginActivity extends BaseActivity {
         if (AndroidTool.getCodeTime(pre.loginTimerCode().get()) < 120000L) {
             countDownTimer.start();
         }
-        getPermissions();
-    }
-
-    private void getPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ArrayList<String> permissions = new ArrayList<>();
-
-            if (checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.READ_SMS);
-            }
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.READ_PHONE_STATE);
-            }
-            if (permissions.size() > 0) {
-                requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
-            } else {
-                //自动读取短信
-//                isRegister = true;
-//                readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-//                this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
-                editUsername.setText(StringUtils.isEmpty(telephonyManager.getLine1Number()) ? "" : telephonyManager.getLine1Number().substring(3));
-                Selection.setSelection(editUsername.getText(), editUsername.length());
-            }
-        } else {
-            //自动读取短信
-//            isRegister = true;
-//            readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-//            this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
-            editUsername.setText(StringUtils.isEmpty(telephonyManager.getLine1Number()) ? "" : telephonyManager.getLine1Number().substring(3));
-            Selection.setSelection(editUsername.getText(), editUsername.length());
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        // TODO Auto-generated method stub
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        for (int grantResult : grantResults) {
-            if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-        }
-        //自动读取短信
-//        isRegister = true;
-//        readSmsContent = new ReadSmsContent(new Handler(), this, edit_code);
-//        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, readSmsContent);
-        editUsername.setText(StringUtils.isEmpty(telephonyManager.getLine1Number()) ? "" : telephonyManager.getLine1Number().substring(3));
-        Selection.setSelection(editUsername.getText(), editUsername.length());
-
+        img_logo.setAnimation(logo_anim);
+        ll_login.setAnimation(login_anim);
     }
 
 

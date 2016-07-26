@@ -1,189 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_bg_color"
     android:orientation="vertical"
     tools:context=".activities.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/cart_buy">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <ImageView
+                android:id="@+id/img_logo"
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
+                android:layout_height="298dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/login_bg" />
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <RadioButton
-                    android:id="@+id/rb_code"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/code_login"
-                    android:button="@null"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/text_code_login"
-                    android:textColor="@color/login_text" />
-
-                <RadioButton
-                    android:id="@+id/rb_password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/password_login"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/text_password_login"
-                    android:textColor="@color/login_text" />
-
-            </RadioGroup>
 
             <LinearLayout
-                android:id="@+id/ll_username"
+                android:id="@+id/ll_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp">
+                android:layout_height="322dp"
+                android:background="@color/main_bg_color"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edit_username"
+                <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/login_edit_text"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/login_phone"
-                    android:hint="@string/text_username"
-                    android:imeOptions="actionNext"
-                    android:inputType="phone"
-                    android:maxLength="20"
-                    android:padding="13dp"
-                    android:singleLine="true"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp" />
 
-            </LinearLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
-            <LinearLayout
-                android:id="@+id/ll_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rb_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/code_login"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/text_code_login"
+                        android:textColor="@color/login_text" />
 
-                <EditText
-                    android:id="@+id/edit_code"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1.3"
-                    android:background="@drawable/login_edit_text"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/password"
-                    android:hint="@string/text_code"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:padding="13dp"
-                    android:singleLine="true"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp" />
+                    <RadioButton
+                        android:id="@+id/rb_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/password_login"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/text_password_login"
+                        android:textColor="@color/login_text" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/ll_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp">
+
+
+                    <EditText
+                        android:id="@+id/edit_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/login_edit_text"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@drawable/login_phone"
+                        android:hint="@string/text_username"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLength="20"
+                        android:padding="13dp"
+                        android:singleLine="true"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_code"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1.3"
+                        android:background="@drawable/login_edit_text"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@drawable/password"
+                        android:hint="@string/text_code"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="13dp"
+                        android:singleLine="true"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/btn_send_code"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/send_code"
+                        android:text="@string/text_send_message" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/edit_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/login_edit_text"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@drawable/password"
+                        android:hint="@string/text_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:maxLength="16"
+                        android:padding="13dp"
+                        android:singleLine="true"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_forget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/forget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/text_forget_password"
+                        android:textColor="@color/main_font_color"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
                 <Button
-                    android:id="@+id/btn_send_code"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/send_code"
-                    android:text="@string/text_send_message" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/edit_password"
+                    android:id="@+id/login_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/login_edit_text"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/password"
-                    android:hint="@string/text_password"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword"
-                    android:maxLength="16"
-                    android:padding="13dp"
-                    android:singleLine="true"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp" />
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/common_button"
+                    android:text="@string/text_login"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
             </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_forget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="right"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/forget"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/text_forget_password"
-                    android:textColor="@color/main_font_color"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-
-            <Button
-                android:id="@+id/login_btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/common_button"
-                android:text="@string/text_login"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>
