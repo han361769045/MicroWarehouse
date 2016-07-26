@@ -49,21 +49,10 @@ public class GoodsDetailRecommendItemView extends ItemView<GoodsModel> {
     @Pref
     MyPrefs_ pre;
 
-    @RestService
-    MyRestClient myRestClient;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
     boolean isCanBy;
 
     public GoodsDetailRecommendItemView(Context context) {
         super(context);
-    }
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     @Override
@@ -91,25 +80,6 @@ public class GoodsDetailRecommendItemView extends ItemView<GoodsModel> {
             goods_price.setText(String.format(text_goods_price, _data.GoodsPrice));
         }
         isCanBy = (Constants.Goods_UP == _data.GoodsStatus && _data.GoodsStock > 0);
-    }
-
-    @Background
-    void addShoppingCart() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("Kbn", Constants.ANDROID);
-//        afterAddShoppingCart(myRestClient.addShoppingCart(_data.GoodsInfoId));
-    }
-
-    @UiThread
-    void afterAddShoppingCart(BaseModel result) {
-        AndroidTool.dismissLoadDialog();
-        if (result == null) {
-            AndroidTool.showToast(context, no_net);
-        } else if (!result.Successful) {
-            AndroidTool.showToast(context, result.Error);
-        } else {
-            AndroidTool.showToast(context, "添加成功");
-        }
     }
 
     @Override

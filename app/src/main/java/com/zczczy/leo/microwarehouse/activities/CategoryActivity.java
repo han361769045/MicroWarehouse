@@ -1,16 +1,13 @@
 package com.zczczy.leo.microwarehouse.activities;
 
-import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
@@ -19,7 +16,6 @@ import com.zczczy.leo.microwarehouse.fragments.CommonCategoryFragment;
 import com.zczczy.leo.microwarehouse.fragments.CommonCategoryFragment_;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 
@@ -48,7 +44,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     CommonCategoryFragment commonCategoryFragment;
 
     @ViewById
-    RadioButton rb_price, rb_filter;
+    RadioButton rb_price, rb_filter, rb_sell_count;
 
     @ViewById
     RadioGroup radio_group;
@@ -69,7 +65,6 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
 
     GoodsTypeModel currentGoodsTypeModel;
 
-
     @Bean
     void setMyAdapter(CategoryAdapter myAdapter) {
         this.myAdapter = myAdapter;
@@ -88,9 +83,12 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
                 if (!obj.isSelected) {
-                    changeFragment(obj);
-
-                    rb_filter();
+                    currentGoodsTypeModel = obj;
+                    if (rb_sell_count.isChecked()) {
+                        rb_sell_count(true);
+                    } else {
+                        rb_sell_count.setChecked(true);
+                    }
                 }
             }
         });

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
@@ -96,16 +97,17 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
 
     @Click
     void img_add_cart() {
-        if (StringUtils.isEmpty(pre.token().get())) {
-            AndroidTool.showToast(context, "请登录");
-        } else {
-            if (isCanBy) {
-                AndroidTool.showLoadDialog(context);
-                addShoppingCart();
-            } else {
-                AndroidTool.showToast(context, tip);
-            }
-        }
+//        if (StringUtils.isEmpty(pre.token().get())) {
+//            AndroidTool.showToast(context, "请登录");
+//        } else {
+//            if (isCanBy) {
+//                AndroidTool.showLoadDialog(context);
+//                addShoppingCart();
+//            } else {
+//                AndroidTool.showToast(context, tip);
+//            }
+//        }
+        GoodsDetailActivity_.intent(context).goodsId(_data.GoodsInfoId).start();
     }
 
     @Background

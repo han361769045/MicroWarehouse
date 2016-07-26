@@ -1,9 +1,7 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +13,6 @@ import com.baidu.location.BDLocationListener;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
@@ -75,7 +72,8 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @ViewsById(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four,
             R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine,
-            R.id.ad_ten, R.id.ad_eleven, R.id.ad_twelve, R.id.ad_thirteen, R.id.ad_fourteenth
+            R.id.ad_ten, R.id.ad_eleven, R.id.ad_twelve, R.id.ad_thirteen, R.id.ad_fourteenth,
+            R.id.ad_fifteen, R.id.ad_sixteen, R.id.ad_seventeen
     })
     List<ImageView> imageViewList;
 
@@ -171,7 +169,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             //为每一个广告位添加描述（传参数）
             imageViewList.get(i).setContentDescription(advertModel.JumpType + "," + advertModel.InfoId + "," + advertModel.AdvertName);
             i++;
-            if (i == 14) {
+            if (i == 17) {
                 break;
             }
         }
@@ -187,7 +185,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         }
     }
 
-    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine, R.id.ad_ten, R.id.ad_eleven, R.id.ad_twelve, R.id.ad_thirteen, R.id.ad_fourteenth})
+    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine, R.id.ad_ten, R.id.ad_eleven, R.id.ad_twelve, R.id.ad_thirteen, R.id.ad_fourteenth, R.id.ad_fifteen, R.id.ad_sixteen, R.id.ad_seventeen})
     void imageViewList(ImageView imageView) {
         if (imageView.getContentDescription() != null) {
             String[] temp = imageView.getContentDescription().toString().split(",");

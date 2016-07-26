@@ -168,12 +168,6 @@
     <string name="text_count">共%1$s件,</string>
 
 
-    <string name="text_add_comment">添加评论</string>
-    <string name="text_goods_reviews">商品评论</string>
-    <string name="text_all_review">查看全部评论</string>
-    <string name="text_review_describe">描述相符</string>
-
-
     <!--feedback-->
     <string name="text_feedback">意见反馈</string>
     <string name="text_feedback_tip">请输入您对我们的宝贵意见！</string>
@@ -220,5 +214,16 @@
     <string name="text_setting_push">消息推送设置</string>
     <string name="text_setting_clear">清除本地缓存</string>
     <string name="text_cache">%1$s</string>
+
+    <!--publish review-->
+    <string name="text_publish_hint">发表评论&#8230;</string>
+    <string name="text_good_review">好评</string>
+    <string name="text_normal_review">中评</string>
+    <string name="text_bad_review">差评</string>
+    <string name="text_add_comment">添加评论</string>
+    <string name="text_goods_reviews">商品评论</string>
+    <string name="text_all_review">查看全部评论</string>
+    <string name="text_review_describe">描述相符:</string>
+    <string name="text_publish_review">发表评论</string>
 
 </resources>
