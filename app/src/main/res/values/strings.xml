@@ -123,7 +123,8 @@
     <string name="search_history">搜索记录</string>
     <string name="text_bat_price">批发价</string>
     <string name="text_price">零售价</string>
-    <string name="text_goods_sell_count">月销量%1$s件</string>
+    <string name="text_goods_month_sell_count">月销量%1$s件</string>
+    <string name="text_goods_sell_count">销量%1$s</string>
     <string name="text_goods_price">￥%1$s</string>
 
 

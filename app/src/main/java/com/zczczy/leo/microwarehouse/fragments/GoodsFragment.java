@@ -10,11 +10,14 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.VerticalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
+import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.adapters.DetailGoodsRecommendAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
+import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -66,6 +69,13 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
                         return false;
                     }
                 }).paint(paint).build());
+
+        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
+                GoodsDetailActivity_.intent(GoodsFragment.this).goodsId(obj.GoodsInfoId).start();
+            }
+        });
         afterLoadMore();
     }
 
@@ -76,7 +86,7 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
 
     @Subscribe
     public void notifyUI(BaseModelJson<List<GoodsModel>> bmj) {
-        parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 141)));
+        parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 155)));
     }
 
     void afterLoadMore() {

@@ -52,7 +52,7 @@
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:gravity="start|top"
-                android:text="@string/text_goods_sell_count"
+                android:text="@string/text_goods_month_sell_count"
                 android:textColor="@color/second_font_color"
                 android:textSize="13sp" />
 

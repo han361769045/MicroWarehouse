@@ -42,7 +42,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
     TextView goods_name, goods_sell_count, goods_price, goods_bat_price, goods_delete_price;
 
     @StringRes
-    String no_net, text_goods_sell_count, text_goods_price, tip;
+    String no_net, text_goods_month_sell_count, text_goods_price, tip;
 
     @ViewById
     LinearLayout ll_bat_price, ll_price, ll_delete_price;
@@ -77,7 +77,7 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
         }
 
         goods_name.setText(_data.GodosName);
-        goods_sell_count.setText(String.format(text_goods_sell_count, _data.GoodsXl));
+        goods_sell_count.setText(String.format(text_goods_month_sell_count, _data.GoodsXl));
         if (Constants.DEALER.equals(pre.userType().get())) {
             ll_bat_price.setVisibility(VISIBLE);
             ll_delete_price.setVisibility(VISIBLE);
