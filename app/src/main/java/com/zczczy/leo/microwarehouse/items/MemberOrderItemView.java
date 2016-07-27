@@ -310,13 +310,13 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             btn_canceled.setVisibility(GONE);
             btn_delete_order.setVisibility(VISIBLE);
         } else if (_data.MorderStatus == Constants.CANCELED_ORDER) {
-            ll_take.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
-            btn_logistics.setVisibility(StringUtils.isEmpty(_data.TrackingNo) ? GONE : VISIBLE);
+            ll_take.setVisibility(VISIBLE);
+            btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);
             btn_cancel_order.setVisibility(GONE);
-            btn_finished.setVisibility(VISIBLE);
+            btn_finished.setVisibility(GONE);
             btn_pay.setVisibility(GONE);
-            btn_canceled.setVisibility(GONE);
+            btn_canceled.setVisibility(VISIBLE);
             btn_delete_order.setVisibility(VISIBLE);
         }
     }

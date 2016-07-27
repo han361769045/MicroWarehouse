@@ -178,7 +178,6 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_delete_order.setVisibility(View.GONE);
             } else if (result.Data.MorderStatus == Constants.SHIPPING) {
                 ll_take.setVisibility(View.VISIBLE);
-//                ll_take.setVisibility((!btn_finish.isShown() && StringUtils.isEmpty(result.Data.TrackingNo)) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_finish.setVisibility(View.VISIBLE);
                 btn_cancel_order.setVisibility(View.GONE);
@@ -206,12 +205,11 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_delete_order.setVisibility(View.VISIBLE);
             } else if (result.Data.MorderStatus == Constants.CANCELED_ORDER) {
                 ll_take.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
-                btn_logistics.setVisibility(StringUtils.isEmpty(result.Data.TrackingNo) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
-                btn_canceled.setVisibility(View.GONE);
+                btn_canceled.setVisibility(View.VISIBLE);
                 btn_delete_order.setVisibility(View.VISIBLE);
             }
         }
