@@ -39,6 +39,13 @@
     <string name="text_timer">再次发送%1$sS</string>
     <string name="text_code_login">验证码登录</string>
     <string name="text_password_login">密码登录</string>
+    <string name="text_user_name">用户名：</string>
+    <string name="text_perfect_password">密码：</string>
+    <string name="text_perfect_confirm">确认密码：</string>
+    <string name="text_perfect_email">邮箱：</string>
+    <string name="text_perfect_title">用户你好,欢迎登录86微仓</string>
+    <string name="text_warning">注:为确保您在微仓界面操作顺利,请填写真实有效信息!</string>
+    <string name="text_multiplication">*</string>
 
     <!--goods detail-->
     <string name="text_goods_detail">商品详情</string>

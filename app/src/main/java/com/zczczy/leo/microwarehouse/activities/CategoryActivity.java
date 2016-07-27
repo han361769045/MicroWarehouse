@@ -76,6 +76,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
         if (!StringUtils.isEmpty(title)) {
             myTitleBar.setTitle(title);
         }
+        recyclerView.removeItemDecoration(itemDecoration);
         priceMin = "0";
         priceMax = "0";
         myAdapter.getMoreData(id);
