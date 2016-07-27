@@ -211,7 +211,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
         if (ids.length() > 0) {
             ids = ids.substring(0, ids.lastIndexOf(','));
         }
-        txt_total_lb.setText(String.format(cart_total, totalMoney));
+        txt_total_lb.setText(String.format(cart_total, AndroidTool.get2Double(totalMoney)));
         txt_checkout.setText(String.format(text_buy, count));
         txt_delete.setText(String.format(text_delete, count));
     }

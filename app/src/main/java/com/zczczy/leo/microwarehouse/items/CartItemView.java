@@ -24,7 +24,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
@@ -99,7 +98,7 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
         quantityView.setQuantity(_data.ProductCount);
         txt_attr.setText(_data.GoodsAttributeName);
         txt_goods_name.setText(_data.GodosName);
-        txt_goods_price.setText(String.valueOf(_data.GoodsPrice));
+        txt_goods_price.setText(AndroidTool.get2DoubleToString(_data.GoodsPrice));
         cb_select.setChecked(_data.isChecked);
     }
 

@@ -539,4 +539,16 @@ public class AndroidTool {
         return m.matches();
     }
 
+    //保留2位小数
+    public static double get2Double(double a) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return Double.valueOf(df.format(a));
+    }
+
+    //保留2位小数
+    public static String get2DoubleToString(double a) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(a);
+    }
+
 }
