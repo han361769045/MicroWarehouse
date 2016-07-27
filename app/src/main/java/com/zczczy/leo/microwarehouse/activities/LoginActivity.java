@@ -1,17 +1,9 @@
 package com.zczczy.leo.microwarehouse.activities;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.text.Html;
-import android.text.Selection;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
@@ -43,15 +34,12 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.SystemService;
-import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.AnimationRes;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
-import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,11 +84,7 @@ public class LoginActivity extends BaseActivity {
 
     MemberInfoModel model;
 
-    boolean isRegister;
-
     CountDownTimer countDownTimer;
-
-    ReadSmsContent readSmsContent;
 
     AlertDialog.Builder adb;
 
@@ -127,7 +111,6 @@ public class LoginActivity extends BaseActivity {
         ll_login.setAnimation(login_anim);
     }
 
-
     @Click
     void login_btn() {
         if (AndroidTool.checkIsNull(editUsername)) {
@@ -141,7 +124,6 @@ public class LoginActivity extends BaseActivity {
             login();
         }
     }
-
 
     void getCountDownTimer() {
         countDownTimer = new CountDownTimer(AndroidTool.getCodeTime(pre.loginTimerCode().get()), 1000) {
@@ -221,7 +203,6 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
     @Background
     void login() {
         BaseModelJson<MemberInfoModel> bmj = myRestClient.login(editUsername.getText().toString().trim(),
@@ -296,7 +277,6 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
     @Background
     void perfectUserInfo() {
         myRestClient.setHeader("Token", model.Token);
@@ -328,13 +308,8 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
     @Override
     public void finish() {
-        if (isRegister) {
-            //注销内容监听者
-            this.getContentResolver().unregisterContentObserver(readSmsContent);
-        }
         super.finish();
     }
 
@@ -342,5 +317,4 @@ public class LoginActivity extends BaseActivity {
     void forget() {
 
     }
-
 }
