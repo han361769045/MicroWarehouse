@@ -68,6 +68,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     @AfterViews
     void afterView() {
         bus.register(this);
+        myTitleBar.hideLogo();
         recyclerView.removeItemDecoration(itemDecoration);
         itemDecoration = new HorizontalDividerItemDecoration.Builder(this).margin(21)
                 .visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {

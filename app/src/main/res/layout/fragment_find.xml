@@ -14,6 +14,7 @@
         android:background="@color/title_bar_bg"
         android:minHeight="50dp"
         app:mCustomView="@layout/search_result"
+        app:mLogoIcon="@mipmap/logo"
         app:mRightText="@string/search"
         app:mRightTextMarginRight="15dp" />
     <!--app:mRightButtonIcon="@drawable/linear_grid"-->

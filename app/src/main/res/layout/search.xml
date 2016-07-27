@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/search_bg"
         android:drawableLeft="@drawable/title_search"
-        android:drawablePadding="15dp"
+        android:drawablePadding="10dp"
         android:ellipsize="start"
         android:ems="16"
         android:gravity="center_vertical"
@@ -19,6 +19,6 @@
         android:inputType="text"
         android:maxLines="1"
         android:maxWidth="240dp"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 </LinearLayout>
 
