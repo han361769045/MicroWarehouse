@@ -280,7 +280,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         Log.e("11111111111111", bdLocation.getBuildingName() + "");
         Log.e("11111111111111", bdLocation.getLocationDescribe() + "");
         Log.e("11111111111111", bdLocation.getAddress().province + bdLocation.getAddress().city + bdLocation.getAddress().address + bdLocation.getAddress().street + "");
-        myTitleBar.setLeftText(bdLocation.getCity());
+        myTitleBar.setRightText(bdLocation.getCity());
     }
 
 }
