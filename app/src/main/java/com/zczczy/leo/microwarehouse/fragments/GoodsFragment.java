@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.provider.FixedLoadProvider;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.VerticalDividerItemDecoration;
@@ -18,7 +17,6 @@ import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
-import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -88,9 +86,9 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
     @Subscribe
     public void notifyUI(BaseModelJson<List<GoodsModel>> bmj) {
         if (checkUserIsLogin() && Constants.DEALER.equals(pre.userType().get())) {
-            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 155)));
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), (myAdapter.getItemCount() + 1) / 2 * 255)));
         } else {
-            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 165)));
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), (myAdapter.getItemCount() + 1) / 2 * 235)));
         }
     }
 
