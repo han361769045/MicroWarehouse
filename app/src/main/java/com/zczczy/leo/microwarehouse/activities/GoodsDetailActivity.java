@@ -121,7 +121,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         badgeView = new BadgeView(this);
         badgeView.setBackground(8, Color.WHITE);
         badgeView.setTextColor(Color.RED);
-        badgeView.setBadgeMargin(0, 10, 10, 0);
+        badgeView.setBadgeMargin(0, 5, 5, 0);
     }
 
     @AfterViews

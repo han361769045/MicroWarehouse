@@ -16,6 +16,7 @@ import com.zczczy.leo.microwarehouse.adapters.DetailGoodsRecommendAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
+import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
@@ -86,7 +87,11 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
 
     @Subscribe
     public void notifyUI(BaseModelJson<List<GoodsModel>> bmj) {
-        parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 155)));
+        if (checkUserIsLogin() && Constants.DEALER.equals(pre.userType().get())) {
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 155)));
+        } else {
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), myAdapter.getItemCount() * 165)));
+        }
     }
 
     void afterLoadMore() {
