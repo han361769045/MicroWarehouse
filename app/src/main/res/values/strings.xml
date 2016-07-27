@@ -160,6 +160,7 @@
     <!--订单列表-->
     <string name="text_canceled">已取消</string>
     <string name="text_cancel_order">取消订单</string>
+    <string name="text_delete_order">删除订单</string>
     <string name="text_logistics">物流信息</string>
     <string name="text_finished">已完成</string>
     <string name="text_pay">付款</string>

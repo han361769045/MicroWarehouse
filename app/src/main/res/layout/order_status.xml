@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:background="@drawable/order_gray"
-        android:text="@string/text_cancel_order"
+        android:text="@string/text_delete_order"
         android:visibility="gone" />
 
     <Button
