@@ -85,7 +85,7 @@
             android:button="@null"
             android:checked="false"
             android:drawablePadding="5dp"
-            android:drawableStart="@drawable/good_review"
+            android:drawableStart="@drawable/normal_review"
             android:padding="10dp"
             android:text="@string/text_normal_review" />
 

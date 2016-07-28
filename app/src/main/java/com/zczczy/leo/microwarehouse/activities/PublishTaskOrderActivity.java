@@ -83,6 +83,7 @@ public class PublishTaskOrderActivity extends BaseActivity {
         } else if (!result.Successful) {
             AndroidTool.showToast(this, result.Error);
         } else {
+            AndroidTool.showToast(this, result.Error);
             setResult(RESULT_OK);
             finish();
         }

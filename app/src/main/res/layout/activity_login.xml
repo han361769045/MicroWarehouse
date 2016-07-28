@@ -90,7 +90,7 @@
                         android:drawableStart="@drawable/username"
                         android:hint="@string/text_phone"
                         android:imeOptions="actionNext"
-                        android:inputType="phone"
+                        android:inputType="text"
                         android:maxLength="20"
                         android:padding="13dp"
                         android:singleLine="true"

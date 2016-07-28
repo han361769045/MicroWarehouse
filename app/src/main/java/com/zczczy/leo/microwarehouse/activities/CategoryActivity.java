@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -155,16 +156,17 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
                 }
             });
             popupWindow = new PopupWindow(view, DensityUtil.dip2px(this, 220), DensityUtil.dip2px(this, 110), true);
-//            //实例化一个ColorDrawable颜色为半透明
-//            ColorDrawable dw = new ColorDrawable(0xb0000000);
-//            //设置SelectPicPopupWindow弹出窗体的背景
-//            popupWindow.setBackgroundDrawable(dw);
+            //实例化一个ColorDrawable颜色为半透明
+            ColorDrawable dw = new ColorDrawable(0xb0000000);
+            //设置SelectPicPopupWindow弹出窗体的背景
+            popupWindow.setBackgroundDrawable(dw);
             popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
                     closeInputMethod(view);
                 }
             });
+            popupWindow.setOutsideTouchable(true);
         }
         popupWindow.showAsDropDown(rb_filter);
     }
