@@ -1,12 +1,15 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.microwarehouse.adapters.HotSearchAdapter;
 import com.zczczy.leo.microwarehouse.adapters.SearchHistoryAdapter;
 import com.zczczy.leo.microwarehouse.dao.SearchHistory;
 import com.zczczy.leo.microwarehouse.dao.SearchHistoryDao;
@@ -32,15 +35,29 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
     @ViewById
     EditText text_search;
 
+    @ViewById
+    public LinearLayout ll_hot;
+
+    @ViewById
+    RecyclerView recycler_view_hot;
+
     SearchHistory searchHistory;
+
+    @Bean
+    HotSearchAdapter hotSearchAdapter;
+
+    LinearLayoutManager hLinearLayoutManager;
 
     @Bean
     void setMyAdapter(SearchHistoryAdapter myAdapter) {
         this.myAdapter = myAdapter;
     }
 
+
     @AfterViews
     void afterView() {
+
+        setHotSearch();
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, SearchHistory obj, int position) {
@@ -57,6 +74,21 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
             }
         });
     }
+
+    void setHotSearch() {
+        hLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recycler_view_hot.setLayoutManager(hLinearLayoutManager);
+        recycler_view_hot.setAdapter(hotSearchAdapter);
+        hotSearchAdapter.getMoreData();
+        hotSearchAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<String>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, String obj, int position) {
+                text_search.setText(obj);
+                search();
+            }
+        });
+    }
+
 
     @EditorAction
     void text_search(int actionId) {

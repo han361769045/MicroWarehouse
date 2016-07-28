@@ -129,6 +129,7 @@
     <string name="search_hint">输入商品名称查找</string>
     <string name="search_clear">清空历史搜索</string>
     <string name="search_history">搜索记录</string>
+    <string name="search_hot">热搜</string>
     <string name="text_bat_price">批发价</string>
     <string name="text_price">零售价</string>
     <string name="text_goods_month_sell_count">月销量%1$s件</string>

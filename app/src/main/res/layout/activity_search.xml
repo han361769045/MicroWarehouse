@@ -21,21 +21,66 @@
         app:mRightTextColor="@color/white"
         app:mRightTextMarginRight="15dp" />
 
+    <LinearLayout
+        android:id="@+id/ll_hot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_title_bar"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/search_hot"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_hot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/ll_line1"
+        layout="@layout/horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@+id/ll_hot" />
+
     <TextView
         android:id="@+id/txt_ti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_title_bar"
-        android:gravity="center"
+        android:layout_below="@+id/ll_line1"
+        android:background="@color/white"
+        android:gravity="center_vertical"
         android:padding="10dp"
-        android:text="@string/search_history" />
+        android:text="@string/search_history"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <include
+        android:id="@+id/ll_line"
+        layout="@layout/horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@+id/txt_ti" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_clear"
-        android:layout_below="@+id/txt_ti"
+        android:layout_below="@+id/ll_line"
         android:background="@color/white" />
 
     <LinearLayout

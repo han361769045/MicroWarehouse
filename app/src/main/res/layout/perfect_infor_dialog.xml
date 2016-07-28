@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:background="@drawable/order_orange"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/order_orange"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,7 +13,8 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/text_perfect_title"
-        android:textColor="@color/price"/>
+        android:textColor="@color/price"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/txt_perfect"
@@ -22,7 +23,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/text_perfect"
-        android:textSize="13sp"/>
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
             android:layout_weight="2"
             android:gravity="end"
             android:text="@string/text_user_name"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/edt_username"
@@ -46,7 +47,7 @@
             android:background="@drawable/login_edit_text"
             android:maxLines="1"
             android:padding="5dp"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -55,7 +56,7 @@
             android:gravity="center_vertical"
             android:padding="5dp"
             android:text="@string/text_multiplication"
-            android:textColor="@color/price"/>
+            android:textColor="@color/price" />
 
     </LinearLayout>
 
@@ -71,7 +72,7 @@
             android:layout_weight="2"
             android:gravity="end"
             android:text="@string/text_perfect_password"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/edt_password"
@@ -82,7 +83,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:padding="5dp"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -91,7 +92,7 @@
             android:gravity="center_vertical"
             android:padding="5dp"
             android:text="@string/text_multiplication"
-            android:textColor="@color/price"/>
+            android:textColor="@color/price" />
 
     </LinearLayout>
 
@@ -107,7 +108,7 @@
             android:layout_weight="2"
             android:gravity="end"
             android:text="@string/text_perfect_confirm"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/edt_confirm_pass"
@@ -118,7 +119,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:padding="5dp"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -126,7 +127,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:text="@string/text_multiplication"
-            android:textColor="@color/price"/>
+            android:textColor="@color/price" />
 
     </LinearLayout>
 
@@ -142,7 +143,7 @@
             android:layout_weight="2"
             android:gravity="end"
             android:text="@string/text_perfect_email"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/edt_email"
@@ -153,7 +154,7 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="5dp"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -161,7 +162,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:text="@string/text_multiplication"
-            android:textColor="@color/price"/>
+            android:textColor="@color/price" />
 
     </LinearLayout>
 
@@ -173,7 +174,7 @@
         android:padding="10dp"
         android:text="@string/text_warning"
         android:textColor="@color/price"
-        android:textSize="12sp"/>
+        android:textSize="13sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -202,7 +203,7 @@
                 android:paddingTop="3dp"
                 android:text="@string/text_reset"
                 android:textColor="@color/main_font_color"
-                android:textSize="12sp"/>
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -225,7 +226,7 @@
                 android:paddingTop="3dp"
                 android:text="@string/text_confirm"
                 android:textColor="@color/white"
-                android:textSize="12sp"/>
+                android:textSize="13sp" />
         </LinearLayout>
 
     </LinearLayout>

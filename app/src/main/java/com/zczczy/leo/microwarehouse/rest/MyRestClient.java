@@ -238,6 +238,15 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Get("api/Content/GetCartRecommendedGoodsList?Top={Top}")
     BaseModelJson<List<GoodsModel>> getCartRecommendedGoodsList(@Path int Top);
 
+    /**
+     * 查询关键字信息
+     *
+     * @return
+     */
+    @Get("api/Content/GetKeyWordList")
+    BaseModelJson<List<String>> getKeyWordList();
+
+
     //==============================================================================================
     // 需要传入token 和 token
 
