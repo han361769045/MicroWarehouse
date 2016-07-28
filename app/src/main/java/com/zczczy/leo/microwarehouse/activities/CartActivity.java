@@ -101,7 +101,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
                 }
             }
         });
-
+        img_soon.setVisibility(View.GONE);
     }
 
     @Bean

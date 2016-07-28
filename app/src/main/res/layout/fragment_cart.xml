@@ -27,8 +27,8 @@
         android:layout_height="200dp"
         android:layout_below="@+id/my_title_bar"
         android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您的购物车还没有商品" />
+            android:text="@string/cart_nothing" />
 
         <ImageView
             android:id="@+id/img_soon"

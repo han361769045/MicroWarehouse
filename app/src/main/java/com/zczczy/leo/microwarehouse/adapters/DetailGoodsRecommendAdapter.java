@@ -34,15 +34,15 @@ public class DetailGoodsRecommendAdapter extends BaseRecyclerViewAdapter<GoodsMo
     }
 
     @UiThread
-    void afterGetData(BaseModelJson<List<GoodsModel>> bmj) {
+    void afterGetData(BaseModelJson<List<GoodsModel>> result) {
         AndroidTool.dismissLoadDialog();
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
+        if (result == null) {
+            result = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (bmj.Data.size() > 0) {
-                insertAll(bmj.Data, getItems().size());
-                bus.post(bmj);
+        } else if (result.Successful) {
+            if (result.Data != null && result.Data.size() > 0) {
+                insertAll(result.Data, getItems().size());
+                bus.post(result);
             }
         }
     }

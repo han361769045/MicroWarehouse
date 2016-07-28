@@ -85,10 +85,10 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
 
     @Subscribe
     public void notifyUI(BaseModelJson<List<GoodsModel>> bmj) {
-        if (checkUserIsLogin() && Constants.DEALER.equals(pre.userType().get())) {
+        if (Constants.DEALER.equals(pre.userType().get())) {
             parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), (myAdapter.getItemCount() + 1) / 2 * 255)));
         } else {
-            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), (myAdapter.getItemCount() + 1) / 2 * 235)));
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(getActivity(), (myAdapter.getItemCount() + 1) / 2 * 240)));
         }
     }
 

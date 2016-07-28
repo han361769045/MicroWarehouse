@@ -107,6 +107,7 @@
     <string name="text_cancel">取消</string>
     <string name="text_edit">编辑</string>
     <string name="cart_total">合计:%1$s</string>
+    <string name="cart_nothing">您的购物车还没有商品</string>
 
     <!--收货地址-->
     <string name="text_shipping_address">收货地址</string>

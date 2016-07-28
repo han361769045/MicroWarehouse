@@ -95,7 +95,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 //            AndroidTool.showToast(context, no_net);
         } else if (result.Successful) {
             clear();
-            if (result.Data.size() > 0) {
+            if (result.Data != null &&result.Data.size() > 0) {
                 insertAll(result.Data, getItemCount());
             }
         }
