@@ -24,7 +24,7 @@ public class GoodsAttribute implements Serializable {
     public String GoodsAttributeName;
     public int GoodsAttributeStock;
     public String GoodsAttributePrice;
-    public String GoodsAttributeLbPrice;
+    public String GoodsAttributeBatPrice;
     public String GoodsAttributeImgUrl;
 
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
+import com.zczczy.leo.microwarehouse.activities.MainActivity;
 import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity_;
 import com.zczczy.leo.microwarehouse.adapters.CartAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
@@ -44,7 +46,7 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
     MyTitleBar myTitleBar;
 
     @ViewById
-    LinearLayout ll_checkout, ll_delete;
+    LinearLayout ll_checkout, ll_delete, ll_nothing;
 
     @ViewById
     CheckBox cb_all;
@@ -106,7 +108,11 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
                 }
             }
         });
+    }
 
+    @Click
+    void img_soon() {
+        ((MainActivity) getActivity()).tabHost.setCurrentTab(0);
     }
 
     @Click
@@ -226,6 +232,11 @@ public class CartFragment extends BaseRecyclerViewFragment<CartModel> {
 
     //计算当前所选的金额和数量
     void calcMoney() {
+        if (myAdapter.getAdapterItemCount() < 1) {
+            ll_nothing.setVisibility(View.VISIBLE);
+        } else {
+            ll_nothing.setVisibility(View.GONE);
+        }
         double totalMoney = 0.00;
         count = 0;
         ids = "";

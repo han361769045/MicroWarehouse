@@ -27,7 +27,8 @@
         android:layout_height="200dp"
         android:layout_below="@+id/my_title_bar"
         android:gravity="center"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -38,6 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="您的购物车还没有商品" />
+
+        <ImageView
+            android:id="@+id/img_soon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/soon_search" />
 
     </LinearLayout>
 

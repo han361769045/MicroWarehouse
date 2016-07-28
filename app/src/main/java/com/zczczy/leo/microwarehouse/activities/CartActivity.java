@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,6 +50,9 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
 
     @ViewById
     TextView txt_total_lb, txt_checkout, txt_delete;
+
+    @ViewById
+    ImageView img_soon;
 
     @StringRes
     String cart_total, text_buy, text_edit, text_delete, text_cancel, text_tip, text_tip_confirm;
@@ -104,6 +108,11 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     void setAdapter(CartAdapter myAdapter) {
         this.myAdapter = myAdapter;
         myAdapter.isFooter = true;
+    }
+
+    @Click
+    void img_soon() {
+
     }
 
 

@@ -12,6 +12,7 @@ import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
@@ -28,7 +29,13 @@ public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<Goods
     @Override
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
-        afterGetMoreData(myRestClient.getGoodsInfoByTypeId(pageIndex, pageSize, objects[0].toString(), objects[1].toString(), objects[2] == null ? "0" : objects[2].toString(), objects[3] == null ? "0" : objects[3].toString()));
+        afterGetMoreData(myRestClient.getGoodsInfoByTypeId(
+                pageIndex, pageSize, objects[0].toString(),
+                objects[1].toString(),
+                (objects[2] == null || "".equals(objects[2])) ? "0" : objects[2].toString(),
+                (objects[3] == null || "".equals(objects[3])) ? "0" : objects[3].toString(),
+                Constants.DEALER.equals(pre.userType().get()) ? "1" : "0")
+        );
     }
 
 

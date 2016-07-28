@@ -30,15 +30,16 @@
 
 
     <!--login-->
-    <string name="text_username">手机号</string>
+    <string name="text_username">用户名</string>
+    <string name="text_phone">手机号</string>
     <string name="text_password">密码</string>
     <string name="text_login">登录</string>
     <string name="text_code">验证码</string>
     <string name="text_forget_password">忘记密码？</string>
     <string name="text_send_message">发送验证码</string>
     <string name="text_timer">再次发送%1$sS</string>
-    <string name="text_code_login">验证码登录</string>
-    <string name="text_password_login">密码登录</string>
+    <string name="text_code_login">手机登录</string>
+    <string name="text_password_login">用户名登录</string>
     <string name="text_user_name">用户名：</string>
     <string name="text_perfect_password">密码：</string>
     <string name="text_perfect_confirm">确认密码：</string>

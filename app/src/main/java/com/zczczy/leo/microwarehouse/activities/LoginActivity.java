@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity {
     Button btn_send_code;
 
     @StringRes
-    String text_send_message, text_timer;
+    String text_send_message, text_timer, text_username, text_phone;
 
     @SystemService
     TelephonyManager telephonyManager;
@@ -180,12 +180,14 @@ public class LoginActivity extends BaseActivity {
     void rb_code(boolean isChecked) {
         if (isChecked) {
             ll_code.setVisibility(View.VISIBLE);
+            editUsername.setHint(text_phone);
             ll_password.setVisibility(View.GONE);
             ll_forget.setVisibility(View.GONE);
         } else {
             ll_code.setVisibility(View.GONE);
             ll_password.setVisibility(View.VISIBLE);
             ll_forget.setVisibility(View.VISIBLE);
+            editUsername.setHint(text_username);
         }
     }
 

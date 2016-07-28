@@ -127,6 +127,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
+        badgeView.setTargetView(myTitleBar.getmRightButtonView());
         goodsPropertiesPopup = GoodsPropertiesPopup_.build(this);
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,9 +243,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     void afterGetMyBuyCartCount(BaseModelJson<Integer> result) {
         if (result != null && result.Successful) {
             //myTitleBar.setBadgeCount(result.Data);
-            badgeView.setTargetView(myTitleBar.getmRightButtonView());
             badgeView.setBadgeCount(result.Data);
-
         }
     }
 

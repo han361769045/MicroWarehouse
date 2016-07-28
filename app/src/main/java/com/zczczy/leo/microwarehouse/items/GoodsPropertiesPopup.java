@@ -152,7 +152,7 @@ public class GoodsPropertiesPopup extends LinearLayout {
                     textView.setSelected(true);
                     txt_store_count.setText(String.valueOf(g.GoodsAttributeStock));
                     txt_rmb.setVisibility(View.VISIBLE);
-                    txt_rmb.setText(String.format(text_goods_price, g.GoodsAttributePrice));
+                    txt_rmb.setText(String.format(text_goods_price, Constants.DEALER.equals(pre.userType().get()) ? g.GoodsAttributeBatPrice : g.GoodsAttributePrice));
                     selectedId = g.GoodsAttributeId;
                     if (!StringUtils.isEmpty(g.GoodsAttributeImgUrl)) {
                         Glide.with(context).load(g.GoodsAttributeImgUrl)

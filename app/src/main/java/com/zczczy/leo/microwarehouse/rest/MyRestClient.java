@@ -136,8 +136,8 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @param OB         1:综合排序，2：销量降序，3：价格降序，4：价格升序
      * @return
      */
-    @Get("api/Content/GetGoodsInfoLikeWord?PageIndex={PageIndex}&PageSize={PageSize}&SearchWord={SearchWord}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}")
-    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoLikeWord(@Path int PageIndex, @Path int PageSize, @Path String SearchWord, @Path String OB, @Path String MinPrice, @Path String MaxPrice);
+    @Get("api/Content/GetGoodsInfoLikeWord?PageIndex={PageIndex}&PageSize={PageSize}&SearchWord={SearchWord}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&IsJxs={IsJxs}")
+    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoLikeWord(@Path int PageIndex, @Path int PageSize, @Path String SearchWord, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path String IsJxs);
 
     /**
      * 查询商品明细
@@ -206,8 +206,8 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @param GoodsTypeId 商品Id
      * @return
      */
-    @Get("api/Content/GetGoodsInfoByTypeId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsTypeId={GoodsTypeId}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}")
-    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path int PageIndex, @Path int PageSize, @Path String GoodsTypeId, @Path String OB, @Path String MinPrice, @Path String MaxPrice);
+    @Get("api/Content/GetGoodsInfoByTypeId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsTypeId={GoodsTypeId}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&IsJxs={IsJxs}")
+    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoByTypeId(@Path int PageIndex, @Path int PageSize, @Path String GoodsTypeId, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path String IsJxs);
 
     /**
      * 查询微仓黄页列表信息

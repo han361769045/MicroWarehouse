@@ -178,6 +178,8 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     }
 
     void changeFragment(GoodsTypeModel model) {
+        if (model == null)
+            return;
         if (model != currentGoodsTypeModel) {
             if (edt_min_price != null && edt_max_price != null) {
                 edt_min_price.setText("");

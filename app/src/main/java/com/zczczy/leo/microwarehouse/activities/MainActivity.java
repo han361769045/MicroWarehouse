@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
 
 
     @ViewById
-    FragmentTabHost tabHost;
+    public FragmentTabHost tabHost;
 
     @StringArrayRes
     String[] tabTag, tabTitle;
