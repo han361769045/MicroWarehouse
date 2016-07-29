@@ -107,7 +107,7 @@ public class BadgeView extends TextView {
     }
 
     public void setBadgeCount(int count) {
-        setText(String.valueOf(count));
+        setText(count==0?null:String.valueOf(count));
     }
 
     public Integer getBadgeCount() {

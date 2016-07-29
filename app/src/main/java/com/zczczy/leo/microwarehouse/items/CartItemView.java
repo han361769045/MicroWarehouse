@@ -130,11 +130,11 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     void subShoppingCart(int newQuantity) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterAubShoppingCart(myRestClient.subShoppingCart(_data.GoodsInfoId), newQuantity);
+        afterSubShoppingCart(myRestClient.subShoppingCart(_data.BuyCartInfoId), newQuantity);
     }
 
     @UiThread
-    void afterAubShoppingCart(BaseModel bm, int newQuantity) {
+    void afterSubShoppingCart(BaseModel bm, int newQuantity) {
         AndroidTool.dismissLoadDialog();
         if (bm == null) {
             AndroidTool.showToast(context, "修改失败");

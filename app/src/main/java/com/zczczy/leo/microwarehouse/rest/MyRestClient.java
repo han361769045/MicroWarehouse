@@ -393,7 +393,7 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Post("api/Member/SubShoppingCart/{id}")
     @RequiresHeader(value = {"Token", "Kbn"})
-    BaseModel subShoppingCart(@Path String id);
+    BaseModel subShoppingCart(@Path int id);
 
     /**
      * 删除购物车商品

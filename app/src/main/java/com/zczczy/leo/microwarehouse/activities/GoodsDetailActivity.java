@@ -143,8 +143,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         ll_bat_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.VISIBLE : View.GONE);
         ll_price.setVisibility(Constants.DEALER.equals(pre.userType().get()) ? View.GONE : View.VISIBLE);
         getGoodsDetailById(goodsId);
-        if (checkUserIsLogin())
-            getMyBuyCartCount();
+
     }
 
 
@@ -169,7 +168,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         goodsPropertiesPopup.setCart(isCart);
         popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
-
 
     @Click
     void txt_add_cart() {
@@ -241,8 +239,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @UiThread
     void afterGetMyBuyCartCount(BaseModelJson<Integer> result) {
-        if (result != null && result.Successful) {
-            //myTitleBar.setBadgeCount(result.Data);
+        if (result != null && result.Successful && result.Data != null) {
             badgeView.setBadgeCount(result.Data);
         }
     }
@@ -359,6 +356,8 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     public void onResume() {
         super.onResume();
         sliderLayout.startAutoCycle();
+        if (checkUserIsLogin())
+            getMyBuyCartCount();
     }
 
     public void onDestroy() {
