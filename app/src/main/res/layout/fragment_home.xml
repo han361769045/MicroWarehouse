@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_bg_color"
-    android:orientation="vertical"
-    tools:context=".fragments.HomeFragment">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_bg_color"
+              android:orientation="vertical"
+              tools:context=".fragments.HomeFragment">
 
-    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+    <com.leo.lu.mytitlebar.MyTitleBar
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:background="@color/title_bar_bg"
-        android:minHeight="50dp"
         app:mCustomView="@layout/search_result"
         app:mCustomViewGravity="mCenter"
-        app:mCustomViewMarginRight="10dp"
+        app:mCustomViewMarginLeft="@dimen/aa"
+        app:mCustomViewMarginRight="@dimen/aa"
         app:mLogoIcon="@mipmap/logo"
         app:mRightText="全国"
         app:mRightTextMarginRight="10dp"
-        app:mRightTextRightDrawable="@drawable/title_down" />
+        app:mRightTextRightDrawable="@drawable/title_down"
+        app:mStatueBarIsTransparent="true"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 app:indicator_visibility="visible"
-                app:pager_animation="Accordion" />
+                app:pager_animation="Accordion"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,7 +62,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_one"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -80,7 +81,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_two"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,7 +99,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_three"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -117,7 +118,7 @@
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_four"
                         android:textColor="@color/second_font_color"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -135,7 +136,7 @@
                     android:layout_weight="0.87"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_two"
@@ -146,7 +147,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_three"
@@ -155,10 +156,10 @@
                     android:layout_weight="0.87"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <LinearLayout
                 android:id="@+id/ll_born"
@@ -175,7 +176,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="14dp"
-                    android:src="@drawable/home_horn" />
+                    android:src="@drawable/home_horn"/>
 
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider_horn"
@@ -183,11 +184,11 @@
                     android:layout_height="18dp"
                     android:layout_marginStart="10dp"
                     app:indicator_visibility="invisible"
-                    app:pager_animation="Default" />
+                    app:pager_animation="Default"/>
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -198,7 +199,7 @@
                 android:paddingEnd="1dp"
                 android:paddingStart="1dp"
                 android:paddingTop="5dp"
-                android:src="@drawable/home_hot" />
+                android:src="@drawable/home_hot"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -214,7 +215,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
 
                 <LinearLayout
@@ -229,7 +230,7 @@
                         android:layout_height="83dp"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:scaleType="fitXY"
-                        android:src="@drawable/goods_default" />
+                        android:src="@drawable/goods_default"/>
 
                     <ImageView
                         android:id="@+id/ad_six"
@@ -238,7 +239,7 @@
                         android:layout_marginTop="1dp"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:scaleType="fitXY"
-                        android:src="@drawable/goods_default" />
+                        android:src="@drawable/goods_default"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -251,7 +252,7 @@
                 android:paddingEnd="1dp"
                 android:paddingStart="1dp"
                 android:paddingTop="5dp"
-                android:src="@drawable/home_recommend" />
+                android:src="@drawable/home_recommend"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -265,7 +266,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_eight"
@@ -276,7 +277,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_nine"
@@ -285,7 +286,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
             <LinearLayout
@@ -302,7 +303,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_eleven"
@@ -311,7 +312,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
             <ImageView
@@ -322,7 +323,7 @@
                 android:paddingEnd="1dp"
                 android:paddingStart="1dp"
                 android:paddingTop="5dp"
-                android:src="@drawable/home_choice" />
+                android:src="@drawable/home_choice"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -336,7 +337,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_thirteen"
@@ -347,7 +348,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_fourteenth"
@@ -356,7 +357,7 @@
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
             <LinearLayout
@@ -371,7 +372,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_sixteen"
@@ -381,7 +382,7 @@
                     android:layout_marginStart="1dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
 
                 <ImageView
                     android:id="@+id/ad_seventeen"
@@ -389,14 +390,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
+                    android:src="@drawable/goods_default"/>
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/home_bottom"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

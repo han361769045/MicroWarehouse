@@ -47,14 +47,4 @@ public class TaskOrderItemView extends ItemView<TaskOrderModel> {
         txt_publisher.setText(_data.PublishLogin);
         txt_content.setText(_data.TaskOrderContent);
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

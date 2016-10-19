@@ -49,15 +49,4 @@ public class TakeOrderItemView extends ItemView<OrderDetailModel> {
         txt_num.setText("x".concat(String.valueOf(_data.ProductNum)));
         txt_attr.setText(_data.GoodsAttributeName);
     }
-
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

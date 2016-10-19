@@ -28,14 +28,4 @@ public class SearchHistoryItemView extends ItemView<SearchHistory> {
     protected void init(Object... objects) {
         text_search_content.setText(_data.getSearchContent());
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

@@ -82,13 +82,4 @@ public class GoodsDetailRecommendItemView extends ItemView<GoodsModel> {
         isCanBy = (Constants.Goods_UP == _data.GoodsStatus && _data.GoodsStock > 0);
     }
 
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

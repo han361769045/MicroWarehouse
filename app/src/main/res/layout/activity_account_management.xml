@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.AccountManagementActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".activities.AccountManagementActivity">
 
-    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+    <com.leo.lu.mytitlebar.MyTitleBar
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:background="@color/title_bar_bg"
-        android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/text_account_manager" />
+        app:mStatueBarIsTransparent="true"
+        app:mTitle="@string/text_account_manager"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:layout_marginTop="20dp"
                     android:drawablePadding="10dp"
                     android:text="头像"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar"
@@ -50,11 +50,11 @@
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/default_avatar"
                     app:civ_border_color="@color/common_button"
-                    app:civ_border_width="2dp" />
+                    app:civ_border_width="2dp"/>
 
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_real_name"
@@ -70,16 +70,16 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_real_name"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/txt_real_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_qq"
@@ -95,16 +95,16 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_qq"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/txt_qq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_blog"
@@ -121,16 +121,16 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_blog"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/txt_blog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_email"
@@ -146,16 +146,16 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_email"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/txt_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_safe"
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_safe"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/txt_safe"
@@ -180,10 +180,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:drawableEnd="@drawable/next"
-                    android:text="@string/text_change_pass" />
+                    android:text="@string/text_change_pass"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_xie_yi"
@@ -200,16 +200,16 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_zhu_ce"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:drawableEnd="@drawable/next" />
+                    android:drawableEnd="@drawable/next"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
                 android:id="@+id/rl_mian_ze"
@@ -226,16 +226,16 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="@string/text_mian_ze"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:drawableEnd="@drawable/next" />
+                    android:drawableEnd="@drawable/next"/>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
         </LinearLayout>
     </ScrollView>

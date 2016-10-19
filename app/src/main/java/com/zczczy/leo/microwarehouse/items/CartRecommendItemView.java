@@ -5,8 +5,7 @@ import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.VerticalDividerItemDecoration;
+import com.leo.lu.llrecyclerview.ui.divideritemdecoration.VerticalDividerItemDecoration;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
@@ -61,15 +60,5 @@ public class CartRecommendItemView extends ItemView {
                 GoodsDetailActivity_.intent(context).goodsId(obj.GoodsInfoId).start();
             }
         });
-    }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
     }
 }

@@ -8,11 +8,10 @@
     android:orientation="vertical"
     tools:context=".fragments.CommonCategoryFragment">
 
-    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
+    <com.leo.lu.llrecyclerview.LLRecyclerView
         android:id="@+id/ultimate_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_tab_color"
-        app:recyclerviewEmptyView="@layout/empty_view" />
+        app:recyclerViewEmptyView="@layout/empty_view" />
 
 </LinearLayout>

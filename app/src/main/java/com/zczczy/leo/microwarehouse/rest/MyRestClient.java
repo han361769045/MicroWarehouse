@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.rest;
 
+import com.zczczy.leo.microwarehouse.BuildConfig;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.AreaModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
@@ -39,7 +40,6 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
 
 import java.util.List;
 import java.util.Map;
@@ -49,8 +49,8 @@ import java.util.Map;
  * http://wcapia.zczczy.com/
  * http://218.61.203.50:8018/
  */
-@Rest(rootUrl = "http://wcapib.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
-        converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
+@Rest(rootUrl = BuildConfig.ROOT_URL, requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+        converters = {StringHttpMessageConverter.class, MyGsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class)
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 

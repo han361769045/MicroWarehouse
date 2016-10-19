@@ -352,15 +352,4 @@ public class MemberOrderItemView extends ItemView<OrderModel> {
             baseUltimateRecyclerViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
         }
     }
-
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

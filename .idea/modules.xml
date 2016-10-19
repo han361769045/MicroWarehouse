@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MicroWarehouse.iml" filepath="$PROJECT_DIR$/MicroWarehouse.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mouth/mouth.iml" filepath="$PROJECT_DIR$/mouth/mouth.iml" />
     </modules>
   </component>
 </project>

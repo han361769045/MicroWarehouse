@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_tab_color"
-    android:orientation="vertical"
-    tools:context=".activities.PublishReviewActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_tab_color"
+              android:orientation="vertical"
+              tools:context=".activities.PublishReviewActivity">
 
-    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+    <com.leo.lu.mytitlebar.MyTitleBar
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:background="@color/title_bar_bg"
-        android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back"
-        app:mTitle="@string/text_add_comment" />
+        app:mStatueBarIsTransparent="true"
+        app:mTitle="@string/text_add_comment"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:layout_height="72dp"
                 android:gravity="center_vertical"
                 android:scaleType="centerCrop"
-                android:src="@drawable/goods_default" />
+                android:src="@drawable/goods_default"/>
         </LinearLayout>
 
         <EditText
@@ -50,11 +50,11 @@
             android:maxLength="100"
             android:padding="10dp"
             android:textColorHint="#cccccc"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
 
     <RadioGroup
@@ -75,7 +75,7 @@
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/good_review"
             android:padding="10dp"
-            android:text="@string/text_good_review" />
+            android:text="@string/text_good_review"/>
 
         <RadioButton
             android:id="@+id/rb_soso_review"
@@ -87,7 +87,7 @@
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/normal_review"
             android:padding="10dp"
-            android:text="@string/text_normal_review" />
+            android:text="@string/text_normal_review"/>
 
         <RadioButton
             android:id="@+id/rb_bad_review"
@@ -99,7 +99,7 @@
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/bad_review"
             android:padding="10dp"
-            android:text="@string/text_bad_review" />
+            android:text="@string/text_bad_review"/>
 
     </RadioGroup>
 
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:text="@string/text_review_describe"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -130,7 +130,7 @@
             android:isIndicator="false"
             android:numStars="5"
             android:rating="0"
-            android:stepSize="1" />
+            android:stepSize="1"/>
     </LinearLayout>
 
     <Button
@@ -143,5 +143,5 @@
         android:background="@drawable/common_button"
         android:text="@string/text_publish_review"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 </LinearLayout>

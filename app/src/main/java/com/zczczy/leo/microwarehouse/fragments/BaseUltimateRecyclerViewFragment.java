@@ -1,24 +1,22 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
-import android.graphics.Paint;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.leo.lu.llrecyclerview.LLRecyclerView;
+import com.leo.lu.llrecyclerview.ui.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.leo.lu.llrecyclerview.ui.divideritemdecoration.VerticalDividerItemDecoration;
+import com.leo.lu.llrecyclerview.ui.header.RentalsSunHeaderView;
+import com.leo.lu.mytitlebar.MyTitleBar;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
-import com.zczczy.leo.microwarehouse.viewgroup.FullyLinearLayoutManager;
-import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
@@ -35,19 +33,21 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
 @EFragment(R.layout.activity_ultimate_recycler_view)
 public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
 
-    @ViewById
-    CustomUltimateRecyclerview ultimateRecyclerView;
+    @ViewById(resName = "my_title_bar")
+    MyTitleBar myTitleBar;
+
+    @ViewById(resName = "ultimate_recycler_view")
+    LLRecyclerView ultimateRecyclerView;
 
     BaseUltimateRecyclerViewAdapter<T> myAdapter;
 
-    @ViewById
+    @ViewById(resName = "empty_view")
     TextView empty_view;
 
     @Bean
     OttoBus bus;
 
-    @ViewById
-    MyTitleBar myTitleBar;
+    int layoutId;
 
     LinearLayoutManager linearLayoutManager;
 
@@ -57,60 +57,119 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
 
     MaterialHeader materialHeader;
 
-    Paint paint = new Paint();
+    RentalsSunHeaderView header;
 
     boolean isRefresh;
 
+    @AfterInject
+    public void afterBaseInject() {
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+    }
+
     @AfterViews
     void afterRecyclerView() {
-        AndroidTool.showLoadDialog(this);
         ultimateRecyclerView.setHasFixedSize(true);
-//        linearLayoutManager = new CustomLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
-        linearLayoutManager = new FullyLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
-//        linearLayoutManager = new LinearLayoutManager(getActivity());
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        verticalItem();
+        setLayoutManager();
+        if (layoutId > 0) {
+            //设置视差header
+            enableParallaxHeader(layoutId);
+        }
+
+        //设置空视图
+        enableEmptyViewPolicy();
+
+        //启用加载更多
+        enableLoadMore();
+
+        //获取数据
         afterLoadMore();
-        ultimateRecyclerView.enableLoadmore();
-        myAdapter.setCustomLoadMoreView(R.layout.custom_bottom_progressbar);
-        ultimateRecyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
+
+        //设置 Material下拉刷新
+//        refreshingMaterial();
+//        refreshingStringArray();
+        refreshingRentalsSun();
+
+//        ultimateRecyclerView.setItemViewCacheSize();
+        setHorizontalDividerItemDecoration(35, 35);
+        ultimateRecyclerView.setAdapter(myAdapter);
+    }
+
+    public void setHorizontalDividerItemDecoration(int leftMargin, int rightMargin) {
+        paint.setStrokeWidth(1);
+        paint.setColor(line_color);
+        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(leftMargin, rightMargin).paint(paint).build());
+    }
+
+    public void setVerticalDividerItemDecoration(int leftMargin, int rightMargin) {
+        paint.setStrokeWidth(1);
+        paint.setColor(line_color);
+        ultimateRecyclerView.addItemDecoration(new VerticalDividerItemDecoration.Builder(getActivity()).margin(leftMargin, rightMargin).paint(paint).build());
+    }
+
+    public void enableLoadMore() {
+        ultimateRecyclerView.setOnLoadMoreListener(new LLRecyclerView.OnLoadMoreListener() {
             @Override
-            public void loadMore(int itemsCount, int maxLastVisiblePosition) {
+            public void loadMore(int itemsCount, final int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-//                    AndroidTool.showToast(BaseUltimateRecyclerViewFragment.this, "没有更多的数据了！~");
+//                    AndroidTool.showToast(BaseUltimateRecyclerViewActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
-                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();
                 }
             }
         });
-        ultimateRecyclerView.setCustomSwipeToRefresh();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).paint(paint).build());
-        refreshingMaterial();
+        ultimateRecyclerView.reenableLoadmore();
+    }
+
+    /**
+     * set layoutManager
+     * you can  override
+     */
+    public void setLayoutManager() {
+        verticalItem();
+    }
+
+    /**
+     * 设置EmptyView
+     */
+    public void enableEmptyViewPolicy() {
+        //  ultimateRecyclerView.setEmptyView(R.layout.empty_view, UltimateRecyclerView.EMPTY_KEEP_HEADER_AND_LOARMORE);
+        //    ultimateRecyclerView.setEmptyView(R.layout.empty_view, UltimateRecyclerView.EMPTY_KEEP_HEADER);
+        //  ultimateRecyclerView.setEmptyView(R.layout.empty_view, UltimateRecyclerView.EMPTY_SHOW_LOADMORE_ONLY);
+//        ultimateRecyclerView.setEmptyView(R.layout.empty_view, HFRefreshRecyclerView.EMPTY_SHOW_LOADMORE_ONLY);
     }
 
     //线性布局
-    void verticalItem() {
-        ultimateRecyclerView.setAdapter(null);
+    public void verticalItem() {
         myAdapter.verticalAndHorizontal = BaseUltimateRecyclerViewAdapter.VerticalAndHorizontal.Vertical;
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        ultimateRecyclerView.setAdapter(myAdapter);
+
     }
 
     //网格布局
-    void horizontalItem() {
-        ultimateRecyclerView.setAdapter(null);
+    public void horizontalItem() {
         myAdapter.verticalAndHorizontal = BaseUltimateRecyclerViewAdapter.VerticalAndHorizontal.Horizontal;
         ultimateRecyclerView.setLayoutManager(gridLayoutManager);
-        ultimateRecyclerView.setAdapter(myAdapter);
+    }
+
+    /**
+     * 设置 启用 ParallaxHeader（视差header）
+     * you can override
+     */
+    public void enableParallaxHeader(int layoutId) {
+        View view = layoutInflater.inflate(layoutId, ultimateRecyclerView.mRecyclerView, false);
+        ultimateRecyclerView.setParallaxHeader(view);
+        ultimateRecyclerView.setOnParallaxScroll(new LLRecyclerView.OnParallaxScroll() {
+            @Override
+            public void onParallaxScroll(float percentage, float offset, View parallax) {
+
+            }
+        });
     }
 
     abstract void afterLoadMore();
-
 
     void refreshingMaterial() {
         materialHeader = new MaterialHeader(getActivity());
@@ -144,13 +203,39 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
             ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
             isRefresh = false;
             if (myAdapter.getItems().size() < myAdapter.getTotal()) {
-                ultimateRecyclerView.reenableLoadmore(layoutInflater.inflate(R.layout.custom_bottom_progressbar, null));
+                if (!ultimateRecyclerView.isLoadMoreEnabled())
+                    ultimateRecyclerView.reenableLoadmore();
             } else {
-                ultimateRecyclerView.disableLoadmore();
+                if (ultimateRecyclerView.isLoadMoreEnabled())
+                    ultimateRecyclerView.disableLoadmore();
             }
         } else if (pageIndex == 1) {
             linearLayoutManager.scrollToPosition(0);
         }
+    }
+
+    public void refreshingRentalsSun() {
+        //启用刷新
+        ultimateRecyclerView.refreshingRentalsSun();
+        header = new RentalsSunHeaderView(getActivity());
+        header.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
+        header.setPadding(0, 15, 0, 10);
+        header.setUp(ultimateRecyclerView.mPtrFrameLayout);
+        ultimateRecyclerView.mPtrFrameLayout.setHeaderView(header);
+        ultimateRecyclerView.mPtrFrameLayout.addPtrUIHandler(header);
+        ultimateRecyclerView.mPtrFrameLayout.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
+                isRefresh = true;
+                pageIndex = 1;
+                afterLoadMore();
+            }
+        });
     }
 
     @Override

@@ -27,13 +27,4 @@ public class ProvinceItemView extends ItemView<ProvinceModel> {
         txt_province.setText(_data.ProvinceName);
     }
 
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

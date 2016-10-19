@@ -10,13 +10,9 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
-import com.marshalchen.ultimaterecyclerview.animators.internal.ViewHelper;
-import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerImpl;
-import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerInterface;
-import com.marshalchen.ultimaterecyclerview.swipe.SwipeLayout;
+import com.leo.lu.llrecyclerview.LLRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.MyApplication;
-import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
+import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.ItemView;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
@@ -44,31 +40,17 @@ import java.util.List;
  * Created by leo on 2015/10/31.
  */
 @EBean
-public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAdapter<BaseUltimateViewHolder> implements SwipeItemManagerInterface {
-
-    protected SwipeItemManagerImpl mItemManger = new SwipeItemManagerImpl(this);
-
-    private List<T> items = new ArrayList<>();
-
-    private int total = 0;
-
-    private boolean isFirstOnly = true;
-
-    private Interpolator mInterpolator = new LinearInterpolator();
-
-    private int mDuration = 300;
-
-    private int mLastPosition = 5;
-
-    private OnItemClickListener<T> onItemClickListener;
-
-    private OnItemLongClickListener<T> onItemLongClickListener;
-
-    private BindHeaderViewHolder bindHeaderViewHolder;
-
-    public VerticalAndHorizontal verticalAndHorizontal;
-
+public abstract class BaseUltimateRecyclerViewAdapter<T> extends LLRecyclerViewAdapter<BaseViewHolder> {
     private DynamicHeight dynamicHeight;
+    public VerticalAndHorizontal verticalAndHorizontal;
+    private List<T> items = new ArrayList<>();
+    private int total = 0;
+    private boolean isFirstOnly = true;
+    private Interpolator mInterpolator = new LinearInterpolator();
+    private int mDuration = 300;
+    private OnItemClickListener<T> onItemClickListener;
+    private OnItemLongClickListener<T> onItemLongClickListener;
+    private BindHeaderViewHolder bindHeaderViewHolder;
 
     @RestService
     MyRestClient myRestClient;
@@ -139,14 +121,10 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
      * @param position
      */
     @Override
-    public void onBindViewHolder(BaseUltimateViewHolder viewHolder, int position) {
-
+    public void onBindViewHolder(BaseViewHolder viewHolder, int position) {
         if (getItemViewType(position) == VIEW_TYPES.NORMAL) {
             ItemView<T> itemView = (ItemView) viewHolder.itemView;
             itemView.init(items.get(customHeaderView != null ? position - 1 : position), this, viewHolder);
-            if (viewHolder.swipeLayout != null) {
-                mItemManger.updateConvertView(viewHolder, position);
-            }
             setNormalClick(viewHolder);
         } else if (getItemViewType(position) == VIEW_TYPES.HEADER) {
             setHeaderClick(viewHolder);
@@ -159,89 +137,45 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         } else if (getItemViewType(position) == VIEW_TYPES.FOOTER) {
 
         }
-        if (!isFirstOnly || position > mLastPosition) {
+        if (!isFirstOnly) {
             for (Animator anim : getAdapterAnimations(viewHolder.itemView, AdapterAnimationType.ScaleIn)) {
                 anim.setDuration(mDuration).start();
                 anim.setInterpolator(mInterpolator);
             }
-            mLastPosition = position;
         } else {
-            ViewHelper.clear(viewHolder.itemView);
+//            ViewHelper.clear(viewHolder.itemView);
         }
         if (dynamicHeight != null && position == 0) {
-//            int cellWidth = viewHolder.itemView.getWidth();// this will give you cell width dynamically
-//            int cellHeight = viewHolder.itemView.height;// this will give you cell height dynamically
             dynamicHeight.HeightChange(position, 55); //call your iterface hear
         }
     }
 
-    abstract void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder);
+    abstract void onBindHeaderViewHolder(BaseViewHolder viewHolder);
 
     /**
      * 绑定 HeaderView
      */
     public interface BindHeaderViewHolder {
 
-        void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder);
+        void onBindHeaderViewHolder(BaseViewHolder viewHolder);
     }
 
     public void setBindHeaderViewHolder(BindHeaderViewHolder bindHeaderViewHolder) {
         this.bindHeaderViewHolder = bindHeaderViewHolder;
     }
 
-    @Override
-    public BaseUltimateViewHolder getViewHolder(View view) {
-
-        return new BaseUltimateViewHolder(view);
+    public BaseViewHolder getViewHolder(View view) {
+        return new BaseViewHolder(view);
     }
 
     @Override
-    public BaseUltimateViewHolder onCreateViewHolder(ViewGroup parent) {
-        final View view = onCreateItemView(parent);
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent) {
+        View view = onCreateItemView(parent);
         //修正 item不充满
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
-        final BaseUltimateViewHolder baseViewHolder = getViewHolder(view);
-        SwipeLayout swipeLayout = baseViewHolder.swipeLayout;
-        if (swipeLayout != null) {
-            swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
-            swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-                @Override
-                public void onDoubleClick(SwipeLayout layout, boolean surface) {
+        return getViewHolder(view);
 
-                }
-            });
-            swipeLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((SwipeLayout) v).close();
-                }
-            });
-            swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (getOpenItems().get(0) != -1) {
-                        closeItem(getOpenItems().get(0));
-                        closeAllExcept(null);
-                    } else {
-                        view.performClick();
-                    }
-                }
-            });
-            swipeLayout.getSurfaceView().setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (getOpenItems().get(0) != -1) {
-                        //closeItem(getOpenItems().get(0));
-                        closeAllExcept(null);
-                    } else {
-                        view.performLongClick();
-                    }
-                    return false;
-                }
-            });
-        }
-        return baseViewHolder;
     }
 
     /**
@@ -249,17 +183,12 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
      *
      * @param viewHolder
      */
-    private void setNormalClick(final BaseUltimateViewHolder viewHolder) {
+    private void setNormalClick(final BaseViewHolder viewHolder) {
         if (onItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (getOpenItems().get(0) != -1 && viewHolder.swipeLayout != null) {
-                        //closeItem(getOpenItems().get(0));
-                        closeAllExcept(null);
-                    } else {
-                        onItemClickListener.onItemClick(viewHolder, items.get(customHeaderView != null ? viewHolder.getAdapterPosition() - 1 : viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition());
-                    }
+                    onItemClickListener.onItemClick(viewHolder, items.get(customHeaderView != null ? viewHolder.getAdapterPosition() - 1 : viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition());
                 }
             });
         }
@@ -267,12 +196,7 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (getOpenItems().get(0) != -1 && viewHolder.swipeLayout != null) {
-                        //closeItem(getOpenItems().get(0));
-                        closeAllExcept(null);
-                    } else {
-                        onItemLongClickListener.onItemLongClick(viewHolder, items.get(customHeaderView != null ? viewHolder.getAdapterPosition() - 1 : viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition());
-                    }
+                    onItemLongClickListener.onItemLongClick(viewHolder, items.get(customHeaderView != null ? viewHolder.getAdapterPosition() - 1 : viewHolder.getAdapterPosition()), viewHolder.getAdapterPosition());
                     return false;
                 }
             });
@@ -284,18 +208,12 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
      *
      * @param viewHolder
      */
-    private void setHeaderClick(final BaseUltimateViewHolder viewHolder) {
-
+    private void setHeaderClick(final BaseViewHolder viewHolder) {
         if (onItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (getOpenItems().get(0) != -1) {
-                        //closeItem(getOpenItems().get(0));
-                        closeAllExcept(null);
-                    } else {
-                        onItemClickListener.onHeaderClick(viewHolder, viewHolder.getAdapterPosition());
-                    }
+                    onItemClickListener.onHeaderClick(viewHolder, viewHolder.getAdapterPosition());
                 }
             });
         }
@@ -303,12 +221,7 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
             viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (getOpenItems().get(0) != -1) {
-                        //closeItem(getOpenItems().get(0));
-                        closeAllExcept(null);
-                    } else {
-                        onItemLongClickListener.onHeaderLongClick(viewHolder, viewHolder.getAdapterPosition());
-                    }
+                    onItemLongClickListener.onHeaderLongClick(viewHolder, viewHolder.getAdapterPosition());
                     return false;
                 }
             });
@@ -379,19 +292,6 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         notifyItemRangeRemoved(customHeaderView != null ? 1 : 0, size);
     }
 
-
-    @Override
-    public void onItemDismiss(int position) {
-        remove(position);
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public void onItemMove(int fromPosition, int toPosition) {
-        swapPositions(items, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
     /**
      * allow resource layout id to be introduced
      *
@@ -411,53 +311,6 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
         View h_layout = LayoutInflater.from(context).inflate(mLayout, null);
         setCustomLoadMoreView(h_layout);
     }
-
-
-    @Override
-    public void openItem(int position) {
-        mItemManger.openItem(position);
-    }
-
-    @Override
-    public void closeItem(int position) {
-        mItemManger.closeItem(position);
-    }
-
-    @Override
-    public void closeAllExcept(SwipeLayout layout) {
-        mItemManger.closeAllExcept(layout);
-    }
-
-    @Override
-    public List<Integer> getOpenItems() {
-        return mItemManger.getOpenItems();
-    }
-
-    @Override
-    public List<SwipeLayout> getOpenLayouts() {
-        return mItemManger.getOpenLayouts();
-    }
-
-    @Override
-    public void removeShownLayouts(SwipeLayout layout) {
-        mItemManger.removeShownLayouts(layout);
-    }
-
-    @Override
-    public boolean isOpen(int position) {
-        return mItemManger.isOpen(position);
-    }
-
-    @Override
-    public SwipeItemManagerImpl.Mode getMode() {
-        return mItemManger.getMode();
-    }
-
-    @Override
-    public void setMode(SwipeItemManagerImpl.Mode mode) {
-        mItemManger.setMode(mode);
-    }
-
 
     @Override
     public long generateHeaderId(int position) {
@@ -495,13 +348,6 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     }
 
-    public class VIEW_TYPES {
-        public static final int NORMAL = 0;
-        public static final int HEADER = 1;
-        public static final int FOOTER = 2;
-        public static final int CHANGED_FOOTER = 3;
-    }
-
     public enum VerticalAndHorizontal {
         Vertical,
         Horizontal
@@ -517,5 +363,15 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     public void setDynamicHeight(DynamicHeight dynamicHeight) {
         this.dynamicHeight = dynamicHeight;
+    }
+
+    @Override
+    public BaseViewHolder newFooterHolder(View view) {
+        return new BaseViewHolder(view);
+    }
+
+    @Override
+    public BaseViewHolder newHeaderHolder(View view) {
+        return new BaseViewHolder(view);
     }
 }

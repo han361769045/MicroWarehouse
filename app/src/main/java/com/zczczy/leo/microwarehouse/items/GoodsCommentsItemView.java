@@ -49,14 +49,4 @@ public class GoodsCommentsItemView extends ItemView<GoodsCommentsModel> {
                     .into(img_avatar);
         }
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

@@ -193,14 +193,4 @@ public class CartItemView extends ItemView<CartModel> implements QuantityView.On
     public void onLimitReached() {
 
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

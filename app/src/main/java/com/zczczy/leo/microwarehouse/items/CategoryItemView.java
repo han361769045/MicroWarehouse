@@ -28,14 +28,4 @@ public class CategoryItemView extends ItemView<GoodsTypeModel> {
         txt_first_category.setText(_data.GoodsTypeName);
         txt_first_category.setSelected(_data.isSelected);
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

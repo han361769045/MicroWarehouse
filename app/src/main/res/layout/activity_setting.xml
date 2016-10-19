@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_tab_color"
-    android:orientation="vertical"
-    tools:context=".activities.SettingActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_tab_color"
+              android:orientation="vertical"
+              tools:context=".activities.SettingActivity">
 
-    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+    <com.leo.lu.mytitlebar.MyTitleBar
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:background="@color/title_bar_bg"
-        android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back"
+        app:mStatueBarIsTransparent="true"
         app:mTitle="@string/text_setting"
-        app:mTitleTextColor="@color/white" />
+        app:mTitleTextColor="@color/white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/text_setting_push" />
+            android:text="@string/text_setting_push"/>
 
         <Switch
             android:id="@+id/switch_push"
@@ -37,11 +37,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:checked="true" />
+            android:checked="true"/>
 
     </RelativeLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <RelativeLayout
         android:id="@+id/ll_clear_cache"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="@string/text_setting_clear" />
+            android:text="@string/text_setting_clear"/>
 
         <TextView
             android:id="@+id/txt_cache"
@@ -64,11 +64,11 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@string/text_cache"
-            android:textColor="@color/second_font_color" />
+            android:textColor="@color/second_font_color"/>
 
     </RelativeLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <Button
         android:id="@+id/btn_exit"
@@ -81,6 +81,6 @@
         android:background="@drawable/common_button"
         android:text="@string/text_logout"
         android:textColor="#ffffff"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
 </LinearLayout>

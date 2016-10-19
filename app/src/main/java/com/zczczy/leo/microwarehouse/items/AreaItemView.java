@@ -27,14 +27,4 @@ public class AreaItemView extends ItemView<AreaModel> {
     protected void init(Object... objects) {
         txt_province.setText(_data.AreaName);
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

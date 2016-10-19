@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.AddShippingAddressActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".activities.AddShippingAddressActivity">
 
-    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+    <com.leo.lu.mytitlebar.MyTitleBar
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:background="@color/title_bar_bg"
-        android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mStatueBarIsTransparent="true"
         app:mTitle="@string/text_add_shipping_address"
-        app:mTitleTextColor="@color/white" />
+        app:mTitleTextColor="@color/white"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:layout_height="match_parent"
                     android:ems="5"
                     android:text="@string/text_shipping_name"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/edt_shipping"
@@ -51,10 +51,10 @@
                     android:inputType="text"
                     android:maxLength="10"
                     android:singleLine="true"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                     android:layout_height="match_parent"
                     android:ems="5"
                     android:text="@string/text_mobile"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/edt_phone"
@@ -79,10 +79,10 @@
                     android:background="@android:color/white"
                     android:inputType="phone"
                     android:singleLine="true"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <LinearLayout
                 android:id="@+id/ll_companyarea"
@@ -99,7 +99,7 @@
                     android:layout_height="match_parent"
                     android:ems="5"
                     android:text="@string/text_p_c_a"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <TextView
                     android:id="@+id/txt_p_c_a"
@@ -110,11 +110,11 @@
                     android:focusable="false"
                     android:gravity="top"
                     android:singleLine="true"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
             </LinearLayout>
 
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
 
             <LinearLayout
@@ -130,7 +130,7 @@
                     android:layout_height="match_parent"
                     android:ems="5"
                     android:text="@string/text_detail_address"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/txt_detail_address"
@@ -141,11 +141,11 @@
                     android:maxLength="50"
                     android:maxLines="2"
                     android:singleLine="true"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"/>
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+            <include layout="@layout/horizontal_line"/>
 
             <Button
                 android:id="@+id/btn_save"
@@ -159,7 +159,7 @@
                 android:background="@color/common_button"
                 android:text="@string/text_save"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -128,14 +128,4 @@ public class GoodsHorizontalItemView extends ItemView<GoodsModel> {
             AndroidTool.showToast(context, "添加成功");
         }
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

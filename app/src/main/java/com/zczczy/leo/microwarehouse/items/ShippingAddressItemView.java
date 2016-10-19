@@ -145,15 +145,4 @@ public class ShippingAddressItemView extends ItemView<ShippingAddressModel> {
             baseRecyclerViewAdapter.deleteItem(_data, viewHolder.getAdapterPosition());
         }
     }
-
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

@@ -4,11 +4,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-
+import com.leo.lu.mytitlebar.MyTitleBar;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
-import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;

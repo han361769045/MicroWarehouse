@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.VerticalDividerItemDecoration;
+import com.leo.lu.llrecyclerview.ui.divideritemdecoration.FlexibleDividerDecoration;
+import com.leo.lu.llrecyclerview.ui.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.leo.lu.llrecyclerview.ui.divideritemdecoration.VerticalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;

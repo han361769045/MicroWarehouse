@@ -1,10 +1,9 @@
 package com.zczczy.leo.microwarehouse.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
+import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.GoodsCommentsItemView_;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 
@@ -29,17 +28,7 @@ public class GoodsCommentsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsC
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-    }
-
-    @Override
-    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
 
     }
 

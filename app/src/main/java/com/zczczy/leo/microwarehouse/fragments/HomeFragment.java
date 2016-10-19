@@ -13,6 +13,7 @@ import com.baidu.location.BDLocationListener;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.leo.lu.mytitlebar.MyTitleBar;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.CategoryActivity_;
@@ -31,7 +32,6 @@ import com.zczczy.leo.microwarehouse.service.LocationService;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
-import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;

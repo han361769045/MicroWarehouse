@@ -47,16 +47,5 @@ public class DepotItemView extends ItemView<DepotModel> {
                     .centerCrop()
                     .into(img_depot);
         }
-
-    }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
     }
 }

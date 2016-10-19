@@ -26,14 +26,4 @@ public class CityItemView extends ItemView<CityModel> {
     protected void init(Object... objects) {
         txt_province.setText(_data.CityName);
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

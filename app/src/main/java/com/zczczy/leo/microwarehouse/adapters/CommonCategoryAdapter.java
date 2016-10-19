@@ -1,23 +1,16 @@
 package com.zczczy.leo.microwarehouse.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
+import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.CommonCategoryHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.items.CommonCategoryVerticalItemView_;
 import com.zczczy.leo.microwarehouse.items.ItemView;
-import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
-import com.zczczy.leo.microwarehouse.model.PagerResult;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
-
-import java.util.List;
 
 /**
  * Created by leo on 2016/5/4.
@@ -38,11 +31,11 @@ public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<Goods
         );
     }
 
-
     @Override
-    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
 
     }
+
 
     @Override
     protected View onCreateItemView(ViewGroup parent) {
@@ -58,13 +51,4 @@ public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<Goods
         return itemView;
     }
 
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-    }
 }

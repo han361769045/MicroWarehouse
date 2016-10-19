@@ -44,14 +44,4 @@ public class ReviewItemView extends ItemView<OrderDetailModel> {
         txt_name.setText(_data.ProductName);
 //        txt_des.setText(_data.GoodsDesc);
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

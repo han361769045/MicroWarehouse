@@ -28,13 +28,4 @@ public class HotSearchItemView extends ItemView<String> {
         txt_hot_name.setText(_data);
     }
 
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }

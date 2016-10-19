@@ -2,11 +2,11 @@ package com.zczczy.leo.microwarehouse.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-
 
 import com.zczczy.leo.microwarehouse.MyApplication;
 import com.zczczy.leo.microwarehouse.prefs.MyPrefs_;
@@ -39,6 +39,8 @@ public abstract class BaseFragment extends Fragment {
 
     @ColorRes
     int line_color;
+
+    Paint paint = new Paint();
 
     @StringRes
     String empty_search, empty_order, empty_review, empty_no_review, empty_logistics;

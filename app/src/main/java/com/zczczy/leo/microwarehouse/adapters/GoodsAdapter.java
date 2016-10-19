@@ -1,10 +1,9 @@
 package com.zczczy.leo.microwarehouse.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
+import com.zczczy.leo.microwarehouse.items.BaseViewHolder;
 import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
 import com.zczczy.leo.microwarehouse.items.GoodsVerticalItemView_;
 import com.zczczy.leo.microwarehouse.items.ItemView;
@@ -42,7 +41,7 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
 
     }
 
@@ -58,15 +57,5 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
                 break;
         }
         return itemView;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-
     }
 }

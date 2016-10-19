@@ -34,14 +34,4 @@ public class LogisticsInfoItemView extends ItemView<LogisticsInfoModel> {
         txt_content.setSelected(_data.isLast);
         img_time_circle.setSelected(_data.isLast);
     }
-
-    @Override
-    public void onItemSelected() {
-
-    }
-
-    @Override
-    public void onItemClear() {
-
-    }
 }
