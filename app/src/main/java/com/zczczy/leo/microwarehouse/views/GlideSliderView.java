@@ -49,13 +49,13 @@ public class GlideSliderView extends BaseSliderView {
             mLoadListener.onStart(me);
         }
         RequestManager p = (mGlide != null) ? mGlide : Glide.with(mContext);
-        DrawableTypeRequest rq = null;
+        DrawableTypeRequest rq;
         if (mUrl != null) {
             rq = p.load(mUrl);
         } else if (mFile != null) {
             rq = p.load(mFile);
         } else if (mRes != 0) {
-            p.load(mRes);
+            rq = p.load(mRes);
         } else {
             return;
         }

@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".activities.FeedbackActivity">
+              tools:context=".activities.FeedBackActivity">
 
     <com.leo.lu.mytitlebar.MyTitleBar
         android:id="@+id/my_title_bar"

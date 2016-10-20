@@ -8,7 +8,7 @@ import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
 import com.zczczy.leo.microwarehouse.activities.ApplyDealerActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
-import com.zczczy.leo.microwarehouse.activities.FeedbackActivity_;
+import com.zczczy.leo.microwarehouse.activities.FeedBackActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberTaskOrderActivity_;
@@ -230,7 +230,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_feedback() {
         if (checkUserIsLogin()) {
-            FeedbackActivity_.intent(this).start();
+            FeedBackActivity_.intent(this).start();
         } else {
             LoginActivity_.intent(this).start();
         }

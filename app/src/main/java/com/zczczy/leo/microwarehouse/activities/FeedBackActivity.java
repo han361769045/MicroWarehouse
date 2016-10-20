@@ -26,7 +26,7 @@ import java.util.Map;
  * Created by Leo on 2016/5/26.
  */
 @EActivity(R.layout.activity_feedback)
-public class FeedbackActivity extends BaseActivity {
+public class FeedBackActivity extends BaseActivity {
 
     @ViewById
     EditText edt_content;
