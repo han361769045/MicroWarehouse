@@ -43,6 +43,7 @@ android {
             minifyEnabled true
 
 //            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
