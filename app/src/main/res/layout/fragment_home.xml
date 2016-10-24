@@ -12,7 +12,7 @@
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/title_bar_bg"
+        android:background="@android:color/transparent"
         app:mCustomView="@layout/search_result"
         app:mCustomViewGravity="mCenter"
         app:mCustomViewMarginLeft="@dimen/aa"
