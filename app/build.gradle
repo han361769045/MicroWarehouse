@@ -57,7 +57,8 @@ android {
             manifestPlaceholders = [label: "86微仓"]
         }
         TEST {
-            buildConfigField "String", "ROOT_URL", '"http://218.61.203.50:8018/"'
+            //http://218.61.203.50:8018/
+            buildConfigField "String", "ROOT_URL", '"http://wcapia.zczczy.com/"'
             manifestPlaceholders = [label: "86微仓测试"]
             applicationIdSuffix ".test"
         }

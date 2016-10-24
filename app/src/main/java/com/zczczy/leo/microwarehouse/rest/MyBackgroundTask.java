@@ -8,10 +8,7 @@ import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
 import com.zczczy.leo.microwarehouse.MyApplication;
-import com.zczczy.leo.microwarehouse.activities.BaseActivity;
-import com.zczczy.leo.microwarehouse.activities.LoginActivity;
 import com.zczczy.leo.microwarehouse.activities.OrderDetailActivity_;
-import com.zczczy.leo.microwarehouse.activities.TakeOrderActivity;
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.AdvertModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
@@ -30,7 +27,6 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
@@ -51,9 +47,6 @@ public class MyBackgroundTask implements TagAliasCallback {
 
     @RootContext
     Context context;
-
-    @StringRes
-    String no_net;
 
     @SystemService
     ConnectivityManager connectivityManager;
@@ -250,7 +243,6 @@ public class MyBackgroundTask implements TagAliasCallback {
                 }
             }
         }
-
         return false;
     }
 }

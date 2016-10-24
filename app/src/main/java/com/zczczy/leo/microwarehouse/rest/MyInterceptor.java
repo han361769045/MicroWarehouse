@@ -1,13 +1,13 @@
 package com.zczczy.leo.microwarehouse.rest;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.zczczy.leo.microwarehouse.BuildConfig;
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.res.StringRes;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -24,23 +24,18 @@ public class MyInterceptor implements ClientHttpRequestInterceptor {
     @RootContext
     Context context;
 
-    @StringRes
-    String no_net;
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] data,
                                         ClientHttpRequestExecution execution) throws IOException {
+        if (BuildConfig.DEBUG) {
+            String str = new String(data);
+            Log.e(context.getClass().getName(), request.getURI().toString());
+            Log.e(context.getClass().getName(), str);
+        }
+        if (!request.getHeaders().containsKey("isLoading") || Boolean.parseBoolean(request.getHeaders().get("isLoading").get(0))) {
+            AndroidTool.dismissdialog(context);
+        }
         return execution.execute(request, data);
-    }
-
-    @Background
-    void check() {
-        afterCheck();
-    }
-
-    @UiThread
-    void afterCheck() {
-//        AndroidTool.showLoadDialog(context);
-//        AndroidTool.showToast(context, no_net);
     }
 }

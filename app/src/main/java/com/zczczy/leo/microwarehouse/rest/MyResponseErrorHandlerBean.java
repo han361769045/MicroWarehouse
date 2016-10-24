@@ -1,6 +1,11 @@
 package com.zczczy.leo.microwarehouse.rest;
 
+import android.content.Context;
+
+import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +27,8 @@ import java.nio.charset.Charset;
 @EBean
 public class MyResponseErrorHandlerBean implements ResponseErrorHandler {
 
+    @RootContext
+    Context context;
 
     @Override
     public boolean hasError(ClientHttpResponse response) throws IOException {
@@ -30,11 +37,8 @@ public class MyResponseErrorHandlerBean implements ResponseErrorHandler {
 
     private HttpStatus getHttpStatusCode(ClientHttpResponse response) throws IOException {
         HttpStatus statusCode;
+        AndroidTool.dismissdialog(context);
         try {
-//            if(response ==null){
-//                statusCode = HttpStatus.GATEWAY_TIMEOUT;
-//            }else{
-//            }
             statusCode = response.getStatusCode();
         } catch (IllegalArgumentException ex) {
             throw new UnknownHttpStatusCodeException(response.getRawStatusCode(),

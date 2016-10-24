@@ -1,12 +1,12 @@
 package com.zczczy.leo.microwarehouse.rest;
 
 import android.content.Context;
+import android.util.Log;
 
-import org.androidannotations.annotations.Background;
+import com.zczczy.leo.microwarehouse.BuildConfig;
+
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.api.RestErrorHandler;
 import org.springframework.core.NestedRuntimeException;
 
@@ -20,23 +20,17 @@ public class MyErrorHandler implements RestErrorHandler {
     @RootContext
     Context context;
 
-    @StringRes
-    String no_net;
+//    @Bean
+//    MyBackgroundTask myBackgroundTask;
 
     @Override
     public void onRestClientExceptionThrown(NestedRuntimeException arg0) {
         // TODO Auto-generated method stub
         //开启 线程运行 否者报错
-//        showTos();
-    }
-
-    @Background
-    void showTos(){
-        afterShowTos();
-    }
-    @UiThread
-    void afterShowTos(){
-
+//        myBackgroundTask.dismissLoading();
+        if (BuildConfig.DEBUG) {
+            Log.e(context.getClass().getName(), arg0.getMessage());
+        }
     }
 
 }
