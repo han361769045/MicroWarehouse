@@ -53,7 +53,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment implements BaseSliderView.OnSliderClickListener, BDLocationListener {
 
     @ViewById
-    MyTitleBar myTitleBar;
+    MyTitleBar myTitleBar, my_title_bar_s;
 
     @ViewById
     SliderLayout homeSlider, slider_horn;
@@ -118,13 +118,20 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
             }
         });
 
+        my_title_bar_s.setCustomViewOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchActivity_.intent(HomeFragment.this).start();
+            }
+        });
+
+
         myTitleBar.setLeftTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-
     }
 
     void setBanner() {
@@ -280,7 +287,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         Log.e("11111111111111", bdLocation.getBuildingName() + "");
         Log.e("11111111111111", bdLocation.getLocationDescribe() + "");
         Log.e("11111111111111", bdLocation.getAddress().province + bdLocation.getAddress().city + bdLocation.getAddress().address + bdLocation.getAddress().street + "");
-        myTitleBar.setRightText(bdLocation.getCity());
+        myTitleBar.setLeftText(bdLocation.getCity());
     }
 
 }

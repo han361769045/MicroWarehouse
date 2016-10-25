@@ -4,12 +4,13 @@
     android:id="@+id/text_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/search_bg"
+    android:background="@drawable/search"
     android:drawablePadding="10dp"
     android:drawableStart="@drawable/title_search"
     android:ellipsize="start"
     android:gravity="center_vertical"
     android:hint="@string/search_hint"
     android:maxLines="1"
+    android:textColorHint="@color/white"
     android:textSize="12sp"/>
 
