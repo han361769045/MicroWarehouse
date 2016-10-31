@@ -2,21 +2,12 @@ package com.zczczy.leo.microwarehouse.activities;
 
 import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
-import com.daimajia.slider.library.Indicators.PagerIndicator;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.fragments.CustomPresentationPagerFragment;
 import com.zczczy.leo.microwarehouse.fragments.CustomPresentationPagerFragment_;
-import com.zczczy.leo.microwarehouse.tools.CustomDescriptionAnimation;
-import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
 
 /**
  * Created by Leo on 2016/5/20.

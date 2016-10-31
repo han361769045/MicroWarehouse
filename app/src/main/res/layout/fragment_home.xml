@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.daimajia.slider.library.SliderLayout
+            <com.leo.lu.bannerauto.BannerLayout
                 android:id="@+id/home_slider"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.leo.lu.bannerauto.BannerLayout;
+import com.leo.lu.bannerauto.bannertypes.BaseBannerView;
+import com.leo.lu.bannerauto.bannertypes.DefaultBannerView;
+import com.leo.lu.bannerauto.bannertypes.TextBannerView;
 import com.leo.lu.mytitlebar.MyTitleBar;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
@@ -31,8 +33,6 @@ import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.service.LocationService;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
-import com.zczczy.leo.microwarehouse.viewgroup.HornSliderView;
-import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -50,13 +50,13 @@ import java.util.List;
  * Created by Leo on 2016/5/20.
  */
 @EFragment(R.layout.fragment_home)
-public class HomeFragment extends BaseFragment implements BaseSliderView.OnSliderClickListener, BDLocationListener {
+public class HomeFragment extends BaseFragment implements BaseBannerView.OnSliderClickListener, BDLocationListener {
 
     @ViewById
     MyTitleBar myTitleBar, my_title_bar_s;
 
     @ViewById
-    SliderLayout homeSlider, slider_horn;
+    BannerLayout homeSlider, slider_horn;
 
     @Bean
     MyBackgroundTask myBackgroundTask;
@@ -138,26 +138,26 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
         //设置首页 轮播图
         for (BannerModel bannerModel : app.getNewBannerList()) {
             //显示 描述和图片sliderView
-            GlideSliderView textSliderView = new GlideSliderView(getActivity());
+            DefaultBannerView textSliderView = new DefaultBannerView(getActivity());
             textSliderView.image(bannerModel.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", bannerModel);
             textSliderView.bundle(bundle);
-            textSliderView.setScaleType(BaseSliderView.ScaleType.Fit);
+            textSliderView.setScaleType(DefaultBannerView.ScaleType.Fit);
             textSliderView.setOnSliderClickListener(this);
-            homeSlider.addSlider(textSliderView);
+            homeSlider.addBanner(textSliderView);
         }
         //设置首页 公告信息
         if (app.getNoticeInfoModelList().size() > 0) {
             for (NoticeInfoModel noticeInfoModel : app.getNoticeInfoModelList()) {
                 //自定义只显示文字描述的SliderView
-                HornSliderView textSliderView = new HornSliderView(getActivity());
+                TextBannerView textSliderView = new TextBannerView(getActivity());
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("noticeInfoModel", noticeInfoModel);
                 textSliderView.bundle(bundle);
                 textSliderView.setOnSliderClickListener(this);
                 textSliderView.description(noticeInfoModel.NoticeInfoTitle);
-                slider_horn.addSlider(textSliderView);
+                slider_horn.addBanner(textSliderView);
             }
         } else {
             ll_born.setVisibility(View.GONE);
@@ -229,7 +229,7 @@ public class HomeFragment extends BaseFragment implements BaseSliderView.OnSlide
     }
 
     @Override
-    public void onSliderClick(BaseSliderView slider) {
+    public void onSliderClick(BaseBannerView slider) {
         if (slider.getBundle() != null && slider.getBundle().get("bannerModel") != null) {
             BannerModel bannerModel = (BannerModel) slider.getBundle().get("bannerModel");
             if (bannerModel != null) {

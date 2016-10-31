@@ -16,8 +16,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.leo.lu.bannerauto.BannerLayout;
+import com.leo.lu.bannerauto.bannertypes.DefaultBannerView;
 import com.leo.lu.mytitlebar.MyTitleBar;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.fragments.GoodsDetailFragment;
@@ -39,7 +39,6 @@ import com.zczczy.leo.microwarehouse.rest.MyRestClient;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.views.BadgeView;
-import com.zczczy.leo.microwarehouse.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -61,10 +60,10 @@ import java.util.Map;
  * Created by Leo on 2016/5/23.
  */
 @EActivity(R.layout.new_activity_goods_detail)
-public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener {
+public class GoodsDetailActivity extends BaseActivity {
 
     @ViewById
-    SliderLayout sliderLayout;
+    BannerLayout sliderLayout;
 
     @ViewById
     RelativeLayout parent;
@@ -212,10 +211,9 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             isCanBy = (Constants.Goods_UP == bmj.Data.GoodsStatus && bmj.Data.GoodsStock > 0);
             if (bmj.Data.GoodsImgList != null) {
                 for (GoodsImgModel goodsImgModel : bmj.Data.GoodsImgList) {
-                    GlideSliderView textSliderView = new GlideSliderView(this);
+                    DefaultBannerView textSliderView = new DefaultBannerView(this);
                     textSliderView.image(goodsImgModel.GoodsImgUrl);
-                    textSliderView.setOnSliderClickListener(this);
-                    sliderLayout.addSlider(textSliderView);
+                    sliderLayout.addBanner(textSliderView);
                 }
             }
             if (bmj.Data.GoodsCommentsList != null) {
@@ -334,12 +332,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @Click
     void ll_review() {
         GoodsCommentsActivity_.intent(this).goodsId(goodsId).start();
-    }
-
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-
     }
 
     public void incrementBadgeCount(int count) {
