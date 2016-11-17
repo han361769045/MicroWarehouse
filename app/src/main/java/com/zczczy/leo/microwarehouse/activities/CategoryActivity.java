@@ -1,41 +1,45 @@
 package com.zczczy.leo.microwarehouse.activities;
 
 import android.graphics.drawable.ColorDrawable;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
+
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.zczczy.leo.microwarehouse.R;
-import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.microwarehouse.adapters.CategoryAdapter;
+
 import com.zczczy.leo.microwarehouse.fragments.CommonCategoryFragment;
 import com.zczczy.leo.microwarehouse.fragments.CommonCategoryFragment_;
-import com.zczczy.leo.microwarehouse.model.BaseModelJson;
-import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
+
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.tools.DensityUtil;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Bean;
+
 import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+
 import org.androidannotations.annotations.ViewById;
+
 import org.springframework.util.StringUtils;
 
-import java.util.List;
+
 
 /**
  * Created by Leo on 2016/5/21.
+ * 商品列表
  */
 @EActivity(R.layout.activity_category)
-public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
+public class CategoryActivity extends BaseActivity {
 
     @Extra
     String id, title;
@@ -50,11 +54,14 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
     @ViewById
     RadioGroup radio_group;
 
+    @ViewById
+    TextView titleName_Tv;
+
     String priceMin, priceMax;
 
     EditText edt_min_price, edt_max_price;
 
-    boolean isRefresh;
+//    boolean isRefresh;
 
     PopupWindow popupWindow;
 
@@ -64,74 +71,82 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
 
     boolean isSelected;
 
-    GoodsTypeModel currentGoodsTypeModel;
 
-    @Bean
-    void setMyAdapter(CategoryAdapter myAdapter) {
-        this.myAdapter = myAdapter;
-        fragmentManager = getSupportFragmentManager();
+    @Override
+    void baseAfterView() {
+
+    }
+
+    /**
+     * 点击返回
+     */
+    @Click
+    void titleName_Tv() {
+        finish();
+    }
+
+    /**
+     * 点击去搜索
+     */
+    @Click
+    void search_Tv() {
+        SearchActivity_.intent(this).start();
     }
 
     @AfterViews
     void afterView() {
         if (!StringUtils.isEmpty(title)) {
-            myTitleBar.setTitle(title);
+            titleName_Tv.setText(title);
         }
-        recyclerView.removeItemDecoration(itemDecoration);
-        priceMin = "0";
-        priceMax = "0";
-        myAdapter.getMoreData(id);
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
-                if (!obj.isSelected) {
-                    currentGoodsTypeModel = obj;
-                    if (rb_sell_count.isChecked()) {
-                        rb_sell_count(true);
-                    } else {
-                        rb_sell_count.setChecked(true);
-                    }
-                }
-            }
-        });
+        fragmentManager = getSupportFragmentManager();
+        // 默认按照销量优先加载
+        rb_sell_count(true);
     }
 
+    /**
+     * 填写价格筛选
+     */
     @Click
     void rb_filter() {
         if (rb_filter.isChecked()) {
             orderBy = Constants.PRICE_FILTER;
-            isRefresh = true;
+//            isRefresh = true;
             showProperties();
         }
     }
 
-
+    /**
+     * 按 最高/最低 价筛选
+     */
     @Click
     void rb_price() {
         if (rb_price.isChecked() && isSelected) {
-            isRefresh = true;
+//            isRefresh = true;
             isSelected = false;
             rb_price.setSelected(isSelected);
             orderBy = Constants.PRICE_ASC;
-            changeFragment(currentGoodsTypeModel);
+            changeFragment();
         } else if (rb_price.isChecked() && !isSelected) {
-            isRefresh = true;
+//            isRefresh = true;
             isSelected = true;
             rb_price.setSelected(isSelected);
             orderBy = Constants.PRICE_DESC;
-            changeFragment(currentGoodsTypeModel);
+            changeFragment();
         }
     }
 
+    /**
+     * 按销量筛选
+     * @param isChecked 是否是选中状态
+     */
     @CheckedChange
     void rb_sell_count(boolean isChecked) {
         if (isChecked) {
             orderBy = Constants.SELL_COUNT;
-            isRefresh = true;
-            changeFragment(currentGoodsTypeModel);
+//            isRefresh = true;
+            changeFragment();
         }
     }
-
 
     void showProperties() {
         if (popupWindow == null) {
@@ -152,7 +167,7 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
                     priceMax = "".equals(edt_max_price.getText().toString()) ? "0" : edt_max_price.getText().toString();
                     closeInputMethod(view);
                     popupWindow.dismiss();
-                    changeFragment(currentGoodsTypeModel);
+                    changeFragment();
                 }
             });
             popupWindow = new PopupWindow(view, DensityUtil.dip2px(this, 220), DensityUtil.dip2px(this, 110), true);
@@ -171,46 +186,15 @@ public class CategoryActivity extends BaseRecyclerViewActivity<GoodsTypeModel> {
         popupWindow.showAsDropDown(rb_filter);
     }
 
-    public void notifyUI(BaseModelJson<List<GoodsTypeModel>> bm) {
-        if (bm.Successful) {
-            if (myAdapter.getItemData(0) != null) {
-                changeFragment(myAdapter.getItemData(0));
-            }
-        }
-    }
-
-    void changeFragment(GoodsTypeModel model) {
-        if (model == null)
-            return;
-        if (model != currentGoodsTypeModel) {
-            if (edt_min_price != null && edt_max_price != null) {
-                edt_min_price.setText("");
-                edt_max_price.setText("");
-            }
-            priceMin = "0";
-            priceMax = "0";
-        }
-        currentGoodsTypeModel = model;
+    /**
+     * 按照筛选条件不同 切换fragment
+     */
+    void changeFragment() {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        int firstPosition = 0;
-        int lastPosition = 0;
-        for (int i = 0; i < myAdapter.getItems().size(); i++) {
-            GoodsTypeModel tempModel = myAdapter.getItems().get(i);
-            if (tempModel.GoodsTypeId == model.GoodsTypeId) {
-                firstPosition = i;
-            }
-            if (tempModel.isSelected) {
-                lastPosition = i;
-                tempModel.isSelected = false;
-            }
-        }
-        model.isSelected = true;
-        myAdapter.notifyItemChanged(firstPosition);
-        myAdapter.notifyItemChanged(lastPosition);
-//        AndroidTool.showToast(this, firstPosition + "=====" + lastPosition);
-        linearLayoutManager.scrollToPosition(firstPosition);
-        commonCategoryFragment = CommonCategoryFragment_.builder().goodsId(model.GoodsTypeId + "").orderBy(orderBy).priceMin(priceMin).priceMax(priceMax).build();
+        commonCategoryFragment = CommonCategoryFragment_.builder().goodsId(id + "").orderBy(orderBy).priceMin(priceMin).priceMax(priceMax).build();
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();
     }
+
+
 }

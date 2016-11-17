@@ -3,11 +3,12 @@ package com.zczczy.leo.microwarehouse.activities;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
-import com.zczczy.leo.microwarehouse.tools.Constants;
+
 import com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -53,6 +54,17 @@ public class CommonWebViewActivity extends BaseActivity {
                 }
             }
         });
+        //重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
+        web_common.setWebViewClient(new WebViewClient(){
+            public  boolean shouldOverrideUrlLoading(WebView view,String url){
+                view.loadUrl(url);
+                return  true;
+
+            }
+
+
+        });
+
     }
 
     public void onBackPressed() {

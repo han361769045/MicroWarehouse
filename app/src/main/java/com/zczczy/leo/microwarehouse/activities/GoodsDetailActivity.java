@@ -114,6 +114,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     String linkUrl;
 
+    @Override
+    void baseAfterView() {
+
+    }
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -155,7 +160,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             changeFragment(goodsId);
         }
     }
-
+    //添加规格
     void showProperties(boolean isCart) {
         if (popupWindow == null) {
             popupWindow = new PopupWindow(goodsPropertiesPopup, ViewGroup.LayoutParams.MATCH_PARENT, parent.getHeight(), true);

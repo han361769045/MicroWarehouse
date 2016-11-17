@@ -12,6 +12,7 @@
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        app:mStatueBarIsTransparent="true"
         android:background="@color/title_bar_bg"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back"

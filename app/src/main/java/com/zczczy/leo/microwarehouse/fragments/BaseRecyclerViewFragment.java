@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
@@ -29,7 +30,7 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
     MyTitleBar myTitleBar;
 
     @ViewById
-    RecyclerView recyclerView;
+    RecyclerView recycler_view;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -59,28 +60,28 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
         AndroidTool.showLoadDialog(this);
         gridLayoutManager = new GridLayoutManager(getActivity(), gridCount);
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setHasFixedSize(true);
+        recycler_view.setHasFixedSize(true);
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
         itemDecoration = new HorizontalDividerItemDecoration.Builder(getActivity()).margin(21).paint(paint).build();
-        recyclerView.addItemDecoration(itemDecoration);
+        recycler_view.addItemDecoration(itemDecoration);
         verticalItem();
     }
 
     //线性布局
     void verticalItem() {
-        recyclerView.setAdapter(null);
+        recycler_view.setAdapter(null);
         myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Vertical;
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
+        recycler_view.setLayoutManager(linearLayoutManager);
+        recycler_view.setAdapter(myAdapter);
     }
 
     //网格布局
     void horizontalItem() {
-        recyclerView.setAdapter(null);
+        recycler_view.setAdapter(null);
         myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Horizontal;
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(myAdapter);
+        recycler_view.setLayoutManager(gridLayoutManager);
+        recycler_view.setAdapter(myAdapter);
     }
 
 }

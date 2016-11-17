@@ -24,8 +24,8 @@ public abstract class BaseRecyclerViewActivity<T> extends BaseActivity {
     @ViewById
     MyTitleBar myTitleBar;
 
-    @ViewById
-    RecyclerView recyclerView;
+//    @ViewById
+//    RecyclerView recyclerView;
 
     LinearLayoutManager linearLayoutManager;
 
@@ -41,12 +41,12 @@ public abstract class BaseRecyclerViewActivity<T> extends BaseActivity {
     void afterRecyclerView() {
         AndroidTool.showLoadDialog(this);
         linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
+//        recyclerView.setHasFixedSize(false);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setAdapter(myAdapter);
+//        paint.setStrokeWidth(1);
+//        paint.setColor(line_color);
+//        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
     }
 
 

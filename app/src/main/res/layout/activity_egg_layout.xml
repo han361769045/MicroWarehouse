@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activities.EggVipActivity">
+
+        <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+            android:id="@+id/my_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/title_bar_bg"
+            android:minHeight="50dp"
+            app:mNavButtonIcon="@drawable/title_back"
+            app:mStatueBarIsTransparent="true"
+            app:mTitle="@string/text_eggvip"
+            app:mTitleTextColor="@color/white" />
+
+        <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
+            android:id="@+id/ultimate_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            app:recyclerviewEmptyView="@layout/empty_view"
+            app:recyclerviewScrollbars="vertical"
+            app:theme="@style/AlertDialog.AppCompat.Light"
+            />
+
+</LinearLayout>

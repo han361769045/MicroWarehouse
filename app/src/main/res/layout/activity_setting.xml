@@ -16,6 +16,7 @@
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back"
         app:mTitle="@string/text_setting"
+        app:mStatueBarIsTransparent="true"
         app:mTitleTextColor="@color/white" />
 
     <RelativeLayout

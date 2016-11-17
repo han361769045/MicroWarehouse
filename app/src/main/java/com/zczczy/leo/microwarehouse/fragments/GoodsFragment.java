@@ -60,8 +60,8 @@ public class GoodsFragment extends BaseRecyclerViewFragment<GoodsModel> {
                     }
                 }).paint(paint).build();
 
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.addItemDecoration(new VerticalDividerItemDecoration.Builder(getActivity())
+        recycler_view.addItemDecoration(itemDecoration);
+        recycler_view.addItemDecoration(new VerticalDividerItemDecoration.Builder(getActivity())
                 .margin(21).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
                     @Override
                     public boolean shouldHideDivider(int position, RecyclerView parent) {

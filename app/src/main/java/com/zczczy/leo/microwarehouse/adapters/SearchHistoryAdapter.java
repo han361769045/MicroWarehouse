@@ -9,7 +9,6 @@ import com.zczczy.leo.microwarehouse.dao.SearchHistoryDao;
 import com.zczczy.leo.microwarehouse.items.SearchHistoryItemView_;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;

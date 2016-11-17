@@ -18,7 +18,7 @@ public class GoodsTypeModel implements Serializable {
      * GoodsTypeIcon : sample string 7
      */
 
-    public int GoodsTypeId;
+    public String GoodsTypeId;
     public String GoodsTypeName;
     public int GoodsTypePid;
     public String KeyWord;

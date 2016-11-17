@@ -21,7 +21,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.StringRes;
+
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -30,6 +30,8 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
 
 /**
  * Created by Leo on 2016/5/21.
+ *
+ *上拉加载下拉刷新
  */
 @EActivity(R.layout.activity_ultimate_recycler_view)
 public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {

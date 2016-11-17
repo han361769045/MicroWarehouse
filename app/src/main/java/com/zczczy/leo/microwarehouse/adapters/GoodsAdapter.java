@@ -1,6 +1,7 @@
 package com.zczczy.leo.microwarehouse.adapters;
 
 import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,10 +30,15 @@ public class GoodsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsModel> {
         switch (Integer.valueOf(objects[0].toString())) {
             case 0:
                 result = myRestClient.getGoodsInfoLikeWord(pageIndex, pageSize,
-                        objects[1].toString(), objects[2].toString(),
+                        (objects[1] == null || "".equals(objects[1])) ? "" : objects[1].toString(),
+                        objects[2].toString(),
                         (objects[3] == null || "".equals(objects[3])) ? "0" : objects[3].toString(),
                         (objects[4] == null || "".equals(objects[4])) ? "0" : objects[4].toString(),
-                        Constants.DEALER.equals(pre.userType().get()) ? "1" : "0");
+                        Constants.DEALER.equals(pre.userType().get()) ? "1" : "0",
+                        (objects[5] == null || "".equals(objects[5])) ? "" : objects[5].toString()
+                );
+
+
                 break;
             case 1:
                 result = myRestClient.getRecommendedGoods(pageIndex, pageSize);

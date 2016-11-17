@@ -35,6 +35,7 @@ import java.util.List;
 
 /**
  * Created by Leo on 2016/5/26.
+ * 购物车
  */
 @EActivity(R.layout.fragment_cart)
 public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
@@ -73,7 +74,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
     void afterView() {
         bus.register(this);
         myTitleBar.hideLogo();
-        recyclerView.removeItemDecoration(itemDecoration);
+        recycler_view.removeItemDecoration(itemDecoration);
         itemDecoration = new HorizontalDividerItemDecoration.Builder(this).margin(21)
                 .visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
                     @Override
@@ -81,7 +82,7 @@ public class CartActivity extends BaseRecyclerViewActivity<CartModel> {
                         return position == parent.getAdapter().getItemCount() - 2;
                     }
                 }).paint(paint).build();
-        recyclerView.addItemDecoration(itemDecoration);
+        recycler_view.addItemDecoration(itemDecoration);
         txt_total_lb.setText(String.format(cart_total, 0.0));
         txt_checkout.setText(String.format(text_buy, count));
         txt_delete.setText(String.format(text_delete, count));

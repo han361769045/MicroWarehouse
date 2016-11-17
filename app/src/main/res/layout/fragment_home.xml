@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,9 @@
     android:orientation="vertical"
     tools:context=".fragments.HomeFragment">
 
-    <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
-        android:id="@+id/my_title_bar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/title_bar_bg"
-        android:minHeight="50dp"
-        app:mCustomView="@layout/search_result"
-        app:mCustomViewGravity="mCenter"
-        app:mCustomViewMarginRight="10dp"
-        app:mLogoIcon="@mipmap/logo"
-        app:mRightText="全国"
-        app:mRightTextMarginRight="10dp"
-        app:mRightTextRightDrawable="@drawable/title_down" />
 
-    <ScrollView
+    <com.zczczy.leo.microwarehouse.viewgroup.GradationScrollView
+        android:id="@+id/gradationScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -31,17 +19,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/home_slider"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
-                app:indicator_visibility="visible"
-                app:pager_animation="Accordion" />
+                android:layout_height="match_parent">
+                <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
 
+                    android:id="@+id/my_title_bar"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:minHeight="50dp"
+                    app:mCustomView="@layout/home_search_result"
+                    app:mCustomViewMarginLeft="80dp"
+                    app:mCustomViewMarginRight="@dimen/fifteen_dp"
+                    app:mCustomViewGravity="mRight"
+                    app:mLeftText="全国"
+                    app:mLeftTextColor="#4d4d4d"
+                    app:mStatueBarIsTransparent="true"
+                    app:mLeftTextMarginLeft="@dimen/fifteen_dp"
+
+                    />
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/home_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="205dp"
+                    app:indicator_visibility="visible"
+                    app:pager_animation="Accordion" />
+            </RelativeLayout>
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
+                android:layout_height="93dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -56,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="7dp"
-                        android:drawableTop="@drawable/pao_tui"
+                        android:drawableTop="@drawable/mic_service"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_one"
@@ -75,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="7dp"
-                        android:drawableTop="@drawable/tool_rent"
+                        android:drawableTop="@drawable/old_man"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_two"
@@ -94,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="7dp"
-                        android:drawableTop="@drawable/village"
+                        android:drawableTop="@drawable/yellow_page"
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_three"
                         android:textColor="@color/second_font_color"
@@ -112,7 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="7dp"
-                        android:drawableTop="@drawable/express"
+                        android:drawableTop="@drawable/mouth_service"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center_horizontal|bottom"
                         android:text="@string/text_four"
@@ -121,61 +130,23 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="102dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ad_one"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.87"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_two"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_three"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.87"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-            </LinearLayout>
-
             <include layout="@layout/horizontal_line" />
-
             <LinearLayout
                 android:id="@+id/ll_born"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_height="40dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingEnd="15dp"
-                android:paddingStart="15dp"
-                android:paddingTop="5dp">
+                android:paddingBottom="@dimen/five_dp"
+                android:paddingEnd="@dimen/fifteen_dp"
+                android:paddingStart="@dimen/fifteen_dp"
+                android:paddingTop="@dimen/five_dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="14dp"
-                    android:src="@drawable/home_horn" />
+                    android:src="@drawable/home_hot_two" />
 
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider_horn"
@@ -187,217 +158,265 @@
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_height="100dp">
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:id="@+id/ad_newimg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/newimg"/>
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:paddingBottom="5dp"
                 android:paddingEnd="1dp"
                 android:paddingStart="1dp"
                 android:paddingTop="5dp"
-                android:src="@drawable/home_hot" />
+                android:src="@drawable/shophot_bg" />
+            <RelativeLayout
+                android:id="@+id/activity_test"
+                android:layout_width="match_parent"
+                android:clipChildren="false"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+                <com.zczczy.leo.microwarehouse.views.LoopViewPager
+                    android:id="@+id/banner_Vp"
+                    android:layout_marginTop="@dimen/fifteen_dp"
+                    android:layout_marginBottom="@dimen/fifteen_dp"
+                    android:background="@color/white"
+                    android:layout_width="208dp"
+                    android:layout_height="134dp"
+                    android:layout_marginLeft="@dimen/fifty_five_dp"
+                    android:layout_marginRight="@dimen/fifty_five_dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <include layout="@layout/horizontal_line" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="188dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/ad_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/goods_default"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
+                    <ImageView
+                        android:id="@+id/left_gif"
+                        android:layout_width="@dimen/twenty_dp"
+                        android:layout_height="@dimen/twenty_dp"
+                        android:scaleType="fitXY"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/fifteen_dp"
+                        android:layout_marginBottom="@dimen/fifteen_dp"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="188dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="94dp">
+
+                        <ImageView
+                            android:id="@+id/ad_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/goods_default" />
+
+                        <ImageView
+                            android:layout_width="@dimen/twenty_dp"
+                            android:layout_height="@dimen/twenty_dp"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="11dp"
+                            android:id="@+id/right_top"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginBottom="@dimen/thirty_dp" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="94dp">
+                        <ImageView
+                            android:id="@+id/ad_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="94dp"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/goods_default" />
+
+                        <ImageView
+                            android:layout_width="@dimen/twenty_dp"
+                            android:layout_height="@dimen/twenty_dp"
+                            android:scaleType="fitXY"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/sixty_eight_dp"
+                            android:layout_marginBottom="@dimen/thirty_dp"
+                            android:id="@+id/right_down" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/ad_four"
                     android:layout_width="0dp"
-                    android:layout_height="167dp"
-                    android:layout_marginEnd="1dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:scaleType="fitXY"
                     android:src="@drawable/goods_default" />
 
-
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/ad_five"
                     android:layout_width="0dp"
-                    android:layout_height="167dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/goods_default" />
 
-                    <ImageView
-                        android:id="@+id/ad_five"
-                        android:layout_width="match_parent"
-                        android:layout_height="83dp"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/goods_default" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_marginTop="@dimen/ten_dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:paddingBottom="5dp"
+                android:paddingEnd="1dp"
+                android:paddingStart="1dp"
+                android:paddingTop="5dp"
+                android:src="@drawable/markethot" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="172dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/ad_six"
                         android:layout_width="match_parent"
-                        android:layout_height="83dp"
-                        android:layout_marginTop="1dp"
+                        android:layout_height="match_parent"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:scaleType="fitXY"
                         android:src="@drawable/goods_default" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="172dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ad_seven"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/goods_default" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="172dp"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:layout_marginBottom="@dimen/twenty_dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ad_eight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/goods_default" />
+
+
                 </LinearLayout>
 
+                <include
+                    layout="@layout/horizontal_line" />
+
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                android:paddingBottom="5dp"
-                android:paddingEnd="1dp"
-                android:paddingStart="1dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/home_recommend" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="144dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ad_seven"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_eight"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_nine"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ad_ten"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_eleven"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                android:paddingBottom="5dp"
-                android:paddingEnd="1dp"
-                android:paddingStart="1dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/home_choice" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="143dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ad_twelve"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_thirteen"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_fourteenth"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="143dp"
-                android:layout_marginTop="1dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ad_fifteen"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_sixteen"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-
-                <ImageView
-                    android:id="@+id/ad_seventeen"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/goods_default" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home_bottom"
-                android:visibility="gone" />
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </com.zczczy.leo.microwarehouse.viewgroup.GradationScrollView>
+
+    <LinearLayout
+        android:id="@+id/second_title_bar"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="65dp"
+        android:visibility="gone"
+        android:minHeight="50dp"
+        android:background="#00000000"
+        android:gravity="center_vertical|left"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_search_two"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/classify_title_height"
+            android:layout_marginLeft="@dimen/fifteen_dp"
+            android:layout_marginRight="@dimen/fifteen_dp"
+            android:background="@drawable/search_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/title_search"
+                android:drawablePadding="@dimen/ten_dp"
+                android:gravity="center"
+                android:hint="@string/search_hint"
+                android:textSize="12sp"
+                android:textColorHint="@color/classify_title_text_color"  />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

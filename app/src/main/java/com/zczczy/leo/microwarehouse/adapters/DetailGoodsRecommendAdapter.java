@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.GoodsDetailRecommendItemView_;
-import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
+
 import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;

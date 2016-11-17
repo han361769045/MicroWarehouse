@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical"
+    tools:context=".items.LotteryHomeAdvertisementItemView">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/home_slider"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            app:indicator_visibility="visible"
+            app:pager_animation="Accordion"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txt_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="7dp"
+                    android:drawableTop="@drawable/pao_tui"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="@string/text_lottery_one"
+                    android:textColor="@color/second_font_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txt_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="7dp"
+                    android:drawableTop="@drawable/tool_rent"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="@string/text_lottery_two"
+                    android:textColor="@color/second_font_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txt_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="7dp"
+                    android:drawableTop="@drawable/village"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="@string/text_lottery_three"
+                    android:textColor="@color/second_font_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txt_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="7dp"
+                    android:drawableTop="@drawable/express"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="@string/text_lottery_four"
+                    android:textColor="@color/second_font_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/horizontal_line" />
+
+        <LinearLayout
+            android:id="@+id/ll_born"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:src="@drawable/home_horn" />
+
+            <com.zczczy.leo.microwarehouse.viewgroup.MarqueeView
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:id="@+id/marqueeView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                app:mvAnimDuration="1000"
+                app:mvInterval="3000"
+                app:mvTextColor="@color/black"
+                app:mvTextSize="14sp"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/horizontal_line" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/ad_one"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="150dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_to_announced"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/price">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="查看更多"
+                android:gravity="center_horizontal|center_vertical"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/gray"
+            android:layout_height="100dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="抢宝专区"
+                android:gravity="center_vertical|center_horizontal"
+                android:id="@+id/textView3" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

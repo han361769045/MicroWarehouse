@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 
+import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.GoodsDetailActivity_;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
@@ -30,7 +31,6 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.fragment_common_category)
 public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
 
-
     @FragmentArg
     String goodsId, orderBy, priceMin, priceMax;
 
@@ -41,6 +41,7 @@ public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<Goo
 
     @AfterViews
     void afterView() {
+        bus.register(this);
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
@@ -58,5 +59,12 @@ public class CommonCategoryFragment extends BaseUltimateRecyclerViewFragment<Goo
     @Override
     void afterLoadMore() {
         myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, goodsId, orderBy, priceMin, priceMax);
+    }
+
+    @Subscribe
+    public void notifyUI(Integer number) {
+        if (number == 1001) {
+            ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
+        }
     }
 }

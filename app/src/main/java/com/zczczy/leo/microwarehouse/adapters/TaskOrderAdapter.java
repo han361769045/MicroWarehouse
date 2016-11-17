@@ -9,11 +9,11 @@ import com.zczczy.leo.microwarehouse.items.TaskOrderItemView_;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.model.TaskOrderModel;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
+
 
 /**
  * @author Created by LuLeo on 2016/6/17.

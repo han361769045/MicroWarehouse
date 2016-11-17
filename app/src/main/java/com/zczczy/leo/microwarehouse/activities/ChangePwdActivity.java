@@ -31,6 +31,7 @@ import java.util.Map;
 
 /**
  * Created by Leo on 2016/5/25.
+ * 修改密码
  */
 @EActivity(R.layout.activity_change_password)
 public class ChangePwdActivity extends BaseActivity {

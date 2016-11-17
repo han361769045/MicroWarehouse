@@ -4,10 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.squareup.otto.Subscribe;
+
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.microwarehouse.adapters.BaseUltimateRecyclerViewAdapter;
+
 import com.zczczy.leo.microwarehouse.adapters.ReviewAdapter;
 import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 
@@ -17,10 +17,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.header.MaterialHeader;
 
 /**
  * Created by leo on 2016/5/8.

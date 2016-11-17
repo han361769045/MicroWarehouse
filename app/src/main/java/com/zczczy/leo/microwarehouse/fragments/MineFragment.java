@@ -1,20 +1,28 @@
 package com.zczczy.leo.microwarehouse.fragments;
 
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.otto.Subscribe;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.activities.AccountManagementActivity_;
 import com.zczczy.leo.microwarehouse.activities.ApplyDealerActivity_;
 import com.zczczy.leo.microwarehouse.activities.CommonWebViewActivity_;
-import com.zczczy.leo.microwarehouse.activities.FeedbackActivity_;
+import com.zczczy.leo.microwarehouse.activities.EggVipActivity;
+import com.zczczy.leo.microwarehouse.activities.EggVipActivity_;
+import com.zczczy.leo.microwarehouse.activities.FeedBackActivity_;
 import com.zczczy.leo.microwarehouse.activities.LoginActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberOrderActivity_;
 import com.zczczy.leo.microwarehouse.activities.MemberTaskOrderActivity_;
+import com.zczczy.leo.microwarehouse.activities.MyVipCardActivity_;
 import com.zczczy.leo.microwarehouse.activities.ReviewActivity_;
 import com.zczczy.leo.microwarehouse.activities.SettingActivity_;
 import com.zczczy.leo.microwarehouse.activities.ShippingAddressActivity_;
+import com.zczczy.leo.microwarehouse.activities.TestActivity_;
+import com.zczczy.leo.microwarehouse.activities.lotteryactivities.LotteryMainActivity_;
+import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.model.OrderCountModel;
@@ -61,20 +69,34 @@ public class MineFragment extends BaseFragment {
 
     @Bean
     MyErrorHandler myErrorHandler;
+    @Bean
+    OttoBus bus;
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
+
+
     @AfterViews
     void afterView() {
+        bus.register(this);
         if (checkUserIsLogin()) {
             getMemberInfo();
+
         } else {
             AndroidTool.dismissLoadDialog();
         }
     }
+
+    @Subscribe
+    public void notifiUI(Integer refresh){
+        if (refresh==1005){
+            getMemberInfo();
+        }
+    }
+
 
     void setData() {
         if (checkUserIsLogin()) {
@@ -129,6 +151,7 @@ public class MineFragment extends BaseFragment {
             pre.avatar().put(bmj.Data.HeadImg);
             txt_user_type.setText(pre.userTypeStr().get());
             pre.userType().put(bmj.Data.UserType);
+            Glide.with(getActivity()).load(bmj.Data.HeadImg).into(avatar);
         }
     }
 
@@ -162,6 +185,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_my_review() {
         if (checkUserIsLogin()) {
+
             AndroidTool.showToast(this, "敬请期待");
         } else {
             LoginActivity_.intent(this).start();
@@ -171,6 +195,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_bookmark() {
         if (checkUserIsLogin()) {
+
             AndroidTool.showToast(this, "敬请期待");
         } else {
             LoginActivity_.intent(this).start();
@@ -212,7 +237,7 @@ public class MineFragment extends BaseFragment {
             LoginActivity_.intent(this).start();
         }
     }
-
+    //我的地址
     @Click
     void rl_my_address() {
         if (checkUserIsLogin()) {
@@ -221,21 +246,37 @@ public class MineFragment extends BaseFragment {
             LoginActivity_.intent(this).start();
         }
     }
-
+    //我的服务
     @Click
-    void rl_about_us() {
-        CommonWebViewActivity_.intent(this).title(text_about_us).linkUrl(Constants.ROOT_URL + "Index").start();
-    }
-
-    @Click
-    void rl_feedback() {
-        if (checkUserIsLogin()) {
-            FeedbackActivity_.intent(this).start();
-        } else {
+    void rl_service(){
+        if (checkUserIsLogin()){
+            EggVipActivity_.intent(this).start();
+        }
+        else {
             LoginActivity_.intent(this).start();
         }
     }
 
+    //关于我们
+    @Click
+    void rl_about_us() {
+        CommonWebViewActivity_.intent(this).title(text_about_us).linkUrl(Constants.ROOT_URL + "Index").start();
+    }
+    //一元夺宝
+    @Click
+    void rl_lottery(){
+        LotteryMainActivity_.intent(this).start();
+    }
+    //意见反馈
+    @Click
+    void rl_feedback() {
+        if (checkUserIsLogin()) {
+            FeedBackActivity_.intent(this).start();
+        } else {
+            LoginActivity_.intent(this).start();
+        }
+    }
+    //申请经销商
     @Click
     void rl_apply() {
         if (checkUserIsLogin()) {

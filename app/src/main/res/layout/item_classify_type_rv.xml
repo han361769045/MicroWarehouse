@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/classifyBg_Rl"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/classify_type_list_item_height"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <View
+        android:id="@+id/isSelect_View"
+        android:layout_width="@dimen/classify_type_list_item_view_width"
+        android:layout_height="@dimen/classify_type_list_item_view_height"
+        android:background="@color/classify_type_list_select_view"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/classifyTitle_Tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/classify_type_list_item_text_size"
+        android:textColor="@color/classify_type_text"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/classify_title_bg"
+        android:paddingLeft="@dimen/five_dp"
+        android:paddingRight="@dimen/five_dp"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

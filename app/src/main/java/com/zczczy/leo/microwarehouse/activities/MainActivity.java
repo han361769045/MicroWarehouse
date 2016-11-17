@@ -9,30 +9,30 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
+
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.liulishuo.magicprogresswidget.MagicProgressCircle;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.fragments.CartFragment_;
+
+import com.zczczy.leo.microwarehouse.fragments.ClassifyFragment_;
 import com.zczczy.leo.microwarehouse.fragments.FindFragment_;
 import com.zczczy.leo.microwarehouse.fragments.HomeFragment_;
 import com.zczczy.leo.microwarehouse.fragments.MineFragment_;
-import com.zczczy.leo.microwarehouse.listener.ReadSmsContent;
+
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.UpdateAppModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
 import com.zczczy.leo.microwarehouse.rest.MyErrorHandler;
 import com.zczczy.leo.microwarehouse.rest.MyRestClient;
-import com.zczczy.leo.microwarehouse.service.LocationService;
+
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 import com.zczczy.leo.microwarehouse.viewgroup.FragmentTabHost;
@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity {
     MyErrorHandler myErrorHandler;
 
     @DrawableRes
-    Drawable home_selector, find_selector, cart_selector, mine_selector;
+    Drawable home_selector, classify_selector, find_selector, cart_selector, mine_selector;
 
     @StringRes
     String progress_de;
@@ -95,9 +95,9 @@ public class MainActivity extends BaseActivity {
     long firstTime = 0;
 
     //导航
-    Class[] classTab = {HomeFragment_.class, FindFragment_.class, CartFragment_.class, MineFragment_.class};
+    Class[] classTab = {HomeFragment_.class, ClassifyFragment_.class, FindFragment_.class, CartFragment_.class, MineFragment_.class};
 
-    Drawable[] drawables = new Drawable[4];
+    Drawable[] drawables = new Drawable[5];
 
     BaseModelJson<UpdateAppModel> appInfo;
 
@@ -121,9 +121,10 @@ public class MainActivity extends BaseActivity {
     @AfterInject
     void afterInject() {
         drawables[0] = home_selector;
-        drawables[1] = find_selector;
-        drawables[2] = cart_selector;
-        drawables[3] = mine_selector;
+        drawables[1] = classify_selector;
+        drawables[2] = find_selector;
+        drawables[3] = cart_selector;
+        drawables[4] = mine_selector;
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
@@ -132,9 +133,6 @@ public class MainActivity extends BaseActivity {
         initTab();
         getUpdateApp();
         myBackgroundTask.setAlias();
-
-
-
     }
 
 
@@ -159,7 +157,7 @@ public class MainActivity extends BaseActivity {
             }
             if (bmj.Data.VersionCode > versionCode) {
                 //升级
-                updateNotice();
+//                updateNotice(); // TODO: 2016/10/13  临时关闭
             }
         } else {
             AndroidTool.showToast(this, bmj.Error);
@@ -268,6 +266,7 @@ public class MainActivity extends BaseActivity {
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
+
             }
         });
 

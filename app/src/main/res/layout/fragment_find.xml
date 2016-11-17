@@ -15,6 +15,10 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/search_result"
         app:mLogoIcon="@mipmap/logo"
+        app:mStatueBarIsTransparent="true"
+        app:mCustomViewMarginLeft="80dp"
+        app:mCustomViewMarginRight="60dp"
+        app:mCustomViewGravity="mLeft"
         app:mRightText="@string/search"
         app:mRightTextMarginRight="15dp" />
     <!--app:mRightButtonIcon="@drawable/linear_grid"-->

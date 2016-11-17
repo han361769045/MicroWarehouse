@@ -1,17 +1,19 @@
 package com.zczczy.leo.microwarehouse.activities;
 
 import android.Manifest;
-import android.content.DialogInterface;
+
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
+
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
 import com.zczczy.leo.microwarehouse.R;
+import com.zczczy.leo.microwarehouse.listener.OttoBus;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
@@ -45,6 +47,7 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 /**
  * Created by Leo on 2016/5/25.
+ * 账户管理
  */
 @EActivity(R.layout.activity_account_management)
 public class AccountManagementActivity extends BaseActivity {
@@ -73,12 +76,17 @@ public class AccountManagementActivity extends BaseActivity {
     @Bean
     MyBackgroundTask myBackgroundTask;
 
+
     MemberInfoModel memberInfoModel;
+
+    @Bean
+    OttoBus bus;
 
     String image;
 
     @AfterInject
     void afterInject() {
+
         myRestClient.setRestErrorHandler(myErrorHandler);
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
@@ -168,8 +176,10 @@ public class AccountManagementActivity extends BaseActivity {
         } else {
             Log.e("img", bmj);
             updateMemberInfoImg(bmj);
+
         }
     }
+
 
     /**
      * 更新头像图片地址
@@ -191,10 +201,16 @@ public class AccountManagementActivity extends BaseActivity {
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, "上传失败");
         } else {
+            bus.post(1005);
             pre.avatar().put(bmj.Data);
-            Glide.with(this).load(bmj.Data).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
+            Glide.with(this)
+                    .load(bmj.Data)
+                    .placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
+
+
         }
     }
+
 
     /**
      * 选择图片
@@ -281,7 +297,9 @@ public class AccountManagementActivity extends BaseActivity {
             txt_qq.setText(bmj.Data.MemberQQ);
             txt_blog.setText(bmj.Data.MemberBlog);
             if (!StringUtils.isEmpty(bmj.Data.HeadImg)) {
-                Glide.with(this).load(bmj.Data.HeadImg).placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
+                Glide.with(this)
+                        .load(bmj.Data.HeadImg)
+                        .placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(avatar);
             }
             memberInfoModel = bmj.Data;
             pre.userTypeStr().put(memberInfoModel.UserTypeStr);

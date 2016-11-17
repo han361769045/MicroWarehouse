@@ -19,6 +19,7 @@ import org.androidannotations.annotations.OnActivityResult;
 
 /**
  * Created by leo on 2016/5/7.
+ * 会员订单
  */
 @EActivity(R.layout.activity_member_order)
 public class MemberOrderActivity extends BaseUltimateRecyclerViewActivity<OrderModel> {

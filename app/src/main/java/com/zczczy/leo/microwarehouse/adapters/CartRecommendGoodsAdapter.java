@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.CartRecommendGoodsItemView_;
-import com.zczczy.leo.microwarehouse.items.GoodsHorizontalItemView_;
+
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 
 import org.androidannotations.annotations.EBean;

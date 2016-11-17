@@ -5,14 +5,19 @@ import com.zczczy.leo.microwarehouse.model.AreaModel;
 import com.zczczy.leo.microwarehouse.model.BannerModel;
 import com.zczczy.leo.microwarehouse.model.BaseModel;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+import com.zczczy.leo.microwarehouse.model.BaseModelJsonDoubleT;
+import com.zczczy.leo.microwarehouse.model.CardDetailModel;
 import com.zczczy.leo.microwarehouse.model.CartModel;
 import com.zczczy.leo.microwarehouse.model.CityModel;
+import com.zczczy.leo.microwarehouse.model.ClassifyDataModel;
 import com.zczczy.leo.microwarehouse.model.DealerApplyModel;
 import com.zczczy.leo.microwarehouse.model.DepotModel;
 import com.zczczy.leo.microwarehouse.model.GoodsCommentsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.GoodsTypeModel;
 import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
+import com.zczczy.leo.microwarehouse.model.MemberCardDetailInfo;
+import com.zczczy.leo.microwarehouse.model.MemberCardInfoModel;
 import com.zczczy.leo.microwarehouse.model.MemberInfoModel;
 import com.zczczy.leo.microwarehouse.model.NoticeInfoModel;
 import com.zczczy.leo.microwarehouse.model.OrderCountModel;
@@ -20,6 +25,7 @@ import com.zczczy.leo.microwarehouse.model.OrderDetailModel;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
 import com.zczczy.leo.microwarehouse.model.ProvinceModel;
+import com.zczczy.leo.microwarehouse.model.RecommendComModel;
 import com.zczczy.leo.microwarehouse.model.ShippingAddressModel;
 import com.zczczy.leo.microwarehouse.model.TaskOrderModel;
 import com.zczczy.leo.microwarehouse.model.UpdateAppModel;
@@ -47,9 +53,10 @@ import java.util.Map;
 /**
  * Created by Leo on 2016/3/2.
  * http://wcapia.zczczy.com/
+ * http://wcapib.zczczy.com/
  * http://218.61.203.50:8018/
  */
-@Rest(rootUrl = "http://wcapib.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://wcapia.zczczy.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class)
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
@@ -82,6 +89,16 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      */
     @Get("api/Content/GetHomeBanner")
     BaseModelJson<List<BannerModel>> getHomeBanner();
+
+    /**
+     * 查询App首页滚动广告
+     *
+     * @return
+     */
+    @Get("api/Content/GetHomeAdvertBanner?kbn={kbn}")
+    BaseModelJson<List<AdvertModel>>GetHomeAdvertBanner(@Path String kbn);
+
+
 
     /**
      * 查询公告信息表
@@ -136,8 +153,8 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
      * @param OB         1:综合排序，2：销量降序，3：价格降序，4：价格升序
      * @return
      */
-    @Get("api/Content/GetGoodsInfoLikeWord?PageIndex={PageIndex}&PageSize={PageSize}&SearchWord={SearchWord}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&IsJxs={IsJxs}")
-    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoLikeWord(@Path int PageIndex, @Path int PageSize, @Path String SearchWord, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path String IsJxs);
+    @Get("api/Content/GetGoodsInfoLikeWord?PageIndex={PageIndex}&PageSize={PageSize}&SearchWord={SearchWord}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&IsJxs={IsJxs}&IsAppointmentPro={IsAppointmentPro}")
+    BaseModelJson<PagerResult<GoodsModel>> getGoodsInfoLikeWord(@Path int PageIndex, @Path int PageSize, @Path String SearchWord, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path String IsJxs,@Path String IsAppointmentPro);
 
     /**
      * 查询商品明细
@@ -190,13 +207,24 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     BaseModelJson<PagerResult<GoodsCommentsModel>> getGoodsCommentsByGoodsInfoId(@Path int PageIndex, @Path int PageSize, @Path String GoodsInfoId);
 
     /**
+     * 查询一级分类
+     *
+     *
+     * @return
+     */
+
+    @Get("api/Content/GetGoodsTypePid")
+    BaseModelJson<List<ClassifyDataModel>>getGoodsTypePid();
+
+
+    /**
      * 根据父ID查询二级分类
      *
      * @param GoodsTypePid 分类id
      * @return
      */
     @Get("api/Content/GetGoodsTypeListByPid?GoodsTypePid={GoodsTypePid}")
-    BaseModelJson<List<GoodsTypeModel>> getGoodsTypeListByPid(@Path String GoodsTypePid);
+    BaseModelJsonDoubleT<List<GoodsTypeModel>,List<RecommendComModel>> getGoodsTypeListByPid(@Path String GoodsTypePid);
 
     /**
      * 根据商品类别ID查询商品信息
@@ -610,6 +638,12 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModelJson<Integer> getMyBuyCartCount();
 
+
+
+
+
+
+
     /**
      * 根据订单ID删除订单
      *
@@ -641,6 +675,42 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Post("api/Member/PerfectUserInfo")
     @RequiresHeader(value = {"Token", "Kbn"})
     BaseModel perfectUserInfo(@Body MemberInfoModel model);
+
+    /**
+     * 查询会员卡信息
+     *
+     *
+     * @return
+     * @see MemberCardInfoModel
+     */
+    @Get("api/Member/GetServiceCardInfo")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<List<MemberCardInfoModel>>GetServiceCardInfo();
+
+    /**
+     * 查询会员卡详情
+     *
+     *
+     * @return
+     * @see MemberCardDetailInfo
+     */
+    @Get("api/Member/GetMyCardInfoByServiceCardId?ServiceCardId={ServiceCardId}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<List<MemberCardDetailInfo>>GetMyCardInfoByServiceCardId(@Path String ServiceCardId);
+
+    /**
+     * 获取卡片消费明细
+     *
+     *
+     * @return
+     * @see MemberCardDetailInfo
+     */
+    @Get("api/Member/GetMyCardInfoById?MyCardInfoId={MyCardInfoId}")
+    @RequiresHeader(value = {"Token", "Kbn"})
+    BaseModelJson<MemberCardDetailInfo>GetMyCardInfoById(@Path String MyCardInfoId);
+
+
+
 
 }
 

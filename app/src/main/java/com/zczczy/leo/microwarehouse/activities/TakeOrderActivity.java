@@ -6,7 +6,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
-import com.tencent.mm.sdk.modelbase.BaseResp;
+
 import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.items.TakeOrderItemView;

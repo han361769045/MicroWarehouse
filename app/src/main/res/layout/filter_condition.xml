@@ -10,6 +10,7 @@
         android:id="@+id/rb_sell_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/twenty_dp"
         android:layout_weight="1"
         android:button="@null"
         android:checked="true"
@@ -18,11 +19,15 @@
         android:text="@string/search_sell_count"
         android:textColor="@color/common_order_text" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
+
     <RadioButton
         android:id="@+id/rb_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_weight="1"
         android:button="@null"
         android:drawableEnd="@drawable/common_search_price"
@@ -31,10 +36,16 @@
         android:text="@string/search_price"
         android:textColor="@color/common_order_text" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
+
     <RadioButton
         android:id="@+id/rb_filter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/twenty_dp"
         android:layout_weight="1"
         android:button="@null"
         android:drawableEnd="@drawable/common_search_filter"

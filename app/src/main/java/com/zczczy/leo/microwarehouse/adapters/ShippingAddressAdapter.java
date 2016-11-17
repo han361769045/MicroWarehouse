@@ -4,14 +4,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.ShippingAddressItemView_;
-import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+
 import com.zczczy.leo.microwarehouse.model.ShippingAddressModel;
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
-
-import java.util.List;
 
 /**
  * Created by Leo on 2016/5/4.

@@ -156,10 +156,12 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (hidden) {
-            bus.unregister(this);
-        } else {
-            bus.register(this);
+        if (bus != null){
+            if (hidden) {
+                bus.unregister(this);
+            } else {
+                bus.register(this);
+            }
         }
     }
 }

@@ -6,14 +6,13 @@ import android.view.ViewGroup;
 
 import com.zczczy.leo.microwarehouse.items.BaseUltimateViewHolder;
 import com.zczczy.leo.microwarehouse.items.MemberOrderItemView_;
-import com.zczczy.leo.microwarehouse.model.BaseModelJson;
+
 import com.zczczy.leo.microwarehouse.model.OrderModel;
-import com.zczczy.leo.microwarehouse.model.PagerResult;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
+
 
 /**
  * Created by leo on 2016/5/7.

@@ -21,6 +21,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
  * Created by Leo on 2016/5/26.
+ * 申请经销商
  */
 @EActivity(R.layout.activity_apply_dealer)
 public class ApplyDealerActivity extends BaseActivity {

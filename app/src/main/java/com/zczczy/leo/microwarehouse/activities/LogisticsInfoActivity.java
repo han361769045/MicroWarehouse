@@ -3,6 +3,7 @@ package com.zczczy.leo.microwarehouse.activities;
 import android.view.View;
 import android.widget.TextView;
 
+
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.adapters.LogisticsInfoAdapter;
 import com.zczczy.leo.microwarehouse.model.LogisticsInfoModel;
@@ -22,6 +23,7 @@ public class LogisticsInfoActivity extends BaseRecyclerViewActivity<LogisticsInf
 
     @ViewById
     TextView empty_view;
+
 
     @Extra
     String MOrderId;

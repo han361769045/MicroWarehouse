@@ -10,7 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.SeekBar;
 
 
-import com.zczczy.leo.microwarehouse.MyApplication;
+
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.model.OrderModel;
 import com.zczczy.leo.microwarehouse.tools.AndroidTool;

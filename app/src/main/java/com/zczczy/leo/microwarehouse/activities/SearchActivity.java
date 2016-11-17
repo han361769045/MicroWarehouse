@@ -20,6 +20,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
@@ -31,6 +32,8 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
 
     @Bean
     SearchHistoryDao searchHistoryDao;
+    @Extra
+    String MouthSearch ;
 
     @ViewById
     EditText text_search;
@@ -58,11 +61,19 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
     void afterView() {
 
         setHotSearch();
+
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, SearchHistory obj, int position) {
-                searchHistoryDao.update(obj);
-                SearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
+
+                if (MouthSearch.equals("1")){
+                    searchHistoryDao.update(obj);
+                    SearchResultActivity_.intent(SearchActivity.this).IsAppointmentPro("1").searchContent(obj.getSearchContent()).startForResult(1000);
+                }
+                else {
+                    searchHistoryDao.update(obj);
+                    SearchResultActivity_.intent(SearchActivity.this).IsAppointmentPro("0").searchContent(obj.getSearchContent()).startForResult(1000);
+                }
             }
         });
         myAdapter.getMoreData(0, 0);
@@ -103,7 +114,14 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
             searchHistory.setSearchContent(text_search.getText().toString());
             searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
             searchHistoryDao.insert(searchHistory);
-            SearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+            if (MouthSearch.equals("1")){
+                SearchResultActivity_.intent(SearchActivity.this).IsAppointmentPro("1").searchContent(text_search.getText().toString()).startForResult(1000);
+            }
+            else {
+            SearchResultActivity_.intent(SearchActivity.this).IsAppointmentPro("0").searchContent(text_search.getText().toString()).startForResult(1000);
+            }
+
+
         }
     }
 

@@ -209,7 +209,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified" />
         <activity
-            android:name=".activities.FeedbackActivity_"
+            android:name=".activities.FeedBackActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified" />
@@ -248,6 +248,72 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified" />
+
+        <activity android:name=".activities.EggVipActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.MyVipCardActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.VipCardDetailActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+
+        <activity android:name=".activities.OrganicEggActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.ClassifyActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+
+        <activity android:name=".activities.TestActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <!-- Lottery -->
+        <activity android:name=".activities.lotteryactivities.LotteryMainActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+
+        <activity android:name=".activities.lotteryactivities.LotteryGoodsDetailActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.lotteryactivities.AnnouncedActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.lotteryactivities.PlayRuleActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.lotteryactivities.LotteryInfoActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+        <activity android:name=".activities.lotteryactivities.MyShareActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified"
+            />
+
 
         <!-- alipay sdk begin -->
         <activity

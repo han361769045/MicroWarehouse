@@ -17,6 +17,7 @@
         app:mNavButtonIcon="@drawable/title_back"
         app:mRightText="@string/text_edit"
         app:mRightTextColor="@color/white"
+        app:mStatueBarIsTransparent="true"
         app:mRightTextMarginRight="10dp"
         app:mTitle="@string/text_cart"
         app:mTitleTextColor="@color/white" />
@@ -67,7 +68,7 @@
     <LinearLayout
         android:id="@+id/ll_cart_total"
         android:layout_width="match_parent"
-        android:layout_height="49.5dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
@@ -107,7 +108,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
 
@@ -130,7 +131,7 @@
                 android:padding="5dp"
                 android:text="@string/text_buy"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

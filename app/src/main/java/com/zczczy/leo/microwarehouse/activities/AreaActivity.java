@@ -17,6 +17,7 @@ import org.androidannotations.annotations.Extra;
 
 /**
  * Created by Leo on 2016/5/4.
+ * 区域选择
  */
 @EActivity(R.layout.activity_province)
 public class AreaActivity extends BaseRecyclerViewActivity<AreaModel> {

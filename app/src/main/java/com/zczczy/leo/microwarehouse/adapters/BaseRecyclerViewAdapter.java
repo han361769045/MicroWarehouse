@@ -101,6 +101,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         }
     }
 
+
     /**
      * 设置 ItemView
      *
@@ -222,6 +223,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     public interface OnItemClickListener<T> {
 
         void onItemClick(RecyclerView.ViewHolder viewHolder, T obj, int position);
+
 
     }
 

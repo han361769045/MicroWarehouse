@@ -47,7 +47,7 @@ public class TaskOrderDetailActivity extends BaseActivity {
     RelativeLayout rl_publisher, rl_receiver;
 
     @ViewById
-    Button btn_reviewing, btn_receive, btn_cancel, btn_finish, btn_finished;
+    Button btn_reviewing, btn_receive, btn_cancel, btn_finish, btn_finished,btn_notpass;
 
     @Extra
     String TaskOrderId;
@@ -90,8 +90,9 @@ public class TaskOrderDetailActivity extends BaseActivity {
             txt_task_price.setText(result.Data.Expense);
             txt_publisher.setText(result.Data.PublishLogin);
             txt_receiver.setText(result.Data.ReveiveLogin);
-            if (result.Data.TaskStatus == 0 && pre.nickName().get().equals(result.Data.PublishLogin)) {
+            if (result.Data.TaskStatus == 0 &&pre.nickName().get().equals(result.Data.PublishLogin)) {
                 btn_reviewing.setVisibility(View.VISIBLE);
+
             } else if (result.Data.TaskStatus == 1 && !pre.nickName().get().equals(result.Data.PublishLogin)) {
                 btn_receive.setVisibility(View.VISIBLE);
             } else if (result.Data.TaskStatus == 2 && pre.nickName().get().equals(result.Data.PublishLogin)) {
@@ -106,6 +107,9 @@ public class TaskOrderDetailActivity extends BaseActivity {
                 btn_finished.setVisibility(View.VISIBLE);
             } else if (result.Data.TaskStatus == 4) {
                 btn_finish.setVisibility(View.VISIBLE);
+            }
+            else  if (result.Data.TaskStatus==5){
+                btn_notpass.setVisibility(View.VISIBLE);
             }
         }
     }

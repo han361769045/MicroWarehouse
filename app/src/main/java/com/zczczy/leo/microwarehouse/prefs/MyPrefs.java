@@ -50,6 +50,8 @@ public interface MyPrefs {
     @DefaultString("")
     String userType();
 
+
+
     @DefaultBoolean(true)
     boolean isStartPush();
 

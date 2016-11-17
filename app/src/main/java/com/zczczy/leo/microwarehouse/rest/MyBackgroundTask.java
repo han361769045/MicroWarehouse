@@ -78,6 +78,10 @@ public class MyBackgroundTask implements TagAliasCallback {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
+
+
+
+
     /**
      * 获取首页banner
      */
@@ -94,7 +98,11 @@ public class MyBackgroundTask implements TagAliasCallback {
             bmj = new BaseModelJson<>();
         }
         bus.post(bmj);
+
+
     }
+
+
 
     /**
      * 获取首页广告

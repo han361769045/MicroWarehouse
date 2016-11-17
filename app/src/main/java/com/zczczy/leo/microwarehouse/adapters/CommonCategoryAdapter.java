@@ -11,13 +11,10 @@ import com.zczczy.leo.microwarehouse.items.ItemView;
 import com.zczczy.leo.microwarehouse.model.BaseModelJson;
 import com.zczczy.leo.microwarehouse.model.GoodsModel;
 import com.zczczy.leo.microwarehouse.model.PagerResult;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+
 import com.zczczy.leo.microwarehouse.tools.Constants;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
-
-import java.util.List;
 
 /**
  * Created by leo on 2016/5/4.
@@ -36,6 +33,14 @@ public class CommonCategoryAdapter extends BaseUltimateRecyclerViewAdapter<Goods
                 (objects[3] == null || "".equals(objects[3])) ? "0" : objects[3].toString(),
                 Constants.DEALER.equals(pre.userType().get()) ? "1" : "0")
         );
+    }
+
+    @Override
+    protected void afterGetMoreData(BaseModelJson<PagerResult<GoodsModel>> bmj) {
+        super.afterGetMoreData(bmj);
+        if (bus != null) {
+            bus.post(1001);
+        }
     }
 
 

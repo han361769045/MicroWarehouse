@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="aa">15px</dimen>
+
+    <!-- margin and padding -->
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="three_dp">3dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="thirty_dp">30dp</dimen>
+    <dimen name="thirty_five_dp">35dp</dimen>
+    <dimen name="forty_dp">61dp</dimen>
+    <dimen name="fifty_five_dp">55dp</dimen>
+    <dimen name="sixty_eight_dp">74dp</dimen>
+    <dimen name="margin_start">175dp</dimen>
+    <!-- ↓分类↓ -->
+    <dimen name="classify_title_height">30dp</dimen>
+    <dimen name="classify_type_list_item_height">60dp</dimen>
+    <dimen name="classify_type_list_item_view_height">30dp</dimen>
+    <dimen name="classify_type_list_item_view_width">4dp</dimen>
+    <dimen name="classify_type_list_item_text_size">15sp</dimen>
+    <dimen name="classify_type_list_item_image_size">75dp</dimen>
+    <dimen name="classify_recommend_list_height">110dp</dimen>
+    <!-- ↑分类↑ -->
+
+    <!-- 商品列表 -->
+    <dimen name="category_title_text_size">16sp</dimen>
+
+</resources>

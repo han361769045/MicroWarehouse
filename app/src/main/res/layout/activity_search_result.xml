@@ -8,6 +8,7 @@
     tools:context=".activities.BaseUltimateRecyclerViewActivity">
 
     <com.zczczy.leo.microwarehouse.viewgroup.MyTitleBar
+
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -15,6 +16,9 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/search_result"
         app:mNavButtonIcon="@drawable/title_back"
+        app:mCustomViewMarginLeft="@dimen/fifteen_dp"
+        app:mCustomViewMarginRight="@dimen/fifteen_dp"
+        app:mStatueBarIsTransparent="true"
         app:mRightText="@string/search"
         app:mRightTextMarginRight="15dp" />
     <!--   app:mRightButtonIcon="@drawable/linear_grid"-->

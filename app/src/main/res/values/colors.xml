@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#333333</color>
-
+    <color name="home_background">#f2f2f2</color>
 
     <color name="gray">#aaaaaa</color>
     <color name="red">#FF0000</color>
@@ -34,4 +34,19 @@
 
     <color name="tab_text">#ff7800</color>
     <color name="pop_pu_bg">#11000000</color>
+
+    <!--home title 透明度变化 专用-->
+    <color name="white_color">#ffffff</color>
+    <color name="home_search_text_scrolled">#a4a3a3</color>
+    <!--home title 新加分类-->
+    <color name="classify_title_bg">#f0f0f0</color>
+    <color name="classify_bg">#f5f5f7</color>
+    <color name="classify_title_text_color">#c1c1c1</color>
+    <color name="classify_type_list_select_view">#fe6d1e</color>
+    <color name="classify_type_text">#4d4d4d</color>
+    <color name="classify_recommend_text">#666666</color>
+    <color name="classify_search_text">#bcbcbc</color>
+    <color name="classify_lines">#d8d8d8</color>
+
 </resources>
+

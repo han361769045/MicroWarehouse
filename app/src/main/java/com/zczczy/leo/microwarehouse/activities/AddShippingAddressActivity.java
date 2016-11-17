@@ -30,6 +30,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
  * Created by Leo on 2016/5/4.
+ * 添加收货地址
  */
 @EActivity(R.layout.activity_add_shipping_address)
 public class AddShippingAddressActivity extends BaseActivity {

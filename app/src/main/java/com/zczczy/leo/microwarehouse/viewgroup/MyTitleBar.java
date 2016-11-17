@@ -2,8 +2,10 @@ package com.zczczy.leo.microwarehouse.viewgroup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -63,9 +66,13 @@ public class MyTitleBar extends RelativeLayout {
 
     private int mLeftTextDrawablePadding, mRightTextDrawablePadding;
 
-    private boolean mLogoShape;
+    private boolean mStatueBarIsTransparent;
 
     private int mCustomViewGravity;
+
+    private LinearLayout statueBar;
+
+    private RelativeLayout titleWrap;
 
     public MyTitleBar(Context context) {
         this(context, null);
@@ -82,9 +89,14 @@ public class MyTitleBar extends RelativeLayout {
         mRightTextMarginRight = a.getDimensionPixelSize(R.styleable.MyTitleBar_mRightTextMarginRight, pxFromDp(0));
         mLeftTextMarginLeft = a.getDimensionPixelSize(R.styleable.MyTitleBar_mLeftTextMarginLeft, pxFromDp(0));
 
+
         mCustomViewMarginRight = a.getDimensionPixelSize(R.styleable.MyTitleBar_mCustomViewMarginRight, pxFromDp(0));
         mCustomViewMarginLeft = a.getDimensionPixelSize(R.styleable.MyTitleBar_mCustomViewMarginLeft, pxFromDp(0));
 
+        mStatueBarIsTransparent = a.getBoolean(R.styleable.MyTitleBar_mStatueBarIsTransparent, false) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        if (mStatueBarIsTransparent && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setStatueBarTransparent();
+        }
 
         final Drawable rightButtonView = a.getDrawable(R.styleable.MyTitleBar_mRightButtonIcon);
         if (rightButtonView != null) {
@@ -109,7 +121,6 @@ public class MyTitleBar extends RelativeLayout {
             mRightTextView.setCompoundDrawablePadding(mRightTextDrawablePadding);
             mRightTextView.setCompoundDrawables(mRightTextLeftDrawable, null, null, null);
         }
-
 
         if (a.hasValue(R.styleable.MyTitleBar_mRightTextColor)) {
             setRightTextColor(a.getColor(R.styleable.MyTitleBar_mRightTextColor, 0xffffffff));
@@ -213,6 +224,47 @@ public class MyTitleBar extends RelativeLayout {
         mDrawableManager = AppCompatDrawableManager.get();
     }
 
+    private void setDefaultLayoutParams() {
+        if (mStatueBarIsTransparent) {
+            getLayoutParams().height = pxFromDp(70);
+        } else {
+            getLayoutParams().height = pxFromDp(50);
+        }
+    }
+
+    private void setStatueBarTransparent() {
+        titleWrap = new RelativeLayout(getContext());
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        layoutParams.setMargins(0, pxFromDp(20), 0, 0);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        super.addView(titleWrap, layoutParams);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, r, t, b);
+        setDefaultLayoutParams();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+//        setDefaultLayoutParams();
+
+    }
+
+    public void addView(View child) {
+        if (mStatueBarIsTransparent) {
+            titleWrap.addView(child, -1);
+        } else {
+            addView(child, -1);
+        }
+    }
+
     /**
      * @param resId
      */
@@ -230,7 +282,7 @@ public class MyTitleBar extends RelativeLayout {
             if (mTitleTextView != null) {
                 mTitleTextView.setVisibility(GONE);
             }
-            LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             if (mCustomViewGravity == 0) {
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                 layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -242,7 +294,7 @@ public class MyTitleBar extends RelativeLayout {
             }
             layoutParams.setMargins(mCustomViewMarginLeft, 0, mCustomViewMarginRight, 0);
             mCustomView.setLayoutParams(layoutParams);
-            addView(customView, layoutParams);
+            addView(customView);
         }
     }
 
@@ -388,7 +440,7 @@ public class MyTitleBar extends RelativeLayout {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             mRightButtonViewBadge.setPadding(5, 5, 5, 5);
             mRightButtonViewBadge.setLayoutParams(layoutParams);
-            addView(mRightButtonViewBadge, layoutParams);
+            addView(mRightButtonViewBadge);
         }
     }
 
@@ -399,7 +451,7 @@ public class MyTitleBar extends RelativeLayout {
             LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             mRightButtonView.setLayoutParams(layoutParams);
-            addView(mRightButtonView, layoutParams);
+            addView(mRightButtonView);
         }
     }
 
@@ -438,7 +490,7 @@ public class MyTitleBar extends RelativeLayout {
             LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             mNavButtonView.setLayoutParams(layoutParams);
-            addView(mNavButtonView, layoutParams);
+            addView(mNavButtonView);
         }
     }
 
@@ -476,7 +528,7 @@ public class MyTitleBar extends RelativeLayout {
             layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
             layoutParams.setMarginStart(30);
             logoView.setLayoutParams(layoutParams);
-            addView(logoView, layoutParams);
+            addView(logoView);
         }
     }
 
@@ -500,7 +552,7 @@ public class MyTitleBar extends RelativeLayout {
                 mLeftTextView.setGravity(Gravity.CENTER);
                 mLeftTextView.setId(R.id.m_left_text);
                 mLeftTextView.setEllipsize(TextUtils.TruncateAt.END);
-                mLeftTextView.setMaxEms(4);
+                mLeftTextView.setMaxEms(6);
                 if (mLeftTextColor != 0) {
                     mLeftTextView.setTextColor(mLeftTextColor);
                 } else {
@@ -519,7 +571,7 @@ public class MyTitleBar extends RelativeLayout {
                     layoutParams.addRule(RelativeLayout.RIGHT_OF, R.id.m_nav_button);
                 }
                 mLeftTextView.setLayoutParams(layoutParams);
-                addView(mLeftTextView, layoutParams);
+                addView(mLeftTextView);
             }
         }
         if (mLeftTextView != null) {
@@ -583,7 +635,7 @@ public class MyTitleBar extends RelativeLayout {
                 }
                 layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
                 mRightTextView.setLayoutParams(layoutParams);
-                addView(mRightTextView, layoutParams);
+                addView(mRightTextView);
             }
         }
         if (mRightTextView != null) {
@@ -627,7 +679,7 @@ public class MyTitleBar extends RelativeLayout {
                 if (mTitleTextColor != 0) {
                     mTitleTextView.setTextColor(mTitleTextColor);
                 } else {
-                    mTitleTextView.setTextColor(getResources().getColor(R.color.white));
+                    mTitleTextView.setTextColor(Color.WHITE);
                 }
                 if (mTitleSize != 0) {
                     mTitleTextView.setTextSize(mTitleSize);
@@ -635,7 +687,7 @@ public class MyTitleBar extends RelativeLayout {
                 LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
                 mTitleTextView.setLayoutParams(layoutParams);
-                addView(mTitleTextView, layoutParams);
+                addView(mTitleTextView);
             }
         }
         if (mTitleTextView != null) {
@@ -696,6 +748,11 @@ public class MyTitleBar extends RelativeLayout {
     public void hideRightTextView() {
         if (mRightTextView != null)
             mRightTextView.setVisibility(GONE);
+    }
+
+    public void hideRightButton() {
+        if (mRightButtonView != null)
+            mRightButtonView.setVisibility(GONE);
     }
 
     public void showNavButtonView() {

@@ -25,6 +25,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
  * Created by Leo on 2016/5/25.
+ * 修改会员信息
  */
 @EActivity(R.layout.activity_change_info)
 public class ChangeInfoActivity extends BaseActivity {

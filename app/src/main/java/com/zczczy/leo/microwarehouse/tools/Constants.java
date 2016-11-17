@@ -5,13 +5,17 @@ package com.zczczy.leo.microwarehouse.tools;
  */
 public class Constants {
     //测试环境
-//    public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
-//    public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
+  // public static final String ROOT_URL = "http://218.61.203.50:8018/ContentView/";
+  // public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
+
 
     //正式环境
-    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
-    public static final String ROOT_URL = "http://wcapib.zczczy.com/ContentView/";
+   // public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
+  //  public static final String ROOT_URL = "http://wcapib.zczczy.com/ContentView/";
 
+//正式环境2
+  public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
+  public static final String ROOT_URL = "http://wcapia.zczczy.com/ContentView/";
 
     public static final String ANDROID = "1";//请求类型  android
 
@@ -32,6 +36,8 @@ public class Constants {
 
     public static final String GOODS_TYPE = "1";  //跳转标识(1:商品类别页，2：商品明细)
     public static final String GOODS_DETAIL = "2"; //跳转标识(1:商品类别页，2：商品明细)
+    public static final String MOUTH_TYPE="3";//跳转到搜索结果页的牙医预约标识
+
 
 
     public static final String PRICE_FILTER = "1"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
@@ -45,6 +51,7 @@ public class Constants {
 
     public static final String DEALER = "3";// 经销商
     public static final String NORMAL = "1";// 普通会员
+    public static final String MOUTH_URL = "GoodsDetailById?GoodsInfoid=";// 牙医详情
 
 
     public static final int DUEPAYMENT = 0; //0:待支付

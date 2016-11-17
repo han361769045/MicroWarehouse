@@ -17,6 +17,7 @@ import org.androidannotations.annotations.OnActivityResult;
 
 /**
  * Created by Leo on 2016/5/4.
+ * 城市选择
  */
 @EActivity(R.layout.activity_province)
 public class CityActivity extends BaseRecyclerViewActivity<CityModel> {

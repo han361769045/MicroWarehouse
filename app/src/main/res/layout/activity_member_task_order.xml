@@ -15,6 +15,7 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/task_title"
         app:mNavButtonIcon="@drawable/title_back"
+        app:mStatueBarIsTransparent="true"
         app:mRightTextMarginRight="15dp" />
 
     <fragment

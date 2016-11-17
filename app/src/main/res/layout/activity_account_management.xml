@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:background="@color/title_bar_bg"
         android:minHeight="50dp"
+        app:mStatueBarIsTransparent="true"
         app:mNavButtonIcon="@drawable/title_back_normal"
         app:mTitle="@string/text_account_manager" />
 

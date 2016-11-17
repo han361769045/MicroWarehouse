@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
     android:background="@color/main_bg_color"
     android:orientation="vertical"
     tools:context=".fragments.MineFragment">
@@ -75,7 +77,7 @@
                         android:layout_gravity="right|top"
                         android:paddingBottom="15dp"
                         android:paddingLeft="15dp"
-                        android:paddingTop="5dp"
+                        android:paddingTop="10dp"
                         android:src="@drawable/setting" />
 
                     <TextView
@@ -88,7 +90,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical|end"
                         android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
+                        android:paddingTop="15dp"
                         android:text="@string/text_manager"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
@@ -181,13 +183,14 @@
                     android:drawablePadding="10dp"
                     android:drawableStart="@drawable/my_order"
                     android:text="@string/text_my_order"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:drawableEnd="@drawable/next"
+                    android:textSize="13sp"
                     android:drawablePadding="5dp"
                     android:text="@string/text_all_order" />
 
@@ -297,12 +300,126 @@
 
 
             <include layout="@layout/horizontal_line" />
+            <RelativeLayout
+                android:id="@+id/rl_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_shadow_selector"
+                android:clickable="true"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/vipicon"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_my_service" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/next" />
+
+            </RelativeLayout>
+
+
+            <include layout="@layout/horizontal_line" />
+
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:id="@+id/rl_about_us"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_shadow_selector"
+                android:clickable="true"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/about_us"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_about_us" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/next" />
+
+            </RelativeLayout>
+            <include layout="@layout/horizontal_line" />
+            <RelativeLayout
+                android:id="@+id/rl_lottery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_shadow_selector"
+                android:clickable="true"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/vipicon"
+                    android:gravity="center_vertical"
+                    android:text="一元夺宝" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/next" />
+
+            </RelativeLayout>
+            <include layout="@layout/horizontal_line" />
+            <RelativeLayout
+                android:id="@+id/rl_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_shadow_selector"
+                android:clickable="true"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/feedback"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_feedback" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/next" />
+
+            </RelativeLayout>
+
+
+            <include layout="@layout/horizontal_line" />
 
             <RelativeLayout
                 android:id="@+id/rl_apply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
                 android:padding="15dp">
@@ -358,64 +475,7 @@
 
             <include layout="@layout/horizontal_line" />
 
-            <RelativeLayout
-                android:id="@+id/rl_feedback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/common_shadow_selector"
-                android:clickable="true"
-                android:padding="15dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:drawablePadding="5dp"
-                    android:drawableStart="@drawable/feedback"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_feedback" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/next" />
-
-            </RelativeLayout>
-
-
-            <include layout="@layout/horizontal_line" />
-
-            <RelativeLayout
-                android:id="@+id/rl_about_us"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/common_shadow_selector"
-                android:clickable="true"
-                android:padding="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:drawablePadding="5dp"
-                    android:drawableStart="@drawable/about_us"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_about_us" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/next" />
-
-            </RelativeLayout>
-
-            <include layout="@layout/horizontal_line" />
 
             <RelativeLayout
                 android:id="@+id/rl_share"

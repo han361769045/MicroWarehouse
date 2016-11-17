@@ -29,7 +29,7 @@ import org.androidannotations.annotations.res.ColorRes;
 public class CartRecommendItemView extends ItemView {
 
     @ViewById
-    RecyclerView recyclerView;
+    RecyclerView recycler_view;
 
     FullyLinearLayoutManager linearLayoutManager;
 
@@ -50,10 +50,10 @@ public class CartRecommendItemView extends ItemView {
         linearLayoutManager = new FullyLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
-        recyclerView.addItemDecoration(new VerticalDividerItemDecoration.Builder(context).margin(21).paint(paint).build());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
+        recycler_view.addItemDecoration(new VerticalDividerItemDecoration.Builder(context).margin(21).paint(paint).build());
+        recycler_view.setNestedScrollingEnabled(false);
+        recycler_view.setLayoutManager(linearLayoutManager);
+        recycler_view.setAdapter(myAdapter);
         myAdapter.getMoreData();
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
             @Override

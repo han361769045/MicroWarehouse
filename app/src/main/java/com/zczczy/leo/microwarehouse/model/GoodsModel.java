@@ -2,6 +2,7 @@ package com.zczczy.leo.microwarehouse.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by Leo on 2016/5/21.
@@ -35,7 +36,9 @@ public class GoodsModel implements Serializable{
     public int PostageType;  //邮费类型（0包邮，1不累计，2多件累计）
     public String PjNum; //评价数量
     public String PJBfb; //评价百分比
+    public  String IsAppointmentPro;
     public int IsUsing;
+
 
     public List<GoodsCommentsModel> GoodsCommentsList;  //商品评价
 

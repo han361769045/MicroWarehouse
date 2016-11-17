@@ -16,6 +16,7 @@
         app:mNavButtonIcon="@drawable/title_back"
         app:mRightText="@string/text_publish"
         app:mRightTextMarginRight="15dp"
+        app:mStatueBarIsTransparent="true"
         app:mTitle="@string/text_publish_task" />
 
     <ScrollView

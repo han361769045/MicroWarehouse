@@ -25,8 +25,8 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
     @ViewById
     MyTitleBar myTitleBar;
 
-    @ViewById
-    RecyclerView recyclerView;
+//    @ViewById
+//    RecyclerView recyclerView;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -40,32 +40,32 @@ public abstract class BaseRecyclerViewFragment<T> extends BaseFragment {
     Paint paint = new Paint();
 
 
-    @AfterViews
-    void afterRecyclerView() {
-        AndroidTool.showLoadDialog(this);
-        gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setHasFixedSize(true);
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).paint(paint).build());
-        verticalItem();
-    }
-
-    //线性布局
-    void verticalItem() {
-        recyclerView.setAdapter(null);
-        myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Vertical;
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
-    }
-
-    //网格布局
-    void horizontalItem() {
-        recyclerView.setAdapter(null);
-        myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Horizontal;
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(myAdapter);
-    }
+//    @AfterViews
+//    void afterRecyclerView() {
+//        AndroidTool.showLoadDialog(this);
+//        gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+//        linearLayoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setHasFixedSize(true);
+//        paint.setStrokeWidth(1);
+//        paint.setColor(line_color);
+//        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).paint(paint).build());
+//        verticalItem();
+//    }
+//
+//    //线性布局
+//    void verticalItem() {
+//        recyclerView.setAdapter(null);
+//        myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Vertical;
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setAdapter(myAdapter);
+//    }
+//
+//    //网格布局
+//    void horizontalItem() {
+//        recyclerView.setAdapter(null);
+//        myAdapter.verticalAndHorizontal = BaseRecyclerViewAdapter.VerticalAndHorizontal.Horizontal;
+//        recyclerView.setLayoutManager(gridLayoutManager);
+//        recyclerView.setAdapter(myAdapter);
+//    }
 
 }

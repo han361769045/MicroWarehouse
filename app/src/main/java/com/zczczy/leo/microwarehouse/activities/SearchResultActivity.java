@@ -1,5 +1,6 @@
 package com.zczczy.leo.microwarehouse.activities;
 
+
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
@@ -20,16 +21,19 @@ import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+
 import org.androidannotations.annotations.ViewById;
 
 /**
  * Created by Leo on 2016/5/21.
+ * 搜索列表结果页
  */
 @EActivity(R.layout.activity_search_result)
 public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<GoodsModel> {
 
     @Extra
-    String searchContent;
+    String searchContent,IsAppointmentPro;
+
 
     @ViewById
     TextView text_search;
@@ -56,13 +60,18 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
 
     @AfterViews
     void afterView() {
+
         text_search.setText(searchContent);
         empty_view.setText(empty_search);
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<GoodsModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsModel obj, int position) {
-                GoodsDetailActivity_.intent(SearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
-
+               if (IsAppointmentPro.equals("1")){
+                CommonWebViewActivity_.intent(SearchResultActivity.this).title("WEB页").linkUrl("http://wcapia.zczczy.com/ContentView/"+Constants.MOUTH_URL+"09e0eff05d6447e48cebbbae392b6ef3" ).start();
+               }
+             else {
+                   GoodsDetailActivity_.intent(SearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
+               }
             }
 
             @Override
@@ -73,7 +82,14 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
         myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (searchContent.equals("")){
+                SearchActivity_.intent(SearchResultActivity.this).MouthSearch("1").start();
+                }
+                else {
                 finish();
+                }
+
+
             }
         });
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
@@ -84,6 +100,9 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
         });
         isSelected = true;
     }
+
+
+
 
     @Click
     void rb_filter() {
@@ -163,7 +182,8 @@ public class SearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods
 
     @Override
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 0, searchContent, orderBy, priceMin, priceMax);
+
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 0, searchContent, orderBy, priceMin, priceMax,IsAppointmentPro);
     }
 
 

@@ -26,7 +26,7 @@ public class FindFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
 
     @Click
     void text_search() {
-        SearchActivity_.intent(this).start();
+        SearchActivity_.intent(this).MouthSearch("0").start();
     }
 
 
@@ -70,6 +70,8 @@ public class FindFragment extends BaseUltimateRecyclerViewFragment<GoodsModel> {
             }
         });
     }
+
+
 
     @Override
     void afterLoadMore() {

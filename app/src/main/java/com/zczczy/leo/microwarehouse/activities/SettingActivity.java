@@ -2,13 +2,13 @@ package com.zczczy.leo.microwarehouse.activities;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.widget.RelativeLayout;
+
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.zczczy.leo.microwarehouse.R;
 import com.zczczy.leo.microwarehouse.rest.MyBackgroundTask;
-import com.zczczy.leo.microwarehouse.tools.AndroidTool;
+
 import com.zczczy.leo.microwarehouse.tools.DataCleanManager;
 
 import org.androidannotations.annotations.AfterViews;
@@ -17,7 +17,7 @@ import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.StringRes;
+
 
 import cn.jpush.android.api.JPushInterface;
 

@@ -111,6 +111,11 @@ public class LoginActivity extends BaseActivity {
         ll_login.setAnimation(login_anim);
     }
 
+    @Override
+    void baseAfterView() {
+
+    }
+
     @Click
     void login_btn() {
         if (AndroidTool.checkIsNull(editUsername)) {
@@ -180,6 +185,8 @@ public class LoginActivity extends BaseActivity {
     void rb_code(boolean isChecked) {
         if (isChecked) {
             ll_code.setVisibility(View.VISIBLE);
+            editUsername.setText("");
+            editPassword.setText("");
             editUsername.setHint(text_phone);
             ll_password.setVisibility(View.GONE);
             ll_forget.setVisibility(View.GONE);
@@ -187,6 +194,8 @@ public class LoginActivity extends BaseActivity {
             ll_code.setVisibility(View.GONE);
             ll_password.setVisibility(View.VISIBLE);
             ll_forget.setVisibility(View.VISIBLE);
+            editUsername.setText("");
+            editPassword.setText("");
             editUsername.setHint(text_username);
         }
     }
