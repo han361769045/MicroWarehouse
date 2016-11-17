@@ -64,7 +64,7 @@ public class AnnouncedItem  extends ItemView<GoodsModel>{
 
     @Override
     protected void init(Object... objects) {
-        pb_progressbar.setProgress(81);
+        pb_progressbar.setProgress(80);
         pb_progressbar.setMax(120);
         ll_activity_now.setVisibility(GONE);
         ll_complete.setVisibility(VISIBLE);
